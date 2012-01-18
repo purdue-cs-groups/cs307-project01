@@ -45,12 +45,12 @@
       <RoleName>BackgroundWorker</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
-    <ProjectReference Include="..\WebService\WebService.csproj">
-      <Name>WebService</Name>
+    <ProjectReference Include="..\WebApplication\WebApplication.csproj">
+      <Name>WebApplication</Name>
       <Project>{d0d1b331-8c82-427f-8098-2faf79ac81c6}</Project>
       <Private>True</Private>
       <RoleType>Web</RoleType>
-      <RoleName>WebService</RoleName>
+      <RoleName>WebApplication</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>

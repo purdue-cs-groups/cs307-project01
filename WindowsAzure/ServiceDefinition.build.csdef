@@ -9,7 +9,7 @@
   **********************************************************************************************
 -->
 <ServiceDefinition name="WindowsAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-  <WebRole name="WebService" vmsize="Small">
+  <WebRole name="WebApplication" vmsize="Small">
     <Sites>
       <Site name="Web">
         <Bindings>
