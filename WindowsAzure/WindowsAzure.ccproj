@@ -37,14 +37,6 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BackgroundWorker\BackgroundWorker.csproj">
-      <Name>BackgroundWorker</Name>
-      <Project>{36019151-67d7-4661-b31a-37dc1aaa0036}</Project>
-      <Private>True</Private>
-      <RoleType>Worker</RoleType>
-      <RoleName>BackgroundWorker</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
     <ProjectReference Include="..\WebApplication\WebApplication.csproj">
       <Name>WebApplication</Name>
       <Project>{d0d1b331-8c82-427f-8098-2faf79ac81c6}</Project>
