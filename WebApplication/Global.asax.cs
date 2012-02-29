@@ -11,6 +11,8 @@ namespace WebService
 {
     public class Global : System.Web.HttpApplication
     {
+        public const string DatabaseConnectionString = "mongodb://pu307user:Password01@ds029847.mongolab.com:29847";
+        public const string DatabaseName = "pu307dev";
 
         protected void Application_Start(object sender, EventArgs e)
         {
