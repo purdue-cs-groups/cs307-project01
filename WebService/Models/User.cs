@@ -6,16 +6,10 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 
-
 namespace WebService.Models
 {
     public class User
     {
-        public User()
-        {
-            // initialize model
-        }
-
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string ID
         {

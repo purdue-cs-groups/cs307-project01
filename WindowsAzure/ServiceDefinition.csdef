@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceDefinition name="WindowsAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
-  <WebRole name="WebApplication" vmsize="Small">
+  <WebRole name="WebService" vmsize="Small">
     <Sites>
       <Site name="Web">
         <Bindings>

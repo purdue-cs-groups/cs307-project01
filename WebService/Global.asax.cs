@@ -14,9 +14,17 @@ namespace WebService
         public const string DatabaseConnectionString = "mongodb://pu307user:Password01@ds029847.mongolab.com:29847";
         public const string DatabaseName = "pu307dev";
 
+        public const bool APIKeyAuthorizationEnabled = true;
+
         protected void Application_Start(object sender, EventArgs e)
         {
-            RouteTable.Routes.Add(new ServiceRoute("v1", new WebServiceHostFactory(), typeof(WebApplication.WebService)));
+            RegisterRoutes();
+        }
+
+        private void RegisterRoutes()
+        {
+            WebServiceHostFactory factory = new WebServiceHostFactory();
+            RouteTable.Routes.Add(new ServiceRoute("v1", factory, typeof(WebService)));
         }
 
         protected void Session_Start(object sender, EventArgs e)

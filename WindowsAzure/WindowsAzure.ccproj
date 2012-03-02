@@ -37,12 +37,12 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication\WebApplication.csproj">
-      <Name>WebApplication</Name>
+    <ProjectReference Include="..\WebApplication\WebService.csproj">
+      <Name>WebService</Name>
       <Project>{d0d1b331-8c82-427f-8098-2faf79ac81c6}</Project>
       <Private>True</Private>
       <RoleType>Web</RoleType>
-      <RoleName>WebApplication</RoleName>
+      <RoleName>WebService</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
