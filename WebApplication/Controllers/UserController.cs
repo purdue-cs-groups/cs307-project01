@@ -9,12 +9,12 @@ namespace WebService.Controllers
 {
     public static class UserController
     {
-        public static User Fetch(int id)
+        public static User Fetch(string id)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<User> users = database.GetCollection<User>("users");
+            MongoCollection<User> users = database.GetCollection<User>("Users");
             var query = new QueryDocument("ID", id);
 
             return users.FindOne(query);
@@ -25,7 +25,7 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<User> users = database.GetCollection<User>("users");
+            MongoCollection<User> users = database.GetCollection<User>("Users");
 
             return users.FindAll().ToList<User>();
         }
@@ -35,7 +35,7 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<User> users = database.GetCollection<User>("users");
+            MongoCollection<User> users = database.GetCollection<User>("Users");
 
             users.Insert(data);
         }
@@ -45,7 +45,7 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<User> users = database.GetCollection<User>("users");
+            MongoCollection<User> users = database.GetCollection<User>("Users");
 
             users.Save(data);
         }
@@ -55,7 +55,7 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<User> users = database.GetCollection<User>("users");
+            MongoCollection<User> users = database.GetCollection<User>("Users");
             var query = new QueryDocument("ID", data.ID);
 
             users.FindAndRemove(query, new SortByDocument());

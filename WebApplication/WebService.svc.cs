@@ -9,50 +9,61 @@ using System.ServiceModel.Activation;
 using System.Configuration;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using WebService.Models;
+using WebService.Controllers;
 
 namespace WebApplication
 {
     [ServiceContract]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public partial class WebService
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, UriTemplate = "common/helloWorld?name={name}")]
+        [WebGet]
         public string HelloWorld(string name)
         {
             return "Hello World! Your name is " + name + ".";
         }
 
         [OperationContract]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, UriTemplate = "database/getDocuments")]
-        public string[] GetDocuments()
+        [WebGet]
+        public User GetUser(string id)
         {
-            string connectionString = "mongodb://pu307user:Password01@ds029847.mongolab.com:29847";
-            MongoServer server = MongoServer.Create(connectionString);
-
-            MongoDatabase database = server.GetDatabase("pu307dev");
-
-            return database.GetCollectionNames().ToArray<string>();
+            return UserController.Fetch(id);
         }
 
         [OperationContract]
-        [WebInvoke(Method = "GET", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json, UriTemplate = "database/getDocumentData?name={name}")]
-        public List<string> GetDocumentData(string name)
+        [WebGet]
+        public List<User> GetUsers()
         {
-            string connectionString = "mongodb://pu307user:Password01@ds029847.mongolab.com:29847";
-            MongoServer server = MongoServer.Create(connectionString);
+            return UserController.FetchAll();
+        }
 
-            MongoDatabase database = server.GetDatabase("pu307dev");
+        [OperationContract]
+        [WebGet]
+        public void CreateUser()
+        {
+            User data = new User();
 
-            List<string> result = new List<string>();
+            data.Username = "mbmccormick";
+            data.Password = "password";
+            data.Name = "Matt McCormick";
+            data.EmailAddress = "mbmccormick@gmail.com";
+            data.Biography = "I am awesome at life.";
+            data.Location = "Purdue University";
+            data.ProfilePictureID = 0;
+            data.CreatedDate = DateTime.Now;
 
-            MongoCollection collection = database.GetCollection(name);
-            foreach (BsonDocument document in collection.FindAllAs<BsonDocument>())
-            {
-                result.Add(document.AsString);
-            }
+            UserController.Create(data);
+        }
 
-            return result;
+        [OperationContract]
+        [WebGet]
+        public void DeleteUser(string id)
+        {
+            User data = UserController.Fetch(id);
+            UserController.Delete(data);
         }
     }
 }
