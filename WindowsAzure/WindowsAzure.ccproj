@@ -37,7 +37,7 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication\WebService.csproj">
+    <ProjectReference Include="..\WebService\WebService.csproj">
       <Name>WebService</Name>
       <Project>{d0d1b331-8c82-427f-8098-2faf79ac81c6}</Project>
       <Private>True</Private>
