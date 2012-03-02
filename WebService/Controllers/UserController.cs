@@ -37,6 +37,8 @@ namespace WebService.Controllers
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
 
+            data.CreatedDate = DateTime.Now;
+
             users.Insert(data);
         }
 

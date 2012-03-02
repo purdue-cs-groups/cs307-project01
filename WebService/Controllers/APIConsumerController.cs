@@ -37,6 +37,8 @@ namespace WebService.Controllers
 
             MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
 
+            data.CreatedDate = DateTime.Now;
+
             consumers.Insert(data);
         }
 
