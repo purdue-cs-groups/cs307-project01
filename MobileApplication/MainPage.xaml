@@ -20,7 +20,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
         <!--Panorama control-->
-        <controls:Panorama Title="winstagram" Name="pan" Background="{StaticResource PhoneBackgroundBrush}">
+        <controls:Panorama Title="winstagram" Name="pan" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
            
             <!--Panorama item one-->
             <controls:PanoramaItem Header="popular">

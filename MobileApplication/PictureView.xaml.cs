@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
+using WinstagramPan.Models;
+
 namespace WinstagramPan
 {
     public partial class PictureView : PhoneApplicationPage

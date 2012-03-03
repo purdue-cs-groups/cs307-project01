@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace WinstagramPan
+namespace WinstagramPan.Models
 {
     public class Picture
     {
@@ -35,7 +35,7 @@ namespace WinstagramPan
             }
             set
             {
-                UserID = value;
+                userID = value;
             }
         }
 

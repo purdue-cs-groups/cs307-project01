@@ -15,6 +15,8 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 
+using WinstagramPan.Models;
+
 namespace WinstagramPan
 {
     public partial class MainPage : PhoneApplicationPage

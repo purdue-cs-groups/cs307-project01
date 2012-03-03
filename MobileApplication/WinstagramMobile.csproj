@@ -66,7 +66,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Picture.cs" />
+    <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="PictureView.xaml.cs">
       <DependentUpon>PictureView.xaml</DependentUpon>
     </Compile>
