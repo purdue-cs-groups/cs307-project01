@@ -21,6 +21,7 @@
  
         <!--Panorama control-->
         <controls:Panorama Title="winstagram" Name="pan" Background="{StaticResource PhoneBackgroundBrush}">
+           
             <!--Panorama item one-->
             <controls:PanoramaItem Header="popular">
                 <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
