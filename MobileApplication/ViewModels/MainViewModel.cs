@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
 
-namespace MobileApplication
+namespace WinstagramPan
 {
     public class MainViewModel : INotifyPropertyChanged
     {
