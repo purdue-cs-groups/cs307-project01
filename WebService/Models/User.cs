@@ -5,11 +5,14 @@ using System.Web;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
+using System.Runtime.Serialization;
 
 namespace WebService.Models
 {
+    [DataContract]
     public class User
     {
+        [DataMember]
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string ID
         {
@@ -17,18 +20,21 @@ namespace WebService.Models
             set;
         }
 
+        [DataMember]
         public string Username
         {
             get;
             set;
         }
 
+        [DataMember]
         public string Name
         {
             get;
             set;
         }
 
+        [DataMember]
         public string EmailAddress
         {
             get;
@@ -41,24 +47,28 @@ namespace WebService.Models
             set;
         }
 
+        [DataMember]
         public string Biography
         {
             get;
             set;
         }
 
+        [DataMember]
         public int ProfilePictureID
         {
             get;
             set;
         }
 
+        [DataMember]
         public string Location
         {
             get;
             set;
         }
 
+        [DataMember]
         public DateTime CreatedDate
         {
             get;

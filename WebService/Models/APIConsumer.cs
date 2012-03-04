@@ -5,11 +5,14 @@ using System.Web;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
+using System.Runtime.Serialization;
 
 namespace WebService.Models
 {
+    [DataContract]
     public class APIConsumer
     {
+        [DataMember]
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string ID
         {
@@ -17,12 +20,14 @@ namespace WebService.Models
             set;
         }
 
+        [DataMember]
         public string EmailAddress
         {
             get;
             set;
         }
 
+        [DataMember]
         public string Key
         {
             get
@@ -31,6 +36,7 @@ namespace WebService.Models
             }
         }
 
+        [DataMember]
         public DateTime CreatedDate
         {
             get;
