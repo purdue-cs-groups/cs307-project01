@@ -86,6 +86,7 @@ namespace WinstagramPan
                 HubTile currentHub =  FindName(tile) as HubTile;
 
                 // populate HubTile with popular photo metadata
+                // ** waiting to complete til I see the Picture model **
                 currentHub.Source = p.Photo.Source;
             }
         }
@@ -130,6 +131,7 @@ namespace WinstagramPan
 
             // the Tag field of each Image on the News Feed will be the pictureID of the Picture
             // in the database
+
             pictureID = i.Tag.ToString();  
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
@@ -150,9 +152,16 @@ namespace WinstagramPan
             cam.Show();
         }
 
+        public static Image captured = new Image();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
+            System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
+            bmp.SetSource(e.ChosenPhoto);
+            captured.Source = bmp;
 
+            Dispatcher.BeginInvoke(() => {
+                NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
+            });
         }
     }
 }
