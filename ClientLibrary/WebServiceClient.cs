@@ -117,11 +117,11 @@ namespace MobileClientLibrary
         public void DeleteUser(string id)
         {
             WebClient client = new WebClient();
-            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteUser_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&id=", _APIKey, id)));
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&id=", _APIKey, id)), null);
         }
 
-        private void DeleteUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
             if (DeleteUserCompleted != null)
             {

@@ -51,7 +51,7 @@ namespace WebService.Common
                     break;
             }
 
-            using (var sr = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + ErrorResponseHTML))
+            using (var sr = new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + errorHTML))
             {
                 XElement response = XElement.Load(sr);
                 using (Message reply = Message.CreateMessage(MessageVersion.None, null, response))

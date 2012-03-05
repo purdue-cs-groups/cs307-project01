@@ -22,7 +22,10 @@ namespace WebService.Common
                 var tokens = HttpContext.Current.Cache[TOKEN_LIST] as List<AuthenticationToken>;
 
                 if (tokens == null)
+                {
                     tokens = new List<AuthenticationToken>();
+                    HttpContext.Current.Cache[TOKEN_LIST] = tokens;
+                }
 
                 return tokens;
             }
@@ -32,7 +35,8 @@ namespace WebService.Common
         {
             User data = UserController.FetchByUsername(credential.Username);
 
-            if (data.Password == credential.Password)
+            if (data != null &&
+                data.Password == credential.Password)
                 return true;
             else
                 return false;
@@ -41,7 +45,7 @@ namespace WebService.Common
         public static AuthenticationToken GenerateToken(string username)
         {
             AuthenticationToken token = null;
-            token = TokenList.Single<AuthenticationToken>(t => t.Identity.Username == username);
+            token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.Identity.Username == username);
 
             if (token != null)
             {
@@ -55,6 +59,8 @@ namespace WebService.Common
                 User data = UserController.FetchByUsername(username);
 
                 token = new AuthenticationToken(uniqueIdentifier, data);
+
+                TokenList.Add(token);
             }
 
             return token;
@@ -66,7 +72,7 @@ namespace WebService.Common
 
             if (IsValidAuthenticationToken(uniqueIdentifier))
             {
-                AuthenticationToken token = TokenList.Single<AuthenticationToken>(t => t.UniqueIdentifier == uniqueIdentifier);
+                AuthenticationToken token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.UniqueIdentifier == uniqueIdentifier);
                 token.LastAccessDate = DateTime.Now;
             }
             else

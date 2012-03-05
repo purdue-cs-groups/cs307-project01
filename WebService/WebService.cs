@@ -24,7 +24,7 @@ namespace WebService
             return "Hello World! Your name is " + name + ".";
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/authenticate")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/authenticate")]
         public string Authenticate(Stream data)
         {
             StreamReader reader = new StreamReader(data);
@@ -65,7 +65,7 @@ namespace WebService
             return UserController.FetchAll();
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/users/create")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
         public void CreateUser(Stream data)
         {
             StreamReader reader = new StreamReader(data);
@@ -79,7 +79,7 @@ namespace WebService
             UserController.Create(jsonData);
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, UriTemplate = "/users/update")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
         public void UpdateUser(Stream data)
         {
             AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -95,7 +95,7 @@ namespace WebService
             UserController.Update(jsonData);
         }
 
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete?id={id}")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete?id={id}")]
         public void DeleteUser(string id)
         {
             AuthenticationManager.ValidateToken(OperationContext.Current);

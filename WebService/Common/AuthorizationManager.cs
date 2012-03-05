@@ -25,7 +25,10 @@ namespace WebService.Common
                 var keys = HttpContext.Current.Cache[API_KEY_LIST] as List<string>;
 
                 if (keys == null)
+                {
                     keys = RefreshAPIConsumerKeys();
+                    HttpContext.Current.Cache[API_KEY_LIST] = keys;
+                }
 
                 return keys;
             }
