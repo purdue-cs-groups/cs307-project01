@@ -21,10 +21,10 @@
  
         <!--Panorama control-->
         <controls:Panorama Title="winstagram" Name="pan" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
-           
-            <!--Panorama item one-->
-            <controls:PanoramaItem Header="popular">
-                <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <!--Panorama item one-->
+                <controls:PanoramaItem Header="popular">
                     <Grid Width="370" HorizontalAlignment="Left" Margin="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -134,62 +134,64 @@
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
                     </Grid>
-                </ScrollViewer>
-            </controls:PanoramaItem>
+                </controls:PanoramaItem>
+            </ScrollViewer>
 
-            <!--Panorama item one-->
-            <controls:PanoramaItem Header="news feed">
-                <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Image Margin="20,0,0,0" Height="90" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                                <TextBlock Margin="118,27,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" />
-                                <Image Margin="20,100,0,0"  Source="{Binding Photo.Source}"  Height="400" HorizontalAlignment="Left" Name="recentPicture" Stretch="Fill" VerticalAlignment="Top" Width="400" Tap="newsFeedPictureTap" Tag="{Binding PictureID}" />
-                                <TextBlock Margin="20,520,0,0" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </controls:PanoramaItem>
-        
-            <controls:PanoramaItem Header="profile">
-                <!--Double line list with image placeholder and text wrapping-->
-                <Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <!--Panorama item one-->
+                <controls:PanoramaItem Header="news feed">
+                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Margin="20,0,0,0" Height="90" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                                    <TextBlock Margin="118,27,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,100,0,0"  Source="{Binding Photo.Source}"  Height="400" HorizontalAlignment="Left" Name="recentPicture" Stretch="Fill" VerticalAlignment="Top" Width="400" Tap="newsFeedPictureTap" Tag="{Binding PictureID}" />
+                                    <TextBlock Margin="20,520,0,0" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </controls:PanoramaItem>
+            </ScrollViewer>
+
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <controls:PanoramaItem Header="profile">
+                    <!--Double line list with image placeholder and text wrapping-->
                     <Grid>
-                        <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                        <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
-                        <TextBlock Height="40" HorizontalAlignment="Left" Margin="177,36,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
-                        <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,170,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
-                        <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,89,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                        <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,8,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                        <TextBlock Height="29" HorizontalAlignment="Left" Margin="187,115,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
-                        <TextBlock Height="29" HorizontalAlignment="Left" Margin="261,113,0,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
-                        <TextBlock Height="29" HorizontalAlignment="Left" Margin="342,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
-                        <TextBlock Height="43" HorizontalAlignment="Left" Margin="185,75,0,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
-                        <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="266,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
-                        <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="346,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
-                    </Grid>
-                    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="17,150,0,0">
-                        <Grid Width="370" HorizontalAlignment="Left" Margin="0,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                        <Grid>
+                            <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
+                            <TextBlock Height="40" HorizontalAlignment="Left" Margin="177,36,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
+                            <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,170,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
+                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,89,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
+                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,8,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="179,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="253,113,0,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="334,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
+                            <TextBlock Height="43" HorizontalAlignment="Left" Margin="177,75,0,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
+                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="258,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="338,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                        </Grid>
+                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                            <!-- Title is username of picture owner -->
-                            <!-- Message is ID of picture owner -->
+                                <!-- Title is username of picture owner -->
+                                <!-- Message is ID of picture owner -->
 
-                            <!-- The Hub Tile -->
-                            <toolkit:HubTile Grid.Row="1" Grid.Column="0" 
+                                <!-- The Hub Tile -->
+                                <toolkit:HubTile Grid.Row="1" Grid.Column="0" 
                                          Margin="12,12,0,0"
                                          Source="/Images/joe.jpg"
                                          Title="Joe"
@@ -197,7 +199,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
+                                <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
                                          Margin="12,12,0,0"
                                          Source="/Images/matt.jpg"
                                          Title="Matt"
@@ -205,7 +207,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
+                                <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
                                          Margin="12,15,0,5"
                                          Source="/Images/james.jpg"
                                          Title="James"
@@ -213,7 +215,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
+                                <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
                                          Margin="12,12,0,0"
                                          Source="/Images/jeremiah.jpg"
                                          Title="Jeremiah"
@@ -221,7 +223,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
+                                <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
                                          Margin="12,12,0,0"
                                          Source="/Images/josh.jpg"
                                          Title="Josh"
@@ -229,7 +231,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
+                                <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
                                          Margin="12,12,0,0"
                                          Source="/Images/shruti.jpg"
                                          Title="Shruti"
@@ -237,7 +239,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
+                                <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
                                          Margin="12,12,0,0"
                                          Source="/Images/microsoft.jpg"
                                          Title="Microsoft"
@@ -245,7 +247,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
+                                <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
                                          Margin="12,12,0,0"
                                          Source="/Images/seattle.jpg"
                                          Title="Seattle"
@@ -253,7 +255,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
+                                <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
                                          Margin="12,12,0,0"
                                          Source="/Images/purdue.jpg"
                                          Title="Purdue"
@@ -261,7 +263,7 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                            <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
+                                <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
                                          Margin="12,12,0,0"
                                          Source="/Images/windowsphone.jpg"
                                          Title="Windows Phone"
@@ -269,10 +271,10 @@
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="ownerID" />
-                        </Grid>
-                    </ScrollViewer>
-                </Grid>
-            </controls:PanoramaItem>
+                            </Grid>
+                    </Grid>
+                </controls:PanoramaItem>
+            </ScrollViewer>
         </controls:Panorama>
     </Grid>
 
