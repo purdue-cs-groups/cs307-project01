@@ -39,9 +39,13 @@ namespace WinstagramPan
             popup.Child = control;
             popup.IsOpen = true;
 
+            this.LayoutRoot.IsHitTestVisible = false;
+
             control.ConfirmButtom.Click += (s, args) =>
             {
                 popup.IsOpen = false;
+                this.LayoutRoot.IsHitTestVisible = true;
+
                 Username = control.usernameInput.Text;
                 Password = control.passwordInput.Password;
 
@@ -53,6 +57,7 @@ namespace WinstagramPan
             control.CancelButton.Click += (s, args) =>
             {
                 popup.IsOpen = false;
+                this.LayoutRoot.IsHitTestVisible = true;
             };
         }
     }
