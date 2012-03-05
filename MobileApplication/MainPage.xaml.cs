@@ -47,6 +47,16 @@ namespace WinstagramPan
         /********************************************************
          * 
          * 
+         *                 PRETTY MUCH ALL THE DATA
+         * 
+         * 
+         ********************************************************/
+        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+
+
+        /********************************************************
+         * 
+         * 
          *                 POPULAR Pivot Codebehind
          * 
          * 
@@ -67,7 +77,6 @@ namespace WinstagramPan
          * 
          * 
          ********************************************************/
-        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
         private void populateRecentPictures()
         {
             // first pic
@@ -98,7 +107,10 @@ namespace WinstagramPan
             PictureView.SenderPage = 2;
 
             Image i = (Image) sender;
-            pictureID = i.Tag.ToString();
+
+            // the Tag field of each Image on the News Feed will be the pictureID of the Picture
+            // in the database
+            pictureID = i.Tag.ToString();  
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
     }

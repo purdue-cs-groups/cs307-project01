@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="WinstagramPan.LogInPopUp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Height="Auto" Width="500" Margin="0,24,0,0" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Log In" FontSize="36" Margin="12,10,0,0" />
+        
+        <Grid x:Name="Popup" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Username:" VerticalAlignment="Center" Margin="12,0,0,0" />
+            <TextBox x:Name="usernameInput"   Grid.Column="1" Grid.Row="0" Width="300" HorizontalAlignment="Center" />
+
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Password:" VerticalAlignment="Center" Margin="12,0,0,0" />
+            <PasswordBox x:Name="passwordInput"  Grid.Column="1" Grid.Row="1" Width="300" HorizontalAlignment="Center" />
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" x:Name="ConfirmButtom" Content="Confirm" Width="200" HorizontalAlignment="Right" />
+            <Button Grid.Column="1" x:Name="CancelButton" Content="Cancel" Width="200" HorizontalAlignment="Left" />
+        </Grid>
+    </Grid>
+
+    <!-- sexy transitions -->
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideDownFadeIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SlideTransition Mode="SlideUpFadeOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+</UserControl>
