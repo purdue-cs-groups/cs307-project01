@@ -33,6 +33,7 @@ namespace WinstagramPan
         private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Popup popup = new Popup();
+
             popup.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             LogInPopUp control = new LogInPopUp();
@@ -48,6 +49,8 @@ namespace WinstagramPan
 
                 Username = control.usernameInput.Text;
                 Password = control.passwordInput.Password;
+
+                // store shit in phone, hash password
 
                 // authenticate
 

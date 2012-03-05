@@ -51,7 +51,9 @@ namespace WinstagramPan
          * 
          * 
          ********************************************************/
+        public static String APIToken;
         public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
 
 
         /********************************************************
@@ -68,6 +70,23 @@ namespace WinstagramPan
 
             selectedPicture = (HubTile) sender;
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
+        }
+
+        private void populatePopularPicturesHub()
+        {
+            String tile;
+            String tileName = "popTile";
+            int tileNumber = 1;
+
+            foreach (Picture p in PopularPictures)
+            {
+                // get HubTile object
+                tile = tileName + tileNumber;
+                HubTile currentHub =  FindName(tile) as HubTile;
+
+                // populate HubTile with popular photo metadata
+                currentHub.Source = p.Photo.Source;
+            }
         }
 
         /********************************************************
