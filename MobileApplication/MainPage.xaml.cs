@@ -155,13 +155,21 @@ namespace WinstagramPan
         public static Image captured = new Image();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
-            System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
-            bmp.SetSource(e.ChosenPhoto);
-            captured.Source = bmp;
+            try
+            {
+                System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
+                bmp.SetSource(e.ChosenPhoto);
+                captured.Source = bmp;
 
-            Dispatcher.BeginInvoke(() => {
-                NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
-            });
+                Dispatcher.BeginInvoke(() =>
+                {
+                    NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
         }
     }
 }
