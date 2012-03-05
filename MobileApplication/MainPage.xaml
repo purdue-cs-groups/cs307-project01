@@ -8,13 +8,13 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="728" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False" Opacity="1">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -166,12 +166,12 @@
                             <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,170,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
                             <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,89,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
                             <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,8,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="179,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="253,113,0,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="334,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
-                            <TextBlock Height="43" HorizontalAlignment="Left" Margin="177,75,0,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
-                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="258,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
-                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="338,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="176,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="250,113,0,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="331,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
+                            <TextBlock Height="43" HorizontalAlignment="Left" Margin="174,75,0,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
+                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="255,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="335,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
                         </Grid>
                         <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,0">
                                 <Grid.ColumnDefinitions>
@@ -279,8 +279,8 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo"/>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>

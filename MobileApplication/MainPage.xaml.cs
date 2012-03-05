@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 
 using WinstagramPan.Models;
+using Microsoft.Phone.Tasks;
 
 namespace WinstagramPan
 {
@@ -131,6 +132,27 @@ namespace WinstagramPan
             // in the database
             pictureID = i.Tag.ToString();  
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
+        }
+
+        /********************************************************
+         * 
+         * 
+         *               APP BAR Codebehind
+         * 
+         * 
+         ********************************************************/
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            CameraCaptureTask cam = new CameraCaptureTask();
+            cam.Completed += new EventHandler<PhotoResult>(cameraCaptureTask_Completed);
+
+            cam.Show();
+        }
+
+        private void cameraCaptureTask_Completed(object sender, PhotoResult e)
+        {
+
         }
     }
 }
