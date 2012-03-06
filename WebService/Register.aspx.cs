@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using WebService.Models;
 using WebService.Controllers;
 using System.Net.Mail;
+using WebService.Common;
 
 namespace WebService
 {
@@ -22,7 +23,7 @@ namespace WebService
             APIConsumer data = new APIConsumer();
 
             data.EmailAddress = this.txtEmailAddress.Text;
-            data.CreatedDate = DateTime.Now;
+            data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             APIConsumerController.Create(data);
 

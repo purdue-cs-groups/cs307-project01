@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebService.Models;
 using MongoDB.Driver;
+using WebService.Common;
 
 namespace WebService.Controllers
 {
@@ -48,7 +49,7 @@ namespace WebService.Controllers
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
 
-            data.CreatedDate = DateTime.Now;
+            data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             users.Insert(data);
         }

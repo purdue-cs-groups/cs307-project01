@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebService.Models;
 using MongoDB.Driver;
+using WebService.Common;
 
 namespace WebService.Controllers
 {
@@ -37,7 +38,7 @@ namespace WebService.Controllers
 
             MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
 
-            data.CreatedDate = DateTime.Now;
+            data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             consumers.Insert(data);
         }
