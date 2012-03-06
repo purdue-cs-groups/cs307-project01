@@ -83,6 +83,7 @@
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
     <Compile Include="Common\ErrorResponseHandler.cs" />
+    <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\APIConsumerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">

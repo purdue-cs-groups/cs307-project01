@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
 using System.Runtime.Serialization;
+using WebService.Common;
 
 namespace WebService.Models
 {
@@ -68,11 +69,24 @@ namespace WebService.Models
             set;
         }
 
-        [DataMember]
         public DateTime CreatedDate
         {
             get;
             set;
+        }
+
+        [DataMember(Name = "CreatedDate")]
+        public int JsonCreatedDate
+        {
+            get
+            {
+                return Utilities.ConvertToUnixTime(this.CreatedDate);
+            }
+
+            set
+            {
+                this.CreatedDate = Utilities.ConvertFromUnixTime(value);
+            }
         }
     }
 }
