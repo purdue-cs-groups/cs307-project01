@@ -76,6 +76,7 @@ namespace WebService.Models
             set;
         }
 
+        [BsonIgnore]
         public DateTime FriendlyCreatedDate
         {
             get
