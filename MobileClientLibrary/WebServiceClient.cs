@@ -28,6 +28,9 @@ namespace MobileClientLibrary
         private static string _WebServiceEndpoint = "http://winstagram.cloudapp.net/v1/";
         private string _APIKey = null;
 
+        private bool _IsAuthenticated = false;
+        private string _Token = null;
+
         public WebServiceClient(string APIkey)
         {
             _APIKey = APIkey;
@@ -36,12 +39,6 @@ namespace MobileClientLibrary
         #region Authentication Methods
 
         public bool IsAuthenticated
-        {
-            get;
-            set;
-        }
-
-        private string Token
         {
             get;
             set;
@@ -66,8 +63,8 @@ namespace MobileClientLibrary
 
                 var jsonData = JsonConvert.DeserializeObject<AuthenticationToken>(stringData);
 
-                this.IsAuthenticated = true;
-                this.Token = jsonData.Token;
+                _IsAuthenticated = true;
+                _Token = jsonData.Token;
 
                 AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
             }
@@ -108,7 +105,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&id={1}", _APIKey, id)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
         }
 
         private void FetchUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -131,7 +128,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}", _APIKey)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
         }
 
         private void FetchAllUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -154,7 +151,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}", _APIKey)), jsonData);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void CreateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -175,7 +172,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}", _APIKey)), jsonData);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void UpdateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -194,7 +191,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&id=", _APIKey, id)), null);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
         }
 
         private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
