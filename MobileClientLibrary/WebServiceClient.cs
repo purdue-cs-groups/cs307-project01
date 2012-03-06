@@ -27,10 +27,11 @@ namespace MobileClientLibrary
     {
         private WebClient _Client = null;
         private const string _WebServiceEndpoint = "http://winstagram.cloudapp.net/v1/";
-        
+
         private string _APIKey = null;
 
         private bool _IsAuthenticated = false;
+        private UserCredentials _Credentials = null;
         private string _Token = null;
 
         public WebServiceClient(string APIkey)
@@ -46,7 +47,9 @@ namespace MobileClientLibrary
 
         public void Authenticate(string username, string password)
         {
-            var jsonData = JsonConvert.SerializeObject(new UserCredentials(username, this.HashPassword(password)));
+            _Credentials = new UserCredentials(username, this.HashPassword(password));
+
+            var jsonData = JsonConvert.SerializeObject(_Credentials);
 
             _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(Authenticate_UploadStringCompleted);
             _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "authenticate?key={0}", _APIKey)), jsonData);
@@ -56,14 +59,27 @@ namespace MobileClientLibrary
         {
             if (AuthenticateCompleted != null)
             {
-                string stringData = e.Result;
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
 
-                var jsonData = JsonConvert.DeserializeObject<AuthenticationToken>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<AuthenticationToken>(stringData);
 
-                _IsAuthenticated = true;
-                _Token = jsonData.Token;
+                    _IsAuthenticated = true;
+                    _Token = jsonData.Token;
 
-                AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
+                    AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The User credentials provided were not valid.");
+                    }
+                }
             }
         }
 
