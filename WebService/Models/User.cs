@@ -69,23 +69,23 @@ namespace WebService.Models
             set;
         }
 
-        public DateTime CreatedDate
+        [DataMember(Order = 7)]
+        public int CreatedDate
         {
             get;
             set;
         }
 
-        [DataMember(Name = "CreatedDate", Order = 7)]
-        public int JsonCreatedDate
+        public DateTime FriendlyCreatedDate
         {
             get
             {
-                return Utilities.ConvertToUnixTime(this.CreatedDate);
+                return Utilities.ConvertFromUnixTime(this.CreatedDate);
             }
 
             set
             {
-                this.CreatedDate = Utilities.ConvertFromUnixTime(value);
+                this.CreatedDate = Utilities.ConvertToUnixTime(value);
             }
         }
     }
