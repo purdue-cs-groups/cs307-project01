@@ -24,8 +24,10 @@ namespace WebService
             return "Hello World! Your name is " + name + ".";
         }
 
+        #region Authentication Methods
+
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/authenticate")]
-        public string Authenticate(Stream data)
+        public Token Authenticate(Stream data)
         {
             StreamReader reader = new StreamReader(data);
             string stringData = reader.ReadToEnd();
@@ -38,7 +40,11 @@ namespace WebService
             if (AuthenticationManager.IsValidUserCredentials(jsonData))
             {
                 AuthenticationToken token = AuthenticationManager.GenerateToken(jsonData.Username);
-                return token.UniqueIdentifier;
+
+                Token jsonToken = new Token();
+                jsonToken.UniqueIdentifier = token.UniqueIdentifier;
+
+                return jsonToken;
             }
             else
             {
@@ -46,6 +52,8 @@ namespace WebService
                 return null;
             }
         }
+
+        #endregion
 
         #region User Methods
 

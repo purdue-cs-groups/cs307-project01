@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MobileClientLibrary.Common;
 
 namespace MobileClientLibrary.Models
 {
@@ -36,7 +37,7 @@ namespace MobileClientLibrary.Models
             set;
         }
 
-        public int ProfilePictureID
+        public string ProfilePictureID
         {
             get;
             set;
@@ -48,10 +49,23 @@ namespace MobileClientLibrary.Models
             set;
         }
 
-        public DateTime CreatedDate
+        public int CreatedDate
         {
             get;
             set;
+        }
+
+        public DateTime FriendlyCreatedDate
+        {
+            get
+            {
+                return Utilities.ConvertFromUnixTime(this.CreatedDate);
+            }
+
+            set
+            {
+                this.CreatedDate = Utilities.ConvertToUnixTime(value);
+            }
         }
     }
 }

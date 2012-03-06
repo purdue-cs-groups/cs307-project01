@@ -13,7 +13,7 @@ namespace WebService.Models
     [DataContract]
     public class User
     {
-        [DataMember]
+        [DataMember(Order = 0)]
         [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string ID
         {
@@ -21,21 +21,21 @@ namespace WebService.Models
             set;
         }
 
-        [DataMember]
+        [DataMember(Order = 1)]
         public string Username
         {
             get;
             set;
         }
 
-        [DataMember]
+        [DataMember(Order = 2)]
         public string Name
         {
             get;
             set;
         }
 
-        [DataMember]
+        [DataMember(Order = 3)]
         public string EmailAddress
         {
             get;
@@ -48,21 +48,21 @@ namespace WebService.Models
             set;
         }
 
-        [DataMember]
+        [DataMember(Order = 4)]
         public string Biography
         {
             get;
             set;
         }
 
-        [DataMember]
-        public int ProfilePictureID
+        [DataMember(Order = 5)]
+        public string ProfilePictureID
         {
             get;
             set;
         }
 
-        [DataMember]
+        [DataMember(Order = 6)]
         public string Location
         {
             get;
@@ -75,7 +75,7 @@ namespace WebService.Models
             set;
         }
 
-        [DataMember(Name = "CreatedDate")]
+        [DataMember(Name = "CreatedDate", Order = 7)]
         public int JsonCreatedDate
         {
             get
