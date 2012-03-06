@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
@@ -42,12 +42,13 @@
     </ScrollViewer>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo"/>
+        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
