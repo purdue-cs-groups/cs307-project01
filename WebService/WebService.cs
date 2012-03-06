@@ -60,7 +60,7 @@ namespace WebService
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?id={id}")]
         public User FetchUser(string id)
         {
-            AuthenticationManager.ValidateToken(OperationContext.Current);
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             return UserController.Fetch(id);
         }
@@ -68,7 +68,7 @@ namespace WebService
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
         public List<User> FetchAllUsers()
         {
-            AuthenticationManager.ValidateToken(OperationContext.Current);
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             return UserController.FetchAll();
         }
@@ -90,7 +90,7 @@ namespace WebService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
         public void UpdateUser(Stream data)
         {
-            AuthenticationManager.ValidateToken(OperationContext.Current);
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             StreamReader reader = new StreamReader(data);
             string stringData = reader.ReadToEnd();
@@ -103,13 +103,15 @@ namespace WebService
             UserController.Update(jsonData);
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete?id={id}")]
-        public void DeleteUser(string id)
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
+        public void DeleteUser()
         {
-            AuthenticationManager.ValidateToken(OperationContext.Current);
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            User data = UserController.Fetch(id);
+            User data = token.Identity;
             UserController.Delete(data);
+
+            // TODO: delete all user pictures
         }
 
         #endregion

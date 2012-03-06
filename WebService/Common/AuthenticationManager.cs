@@ -66,7 +66,7 @@ namespace WebService.Common
             return token;
         }
 
-        public static void ValidateToken(OperationContext context)
+        public static AuthenticationToken ValidateToken(OperationContext context)
         {
             string uniqueIdentifier = ParseUniqueIdentifider(context);
 
@@ -74,10 +74,13 @@ namespace WebService.Common
             {
                 AuthenticationToken token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.UniqueIdentifier == uniqueIdentifier);
                 token.LastAccessDate = DateTime.Now;
+
+                return token;
             }
             else
             {
                 ErrorResponseHandler.GenerateErrorResponse(context, ErrorType.InvalidAuthenticationToken);
+                return null;
             }
         }
 

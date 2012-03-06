@@ -38,12 +38,6 @@ namespace MobileClientLibrary
 
         #region Authentication Methods
 
-        public bool IsAuthenticated
-        {
-            get;
-            set;
-        }
-
         public event RequestCompletedEventHandler AuthenticateCompleted;
 
         public void Authenticate(string username, string password)
@@ -101,7 +95,7 @@ namespace MobileClientLibrary
 
         public void FetchUser(string id)
         {
-            if (this.IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
@@ -124,7 +118,7 @@ namespace MobileClientLibrary
 
         public void FetchAllUsers()
         {
-            if (this.IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
@@ -166,7 +160,7 @@ namespace MobileClientLibrary
 
         public void UpdateUser(User data)
         {
-            if (this.IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             var jsonData = JsonConvert.SerializeObject(data);
 
@@ -185,13 +179,13 @@ namespace MobileClientLibrary
 
         public event RequestCompletedEventHandler DeleteUserCompleted;
 
-        public void DeleteUser(string id)
+        public void DeleteUser()
         {
-            if (this.IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
         }
 
         private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
