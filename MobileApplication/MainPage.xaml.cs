@@ -14,6 +14,7 @@ using Microsoft.Phone.Controls;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 using WinstagramPan.Models;
 using Microsoft.Phone.Tasks;
@@ -44,26 +45,45 @@ namespace WinstagramPan
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
-        /********************************************************
-         * 
-         * 
-         *                 PRETTY MUCH ALL THE DATA
-         * 
-         * 
-         ********************************************************/
+            changeVisibilityOfContent(Settings.isLoggedIn.Value);
+        }
+
+        /* 
+         * Change visibility of content based on flag
+         * true: only panorama MainContent is visible
+         * false: only tiled WelcomeScreen is visible 
+         */
+        private void changeVisibilityOfContent(bool flag)
+        {
+            if (flag)
+            {
+                // MainContent
+                this.WelcomeScreen.Visibility = Visibility.Collapsed;
+                this.MainContent.Visibility = Visibility.Visible;
+                this.ApplicationBar.IsVisible = true;
+            }
+            else
+            {
+                // WelcomeScreen
+                this.MainContent.Visibility = Visibility.Collapsed;
+                this.WelcomeScreen.Visibility = Visibility.Visible;
+                this.ApplicationBar.IsVisible = false;
+            }
+        }
+
         public static String APIToken;
         public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
         public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
 
+        #region Popular Pivot Codebehind
+        /***************************************
+         ******* Popular Pivot Codebehind ******
+         ***************************************/
 
-        /********************************************************
-         * 
-         * 
-         *                 POPULAR Pivot Codebehind
-         * 
-         * 
-         ********************************************************/
         public static HubTile selectedPicture;
         private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -90,14 +110,13 @@ namespace WinstagramPan
                 currentHub.Source = p.Photo.Source;
             }
         }
+        #endregion Popular Pivot Codebehind
 
-        /********************************************************
-         * 
-         * 
-         *               NEWS FEED Pivot Codebehind
-         * 
-         * 
-         ********************************************************/
+        #region News Feed Codebehind
+        /***************************************
+         ***** News Feed Codebehind ************
+         ***************************************/
+        
         private void populateRecentPictures()
         {
             // first pic
@@ -135,14 +154,12 @@ namespace WinstagramPan
             pictureID = i.Tag.ToString();  
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
+        #endregion News Feed Codebehind
 
-        /********************************************************
-         * 
-         * 
-         *               APP BAR Codebehind
-         * 
-         * 
-         ********************************************************/
+        #region Application Bar Codebehind
+        /***************************************
+         ***** Application Bar Codebehind ******
+         ***************************************/
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
         {
@@ -171,5 +188,23 @@ namespace WinstagramPan
                 Console.Write(ex.Message);
             }
         }
+
+        private void SignoutBarIconButton_Click(object sender, EventArgs e)
+        {
+            Settings.isLoggedIn.Value = false;
+
+            changeVisibilityOfContent(Settings.isLoggedIn.Value);
+        }
+        #endregion Application Bar Codebehind
+
+        #region logInTileTap Codebehind
+        /***************************************
+         ***** logInTileTap Codebehind *********
+         ***************************************/
+        private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
+        }
+        #endregion logInTileTap Codebehind
     }
 }

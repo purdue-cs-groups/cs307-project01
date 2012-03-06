@@ -19,8 +19,36 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
+        <!--Welcome Screen-->
+        <Grid x:Name="WelcomeScreen" Visibility="Collapsed" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap">
+                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+                </Grid>
+
+                <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
+                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+
         <!--Panorama control-->
-        <controls:Panorama Title="winstagram" Name="pan" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
+        <controls:Panorama  x:Name="MainContent" Visibility="Collapsed" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
@@ -279,12 +307,13 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
