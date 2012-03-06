@@ -9,14 +9,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class LogInPopUp : UserControl
+    public partial class EditPicture : PhoneApplicationPage
     {
-        public LogInPopUp()
+        public EditPicture()
         {
             InitializeComponent();
+        }
+
+        private void capturedImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            capturedImage.Source = MainPage.captured.Source;
         }
     }
 }
