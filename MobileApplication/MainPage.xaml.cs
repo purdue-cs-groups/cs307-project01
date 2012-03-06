@@ -19,6 +19,9 @@ using System.Windows.Navigation;
 using WinstagramPan.Models;
 using Microsoft.Phone.Tasks;
 
+using System.IO;
+using ExifLib;
+
 namespace WinstagramPan
 {
     public partial class MainPage : PhoneApplicationPage
@@ -172,21 +175,93 @@ namespace WinstagramPan
         public static Image captured = new Image();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
-            try
-            {
-                System.Windows.Media.Imaging.BitmapImage bmp = new System.Windows.Media.Imaging.BitmapImage();
-                bmp.SetSource(e.ChosenPhoto);
-                captured.Source = bmp;
+            // figure out the orientation from EXIF data
+            e.ChosenPhoto.Position = 0;
+            JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
 
-                Dispatcher.BeginInvoke(() =>
-                {
-                    NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
-                });
-            }
-            catch (Exception ex)
+            int _width = info.Width;
+            int _height = info.Height;
+            var _orientation = info.Orientation;
+            int _angle = 0;
+
+            switch (info.Orientation)
             {
-                Console.Write(ex.Message);
+                case ExifOrientation.TopLeft:
+                case ExifOrientation.Undefined:
+                    _angle = 0;
+                    break;
+                case ExifOrientation.TopRight:
+                    _angle = 90;
+                    break;
+                case ExifOrientation.BottomRight:
+                    _angle = 180;
+                    break;
+                case ExifOrientation.BottomLeft:
+                    _angle = 270;
+                    break;
             }
+
+            BitmapImage bmp = new BitmapImage();
+            if (_angle > 0d)
+            {
+                bmp.SetSource(RotateStream(e.ChosenPhoto, _angle));
+            }
+            else
+            {
+                bmp.SetSource(e.ChosenPhoto);
+            }
+
+            captured.Source = bmp;
+
+            // wait til UI thread is done, then navigate
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
+            });
+        }
+
+        // thanks, interwebs
+        private Stream RotateStream(Stream stream, int angle)
+        {
+            stream.Position = 0;
+            if (angle % 90 != 0 || angle < 0) throw new ArgumentException();
+            if (angle % 360 == 0) return stream;
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            WriteableBitmap wbSource = new WriteableBitmap(bitmap);
+
+            WriteableBitmap wbTarget = null;
+            if (angle % 180 == 0)
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelWidth, wbSource.PixelHeight);
+            }
+            else
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelHeight, wbSource.PixelWidth);
+            }
+
+            for (int x = 0; x < wbSource.PixelWidth; x++)
+            {
+                for (int y = 0; y < wbSource.PixelHeight; y++)
+                {
+                    switch (angle % 360)
+                    {
+                        case 90:
+                            wbTarget.Pixels[(wbSource.PixelHeight - y - 1) + x * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 180:
+                            wbTarget.Pixels[(wbSource.PixelWidth - x - 1) + (wbSource.PixelHeight - y - 1) * wbSource.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 270:
+                            wbTarget.Pixels[y + (wbSource.PixelWidth - x - 1) * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                    }
+                }
+            }
+            MemoryStream targetStream = new MemoryStream();
+            wbTarget.SaveJpeg(targetStream, wbTarget.PixelWidth, wbTarget.PixelHeight, 0, 100);
+            return targetStream;
         }
 
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
