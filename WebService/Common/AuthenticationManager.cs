@@ -35,6 +35,10 @@ namespace WebService.Common
         {
             User data = UserController.FetchByUsername(credential.Username);
 
+            // if user is null, try looking up by email address
+            if (data == null)
+                data = UserController.FetchByEmailAddress(credential.Username);
+
             if (data != null &&
                 data.Password == credential.Password)
                 return true;

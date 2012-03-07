@@ -32,6 +32,17 @@ namespace WebService.Controllers
             return users.FindOne(query);
         }
 
+        public static User FetchByEmailAddress(string username)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<User> users = database.GetCollection<User>("Users");
+            var query = new QueryDocument("EmailAddress", username);
+
+            return users.FindOne(query);
+        }
+
         public static List<User> FetchAll()
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
