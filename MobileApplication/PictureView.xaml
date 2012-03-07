@@ -44,7 +44,6 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>

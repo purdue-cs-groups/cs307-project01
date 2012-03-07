@@ -276,6 +276,11 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
+        private void UserSearch_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
+        }
+
         #endregion Application Bar Codebehind
 
         #region logInTileTap Codebehind
