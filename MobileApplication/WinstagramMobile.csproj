@@ -90,6 +90,9 @@
     </Compile>
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="UserSearch.xaml.cs">
+      <DependentUpon>UserSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PictureView.xaml.cs">
       <DependentUpon>PictureView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="UserSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PictureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
