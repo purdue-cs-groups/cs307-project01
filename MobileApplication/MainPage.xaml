@@ -313,6 +313,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

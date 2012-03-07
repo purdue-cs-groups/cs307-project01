@@ -17,18 +17,18 @@
     shell:SystemTray.IsVisible="False" Opacity="1">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent"> 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                 </Grid.RowDefinitions>
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-                <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-                <!-- <TextBlock x:Name="ApplicationTitle" Text="winstagram" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/> -->
-                <TextBlock x:Name="PageTitle" Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-                </StackPanel>
-       
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <!-- <TextBlock x:Name="ApplicationTitle" Text="winstagram" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/> -->
+            <TextBlock x:Name="PageTitle" Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Grid.Row="1" Margin="12,0,12,0">
             <Grid x:Name="ContentPane" Background="Transparent">
                 <Grid.ColumnDefinitions>
@@ -39,7 +39,7 @@
                 <TextBlock x:Name="useritems" Text="login" Style="{StaticResource PhoneTextTitle2Style}"/>
                 <Button x:Name="changepassword" Grid.ColumnSpan="2" Margin="6,54,6,502">Change password</Button>
                 <Button x:Name="loginasnew" Grid.ColumnSpan="2" Margin="6,170,6,380">Login as new user</Button>
-                
+
                 <TextBlock x:Name="socialitems" Text="social networks" Style="{StaticResource PhoneTextTitle2Style}" Margin="18,292,12,322" Grid.ColumnSpan="2" />
                 <Button x:Name="connectaccounts" Grid.ColumnSpan="2" Margin="6,350,6,200">Connect to Twitter</Button>
 
@@ -49,7 +49,7 @@
         </ScrollViewer>
 
     </Grid>
-  <!--  <phone:PhoneApplicationPage.ApplicationBar>
+    <!--  <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
@@ -59,7 +59,7 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>-->
-   
+
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -81,5 +81,4 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
 </phone:PhoneApplicationPage>

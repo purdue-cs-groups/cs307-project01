@@ -171,12 +171,20 @@ namespace WinstagramPan
             return targetStream;
         }
 
+        /**
+         * 
+         *  Need to fill this out.
+         * 
+         */
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
         {
             Settings.isLoggedIn.Value = false;
-
-            //changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }
-        #endregion Application Bar Codebehind
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+        #endregion Application Bar Codebehind      
     }
 }

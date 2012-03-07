@@ -270,6 +270,12 @@ namespace WinstagramPan
 
             changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
         #endregion Application Bar Codebehind
 
         #region logInTileTap Codebehind
