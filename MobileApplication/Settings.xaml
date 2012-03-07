@@ -44,7 +44,7 @@
                 <Button x:Name="connectaccounts" Grid.ColumnSpan="2" Margin="6,350,6,200">Connect to Twitter</Button>
 
                 <TextBlock x:Name="privitems" Text="privacy" Style="{StaticResource PhoneTextTitle2Style}" Grid.ColumnSpan="2" Margin="18,490,0,128" />
-                <Button x:Name="readpriv" Grid.ColumnSpan="2" Margin="0,544,12,6">Privacy agreement</Button>
+                <Button x:Name="readprivcy" Grid.ColumnSpan="2" Margin="0,544,12,6">Privacy agreement</Button>
             </Grid>
         </ScrollViewer>
 
