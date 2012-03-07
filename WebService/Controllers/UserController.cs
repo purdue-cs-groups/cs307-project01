@@ -32,13 +32,13 @@ namespace WebService.Controllers
             return users.FindOne(query);
         }
 
-        public static User FetchByEmailAddress(string username)
+        public static User FetchByEmailAddress(string emailAddress)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
-            var query = new QueryDocument("EmailAddress", username);
+            var query = new QueryDocument("EmailAddress", emailAddress);
 
             return users.FindOne(query);
         }
