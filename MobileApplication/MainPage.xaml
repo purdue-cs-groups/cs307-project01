@@ -171,8 +171,8 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Image Margin="20,0,0,0" Height="90" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                                    <TextBlock Margin="118,27,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,0,0,0" Height="90" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
+                                    <TextBlock Margin="118,27,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailTap" />
                                     <Image Margin="20,100,0,0"  Source="{Binding Photo.Source}"  Height="400" HorizontalAlignment="Left" Name="recentPicture" Stretch="Fill" VerticalAlignment="Top" Width="400" Tap="newsFeedPictureTap" Tag="{Binding PictureID}" />
                                     <TextBlock Margin="20,520,0,0" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
                                 </Grid>

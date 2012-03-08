@@ -185,6 +185,11 @@ namespace WinstagramPan
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
-        #endregion Application Bar Codebehind      
+        #endregion Application Bar Codebehind 
+     
+        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+        }
     }
 }

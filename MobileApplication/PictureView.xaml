@@ -27,7 +27,7 @@
                 <Image Height="400" HorizontalAlignment="Left" Margin="29,120,0,0" Name="pictureView" Stretch="Fill" VerticalAlignment="Top" Width="400" />
                 
                 <!-- Get owner picture from ownerID -->
-                <Image Height="90" HorizontalAlignment="Left" Margin="29,9,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                <Image Height="90" HorizontalAlignment="Left" Margin="29,9,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
                 <TextBlock Height="38" Margin="136,36,27,0" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="26" />
                 <TextBlock Height="80" HorizontalAlignment="Left" Margin="27,532,0,0" Name="pictureCaption" Text="Picture caption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
 

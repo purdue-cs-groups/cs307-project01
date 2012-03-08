@@ -13,6 +13,8 @@ using Microsoft.Phone.Controls;
 
 using WinstagramPan.Models;
 
+using Microsoft.Phone.Tasks;
+
 namespace WinstagramPan
 {
     public partial class UserDetailPage : PhoneApplicationPage
@@ -20,6 +22,14 @@ namespace WinstagramPan
         public UserDetailPage()
         {
             InitializeComponent();
+        }
+
+        private void SendEmail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EmailComposeTask em = new EmailComposeTask();
+            em.To = emailTextBlock.Text;
+
+            em.Show();
         }
     }
 }
