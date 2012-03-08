@@ -292,5 +292,10 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
         }
         #endregion logInTileTap Codebehind
+
+        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+        }
     }
 }

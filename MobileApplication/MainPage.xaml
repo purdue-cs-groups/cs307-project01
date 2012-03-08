@@ -43,12 +43,11 @@
                 <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
                     <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
                 </Grid>
-
             </Grid>
         </Grid>
 
         <!--Panorama control-->
-        <controls:Panorama  x:Name="MainContent" Visibility="Collapsed" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
+        <controls:Panorama  x:Name="MainContent" Visibility="Visible" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
@@ -187,7 +186,7 @@
                 <controls:PanoramaItem Header="profile">
                     <!--Double line list with image placeholder and text wrapping-->
                     <Grid>
-                        <Grid>
+                        <Grid Tap="ViewUserDetailTap">
                             <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
                             <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
                             <TextBlock Height="40" HorizontalAlignment="Left" Margin="177,36,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
