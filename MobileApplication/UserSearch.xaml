@@ -34,7 +34,7 @@
             </StackPanel>
         </Grid>
          <Grid Grid.Row="2">
-                <Button x:Name="searchbutton" Content="search" Margin="12,0,12,0" MinWidth="220" HorizontalAlignment="Left" />
+                <Button x:Name="searchbutton" Content="search" Margin="12,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="searchbutton_Click" />
                 <!--button stuff goes here, displays search results-->
          </Grid>
         </StackPanel>

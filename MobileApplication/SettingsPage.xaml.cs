@@ -19,5 +19,35 @@ namespace WinstagramPan
         {
             InitializeComponent();
         }
+
+        private void loginasnew_Click(object sender, RoutedEventArgs e)
+        {
+            //do something with the click on the login as new user button
+            //link to the login screen
+            //must check some state related stuff
+                    //can we go back once we got to the login as new user page?
+                    //if we go to login as new user, we want to swap the whole user experience
+                    //want to be able to go back to cancel the login
+                    //once oyu're logged in, everything changes
+        }
+
+        private void changepassword_Click(object sender, RoutedEventArgs e)
+        {
+            //is this somethign we even want to do?
+            //have to go to some other page where we can enter the password change requests
+                //user control popup?
+        }
+
+        private void connectaccounts_Click(object sender, RoutedEventArgs e)
+        {
+            //enter twitter information
+            //user control in conjunction with twitter API
+        }
+
+        private void readprivcy_Click(object sender, RoutedEventArgs e)
+        {
+            //again, user control popup? that just has a text box with the privacy agreement in it
+        }
+
     }
 }

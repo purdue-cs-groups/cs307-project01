@@ -37,14 +37,14 @@
                 </Grid.ColumnDefinitions>
                 <!--  <toolkit:ToggleSwitch x:Name="toganimations" Content="On" IsChecked="true" Header="Use animations" Checked="ToggleSwitch_Checked" Unchecked="ToggleSwitch_Unchecked" Grid.ColumnSpan="2" />-->
                 <TextBlock x:Name="useritems" Text="login" Style="{StaticResource PhoneTextTitle2Style}"/>
-                <Button x:Name="changepassword" Grid.ColumnSpan="2" Margin="6,54,6,502">Change password</Button>
-                <Button x:Name="loginasnew" Grid.ColumnSpan="2" Margin="6,170,6,380">Login as new user</Button>
+                <Button x:Name="changepassword" Grid.ColumnSpan="2" Margin="6,54,6,502" Click="changepassword_Click">Change password</Button>
+                <Button x:Name="loginasnew" Grid.ColumnSpan="2" Margin="6,170,6,380" BindingValidationError="loginasnew_BindingValidationError" Click="loginasnew_Click">Login as new user</Button>
 
                 <TextBlock x:Name="socialitems" Text="social networks" Style="{StaticResource PhoneTextTitle2Style}" Margin="18,292,12,322" Grid.ColumnSpan="2" />
-                <Button x:Name="connectaccounts" Grid.ColumnSpan="2" Margin="6,350,6,200">Connect to Twitter</Button>
+                <Button x:Name="connectaccounts" Grid.ColumnSpan="2" Margin="6,350,6,200" Click="connectaccounts_Click">Connect to Twitter</Button>
 
                 <TextBlock x:Name="privitems" Text="privacy" Style="{StaticResource PhoneTextTitle2Style}" Grid.ColumnSpan="2" Margin="18,490,0,128" />
-                <Button x:Name="readprivcy" Grid.ColumnSpan="2" Margin="0,544,12,6">Privacy agreement</Button>
+                <Button x:Name="readprivcy" Grid.ColumnSpan="2" Margin="0,544,12,6" Click="readprivcy_Click">Privacy agreement</Button>
             </Grid>
         </ScrollViewer>
 
