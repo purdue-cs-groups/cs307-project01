@@ -165,7 +165,7 @@
             </ScrollViewer>
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--Panorama item one-->
+                <!--NEWS FEED-->
                 <controls:PanoramaItem Header="news feed">
                     <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ListBox.ItemTemplate>
