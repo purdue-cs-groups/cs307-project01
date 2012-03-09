@@ -47,6 +47,20 @@ namespace WinstagramPan
         private void readprivcy_Click(object sender, RoutedEventArgs e)
         {
             //again, user control popup? that just has a text box with the privacy agreement in it
+            System.Windows.Controls.Primitives.Popup popup = new System.Windows.Controls.Primitives.Popup();
+            popup.Height = 300;
+            popup.Width = 400;
+            popup.VerticalOffset = 100;
+            PopupControl control = new PopupControl();
+
+            popup.Child = control;
+            popup.IsOpen = true;
+
+            control.okbtn.Click += (s, args) =>
+            {
+                popup.IsOpen = false;
+
+            };
         }
 
     }

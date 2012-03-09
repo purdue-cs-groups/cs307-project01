@@ -30,7 +30,7 @@
             <!-- StackPanel for user input fields -->
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="search by username or email address"/>
-                <TextBox x:Name="usernameInput" AcceptsReturn="False"/>
+                <TextBox x:Name="usernameInput" AcceptsReturn="False" Text="Search" Foreground="Gray" GotFocus="usernameInput_GotFocus" LostFocus="usernameInput_LostFocus"/>
             </StackPanel>
         </Grid>
          <Grid Grid.Row="2">
@@ -41,7 +41,10 @@
 
         <!-- results go here -->
         <!-- We'll set up the view for the results as a ListBox with DataBinding to a collection of matching Users -->
-        <ScrollViewer Height="364" HorizontalAlignment="Left" Margin="12,0,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="456" Grid.Row="1" />
+        <ScrollViewer Height="364" HorizontalAlignment="Left" Margin="12,0,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="456" Grid.Row="1">
+            <TextBlock x:Name="noresults" Visibility="Collapsed" Text="no results found" Style="{StaticResource PhoneTextTitle2Style}"/>
+            
+        </ScrollViewer>
         
         
         
