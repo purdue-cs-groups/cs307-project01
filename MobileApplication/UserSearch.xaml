@@ -42,7 +42,15 @@
         <!-- results go here -->
         <!-- We'll set up the view for the results as a ListBox with DataBinding to a collection of matching Users -->
         <ScrollViewer Height="364" HorizontalAlignment="Left" Margin="12,0,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="456" Grid.Row="1">
-            <TextBlock x:Name="noresults" Visibility="Collapsed" Text="no results found" Style="{StaticResource PhoneTextTitle2Style}"/>
+            <StackPanel x:Name="results">
+                <TextBlock x:Name="noresults" Visibility="Collapsed" Text="no results found" Style="{StaticResource PhoneTextTitle2Style}"/>
+                <Image Margin="20,0,0,0" Visibility="Collapsed" Height="90" HorizontalAlignment="Left" Name="JoePic" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
+                <TextBlock Margin="100,20,0,0" Visibility ="Collapsed" Text="Joe" Height="38" Name="joeusername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailTap" />
+                <Image Margin="20,0,0,0" Visibility="Collapsed" Height="90" HorizontalAlignment="Left" Name="JoshPic" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJosh.png" Tap="ViewUserDetailTap" />
+                <TextBlock Margin="100,20,0,0" Visibility ="Collapsed" Text="Josh" Height="38" Name="joshusername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailTap" />
+            </StackPanel>
+          
+            
             
         </ScrollViewer>
         

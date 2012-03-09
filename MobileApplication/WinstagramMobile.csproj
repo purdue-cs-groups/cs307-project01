@@ -170,6 +170,7 @@
     <Resource Include="Images\appbar.check.rest.png" />
     <Resource Include="Images\appbar.close.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
+    <Resource Include="Images\smallJosh.png" />
     <Content Include="References\ExifLib.dll" />
     <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="SplashScreenImage.jpg" />
