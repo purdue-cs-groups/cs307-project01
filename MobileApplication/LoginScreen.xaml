@@ -24,25 +24,34 @@
         <TextBlock Grid.Row="0" Text="Winstagram" 
                    FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" 
                    FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
-                   HorizontalAlignment="Center" 
-                   Foreground="{StaticResource PhoneAccentBrush}" />
+                   HorizontalAlignment="Left" 
+                   Foreground="{StaticResource PhoneAccentBrush}" Margin="12,0,0,0" />
 
         <Grid x:Name="userInputFields" Grid.Row="1">
             <!-- StackPanel for user input fields -->
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="username"/>
-                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" />
-
-                <TextBlock Text="password"/>
-                <PasswordBox x:Name="passwordInput"/>
+                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" Margin="-12,0,0,0" />
+                <TextBlock Text="password" />
+                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button x:Name="LoginButton" Content="login" Margin="12,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="LoginButton_Click" />
+            <Button x:Name="ForgotPasswordButton" Content="forgot password?" Margin="0,12,12,0" MinWidth="220" HorizontalAlignment="Right" Click="LoginButton_Click" />
+            <Button x:Name="LoginButton" Content="login" Margin="0,12,12,0" MinWidth="220" HorizontalAlignment="Left" Click="LoginButton_Click" />
         </Grid>
     </Grid>
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.75">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="about"/>
+                <shell:ApplicationBarMenuItem Text="privacy policy"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
