@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="MongoDB.Bson">
       <HintPath>Libraries\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -82,6 +83,7 @@
     <Compile Include="Common\AuthenticationManager.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
+    <Compile Include="Common\BlobKey.cs" />
     <Compile Include="Common\ErrorResponseHandler.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\APIConsumerController.cs" />

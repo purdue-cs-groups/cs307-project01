@@ -10,6 +10,9 @@ using WebService.Controllers;
 using System.IO;
 using System.Web.Helpers;
 using WebService.Common;
+using System.Configuration;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace WebService
 {
@@ -112,6 +115,79 @@ namespace WebService
             UserController.Delete(data);
 
             // TODO: delete all user pictures
+        }
+
+        #endregion
+
+        #region Picture Methods
+
+        private CloudBlobContainer container;
+
+        private void InitializeBlogStorage()
+        {
+            // initialize storage account
+            StorageCredentialsAccountAndKey storageCredentialsAccountAndKey = new StorageCredentialsAccountAndKey(ConfigurationManager.AppSettings["AzureStorageAccount"], ConfigurationManager.AppSettings["AzureStorageKey"]);
+            CloudStorageAccount storageAccount = new CloudStorageAccount(storageCredentialsAccountAndKey, true);
+
+            // initialize blob storage
+            CloudBlobClient blobStorage = storageAccount.CreateCloudBlobClient();
+            blobStorage.ParallelOperationThreadCount = 1;
+
+            // locate container reference
+            container = blobStorage.GetContainerReference("pictures");
+
+            // wait for container to initialize
+            bool storageInitialized = false;
+            while (!storageInitialized)
+            {
+                try
+                {
+                    // check if container exists
+                    container.CreateIfNotExist();
+
+                    // set container permissions
+                    var permissions = container.GetPermissions();
+                    permissions.PublicAccess = BlobContainerPublicAccessType.Container;
+                    container.SetPermissions(permissions);
+
+                    storageInitialized = true;
+                }
+                catch (StorageClientException e)
+                {
+                    // storage account could not be initialized
+                    throw e;
+                }
+            }
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/upload")]
+        public BlobKey UploadPicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            // initialize blob storage
+            this.InitializeBlogStorage();
+
+            // generate key for this picture
+            Guid id = Guid.NewGuid();
+            string fileName = String.Format("{0}.jpg");
+
+            // locate blob reference for this key
+            CloudBlob blob = container.GetBlobReference(fileName);
+
+            // upload image data to blob storage
+            reader.BaseStream.Seek(0, SeekOrigin.Begin);
+            blob.UploadFromStream(reader.BaseStream);
+
+            // close stream
+            reader.Close();
+            reader.Dispose();
+
+            // return reference to blob
+            return new BlobKey(fileName);
         }
 
         #endregion
