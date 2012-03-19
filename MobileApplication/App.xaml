@@ -9,6 +9,11 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <DataTemplate x:Key="SmallPanoramaTitle">
+            <ContentPresenter>
+                <TextBlock Text="{Binding}" FontSize="70" Margin="0,70,0,0"  />
+            </ContentPresenter>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
