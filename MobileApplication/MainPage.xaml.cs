@@ -84,6 +84,7 @@ namespace WinstagramPan
         public static String APIToken;
         public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
         public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
         /***************************************
@@ -99,23 +100,6 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
 
-        private void populatePopularPicturesHub()
-        {
-            String tile;
-            String tileName = "popTile";
-            int tileNumber = 1;
-
-            foreach (Picture p in PopularPictures)
-            {
-                // get HubTile object
-                tile = tileName + tileNumber;
-                HubTile currentHub =  FindName(tile) as HubTile;
-
-                // populate HubTile with popular photo metadata
-                // ** waiting to complete til I see the Picture model **
-                currentHub.Source = p.Photo.Source;
-            }
-        }
         #endregion Popular Pivot Codebehind
 
         #region News Feed Codebehind

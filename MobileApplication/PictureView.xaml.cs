@@ -35,7 +35,7 @@ namespace WinstagramPan
         {
             if (SenderPage == 1)
             {
-                String ownerID = MainPage.selectedPicture.Message;
+                String pictureID = MainPage.selectedPicture.Message;
                 String ownerName = MainPage.selectedPicture.Title;
                 String pictureCaptionText = MainPage.selectedPicture.Notification;
                 ImageSource pictureSource = MainPage.selectedPicture.Source;
