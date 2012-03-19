@@ -24,7 +24,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
                 <controls:PanoramaItem Header="popular">
-                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -186,7 +186,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--NEWS FEED-->
                 <controls:PanoramaItem Header="news feed">
-                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -204,7 +204,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <controls:PanoramaItem Header="profile">
                     <!--Double line list with image placeholder and text wrapping-->
-                    <Grid>
+                    <Grid Margin="0,0,0,75">
                         <Grid Tap="ViewUserDetailTap">
                             <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
                             <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
@@ -219,7 +219,7 @@
                             <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="255,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
                             <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="335,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
                         </Grid>
-                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,0">
+                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,20">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
