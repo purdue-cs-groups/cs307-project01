@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{12A078EE-1E9B-441A-9191-62D2E6CDE891}</ProjectGuid>
+    <ProjectGuid>{A5D56CA9-EC66-473C-A38A-30CF84202FDC}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinstagramPan</RootNamespace>
-    <AssemblyName>WinstagramPan</AssemblyName>
+    <RootNamespace>TestApplication</RootNamespace>
+    <AssemblyName>TestApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
@@ -20,26 +20,11 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>WinstagramPan.xap</XapFilename>
+    <XapFilename>TestApplication.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>WinstagramPan.App</SilverlightAppEntry>
+    <SilverlightAppEntry>TestApplication.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,10 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExifLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Controls" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -79,57 +61,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditPicture.xaml.cs">
-      <DependentUpon>EditPicture.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LoginScreen.xaml.cs">
-      <DependentUpon>LoginScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="PictureView.xaml.cs">
-      <DependentUpon>PictureView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\Setting.cs" />
-    <Compile Include="Settings\Settings.cs" />
-    <Compile Include="ViewModels\ItemViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="EditPicture.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LoginScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <DesignData Include="SampleData\MainViewModelSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <Page Include="PictureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">
@@ -138,47 +87,14 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\appbar.check.png" />
-    <Resource Include="Images\appbar.check.rest.png" />
-    <Resource Include="Images\appbar.close.rest.png" />
-    <Content Include="References\ExifLib.dll" />
-    <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="SplashScreenImage.jpg" />
-    <Resource Include="Images\test.png" />
-    <Resource Include="PanoramaBackground.png" />
-    <Content Include="Images\appbar.camera.png" />
-    <Content Include="Images\appbar.image.png" />
-    <Content Include="Images\joe.jpg" />
-    <Content Include="Images\james.jpg" />
-    <Content Include="Images\jeremiah.jpg" />
-    <Content Include="Images\josh.jpg" />
-    <Content Include="Images\matt.jpg" />
-    <Content Include="Images\microsoft.jpg" />
-    <Content Include="Images\purdue.jpg" />
-    <Content Include="Images\seattle.jpg" />
-    <Content Include="Images\shruti.jpg" />
-    <Resource Include="Images\smallJoe.png" />
-    <Content Include="Images\windowsphone.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClientLibrary\MobileClientLibrary.csproj">
+    <ProjectReference Include="..\MobileClientLibrary\MobileClientLibrary.csproj">
       <Project>{563005C0-77BC-4DA0-883A-9917DA9B8F92}</Project>
       <Name>MobileClientLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
