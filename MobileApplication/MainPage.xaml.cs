@@ -173,6 +173,7 @@ namespace WinstagramPan
         }
 
         public static Image captured = new Image();
+        public static BitmapImage bmp = new BitmapImage();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
             // figure out the orientation from EXIF data
@@ -201,7 +202,6 @@ namespace WinstagramPan
                     break;
             }
 
-            BitmapImage bmp = new BitmapImage();
             if (_angle > 0d)
             {
                 bmp.SetSource(RotateStream(e.ChosenPhoto, _angle));

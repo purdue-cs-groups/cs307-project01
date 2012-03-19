@@ -47,7 +47,7 @@
         </Grid>
 
         <!--Panorama control-->
-        <controls:Panorama  x:Name="MainContent" Visibility="Visible" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
+        <controls:Panorama  x:Name="MainContent" Visibility="Visible" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
