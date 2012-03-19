@@ -25,8 +25,9 @@ namespace WinstagramPan
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
 
-            // Delete this instance of LoginScreen (users cannot get back to this page!)
-            NavigationService.GoBack();
+            MainPage.isFromLogin = true;
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
         }
     }
 }

@@ -40,11 +40,20 @@ namespace WinstagramPan
         }
 
         // Load data for the ViewModel Items
+        public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
+            }
+
+            if (isFromLogin)
+            {
+                isFromLogin = false;
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
             }
         }
 
@@ -64,17 +73,11 @@ namespace WinstagramPan
         {
             if (flag)
             {
-                // MainContent
-                this.WelcomeScreen.Visibility = Visibility.Collapsed;
-                this.MainContent.Visibility = Visibility.Visible;
-                this.ApplicationBar.IsVisible = true;
+                
             }
             else
             {
-                // WelcomeScreen
-                this.MainContent.Visibility = Visibility.Collapsed;
-                this.WelcomeScreen.Visibility = Visibility.Visible;
-                this.ApplicationBar.IsVisible = false;
+                NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
             }
         }
 
@@ -282,16 +285,6 @@ namespace WinstagramPan
         }
 
         #endregion Application Bar Codebehind
-
-        #region logInTileTap Codebehind
-        /***************************************
-         ***** logInTileTap Codebehind *********
-         ***************************************/
-        private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
-        }
-        #endregion logInTileTap Codebehind
 
         private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
         {

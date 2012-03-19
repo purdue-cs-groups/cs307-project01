@@ -18,36 +18,8 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
- 
-        <!--Welcome Screen-->
-        <Grid x:Name="WelcomeScreen" Visibility="Collapsed" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--ContentPanel - place additional content here-->
-            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap">
-                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-                </Grid>
-
-                <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
-                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-                </Grid>
-            </Grid>
-        </Grid>
-
         <!--Panorama control-->
-        <controls:Panorama  x:Name="MainContent" Visibility="Visible" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
+        <controls:Panorama  x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
