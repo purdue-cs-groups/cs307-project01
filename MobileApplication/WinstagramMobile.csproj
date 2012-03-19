@@ -185,25 +185,13 @@
     <Resource Include="Images\appbar.check.rest.png" />
     <Resource Include="Images\appbar.close.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
-    <Resource Include="Images\smallJosh.png" />
     <Content Include="References\ExifLib.dll" />
     <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
     <Content Include="SplashScreenImage.jpg" />
-    <Resource Include="Images\test.png" />
     <Resource Include="PanoramaBackground.png" />
     <Content Include="Images\appbar.camera.png" />
     <Content Include="Images\appbar.image.png" />
-    <Content Include="Images\joe.jpg" />
-    <Content Include="Images\james.jpg" />
-    <Content Include="Images\jeremiah.jpg" />
-    <Content Include="Images\josh.jpg" />
-    <Content Include="Images\matt.jpg" />
-    <Content Include="Images\microsoft.jpg" />
     <Content Include="Images\purdue.jpg" />
-    <Content Include="Images\seattle.jpg" />
-    <Content Include="Images\shruti.jpg" />
-    <Resource Include="Images\smallJoe.png" />
-    <Content Include="Images\windowsphone.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

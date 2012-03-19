@@ -24,10 +24,11 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
                 <controls:PanoramaItem Header="popular">
-                    <Grid Width="370" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -45,66 +46,66 @@
                         <toolkit:HubTile Grid.Row="1" Grid.Column="0"
                                          Name="popTile1"
                                          Margin="12,12,0,0"
-                                         Source="/Images/joe.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Joe"
                                          Notification="XAML God"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Width="120" Height="120" />
                         <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
                                          Name="popTile2"
                                          Margin="12,12,0,0"
-                                         Source="/Images/matt.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Matt"
                                          Notification="Lync!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Height="120" Width="120" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
                                          Name="popTile3"
                                          Margin="12,15,0,5"
-                                         Source="/Images/james.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="James"
                                          Notification="Clarity!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Height="120" Width="120" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
                                          Name="popTile4"
                                          Margin="12,12,0,0"
-                                         Source="/Images/jeremiah.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Jeremiah"
                                          Notification="Mongo!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Height="120" Width="120" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
                                          Name="popTile5"
                                          Margin="12,12,0,0"
-                                         Source="/Images/josh.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Josh"
                                          Notification="En guard!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Height="120" Width="120" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
                                          Name="popTile6"
                                          Margin="12,12,0,0"
-                                         Source="/Images/shruti.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Shruti"
                                          Notification="Shrutigram!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Height="120" Width="120" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
                                          Name="popTile7"
                                          Margin="12,12,0,0"
-                                         Source="/Images/microsoft.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Microsoft"
                                          Notification="Windows 8 is here!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Width="120" Height="120" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
                                          Name="popTile8"
                                          Margin="12,12,0,0"
@@ -113,7 +114,7 @@
                                          Notification="Space Needle"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Width="120" Height="120" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
                                          Name="popTile9"
                                          Margin="12,12,0,0"
@@ -122,16 +123,16 @@
                                          Notification="Boiler up!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Width="120" Height="120" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
                                          Name="popTile10"
                                          Margin="12,12,0,0"
-                                         Source="/Images/windowsphone.jpg"
+                                         Source="/Images/purdue.jpg"
                                          Title="Windows Phone"
                                          Notification="Love me some Mango!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="ownerID" Width="120" Height="120" />
                     </Grid>
                 </controls:PanoramaItem>
             </ScrollViewer>
