@@ -14,8 +14,13 @@ using Microsoft.Phone.Controls;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 using WinstagramPan.Models;
+using Microsoft.Phone.Tasks;
+
+using System.IO;
+using ExifLib;
 
 namespace WinstagramPan
 {
@@ -43,14 +48,45 @@ namespace WinstagramPan
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
-        /********************************************************
-         * 
-         * 
-         *                 POPULAR Pivot Codebehind
-         * 
-         * 
-         ********************************************************/
+            changeVisibilityOfContent(Settings.isLoggedIn.Value);
+        }
+
+        /* 
+         * Change visibility of content based on flag
+         * true: only panorama MainContent is visible
+         * false: only tiled WelcomeScreen is visible 
+         */
+        private void changeVisibilityOfContent(bool flag)
+        {
+            if (flag)
+            {
+                // MainContent
+                this.WelcomeScreen.Visibility = Visibility.Collapsed;
+                this.MainContent.Visibility = Visibility.Visible;
+                this.ApplicationBar.IsVisible = true;
+            }
+            else
+            {
+                // WelcomeScreen
+                this.MainContent.Visibility = Visibility.Collapsed;
+                this.WelcomeScreen.Visibility = Visibility.Visible;
+                this.ApplicationBar.IsVisible = false;
+            }
+        }
+
+        public static String APIToken;
+        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+
+        #region Popular Pivot Codebehind
+        /***************************************
+         ******* Popular Pivot Codebehind ******
+         ***************************************/
+
         public static HubTile selectedPicture;
         private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -60,14 +96,30 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
 
-        /********************************************************
-         * 
-         * 
-         *               NEWS FEED Pivot Codebehind
-         * 
-         * 
-         ********************************************************/
-        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+        private void populatePopularPicturesHub()
+        {
+            String tile;
+            String tileName = "popTile";
+            int tileNumber = 1;
+
+            foreach (Picture p in PopularPictures)
+            {
+                // get HubTile object
+                tile = tileName + tileNumber;
+                HubTile currentHub =  FindName(tile) as HubTile;
+
+                // populate HubTile with popular photo metadata
+                // ** waiting to complete til I see the Picture model **
+                currentHub.Source = p.Photo.Source;
+            }
+        }
+        #endregion Popular Pivot Codebehind
+
+        #region News Feed Codebehind
+        /***************************************
+         ***** News Feed Codebehind ************
+         ***************************************/
+        
         private void populateRecentPictures()
         {
             // first pic
@@ -98,8 +150,136 @@ namespace WinstagramPan
             PictureView.SenderPage = 2;
 
             Image i = (Image) sender;
-            pictureID = i.Tag.ToString();
+
+            // the Tag field of each Image on the News Feed will be the pictureID of the Picture
+            // in the database
+
+            pictureID = i.Tag.ToString();  
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
+        #endregion News Feed Codebehind
+
+        #region Application Bar Codebehind
+        /***************************************
+         ***** Application Bar Codebehind ******
+         ***************************************/
+
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            CameraCaptureTask cam = new CameraCaptureTask();
+            cam.Completed += new EventHandler<PhotoResult>(cameraCaptureTask_Completed);
+
+            cam.Show();
+        }
+
+        public static Image captured = new Image();
+        private void cameraCaptureTask_Completed(object sender, PhotoResult e)
+        {
+            // figure out the orientation from EXIF data
+            e.ChosenPhoto.Position = 0;
+            JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
+
+            int _width = info.Width;
+            int _height = info.Height;
+            var _orientation = info.Orientation;
+            int _angle = 0;
+
+            switch (info.Orientation)
+            {
+                case ExifOrientation.TopLeft:
+                case ExifOrientation.Undefined:
+                    _angle = 0;
+                    break;
+                case ExifOrientation.TopRight:
+                    _angle = 90;
+                    break;
+                case ExifOrientation.BottomRight:
+                    _angle = 180;
+                    break;
+                case ExifOrientation.BottomLeft:
+                    _angle = 270;
+                    break;
+            }
+
+            BitmapImage bmp = new BitmapImage();
+            if (_angle > 0d)
+            {
+                bmp.SetSource(RotateStream(e.ChosenPhoto, _angle));
+            }
+            else
+            {
+                bmp.SetSource(e.ChosenPhoto);
+            }
+
+            captured.Source = bmp;
+
+            // wait til UI thread is done, then navigate
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
+            });
+        }
+
+        // thanks, interwebs
+        private Stream RotateStream(Stream stream, int angle)
+        {
+            stream.Position = 0;
+            if (angle % 90 != 0 || angle < 0) throw new ArgumentException();
+            if (angle % 360 == 0) return stream;
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            WriteableBitmap wbSource = new WriteableBitmap(bitmap);
+
+            WriteableBitmap wbTarget = null;
+            if (angle % 180 == 0)
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelWidth, wbSource.PixelHeight);
+            }
+            else
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelHeight, wbSource.PixelWidth);
+            }
+
+            for (int x = 0; x < wbSource.PixelWidth; x++)
+            {
+                for (int y = 0; y < wbSource.PixelHeight; y++)
+                {
+                    switch (angle % 360)
+                    {
+                        case 90:
+                            wbTarget.Pixels[(wbSource.PixelHeight - y - 1) + x * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 180:
+                            wbTarget.Pixels[(wbSource.PixelWidth - x - 1) + (wbSource.PixelHeight - y - 1) * wbSource.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 270:
+                            wbTarget.Pixels[y + (wbSource.PixelWidth - x - 1) * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                    }
+                }
+            }
+            MemoryStream targetStream = new MemoryStream();
+            wbTarget.SaveJpeg(targetStream, wbTarget.PixelWidth, wbTarget.PixelHeight, 0, 100);
+            return targetStream;
+        }
+
+        private void SignoutBarIconButton_Click(object sender, EventArgs e)
+        {
+            Settings.isLoggedIn.Value = false;
+
+            changeVisibilityOfContent(Settings.isLoggedIn.Value);
+        }
+        #endregion Application Bar Codebehind
+
+        #region logInTileTap Codebehind
+        /***************************************
+         ***** logInTileTap Codebehind *********
+         ***************************************/
+        private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
+        }
+        #endregion logInTileTap Codebehind
     }
 }
