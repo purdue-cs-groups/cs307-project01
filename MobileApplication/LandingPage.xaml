@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -23,20 +24,56 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap">
+            <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap" Margin="0,0,12,0">
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="0,12,0,0">
+                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Browse" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+            </Grid>
         </Grid>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.75">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="about"/>
+                <shell:ApplicationBarMenuItem Text="privacy policy"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!-- sexy transitions -->
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 </phone:PhoneApplicationPage>
