@@ -191,5 +191,10 @@ namespace WinstagramPan
         {
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
         }
+
+        private void recentPicture_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }

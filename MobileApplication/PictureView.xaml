@@ -24,19 +24,46 @@
 
             <!--ContentPanel - place additional content here-->
             <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                <Image Height="400" HorizontalAlignment="Left" Margin="29,120,0,0" Name="pictureView" Stretch="Fill" VerticalAlignment="Top" Width="400" />
+                    <Grid> <Image Height="400" HorizontalAlignment="Left" Margin="29,120,0,0" Name="pictureView" Stretch="Fill" VerticalAlignment="Top" Width="400" />
                 
                 <!-- Get owner picture from ownerID -->
                 <Image Height="90" HorizontalAlignment="Left" Margin="29,9,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                <TextBlock Height="38" Margin="136,36,27,0" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="26" />
-                <TextBlock Height="80" HorizontalAlignment="Left" Margin="27,532,0,0" Name="pictureCaption" Text="Picture caption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
+                    <TextBlock Margin="118,25,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}"/>
+                    <TextBlock Text="3 hours ago" Margin="0,34,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                        <Image Margin="20,80,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" ImageFailed="recentPicture_ImageFailed" />
+                        <Grid Margin="20,560,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto"  />
+                            </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="pictureCaption" Text="Picture caption" HorizontalAlignment="Left" Height="80" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">
+                                <toolkit:ContextMenuService.ContextMenu>
+                                    <toolkit:ContextMenu>
+                                        <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                        <toolkit:MenuItem Header="share" />
+                                        <toolkit:MenuItem Header="flag for review" />
+                                        <toolkit:MenuItem Header="cancel" />
+                                    </toolkit:ContextMenu>
+                                </toolkit:ContextMenuService.ContextMenu>
+                            </Button>
+                        </Grid>
+                    </Grid>
 
-                <Button Margin="17,590,10,28"  
+
+
+               
+                
+
+              <!--  <Button Margin="17,590,10,28"  
                         VerticalAlignment="Center"
                         Padding="12"
                         Content="Share Photo"
                         FontSize="24" Name="shareButton" Click="shareButton_Click">
-                </Button>
+                </Button>-->
             </Grid>
         </Grid>
     </ScrollViewer>
