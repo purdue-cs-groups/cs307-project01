@@ -7,15 +7,15 @@ using System.Runtime.Serialization;
 namespace WebService.Common
 {
     [DataContract]
-    public class BlobKey
+    public class PictureURL
     {
-        public BlobKey(string key)
+        public PictureURL(string url)
         {
-            Key = key;
+            URL = url;
         }
 
-        [DataMember(Name = "Key", Order = 0)]
-        public string Key
+        [DataMember(Name = "URL", Order = 0)]
+        public string URL
         {
             get;
             set;

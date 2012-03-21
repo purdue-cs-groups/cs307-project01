@@ -69,6 +69,7 @@
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
     <Content Include="Register.aspx" />
+    <Content Include="ViewPicture.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -83,10 +84,11 @@
     <Compile Include="Common\AuthenticationManager.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
-    <Compile Include="Common\BlobKey.cs" />
+    <Compile Include="Common\PictureURL.cs" />
     <Compile Include="Common\ErrorResponseHandler.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\APIConsumerController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -101,6 +103,7 @@
     <Compile Include="Models\APIConsumer.cs" />
     <Compile Include="Common\UserCredentials.cs" />
     <Compile Include="Common\Token.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
@@ -109,6 +112,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewPicture.aspx.cs">
+      <DependentUpon>ViewPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewPicture.aspx.designer.cs">
+      <DependentUpon>ViewPicture.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebService.cs" />
   </ItemGroup>

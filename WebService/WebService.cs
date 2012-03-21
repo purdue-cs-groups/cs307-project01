@@ -87,6 +87,9 @@ namespace WebService
 
             var jsonData = Json.Decode<User>(stringData);
 
+            // force server-side values
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
             UserController.Create(jsonData);
         }
 
@@ -161,7 +164,7 @@ namespace WebService
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/upload")]
-        public BlobKey UploadPicture(Stream data)
+        public PictureURL UploadPicture(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -173,7 +176,7 @@ namespace WebService
 
             // generate key for this picture
             Guid id = Guid.NewGuid();
-            string fileName = String.Format("{0}.jpg");
+            string fileName = String.Format("{0}.jpg", id);
 
             // locate blob reference for this key
             CloudBlob blob = container.GetBlobReference(fileName);
@@ -187,7 +190,67 @@ namespace WebService
             reader.Dispose();
 
             // return reference to blob
-            return new BlobKey(fileName);
+            return new PictureURL(blob.Uri.AbsoluteUri.ToLower().Replace("https://", "http://"));
+        }
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
+        public Picture FetchPicture(string id)
+        {
+            return PictureController.Fetch(id);
+        }
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
+        public List<Picture> FetchAllPictures()
+        {
+            return PictureController.FetchAll();
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/create")]
+        public void CreatePicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<Picture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            PictureController.Create(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/update")]
+        public void UpdatePicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<Picture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+
+            PictureController.Update(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/delete?id={id}")]
+        public void DeletePicture(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            Picture data = PictureController.Fetch(id);
+            PictureController.Delete(data);
         }
 
         #endregion

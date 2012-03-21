@@ -16,7 +16,7 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
-            var query = new QueryDocument("ID", id);
+            var query = new QueryDocument("_id", id);
 
             return users.FindOne(query);
         }
@@ -81,7 +81,7 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
-            var query = new QueryDocument("ID", data.ID);
+            var query = new QueryDocument("_id", data.ID);
 
             users.FindAndRemove(query, new SortByDocument());
         }
