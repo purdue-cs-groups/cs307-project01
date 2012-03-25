@@ -13,7 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False" >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <controls:Pivot Title="JOE MARTELLA">
@@ -57,51 +57,9 @@
                             <Grid x:Name="RectanglesPanel" Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                
-                                <Grid>
-                                    <Rectangle x:Name="photosRectangle" Grid.Column="0"
-                                           Height="70" Width="95"
-                                           HorizontalAlignment="Center" Stroke="Black" StrokeThickness="1" Fill="{StaticResource PhoneAccentBrush}" />
-                                    <TextBlock Text="52"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Top"
-                                               FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                    <TextBlock Text="photos"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Bottom"
-                                               FontSize="{StaticResource PhoneFontSizeNormal}"/>
-                                </Grid>
-
-                                <Grid Grid.Column="1">
-                                    <Rectangle x:Name="followerRectangle" 
-                                           Height="70" Width="95"
-                                           HorizontalAlignment="Center" Stroke="Black" StrokeThickness="1" Fill="{StaticResource PhoneAccentBrush}" />
-                                    <TextBlock Text="23"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Top"
-                                               FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                    <TextBlock Text="followers"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Bottom"
-                                               FontSize="{StaticResource PhoneFontSizeNormal}"/>
-                                </Grid>
-
-                                <Grid Grid.Column="2">
-                                    <Rectangle x:Name="followingRectangle" 
-                                           Height="70" Width="95"
-                                           HorizontalAlignment="Center" Stroke="Black" StrokeThickness="1" Fill="{StaticResource PhoneAccentBrush}" />
-                                    <TextBlock Text="5"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Top"
-                                               FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                    <TextBlock Text="following"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Bottom"
-                                               FontSize="{StaticResource PhoneFontSizeNormal}"/>
-                                </Grid>
+                                <Rectangle Height="53" HorizontalAlignment="Left" Margin="13,7,0,0" Name="followingRec" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="179" Fill="Green" />
+                                <TextBlock Height="49" HorizontalAlignment="Left" Margin="60,17,0,0" Name="followingStatus" Text="Following" VerticalAlignment="Top" Width="Auto" />
                             </Grid>
                         </Grid>
                         
@@ -282,8 +240,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.refresh.rest.png" Text="refresh"/>
+        <shell:ApplicationBar x:Name="UserDetailAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

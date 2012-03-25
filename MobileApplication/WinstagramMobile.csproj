@@ -191,7 +191,9 @@
     <Resource Include="Images\appbar.check.png" />
     <Content Include="Images\appbar.check.rest.png" />
     <Content Include="Images\appbar.close.rest.png" />
+    <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
+    <Content Include="Images\appbar.upload.rest.png" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />
