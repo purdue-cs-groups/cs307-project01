@@ -274,5 +274,10 @@ namespace WinstagramPan
         {
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
         }
+
+        private void EditProfile_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+        }
     }
 }

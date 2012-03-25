@@ -204,7 +204,7 @@
                                             <ColumnDefinition Width="Auto"  />
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
-                                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">
+                                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">              
                                             <toolkit:ContextMenuService.ContextMenu>
                                                 <toolkit:ContextMenu>
                                                     <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
@@ -292,7 +292,7 @@
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="EditProfile_Click" />
                 <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
                 <shell:ApplicationBarMenuItem Text="user search" Click="UserSearch_Click" />
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
