@@ -31,5 +31,40 @@ namespace WinstagramPan
             MessageBox.Show("Your changes have been discarded.");
             NavigationService.GoBack();
         }
+
+        private void usernameInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Dispatcher.BeginInvoke(() => usernameInput.Focus());
+                Dispatcher.BeginInvoke(() => textBox1.Focus());
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Dispatcher.BeginInvoke(() => textBox1.Focus());
+                Dispatcher.BeginInvoke(() => textBox2.Focus());
+            }
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Dispatcher.BeginInvoke(() => textBox2.Focus());
+                Dispatcher.BeginInvoke(() => textBox3.Focus());
+            }
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                this.Focus();
+            }
+        }
     }
 }

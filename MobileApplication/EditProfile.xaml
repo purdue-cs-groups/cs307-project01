@@ -31,13 +31,13 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="name" />
-                <TextBox InputScope="PersonalFullName" Name="usernameInput" Margin="-12,0,0,0" />
+                <TextBox InputScope="PersonalFullName" Name="usernameInput" Margin="-12,0,0,0" KeyDown="usernameInput_KeyDown" />
                 <TextBlock Text="email" />
-                <TextBox InputScope="PersonalFullName" Name="textBox1" Margin="-12,0,0,0" />
+                <TextBox InputScope="PersonalFullName" Name="textBox1" Margin="-12,0,0,0" KeyDown="textBox1_KeyDown" />
                 <TextBlock Text="location" />
-                <TextBox InputScope="PersonalFullName" Name="textBox2" Margin="-12,0,0,0" />
+                <TextBox InputScope="PersonalFullName" Name="textBox2" Margin="-12,0,0,0" KeyDown="textBox2_KeyDown" />
                 <TextBlock Text="bio" />
-                <TextBox InputScope="PersonalFullName" Name="textBox3" Text="" Margin="-12,0,0,0" TextWrapping="Wrap" Height="159" Width="Auto" />
+                <TextBox InputScope="PersonalFullName" Name="textBox3" Text="" Margin="-12,0,0,0" TextWrapping="Wrap" Height="159" Width="Auto" KeyDown="textBox3_KeyDown" />
             </StackPanel>
         </Grid>
     </Grid>
