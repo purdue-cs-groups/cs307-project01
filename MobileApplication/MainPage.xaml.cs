@@ -40,11 +40,20 @@ namespace WinstagramPan
         }
 
         // Load data for the ViewModel Items
+        public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!App.ViewModel.IsDataLoaded)
             {
                 App.ViewModel.LoadData();
+            }
+
+            if (isFromLogin)
+            {
+                isFromLogin = false;
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
             }
         }
 
@@ -64,23 +73,18 @@ namespace WinstagramPan
         {
             if (flag)
             {
-                // MainContent
-                this.WelcomeScreen.Visibility = Visibility.Collapsed;
-                this.MainContent.Visibility = Visibility.Visible;
-                this.ApplicationBar.IsVisible = true;
+                
             }
             else
             {
-                // WelcomeScreen
-                this.MainContent.Visibility = Visibility.Collapsed;
-                this.WelcomeScreen.Visibility = Visibility.Visible;
-                this.ApplicationBar.IsVisible = false;
+                NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
             }
         }
 
         public static String APIToken;
         public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
         public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
         /***************************************
@@ -96,23 +100,6 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
 
-        private void populatePopularPicturesHub()
-        {
-            String tile;
-            String tileName = "popTile";
-            int tileNumber = 1;
-
-            foreach (Picture p in PopularPictures)
-            {
-                // get HubTile object
-                tile = tileName + tileNumber;
-                HubTile currentHub =  FindName(tile) as HubTile;
-
-                // populate HubTile with popular photo metadata
-                // ** waiting to complete til I see the Picture model **
-                currentHub.Source = p.Photo.Source;
-            }
-        }
         #endregion Popular Pivot Codebehind
 
         #region News Feed Codebehind
@@ -173,6 +160,7 @@ namespace WinstagramPan
         }
 
         public static Image captured = new Image();
+        public static BitmapImage bmp = new BitmapImage();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
             // figure out the orientation from EXIF data
@@ -201,7 +189,6 @@ namespace WinstagramPan
                     break;
             }
 
-            BitmapImage bmp = new BitmapImage();
             if (_angle > 0d)
             {
                 bmp.SetSource(RotateStream(e.ChosenPhoto, _angle));
@@ -270,16 +257,22 @@ namespace WinstagramPan
 
             changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void UserSearch_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
+        }
+
         #endregion Application Bar Codebehind
 
-        #region logInTileTap Codebehind
-        /***************************************
-         ***** logInTileTap Codebehind *********
-         ***************************************/
-        private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
         }
-        #endregion logInTileTap Codebehind
     }
 }

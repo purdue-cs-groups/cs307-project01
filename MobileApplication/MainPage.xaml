@@ -18,45 +18,17 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
- 
-        <!--Welcome Screen-->
-        <Grid x:Name="WelcomeScreen" Visibility="Collapsed" Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!--ContentPanel - place additional content here-->
-            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap">
-                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-                </Grid>
-
-                <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
-                    <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-                </Grid>
-
-            </Grid>
-        </Grid>
-
         <!--Panorama control-->
-        <controls:Panorama  x:Name="MainContent" Visibility="Collapsed" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto">
+        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <!--Panorama item one-->
                 <controls:PanoramaItem Header="popular">
-                    <Grid Width="370" HorizontalAlignment="Left" Margin="0,0,0,0">
+                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -68,18 +40,20 @@
                         </Grid.RowDefinitions>
 
                         <!-- Title is username of picture owner -->
-                        <!-- Message is ID of picture owner -->
+                        <!-- Notification is picture caption -->
+                        <!-- Message is ID of picture -->
 
                         <!-- The Hub Tile -->
                         <toolkit:HubTile Grid.Row="1" Grid.Column="0"
                                          Name="popTile1"
                                          Margin="12,12,0,0"
                                          Source="/Images/joe.jpg"
-                                         Title="Joe"
+                                         Title="Joe"  
                                          Notification="XAML God"
+                                         Style="{StaticResource SmallHubTile}"
                                          DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap"
+                                         Message="pictureID" />
                         <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
                                          Name="popTile2"
                                          Margin="12,12,0,0"
@@ -88,7 +62,16 @@
                                          Notification="Lync!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="1" Grid.Column="2" 
+                                         Name="popTile20"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/matt.jpg"
+                                         Title="Matt"
+                                         Notification="Lync!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
                                          Name="popTile3"
                                          Margin="12,15,0,5"
@@ -97,7 +80,7 @@
                                          Notification="Clarity!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
                                          Name="popTile4"
                                          Margin="12,12,0,0"
@@ -106,7 +89,16 @@
                                          Notification="Mongo!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="2" Grid.Column="2" 
+                                         Name="popTile40"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/jeremiah.jpg"
+                                         Title="Jeremiah"
+                                         Notification="Mongo!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
                                          Name="popTile5"
                                          Margin="12,12,0,0"
@@ -115,7 +107,7 @@
                                          Notification="En guard!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
                                          Name="popTile6"
                                          Margin="12,12,0,0"
@@ -124,7 +116,16 @@
                                          Notification="Shrutigram!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="3" Grid.Column="2" 
+                                         Name="popTile60"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/shruti.jpg"
+                                         Title="Shruti"
+                                         Notification="Shrutigram!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
                                          Name="popTile7"
                                          Margin="12,12,0,0"
@@ -133,7 +134,7 @@
                                          Notification="Windows 8 is here!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
                                          Name="popTile8"
                                          Margin="12,12,0,0"
@@ -142,7 +143,16 @@
                                          Notification="Space Needle"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="4" Grid.Column="2" 
+                                         Name="popTile80"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/seattle.jpg"
+                                         Title="Seattle"
+                                         Notification="Space Needle"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
                                          Name="popTile9"
                                          Margin="12,12,0,0"
@@ -151,7 +161,7 @@
                                          Notification="Boiler up!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
                                          Name="popTile10"
                                          Margin="12,12,0,0"
@@ -160,22 +170,51 @@
                                          Notification="Love me some Mango!"
                                          DisplayNotification="True"
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="5" Grid.Column="2" 
+                                         Name="popTile100"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/windowsphone.jpg"
+                                         Title="Windows Phone"
+                                         Notification="Love me some Mango!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                     </Grid>
                 </controls:PanoramaItem>
             </ScrollViewer>
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--Panorama item one-->
-                <controls:PanoramaItem Header="news feed">
-                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <!--NEWS FEED-->
+                <controls:PanoramaItem Header="recent">
+                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Image Margin="20,0,0,0" Height="90" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                                    <TextBlock Margin="118,27,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,100,0,0"  Source="{Binding Photo.Source}"  Height="400" HorizontalAlignment="Left" Name="recentPicture" Stretch="Fill" VerticalAlignment="Top" Width="400" Tap="newsFeedPictureTap" Tag="{Binding PictureID}" />
-                                    <TextBlock Margin="20,520,0,0" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" VerticalAlignment="Top" Width="400" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" TextAlignment="Center" />
+                                    <Image Margin="20,0,0,0" Height="65" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="65" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
+                                    <TextBlock Margin="118,17,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
+                                    <TextBlock Text="3 hours ago" Margin="0,25,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,80,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
+                                    <Grid Margin="20,560,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto"  />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+                                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                                    <toolkit:MenuItem Header="share" />
+                                                    <toolkit:MenuItem Header="flag for review" />
+                                                    <toolkit:MenuItem Header="cancel" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                        </Button>
+                                    </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -186,8 +225,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <controls:PanoramaItem Header="profile">
                     <!--Double line list with image placeholder and text wrapping-->
-                    <Grid>
-                        <Grid>
+                    <Grid Margin="0,0,0,75">
+                        <Grid Tap="ViewUserDetailTap">
                             <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
                             <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
                             <TextBlock Height="40" HorizontalAlignment="Left" Margin="177,36,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
@@ -201,105 +240,47 @@
                             <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="255,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
                             <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="335,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
                         </Grid>
-                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                                <!-- Title is username of picture owner -->
-                                <!-- Message is ID of picture owner -->
+                            <!-- set Tag equal to index of UserPicture colleciton -->
+                            <Image Grid.Row="0" Grid.Column="0" Name="i1" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="0" Grid.Column="1" Name="i2" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="0" Grid.Column="2" Name="i3" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
 
-                                <!-- The Hub Tile -->
-                                <toolkit:HubTile Grid.Row="1" Grid.Column="0" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/joe.jpg"
-                                         Title="Joe"
-                                         Notification="XAML God"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/matt.jpg"
-                                         Title="Matt"
-                                         Notification="Lync!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
-                                         Margin="12,15,0,5"
-                                         Source="/Images/james.jpg"
-                                         Title="James"
-                                         Notification="Clarity!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/jeremiah.jpg"
-                                         Title="Jeremiah"
-                                         Notification="Mongo!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/josh.jpg"
-                                         Title="Josh"
-                                         Notification="En guard!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/shruti.jpg"
-                                         Title="Shruti"
-                                         Notification="Shrutigram!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/microsoft.jpg"
-                                         Title="Microsoft"
-                                         Notification="Windows 8 is here!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/seattle.jpg"
-                                         Title="Seattle"
-                                         Notification="Space Needle"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/purdue.jpg"
-                                         Title="Purdue"
-                                         Notification="Boiler up!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                                <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
-                                         Margin="12,12,0,0"
-                                         Source="/Images/windowsphone.jpg"
-                                         Title="Windows Phone"
-                                         Notification="Love me some Mango!"
-                                         DisplayNotification="True"
-                                         GroupTag="Pic" Tap="hubTilePictureTap" 
-                                         Message="ownerID" />
-                            </Grid>
+                            <Image Grid.Row="1" Grid.Column="0" Name="i4" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="1" Grid.Column="1" Name="i5" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="1" Grid.Column="2" Name="i6" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+
+                            <Image Grid.Row="2" Grid.Column="0" Name="i7" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="2" Grid.Column="1" Name="i8" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="2" Grid.Column="2" Name="i9" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+
+                            <Image Grid.Row="3" Grid.Column="0" Name="i10" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="3" Grid.Column="1" Name="i11" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="3" Grid.Column="2" Name="i12"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+
+                            <Image Grid.Row="4" Grid.Column="0" Name="i13"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="4" Grid.Column="1" Name="i14" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="4" Grid.Column="2" Name="i15" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+
+                            <Image Grid.Row="5" Grid.Column="0" Name="i16" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="5" Grid.Column="1" Name="i17" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="5" Grid.Column="2" Name="i18"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+
+                        </Grid>
                     </Grid>
                 </controls:PanoramaItem>
             </ScrollViewer>
@@ -309,10 +290,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
+                <shell:ApplicationBarMenuItem Text="user search" Click="UserSearch_Click" />
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
@@ -339,5 +321,5 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
 </phone:PhoneApplicationPage>

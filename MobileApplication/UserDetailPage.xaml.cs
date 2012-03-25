@@ -11,23 +11,25 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
+using WinstagramPan.Models;
+
+using Microsoft.Phone.Tasks;
+
 namespace WinstagramPan
 {
-    public partial class LoginScreen : PhoneApplicationPage
+    public partial class UserDetailPage : PhoneApplicationPage
     {
-        public LoginScreen()
+        public UserDetailPage()
         {
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void SendEmail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // For now, we set isLoggedIn to true
-            Settings.isLoggedIn.Value = true;
+            EmailComposeTask em = new EmailComposeTask();
+            em.To = emailTextBlock.Text;
 
-            MainPage.isFromLogin = true;
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-
+            em.Show();
         }
     }
 }
