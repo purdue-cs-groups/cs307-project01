@@ -27,7 +27,35 @@ namespace WinstagramPan
 
             MainPage.isFromLogin = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
 
+        private void ForgotPasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void usernameInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // TODO: Validate Input!
+
+                // Switch focus to next input field
+                Dispatcher.BeginInvoke(() =>
+                    passwordInput.Focus());
+            }
+        }
+
+        private void passwordInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // TODO: Validate Input!
+
+                // Lose Focus on the keyboard
+                Dispatcher.BeginInvoke(() =>
+                    this.Focus());
+            }
         }
     }
 }

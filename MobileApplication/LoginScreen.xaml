@@ -14,31 +14,30 @@
     mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False">
 
-    <Grid x:Name="LayoutRoot" Height="Auto" Width="480" Margin="0,24,0,0" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Winstagram" 
-                   FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" 
-                   FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
-                   HorizontalAlignment="Left" 
-                   Foreground="{StaticResource PhoneAccentBrush}" Margin="12,0,0,0" />
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="log in" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
 
         <Grid x:Name="userInputFields" Grid.Row="1">
             <!-- StackPanel for user input fields -->
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="username"/>
-                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" Margin="-12,0,0,0" />
+                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" />
                 <TextBlock Text="password" />
-                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" />
+                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2">
-            <Button x:Name="ForgotPasswordButton" Content="forgot password?" Margin="0,12,12,0" MinWidth="220" HorizontalAlignment="Right" Click="LoginButton_Click" />
+            <Button x:Name="ForgotPasswordButton" Content="forgot password?" Margin="0,12,12,0" MinWidth="220" HorizontalAlignment="Right" Click="ForgotPasswordButton_Click" />
             <Button x:Name="LoginButton" Content="login" Margin="0,12,12,0" MinWidth="220" HorizontalAlignment="Left" Click="LoginButton_Click" />
         </Grid>
     </Grid>

@@ -74,7 +74,7 @@ namespace WinstagramPan
             {
                 // TODO: Validate Input!
 
-                // Lost Focus on the keyboard
+                // Lose Focus on the keyboard
                 Dispatcher.BeginInvoke(() =>
                     this.Focus());
             }
