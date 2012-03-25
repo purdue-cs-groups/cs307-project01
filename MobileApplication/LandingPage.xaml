@@ -36,7 +36,7 @@
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left">
+            <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="signUpTileTap">
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
 

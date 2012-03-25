@@ -29,5 +29,15 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
         }
         #endregion logInTileTap Codebehind
+
+        #region signUpTileTap Codebehind
+        /***************************************
+         ***** signUpTileTap Codebehind *********
+         ***************************************/
+        private void signUpTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
+        }
+        #endregion signUpTileTap Codebehind
     }
 }
