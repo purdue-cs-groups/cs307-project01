@@ -86,6 +86,9 @@
     <Compile Include="EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForgotPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +209,7 @@
     <Content Include="Images\appbar.close.rest.png" />
     <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.flag.png" />
+    <Content Include="Images\appbar.questionmark.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
     <Content Include="Images\appbar.share.rest.png" />
     <Content Include="Images\appbar.upload.rest.png" />

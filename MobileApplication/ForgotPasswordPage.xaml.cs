@@ -13,15 +13,51 @@ using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class LoginScreen : PhoneApplicationPage
+    public partial class ForgotPasswordPage : PhoneApplicationPage
     {
-        public LoginScreen()
+        public ForgotPasswordPage()
         {
             InitializeComponent();
         }
 
-        private void Login_Click(object sender, EventArgs e)
+        private void usernameInput_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Enter)
+            {
+                // TODO: Validate Input!
+
+                // Switch focus to next input field
+                Dispatcher.BeginInvoke(() =>
+                    emailInput.Focus());
+            }
+        }
+
+        private void emailInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // TODO: Validate Input!
+
+                // Lose Focus on the keyboard
+                Dispatcher.BeginInvoke(() =>
+                    this.Focus());
+            }
+        }
+
+        private void PrivacyMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AboutMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Accept_Click(object sender, EventArgs e)
+        {
+            // TODO: Validate Input!
+
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
 
@@ -33,35 +69,6 @@ namespace WinstagramPan
         {
             // GoBack() Automatically clears everything on this PortraitPage
             NavigationService.GoBack();
-        }
-
-        private void Forgot_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/ForgotPasswordPage.xaml", UriKind.Relative));
-        }
-
-        private void usernameInput_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                // TODO: Validate Input!
-
-                // Switch focus to next input field
-                Dispatcher.BeginInvoke(() =>
-                    passwordInput.Focus());
-            }
-        }
-
-        private void passwordInput_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                // TODO: Validate Input!
-
-                // Lose Focus on the keyboard
-                Dispatcher.BeginInvoke(() =>
-                    this.Focus());
-            }
         }
     }
 }
