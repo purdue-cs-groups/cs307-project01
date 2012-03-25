@@ -80,6 +80,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrowsePage.xaml.cs">
+      <DependentUpon>BrowsePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPicture.xaml.cs">
       <DependentUpon>EditPicture.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="BrowsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPicture.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -40,7 +40,7 @@
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
 
-            <Grid Grid.Row="1" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="0,12,0,0">
+            <Grid Grid.Row="1" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="0,12,0,0" Tap="browseTileTap">
                 <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Browse" VerticalAlignment="Bottom" FontSize="32" Width="142" />
             </Grid>
         </Grid>
