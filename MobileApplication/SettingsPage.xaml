@@ -48,7 +48,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>
-                <shell:ApplicationBarMenuItem Text="user search"  />
+                <shell:ApplicationBarMenuItem Text="find friends"  />
                 <shell:ApplicationBarMenuItem Text="sign out" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

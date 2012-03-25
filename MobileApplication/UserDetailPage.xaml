@@ -241,6 +241,13 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="UserDetailAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="about"/>
+                <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="settings" />
+                <shell:ApplicationBarMenuItem Text="find friends" />
+                <shell:ApplicationBarMenuItem Text="sign out" />
+            </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

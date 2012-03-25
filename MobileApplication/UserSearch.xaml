@@ -23,7 +23,7 @@
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" Height="Auto">
             <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="user search" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="find friends" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
 
@@ -54,8 +54,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo"/>
+        <shell:ApplicationBar x:Name="MainPageAppBar" Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="edit profile"/>

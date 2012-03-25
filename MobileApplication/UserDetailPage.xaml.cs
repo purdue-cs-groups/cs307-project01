@@ -45,7 +45,7 @@ namespace WinstagramPan
                 followingStatus.Margin = new Thickness(60, 17, 0, 0);
                 followingRec.Fill = new SolidColorBrush(Colors.Green);
 
-                ApplicationBarIconButton unfollow = new ApplicationBarIconButton(new Uri("Images/appbar.download.rest.png", UriKind.Relative));
+                ApplicationBarIconButton unfollow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.down.png", UriKind.Relative));
                 unfollow.Text = "unfollow";
                 unfollow.Click += new EventHandler(Unfollow);
                 ApplicationBar.Buttons.Add(unfollow);
@@ -56,7 +56,7 @@ namespace WinstagramPan
                 followingStatus.Margin = new Thickness(44, 17, 0, 0);
                 followingRec.Fill = new SolidColorBrush(Colors.Red);
 
-                ApplicationBarIconButton follow = new ApplicationBarIconButton(new Uri("Images/appbar.upload.rest.png", UriKind.Relative));
+                ApplicationBarIconButton follow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.up.png", UriKind.Relative));
                 follow.Text = "follow";
                 follow.Click += new EventHandler(Follow);
                 ApplicationBar.Buttons.Add(follow);

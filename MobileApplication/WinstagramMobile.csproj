@@ -189,10 +189,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\appbar.check.png" />
+    <Content Include="Images\appbar.arrow.down.png" />
+    <Content Include="Images\appbar.arrow.up.png" />
     <Content Include="Images\appbar.check.rest.png" />
     <Content Include="Images\appbar.close.rest.png" />
     <Content Include="Images\appbar.download.rest.png" />
+    <Content Include="Images\appbar.flag.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
+    <Content Include="Images\appbar.share.rest.png" />
     <Content Include="Images\appbar.upload.rest.png" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
