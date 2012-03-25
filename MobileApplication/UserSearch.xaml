@@ -11,29 +11,47 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="373*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" Height="Auto">
             <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="user search" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
 
-        <Grid x:Name="userInputFields" Grid.Row="1" Height="Auto" VerticalAlignment="Top">
-            <!-- StackPanel for user input fields -->
-            <StackPanel Margin="12,0,12,0" VerticalAlignment="Top">
-                <TextBlock Text="search by username or email address" Margin="12,0,0,0" />
-                <TextBox x:Name="usernameInput" AcceptsReturn="False" Text="Search" Foreground="Gray" Margin="0,0,0,0" />
-                <Button x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left"/>
-            </StackPanel>
+        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,75">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Text="search by username or email address" Margin="12,0,0,0" />
+            <TextBox Grid.Row="1" x:Name="usernameInput" AcceptsReturn="False" Text="" Margin="0,0,0,0" />
+            <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="SearchButton_Click" />
+
+            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Hidden">
+                <ListBox Name="searchResults" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Margin="12,0,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                                <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" />
+                                <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
         </Grid>
     </Grid>
 
@@ -70,5 +88,5 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
 </phone:PhoneApplicationPage>
