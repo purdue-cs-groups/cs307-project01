@@ -19,5 +19,17 @@ namespace WinstagramPan
         {
             InitializeComponent();
         }
+
+        private void Accept_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Your profile has been updated.");
+            NavigationService.GoBack();
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Your changes have been discarded.");
+            NavigationService.GoBack();
+        }
     }
 }
