@@ -27,7 +27,7 @@
         </StackPanel>
 
 
-        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,75">
+        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,28">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -39,7 +39,7 @@
             <TextBox Grid.Row="1" x:Name="usernameInput" AcceptsReturn="False" Text="" Margin="0,0,0,0" />
             <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="SearchButton_Click" />
 
-            <ListBox Height="400"  Grid.Row="3" Name="searchResults" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListBox Height="500"  Grid.Row="3" Name="searchResults" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
