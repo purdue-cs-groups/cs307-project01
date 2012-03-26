@@ -77,6 +77,9 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BrowsePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,6 +228,10 @@
     <Content Include="Images\appbar.refresh.rest.png" />
     <Content Include="Images\appbar.share.rest.png" />
     <Content Include="Images\appbar.upload.rest.png" />
+    <Resource Include="Images\camera.png" />
+    <Resource Include="Images\smallJames.jpg" />
+    <Resource Include="Images\smallJeremiah.jpg" />
+    <Resource Include="Images\smallMatt.jpg" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />
@@ -231,7 +242,7 @@
     <Content Include="Images\seattle.jpg" />
     <Content Include="Images\shruti.jpg" />
     <Resource Include="Images\smallJoe.png" />
-    <Content Include="Images\smallJosh.png" />
+    <Resource Include="Images\smallJosh.png" />
     <Content Include="Images\test.png" />
     <Content Include="References\ExifLib.dll" />
     <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
