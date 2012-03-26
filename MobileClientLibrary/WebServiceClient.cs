@@ -247,7 +247,11 @@ namespace MobileClientLibrary
         {
             if (UploadPictureCompleted != null)
             {
-                UploadPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                var stringData = e.Result.ToString();
+
+                var jsonData = JsonConvert.DeserializeObject<PictureURL>(stringData);
+
+                UploadPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
             }
         }
         

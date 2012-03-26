@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\MD5CryptoServiceProvider.cs" />
+    <Compile Include="Common\PictureURL.cs" />
     <Compile Include="Common\UserCredentials.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
