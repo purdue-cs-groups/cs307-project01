@@ -20,21 +20,5 @@ namespace WinstagramPan
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            try
-            {
-                string newparameter = this.NavigationContext.QueryString["parameter"];
-                if (newparameter.Equals("privacy"))
-                {
-                    AboutPivot.SelectedItem = privacy;
-                }
-            }
-            catch (KeyNotFoundException ex) {
-                AboutPivot.SelectedItem = about;
-            }
-           
-        }
     }
 }
