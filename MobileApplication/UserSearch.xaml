@@ -27,7 +27,7 @@
         </StackPanel>
 
 
-        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,28">
+        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -53,7 +53,7 @@
         </Grid>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
@@ -62,7 +62,7 @@
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
 
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>

@@ -192,26 +192,5 @@ namespace WinstagramPan
 
             shareLinkTask.Show();
         }
-
-        private void About_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
-        }
-
-        private void Edit_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
-        }
-
-        private void Find_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
-        }
-
-        private void Signout_Click(object sender, EventArgs e)
-        {
-            Settings.isLoggedIn.Value = false;
-            NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
-        }
     }
 }
