@@ -39,7 +39,7 @@
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto"  />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="pictureCaption" Text="Picture caption" HorizontalAlignment="Left" Height="80" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Name="pictureCaption" Text="Picture caption" HorizontalAlignment="Left" Height="80" Width="Auto" FontSize="26" TextAlignment="Left" Margin="12,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
                 </Grid>
             </Grid>
         </Grid>
