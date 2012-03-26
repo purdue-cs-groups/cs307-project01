@@ -203,8 +203,9 @@
                                             <ColumnDefinition />
                                             <ColumnDefinition Width="Auto"  />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
-                                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">              
+                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+                                        <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
+                                        <Image Source="/WinstagramPan;component/Images/appbar.overflowdots.png" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,15,0,0">
                                             <toolkit:ContextMenuService.ContextMenu>
                                                 <toolkit:ContextMenu>
                                                     <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
@@ -213,7 +214,7 @@
                                                     <toolkit:MenuItem Header="cancel" />
                                                 </toolkit:ContextMenu>
                                             </toolkit:ContextMenuService.ContextMenu>
-                                        </Button>
+                                        </Image>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

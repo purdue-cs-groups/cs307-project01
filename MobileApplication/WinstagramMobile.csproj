@@ -216,6 +216,7 @@
     <Content Include="Images\appbar.close.rest.png" />
     <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.flag.png" />
+    <Resource Include="Images\appbar.overflowdots.png" />
     <Content Include="Images\appbar.questionmark.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
     <Content Include="Images\appbar.share.rest.png" />
