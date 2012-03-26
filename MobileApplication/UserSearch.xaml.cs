@@ -33,6 +33,8 @@ namespace WinstagramPan
         public static ObservableCollection<User> SearchResults = new ObservableCollection<User>();
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            SearchResults.Clear();
+
             User u = new User();
             u.Name = "Joe Martella";
             u.Username = "martellaj";

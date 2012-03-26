@@ -43,7 +43,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Image Margin="12,0,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Margin="12,5,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png"/>
                             <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" />
                             <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" />
                         </Grid>

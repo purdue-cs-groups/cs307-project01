@@ -109,6 +109,8 @@ namespace WinstagramPan
         
         private void populateRecentPictures()
         {
+            RecentPictures.Clear();
+
             // first pic
             Picture p1 = new Picture();
             p1.Username = "Joe";
