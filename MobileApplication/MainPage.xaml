@@ -17,13 +17,14 @@
     shell:SystemTray.IsVisible="False" Opacity="1">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
         <!--Panorama control-->
-        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
+        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0">
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--Panorama item one-->
-                <controls:PanoramaItem Header="popular">
+
+            <!--Panorama item one-->
+            <controls:PanoramaItem Header="popular" IsTabStop="False" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
                     <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -181,12 +182,14 @@
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="pictureID" Style="{StaticResource SmallHubTile}" />
                     </Grid>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--NEWS FEED-->
-                <controls:PanoramaItem Header="recent">
+
+
+            <!--NEWS FEED-->
+            <controls:PanoramaItem Header="recent" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -220,11 +223,13 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <controls:PanoramaItem Header="profile">
+
+
+            <controls:PanoramaItem Header="profile" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <!--Double line list with image placeholder and text wrapping-->
                     <Grid Margin="0,0,0,75">
                         <Grid Tap="ViewUserDetailTap">
@@ -283,8 +288,9 @@
 
                         </Grid>
                     </Grid>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
         </controls:Panorama>
     </Grid>
 
