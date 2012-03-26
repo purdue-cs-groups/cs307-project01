@@ -57,7 +57,6 @@
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" Click="Cancel_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about" Click="AboutMenuItem_Click" />
-                <shell:ApplicationBarMenuItem Text="privacy policy" Click="PrivacyMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

@@ -44,14 +44,9 @@ namespace WinstagramPan
             }
         }
 
-        private void PrivacyMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void AboutMenuItem_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
 
         private void Accept_Click(object sender, EventArgs e)

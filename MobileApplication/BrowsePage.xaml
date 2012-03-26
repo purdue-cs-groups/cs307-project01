@@ -189,8 +189,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="privacy policy"/>
+                <shell:ApplicationBarMenuItem Text="about" Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

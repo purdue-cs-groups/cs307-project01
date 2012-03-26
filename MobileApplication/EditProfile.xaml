@@ -48,10 +48,10 @@
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Accept_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" Click="Cancel_Click" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="settings" />
-                <shell:ApplicationBarMenuItem Text="find friends" />
-                <shell:ApplicationBarMenuItem Text="sign out" />
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="settings" Click="ApplicationBarMenuItem_Click" />
+                <shell:ApplicationBarMenuItem Text="find friends" Click="Find_Click" />
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

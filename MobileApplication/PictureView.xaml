@@ -51,11 +51,11 @@
             <shell:ApplicationBarIconButton IconUri="Images/appbar.share.rest.png" Text="share" Click="Share" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.flag.png" Text="flag"  />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="Edit_Click" />
                 <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
-                <shell:ApplicationBarMenuItem Text="find friends" />
-                <shell:ApplicationBarMenuItem Text="sign out" />
+                <shell:ApplicationBarMenuItem Text="find friends" Click="Find_Click" />
+                <shell:ApplicationBarMenuItem Text="sign out" Click="Signout_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

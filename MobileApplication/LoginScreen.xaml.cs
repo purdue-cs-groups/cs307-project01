@@ -63,5 +63,10 @@ namespace WinstagramPan
                     this.Focus());
             }
         }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
     }
 }

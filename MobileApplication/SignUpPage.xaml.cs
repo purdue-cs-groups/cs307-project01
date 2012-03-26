@@ -102,12 +102,7 @@ namespace WinstagramPan
 
         private void AboutMenuItem_Click(object sender, EventArgs e)
         {
-            // Navigate to AboutPage
-        }
-
-        private void PrivacyMenuItem_Click(object sender, EventArgs e)
-        {
-            // Navigate to PrivacyPolicyPage
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

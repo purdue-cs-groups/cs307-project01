@@ -56,10 +56,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
-                <shell:ApplicationBarMenuItem Text="settings" />
-                <shell:ApplicationBarMenuItem Text="sign out" />
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="Edit_Click" />
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

@@ -124,11 +124,12 @@
 
             <!--PICTURES pivot item-->
             <controls:PivotItem Header="pictures">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <Grid Width="370" HorizontalAlignment="Left" Margin="0,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="12,0,12,0">
+                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -140,18 +141,20 @@
                         </Grid.RowDefinitions>
 
                         <!-- Title is username of picture owner -->
-                        <!-- Message is ID of picture owner -->
+                        <!-- Notification is picture caption -->
+                        <!-- Message is ID of picture -->
 
                         <!-- The Hub Tile -->
                         <toolkit:HubTile Grid.Row="1" Grid.Column="0"
                                          Name="popTile1"
                                          Margin="12,12,0,0"
                                          Source="/Images/joe.jpg"
-                                         Title="Joe"
+                                         Title="Joe"  
                                          Notification="XAML God"
+                                         Style="{StaticResource SmallHubTile}"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap"
+                                         Message="pictureID" />
                         <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
                                          Name="popTile2"
                                          Margin="12,12,0,0"
@@ -159,8 +162,17 @@
                                          Title="Matt"
                                          Notification="Lync!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="1" Grid.Column="2" 
+                                         Name="popTile20"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/matt.jpg"
+                                         Title="Matt"
+                                         Notification="Lync!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
                                          Name="popTile3"
                                          Margin="12,15,0,5"
@@ -168,8 +180,8 @@
                                          Title="James"
                                          Notification="Clarity!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
                                          Name="popTile4"
                                          Margin="12,12,0,0"
@@ -177,8 +189,17 @@
                                          Title="Jeremiah"
                                          Notification="Mongo!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="2" Grid.Column="2" 
+                                         Name="popTile40"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/jeremiah.jpg"
+                                         Title="Jeremiah"
+                                         Notification="Mongo!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
                                          Name="popTile5"
                                          Margin="12,12,0,0"
@@ -186,8 +207,8 @@
                                          Title="Josh"
                                          Notification="En guard!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
                                          Name="popTile6"
                                          Margin="12,12,0,0"
@@ -195,8 +216,17 @@
                                          Title="Shruti"
                                          Notification="Shrutigram!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="3" Grid.Column="2" 
+                                         Name="popTile60"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/shruti.jpg"
+                                         Title="Shruti"
+                                         Notification="Shrutigram!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
                                          Name="popTile7"
                                          Margin="12,12,0,0"
@@ -204,8 +234,8 @@
                                          Title="Microsoft"
                                          Notification="Windows 8 is here!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
                                          Name="popTile8"
                                          Margin="12,12,0,0"
@@ -213,8 +243,17 @@
                                          Title="Seattle"
                                          Notification="Space Needle"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="4" Grid.Column="2" 
+                                         Name="popTile80"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/seattle.jpg"
+                                         Title="Seattle"
+                                         Notification="Space Needle"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
                                          Name="popTile9"
                                          Margin="12,12,0,0"
@@ -222,8 +261,8 @@
                                          Title="Purdue"
                                          Notification="Boiler up!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                         <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
                                          Name="popTile10"
                                          Margin="12,12,0,0"
@@ -231,8 +270,17 @@
                                          Title="Windows Phone"
                                          Notification="Love me some Mango!"
                                          DisplayNotification="True"
-                                         GroupTag="Pic"
-                                         Message="ownerID" />
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="5" Grid.Column="2" 
+                                         Name="popTile100"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/windowsphone.jpg"
+                                         Title="Windows Phone"
+                                         Notification="Love me some Mango!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
@@ -242,11 +290,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="UserDetailAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
-                <shell:ApplicationBarMenuItem Text="settings" />
-                <shell:ApplicationBarMenuItem Text="find friends" />
-                <shell:ApplicationBarMenuItem Text="sign out" />
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="Edit_Click" />
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
+                <shell:ApplicationBarMenuItem Text="find friends" Click="Find_Click" />
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

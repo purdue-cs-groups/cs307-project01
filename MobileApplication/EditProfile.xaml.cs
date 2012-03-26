@@ -66,5 +66,26 @@ namespace WinstagramPan
                 this.Focus();
             }
         }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Find_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
+        }
+
+        private void SignOut_Click(object sender, EventArgs e)
+        {
+            Settings.isLoggedIn.Value = false;
+            NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
+        }
     }
 }

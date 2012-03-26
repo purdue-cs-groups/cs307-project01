@@ -63,6 +63,15 @@ namespace WinstagramPan
             }
         }
 
+        public static HubTile selectedPicture;
+        private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            /*
+            selectedPicture = (HubTile)sender;
+            NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
+             */
+        }
+
         private void Follow(object sender, EventArgs e)
         {
             isFollowing = true;
@@ -73,6 +82,32 @@ namespace WinstagramPan
         {
             isFollowing = false;
             UpdateAppBar();
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Edit_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+        }
+
+        private void Find_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
+        }
+
+        private void SignOut_Click(object sender, EventArgs e)
+        {
+            Settings.isLoggedIn.Value = false;
+            NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
         }
     }
 }

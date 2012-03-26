@@ -34,5 +34,10 @@ namespace WinstagramPan
         {
             NavigationService.Navigate(new Uri("/BrowsePage.xaml", UriKind.Relative));
         }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
     }
 }
