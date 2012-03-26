@@ -54,9 +54,9 @@
 
             <!--Pivot item two-->
             <controls:PivotItem x:Name="privacy" Header="privacy">
-                <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="-12,-100,0,0">
-                    <StackPanel x:Name="stackpanelroot" Width="500" Height="500" Background="Transparent">
-                        <ScrollViewer Height="500" Width="500" VerticalScrollBarVisibility="Hidden">
+                <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="-12,-50,0,0">
+                    <StackPanel x:Name="stackpanelroot" Width="500" Height="650" Background="Transparent">
+                        <ScrollViewer Height="650" Width="500" VerticalScrollBarVisibility="Hidden">
                             <TextBlock x:Name="displaybox" Margin="20" TextWrapping="Wrap"
                             
                                                    FontSize="{StaticResource PhoneFontSizeMedium}"
