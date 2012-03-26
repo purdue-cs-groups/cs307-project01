@@ -1,0 +1,317 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="WinstagramPan.UserDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" >
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <controls:Pivot Title="JOE MARTELLA">
+            <!--PROFILE pivot item-->
+            <controls:PivotItem Header="profile">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
+                    <Grid x:Name="ProfilePanelLevel1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="300" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--Left Column for profile picture-->
+                        <Image x:Name="profilePicture" Grid.Row="0" Grid.Column="0"
+                               Height="140" Width="140"
+                               Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                        
+                        <!--Right Column for fullname, hometown and rectangles-->
+                        <Grid x:Name="ProfilePanelLevel2" Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="65"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock x:Name="fullName" Grid.Row="0"
+                                       Margin="12,0,0,0"
+                                       Text="Joe Martella"
+                                       FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                            <TextBlock x:Name="hometown" Grid.Row="1"
+                                       Margin="12,2,0,0"
+                                       Text="West Lafayette, IN"
+                                       Foreground="{StaticResource PhoneSubtleBrush}"
+                                       FontSize="{StaticResource PhoneFontSizeSmall}"/>
+                            
+                            <!--Grid for the 3 rectangles-->
+                            <Grid x:Name="RectanglesPanel" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Height="53" HorizontalAlignment="Left" Margin="13,7,0,0" Name="followingRec" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="179" Fill="Green" />
+                                <TextBlock Height="49" HorizontalAlignment="Left" Margin="60,17,0,0" Name="followingStatus" Text="Following" VerticalAlignment="Top" Width="Auto" />
+                            </Grid>
+                        </Grid>
+                        
+                        <!--Rest of the data: username, bio, etc-->
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>    <!--Row for username-->
+                                    <RowDefinition/>    <!--Row for biography-->
+                                    <RowDefinition/>    <!--Row for email-->
+                                    <RowDefinition/>    <!--Row for active since-->
+                                </Grid.RowDefinitions>
+                                
+                                <Grid x:Name="usernameGrid" Grid.Row="0">
+                                    <StackPanel>
+                                        <TextBlock Text="username" Margin="0,12,0,0"
+                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                        <TextBlock x:Name="usernameTextBlock" Text="JoeM"
+                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
+                                                   Foreground="{StaticResource PhoneSubtleBrush}"/>
+                                    </StackPanel>
+                                </Grid>
+                                
+                                <Grid x:Name="bioGrid" Grid.Row="1">
+                                    <StackPanel>
+                                        <TextBlock Text="biography" Margin="0,12,0,0"
+                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                        <TextBlock x:Name="biographyTextBlock" TextWrapping="Wrap"
+                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
+                                                   Foreground="{StaticResource PhoneSubtleBrush}">
+                                            <Run>I'm a Computer Science Senior studying at Purdue University. I'm a software engineer and I develop Windows Phone applications! By the way, I am a XAML god and yes you may worship me =P.</Run>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid x:Name="emailGrid" Grid.Row="2">
+                                    <StackPanel>
+                                        <TextBlock Text="email" Margin="0,12,0,0"
+                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                        <TextBlock x:Name="emailTextBlock" Text="joemartella@purdue.edu"
+                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
+                                                   Foreground="{StaticResource PhoneAccentBrush}" Tap="SendEmail_Tap">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid x:Name="activeSinceGrid" Grid.Row="3">
+                                    <StackPanel>
+                                        <TextBlock Text="active since" Margin="0,12,0,0"
+                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                        <TextBlock x:Name="activeSinceTextBlock" Text="20 February 2012"
+                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
+                                                   Foreground="{StaticResource PhoneSubtleBrush}">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </controls:PivotItem>
+
+            <!--PICTURES pivot item-->
+            <controls:PivotItem Header="pictures">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+                    <Grid Width="Auto" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Title is username of picture owner -->
+                        <!-- Notification is picture caption -->
+                        <!-- Message is ID of picture -->
+
+                        <!-- The Hub Tile -->
+                        <toolkit:HubTile Grid.Row="1" Grid.Column="0"
+                                         Name="popTile1"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/joe.jpg"
+                                         Title="Joe"  
+                                         Notification="XAML God"
+                                         Style="{StaticResource SmallHubTile}"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap"
+                                         Message="pictureID" />
+                        <toolkit:HubTile Grid.Row="1" Grid.Column="1" 
+                                         Name="popTile2"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/matt.jpg"
+                                         Title="Matt"
+                                         Notification="Lync!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="1" Grid.Column="2" 
+                                         Name="popTile20"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/matt.jpg"
+                                         Title="Matt"
+                                         Notification="Lync!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="2" Grid.Column="0" 
+                                         Name="popTile3"
+                                         Margin="12,15,0,5"
+                                         Source="/Images/james.jpg"
+                                         Title="James"
+                                         Notification="Clarity!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="2" Grid.Column="1" 
+                                         Name="popTile4"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/jeremiah.jpg"
+                                         Title="Jeremiah"
+                                         Notification="Mongo!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="2" Grid.Column="2" 
+                                         Name="popTile40"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/jeremiah.jpg"
+                                         Title="Jeremiah"
+                                         Notification="Mongo!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="3" Grid.Column="0" 
+                                         Name="popTile5"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/josh.jpg"
+                                         Title="Josh"
+                                         Notification="En guard!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="3" Grid.Column="1" 
+                                         Name="popTile6"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/shruti.jpg"
+                                         Title="Shruti"
+                                         Notification="Shrutigram!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="3" Grid.Column="2" 
+                                         Name="popTile60"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/shruti.jpg"
+                                         Title="Shruti"
+                                         Notification="Shrutigram!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="4" Grid.Column="0" 
+                                         Name="popTile7"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/microsoft.jpg"
+                                         Title="Microsoft"
+                                         Notification="Windows 8 is here!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="4" Grid.Column="1" 
+                                         Name="popTile8"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/seattle.jpg"
+                                         Title="Seattle"
+                                         Notification="Space Needle"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="4" Grid.Column="2" 
+                                         Name="popTile80"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/seattle.jpg"
+                                         Title="Seattle"
+                                         Notification="Space Needle"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="5" Grid.Column="0" 
+                                         Name="popTile9"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/purdue.jpg"
+                                         Title="Purdue"
+                                         Notification="Boiler up!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="5" Grid.Column="1" 
+                                         Name="popTile10"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/windowsphone.jpg"
+                                         Title="Windows Phone"
+                                         Notification="Love me some Mango!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                        <toolkit:HubTile Grid.Row="5" Grid.Column="2" 
+                                         Name="popTile100"
+                                         Margin="12,12,0,0"
+                                         Source="/Images/windowsphone.jpg"
+                                         Title="Windows Phone"
+                                         Notification="Love me some Mango!"
+                                         DisplayNotification="True"
+                                         GroupTag="Pic" Tap="hubTilePictureTap" 
+                                         Message="pictureID" Style="{StaticResource SmallHubTile}" />
+                    </Grid>
+                </ScrollViewer>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="UserDetailAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!-- sexy transitions -->
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+</phone:PhoneApplicationPage>

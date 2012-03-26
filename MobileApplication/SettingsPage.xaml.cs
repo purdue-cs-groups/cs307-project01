@@ -13,16 +13,18 @@ using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class EditPicture : PhoneApplicationPage
+    public partial class SettingsPage : PhoneApplicationPage
     {
-        public EditPicture()
+        public SettingsPage()
         {
             InitializeComponent();
         }
 
-        private void capturedImage_Loaded(object sender, RoutedEventArgs e)
+        private void connectaccounts_Click(object sender, RoutedEventArgs e)
         {
-            capturedImage.Source = CropPage.cropped.Source;
+            //enter twitter information
+            //user control in conjunction with twitter API
         }
+
     }
 }

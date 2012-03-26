@@ -68,6 +68,7 @@
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -76,11 +77,29 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrowsePage.xaml.cs">
+      <DependentUpon>BrowsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CropPage.xaml.cs">
+      <DependentUpon>CropPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPicture.xaml.cs">
       <DependentUpon>EditPicture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LandingPage.xaml.cs">
+      <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -90,6 +109,18 @@
     </Compile>
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetailPage.xaml.cs">
+      <DependentUpon>UserDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserSearch.xaml.cs">
+      <DependentUpon>UserSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PictureView.xaml.cs">
       <DependentUpon>PictureView.xaml</DependentUpon>
     </Compile>
@@ -104,7 +135,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrowsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForgotPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LandingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +175,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <Page Include="SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PictureView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,33 +203,47 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="ApplicationIcon.png" />
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\appbar.check.png" />
-    <Resource Include="Images\appbar.check.rest.png" />
-    <Resource Include="Images\appbar.close.rest.png" />
-    <Content Include="References\ExifLib.dll" />
-    <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
-    <Content Include="SplashScreenImage.jpg" />
-    <Resource Include="Images\test.png" />
-    <Resource Include="PanoramaBackground.png" />
-    <Content Include="Images\appbar.camera.png" />
-    <Content Include="Images\appbar.image.png" />
-    <Content Include="Images\joe.jpg" />
+    <Content Include="Images\appbar.arrow.down.png" />
+    <Content Include="Images\appbar.arrow.up.png" />
+    <Content Include="Images\appbar.check.rest.png" />
+    <Content Include="Images\appbar.close.rest.png" />
+    <Content Include="Images\appbar.crop.png" />
+    <Content Include="Images\appbar.download.rest.png" />
+    <Content Include="Images\appbar.flag.png" />
+    <Resource Include="Images\appbar.overflowdots.png" />
+    <Resource Include="Images\appbar.overflowdots.light.png" />
+    <Content Include="Images\appbar.questionmark.rest.png" />
+    <Content Include="Images\appbar.refresh.rest.png" />
+    <Content Include="Images\appbar.share.rest.png" />
+    <Content Include="Images\appbar.upload.rest.png" />
+    <Resource Include="Images\camera.png" />
+    <Resource Include="Images\smallJames.jpg" />
+    <Resource Include="Images\smallJeremiah.jpg" />
+    <Resource Include="Images\smallMatt.jpg" />
+    <Resource Include="Images\crop.png" />
+    <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />
+    <Content Include="Images\joe.jpg" />
     <Content Include="Images\josh.jpg" />
     <Content Include="Images\matt.jpg" />
     <Content Include="Images\microsoft.jpg" />
-    <Content Include="Images\purdue.jpg" />
     <Content Include="Images\seattle.jpg" />
     <Content Include="Images\shruti.jpg" />
     <Resource Include="Images\smallJoe.png" />
-    <Content Include="Images\windowsphone.jpg" />
+    <Resource Include="Images\smallJosh.png" />
+    <Content Include="Images\test.png" />
+    <Content Include="References\ExifLib.dll" />
+    <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
+    <Resource Include="PanoramaBackground.png" />
+    <Content Include="Images\appbar.camera.png" />
+    <Content Include="Images\appbar.image.png" />
+    <Content Include="Images\purdue.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
