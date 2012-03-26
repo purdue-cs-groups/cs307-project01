@@ -13,16 +13,16 @@ using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class EditPicture : PhoneApplicationPage
+    public partial class BrowsePage : PhoneApplicationPage
     {
-        public EditPicture()
+        public BrowsePage()
         {
             InitializeComponent();
         }
 
-        private void capturedImage_Loaded(object sender, RoutedEventArgs e)
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
-            capturedImage.Source = CropPage.cropped.Source;
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

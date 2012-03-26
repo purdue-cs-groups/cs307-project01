@@ -13,31 +13,11 @@ using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class LoginScreen : PhoneApplicationPage
+    public partial class ForgotPasswordPage : PhoneApplicationPage
     {
-        public LoginScreen()
+        public ForgotPasswordPage()
         {
             InitializeComponent();
-        }
-
-        private void Login_Click(object sender, EventArgs e)
-        {
-            // For now, we set isLoggedIn to true
-            Settings.isLoggedIn.Value = true;
-
-            MainPage.isFromLogin = true;
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-        }
-
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            // GoBack() Automatically clears everything on this PortraitPage
-            NavigationService.GoBack();
-        }
-
-        private void Forgot_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/ForgotPasswordPage.xaml", UriKind.Relative));
         }
 
         private void usernameInput_KeyUp(object sender, KeyEventArgs e)
@@ -48,11 +28,11 @@ namespace WinstagramPan
 
                 // Switch focus to next input field
                 Dispatcher.BeginInvoke(() =>
-                    passwordInput.Focus());
+                    emailInput.Focus());
             }
         }
 
-        private void passwordInput_KeyUp(object sender, KeyEventArgs e)
+        private void emailInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -64,9 +44,26 @@ namespace WinstagramPan
             }
         }
 
-        private void About_Click(object sender, EventArgs e)
+        private void AboutMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void Accept_Click(object sender, EventArgs e)
+        {
+            // TODO: Validate Input!
+
+            // For now, we set isLoggedIn to true
+            Settings.isLoggedIn.Value = true;
+
+            MainPage.isFromLogin = true;
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            // GoBack() Automatically clears everything on this PortraitPage
+            NavigationService.GoBack();
         }
     }
 }

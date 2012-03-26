@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="WinstagramPan.PictureView"
+    x:Class="WinstagramPan.CropPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -21,35 +21,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid>
-                <Image Height="400" HorizontalAlignment="Left" Margin="29,120,0,0" Name="pictureView" Stretch="Fill" VerticalAlignment="Top" Width="400" />
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
+            <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="crop photo" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
 
-                <!-- Get owner picture from ownerID -->
-                <Image Height="90" HorizontalAlignment="Left" Margin="29,15,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                <TextBlock Margin="130,48,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}"/>
-                <TextBlock Text="3 hours ago" Margin="0,54,25,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                <Image Margin="20,80,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}"/>
-                <Grid Margin="20,510,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto"  />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Name="pictureCaption" Text="Picture caption" HorizontalAlignment="Left" Height="80" Width="Auto" FontSize="24" TextAlignment="Left" Margin="12,18,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
-                </Grid>
-            </Grid>
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,-12,12,0">
+            <Image  Height="533" HorizontalAlignment="Left" Margin="28,44,0,0" Name="originalPhoto" Stretch="Fill" VerticalAlignment="Top" Width="400" />
+            <Image  Height="400" HorizontalAlignment="Left" Margin="28,44,0,0" Name="cropArea" Stretch="Fill" VerticalAlignment="Top" Width="400" Source="/WinstagramPan;component/Images/crop.png" Opacity="0.5" ManipulationDelta="cropArea_ManipulationDelta" />
         </Grid>
     </Grid>
-
-
+ 
+    <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.share.rest.png" Text="share" Click="Share" />
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.flag.png" Text="flag"  />
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.crop.png" Text="crop" Click="Crop_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
