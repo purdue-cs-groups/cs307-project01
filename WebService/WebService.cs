@@ -200,7 +200,13 @@ namespace WebService
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
-        public List<Picture> FetchAllPictures()
+        public List<Picture> FetchNewsFeed()
+        {
+            return PictureController.FetchAll();
+        }
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/popular/fetch")]
+        public List<Picture> FetchPopularNewsFeed()
         {
             return PictureController.FetchAll();
         }
