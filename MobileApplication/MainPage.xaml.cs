@@ -39,26 +39,6 @@ namespace WinstagramPan
             populateRecentPictures();
         }
 
-        public string ImageSource
-        {
-            get
-            {
-                if ((Visibility)App.Current.Resources["PhoneDarkThemeVisibility"]
-                  == Visibility.Visible)
-                {
-                    return "/Images/appbar.overflowdots.png";
-
-                }
-                else
-                {
-                    return "/Images/appbar.overflowdots.light.png";
-
-                }
-            }
-            private set { }
-        }
-
-
         // Load data for the ViewModel Items
         public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -225,7 +205,7 @@ namespace WinstagramPan
             // wait til UI thread is done, then navigate
             Dispatcher.BeginInvoke(() =>
             {
-                NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
             });
         }
 

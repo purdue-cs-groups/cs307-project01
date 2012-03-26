@@ -86,6 +86,9 @@
     <Compile Include="BrowsePage.xaml.cs">
       <DependentUpon>BrowsePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CropPage.xaml.cs">
+      <DependentUpon>CropPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPicture.xaml.cs">
       <DependentUpon>EditPicture.xaml</DependentUpon>
     </Compile>
@@ -106,9 +109,6 @@
     </Compile>
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="PhotoCrop.xaml.cs">
-      <DependentUpon>PhotoCrop.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -143,6 +143,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPicture.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,10 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
-    <Page Include="PhotoCrop.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +212,7 @@
     <Content Include="Images\appbar.arrow.up.png" />
     <Content Include="Images\appbar.check.rest.png" />
     <Content Include="Images\appbar.close.rest.png" />
+    <Content Include="Images\appbar.crop.png" />
     <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.flag.png" />
     <Resource Include="Images\appbar.overflowdots.png" />
@@ -224,6 +225,7 @@
     <Resource Include="Images\smallJames.jpg" />
     <Resource Include="Images\smallJeremiah.jpg" />
     <Resource Include="Images\smallMatt.jpg" />
+    <Resource Include="Images\crop.png" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />
