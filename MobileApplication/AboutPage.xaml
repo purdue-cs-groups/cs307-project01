@@ -54,11 +54,12 @@
 
             <!--Pivot item two-->
             <controls:PivotItem x:Name="privacy" Header="privacy">
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="-12,-100,0,0">
-                    <StackPanel x:Name="stackpanelroot" Width="480" Height="480" Background="Black">
-                        <ScrollViewer Height="500" Width="400" VerticalScrollBarVisibility="Hidden">
+                <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="-12,-100,0,0">
+                    <StackPanel x:Name="stackpanelroot" Width="500" Height="500" Background="Transparent">
+                        <ScrollViewer Height="500" Width="500" VerticalScrollBarVisibility="Hidden">
                             <TextBlock x:Name="displaybox" Margin="20" TextWrapping="Wrap"
-                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
+                            
+                                                   FontSize="{StaticResource PhoneFontSizeMedium}"
                                                    Style="{StaticResource PhoneTextTitle2Style}">
                                             <Run>Winstagram agrees not to share any of your shit with anyone (password, email, etc) but accepts no responsibility for information and photographs you freely share as a part of your profile.  Winstagram will not store your Twitter credentials, but might steal some snacks from you, if you have some.  Cheez its are always good.  Bacon ipsum dolor sit amet ground round fatback salami bacon pork chop flank, filet mignon boudin. Flank strip steak ribeye, tenderloin corned beef ham short loin ball tip capicola. Short ribs boudin spare ribs, flank fatback andouille t-bone pork chop shoulder meatloaf salami brisket strip steak filet mignon. Ham hock drumstick chicken, pastrami shankle short ribs hamburger spare ribs t-bone kielbasa pork jerky turducken. Beef ribs pork loin ball tip capicola, shank brisket hamburger bacon pig jowl ground round chicken leberkas flank sausage. Jowl tri-tip sirloin short ribs, ball tip tongue biltong corned beef ribeye.
 
