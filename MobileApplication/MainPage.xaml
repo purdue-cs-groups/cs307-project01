@@ -208,7 +208,17 @@
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
                                         <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
-                                        <Image Grid.Row="0" Grid.Column="1" Source="/WinstagramPan;component/Images/appbar.overflowdots.png" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0">
+                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.light.png">
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                                    <toolkit:MenuItem Header="share" />
+                                                    <toolkit:MenuItem Header="flag for review" />
+                                                    <toolkit:MenuItem Header="cancel" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                        </Image>
+                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.png">
                                             <toolkit:ContextMenuService.ContextMenu>
                                                 <toolkit:ContextMenu>
                                                     <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->

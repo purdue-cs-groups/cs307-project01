@@ -39,6 +39,26 @@ namespace WinstagramPan
             populateRecentPictures();
         }
 
+        public string ImageSource
+        {
+            get
+            {
+                if ((Visibility)App.Current.Resources["PhoneDarkThemeVisibility"]
+                  == Visibility.Visible)
+                {
+                    return "/Images/appbar.overflowdots.png";
+
+                }
+                else
+                {
+                    return "/Images/appbar.overflowdots.light.png";
+
+                }
+            }
+            private set { }
+        }
+
+
         // Load data for the ViewModel Items
         public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
