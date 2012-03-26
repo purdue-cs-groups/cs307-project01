@@ -34,7 +34,7 @@
         </Grid>
     </Grid>
  
-    <!--Sample code showing usage of ApplicationBar-->
+    <!-- Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.crop.png" Text="crop" Click="Crop_Click" />
