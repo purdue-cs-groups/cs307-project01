@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -37,7 +37,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True">
+        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Login_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" Click="Cancel_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.questionmark.rest.png" Text="forgot" Click="Forgot_Click" />
