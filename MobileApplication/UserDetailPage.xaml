@@ -19,7 +19,7 @@
         <controls:Pivot Title="JOE MARTELLA">
             <!--PROFILE pivot item-->
             <controls:PivotItem Header="profile">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
                     <Grid x:Name="ProfilePanelLevel1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="140"/>
@@ -124,8 +124,8 @@
 
             <!--PICTURES pivot item-->
             <controls:PivotItem Header="pictures">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="12,0,12,0">
-                    <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+                    <Grid Width="Auto" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
