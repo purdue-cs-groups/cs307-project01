@@ -23,8 +23,8 @@
 
 
             <!--Panorama item one-->
-            <controls:PanoramaItem Header="popular" IsTabStop="False" Margin="0,-15,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,-15,0,0">
+                <controls:PanoramaItem Header="popular" IsTabStop="False" >
                     <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -182,15 +182,15 @@
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="pictureID" Style="{StaticResource SmallHubTile}" />
                     </Grid>
-                </ScrollViewer>
-            </controls:PanoramaItem>
+                </controls:PanoramaItem>
+            </ScrollViewer>
 
 
 
             <!--NEWS FEED-->
-            <controls:PanoramaItem Header="recent" Margin="0,-15,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,-15,0,0">
+                <controls:PanoramaItem Header="recent" >
+                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,40">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -223,13 +223,12 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </ScrollViewer>
-            </controls:PanoramaItem>
+                </controls:PanoramaItem>
+            </ScrollViewer>
 
 
-
-            <controls:PanoramaItem Header="profile" Margin="0,-15,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,-15,0,0">
+                <controls:PanoramaItem Header="profile" >
                     <!--Double line list with image placeholder and text wrapping-->
                     <Grid Margin="0,0,0,75">
                         <Grid Tap="ViewUserDetailTap">
@@ -288,8 +287,8 @@
 
                         </Grid>
                     </Grid>
-                </ScrollViewer>
-            </controls:PanoramaItem>
+                </controls:PanoramaItem>
+            </ScrollViewer>
 
         </controls:Panorama>
     </Grid>
