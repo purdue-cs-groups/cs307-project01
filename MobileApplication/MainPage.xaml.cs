@@ -114,7 +114,7 @@ namespace WinstagramPan
             // first pic
             Picture p1 = new Picture();
             p1.Username = "Joe";
-            p1.Caption = "It's Joe!";
+            p1.Caption = "It's Joe! He is helping to write this awesome Windows Phone 7 application.";
             p1.PictureID = 001;
             p1.Photo.Source = new BitmapImage(new Uri("Images/joe.jpg", UriKind.Relative));
 

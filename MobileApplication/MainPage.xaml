@@ -194,21 +194,21 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Image Margin="20,0,0,0" Height="65" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="65" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                                    <TextBlock Margin="118,17,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
-                                    <TextBlock Text="3 hours ago" Margin="0,25,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,80,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
-                                    <Grid Margin="20,560,0,0">
+                                    <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
+                                    <TextBlock Margin="70,10,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
+                                    <TextBlock Text="3 hours ago" Margin="0,22,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,45,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
+                                    <Grid Margin="20,495,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="Auto"  />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="90"  />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
                                         <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
-                                        <Image Source="/WinstagramPan;component/Images/appbar.overflowdots.png" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,15,-25,0">
+                                        <Image Grid.Row="0" Grid.Column="1" Source="/WinstagramPan;component/Images/appbar.overflowdots.png" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0">
                                             <toolkit:ContextMenuService.ContextMenu>
                                                 <toolkit:ContextMenu>
                                                     <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->

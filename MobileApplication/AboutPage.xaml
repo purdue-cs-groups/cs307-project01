@@ -55,7 +55,7 @@
             <!--Pivot item two-->
             <controls:PivotItem x:Name="privacy" Header="privacy">
                 <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="-12,-50,0,0">
-                    <StackPanel x:Name="stackpanelroot" Width="500" Height="650" Background="Transparent">
+                    <StackPanel x:Name="stackpanelroot" Width="500" Height="650" Background="Transparent" Margin="0,12,0,0">
                         <ScrollViewer Height="650" Width="500" VerticalScrollBarVisibility="Hidden">
                             <TextBlock x:Name="displaybox" Margin="20" TextWrapping="Wrap"
                             
