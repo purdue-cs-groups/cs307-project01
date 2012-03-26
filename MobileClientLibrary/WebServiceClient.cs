@@ -298,7 +298,7 @@ namespace MobileClientLibrary
         public void FetchPopularNewsFeed()
         {
             _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPopularNewsFeed_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}", _APIKey)));
+            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/popular/fetch?key={0}", _APIKey)));
         }
 
         private void FetchPopularNewsFeed_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
