@@ -8,60 +8,60 @@ using WebService.Common;
 
 namespace WebService.Controllers
 {
-    public static class APIConsumerController
+    public static class PictureController
     {
-        public static APIConsumer Fetch(string id)
+        public static Picture Fetch(string id)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
             var query = new QueryDocument("_id", id);
 
-            return consumers.FindOne(query);
+            return pictures.FindOne(query);
         }
 
-        public static List<APIConsumer> FetchAll()
+        public static List<Picture> FetchAll()
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
-            return consumers.FindAll().ToList<APIConsumer>();
+            return pictures.FindAll().ToList<Picture>();
         }
 
-        public static void Create(APIConsumer data)
+        public static void Create(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
-            consumers.Insert(data);
+            pictures.Insert(data);
         }
 
-        public static void Update(APIConsumer data)
+        public static void Update(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
-            consumers.Save(data);
+            pictures.Save(data);
         }
 
-        public static void Delete(APIConsumer data)
+        public static void Delete(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
             var query = new QueryDocument("_id", data.ID);
 
-            consumers.FindAndRemove(query, new SortByDocument());
+            pictures.FindAndRemove(query, new SortByDocument());
         }
     }
 }
