@@ -240,6 +240,7 @@
     <Resource Include="Images\smallJeremiah.jpg" />
     <Resource Include="Images\smallMatt.jpg" />
     <Resource Include="Images\crop.png" />
+    <Resource Include="Images\scenic.jpg" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />

@@ -30,14 +30,61 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image Height="440" Margin="12,20,0,0" Name="capturedImage" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
-            <ScrollViewer Height="125" HorizontalAlignment="Left" Margin="12,460,0,0" Name="filterOptions" VerticalAlignment="Top" Width="440" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+            <ScrollViewer Height="125" HorizontalAlignment="Left" Margin="12,468,0,0" Name="filterOptions" VerticalAlignment="Top" Width="440" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <Rectangle Height="100" Name="f1" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
-                    <Rectangle Height="100" Name="f2" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
-                    <Rectangle Height="100" Name="f3" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
-                    <Rectangle Height="100" Name="f4" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
-                    <Rectangle Height="100" Name="f5" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
-                    <Rectangle Height="100" Name="f6" Stroke="Black" StrokeThickness="1" Width="110" Margin="0,12,24,0" Fill="{StaticResource PhoneAccentBrush}" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
