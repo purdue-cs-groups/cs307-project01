@@ -20,6 +20,7 @@ namespace WinstagramPan
             InitializeComponent();
         }
 
+        public static Image editedPicture = new Image();
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!MainPage.isLandscape)
@@ -30,6 +31,12 @@ namespace WinstagramPan
             {
                 capturedImage.Source = CropPageLandscape.cropped.Source;
             }
+        }
+
+        private void Check_Click(object sender, EventArgs e)
+        {
+            editedPicture.Source = capturedImage.Source;
+            NavigationService.Navigate(new Uri("/UploadPage.xaml", UriKind.Relative));
         }
     }
 }

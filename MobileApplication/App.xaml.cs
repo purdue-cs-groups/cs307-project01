@@ -17,6 +17,7 @@ namespace WinstagramPan
 {
     public partial class App : Application
     {
+        public static String APIKey = "4f7124f25ad9850a042a5f2d";
         private static MainViewModel viewModel = null;
 
         /// <summary>
