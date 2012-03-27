@@ -21,13 +21,25 @@ namespace WebService.Controllers
             return pictures.FindOne(query);
         }
 
-        public static List<Picture> FetchAll()
+        public static List<Picture> FetchNewsFeed(User data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
+            // TODO: query the pictures properly
+            return pictures.FindAll().ToList<Picture>();
+        }
+
+        public static List<Picture> FetchPopularNewsFeed()
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
+
+            // TODO: query the pictures properly
             return pictures.FindAll().ToList<Picture>();
         }
 

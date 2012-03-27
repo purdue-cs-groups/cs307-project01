@@ -202,13 +202,15 @@ namespace WebService
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
         public List<Picture> FetchNewsFeed()
         {
-            return PictureController.FetchAll();
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            return PictureController.FetchNewsFeed(token.Identity);
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/popular/fetch")]
         public List<Picture> FetchPopularNewsFeed()
         {
-            return PictureController.FetchAll();
+            return PictureController.FetchPopularNewsFeed();
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/create")]
@@ -256,6 +258,25 @@ namespace WebService
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             Picture data = PictureController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                PictureController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that Picture.");
+            }
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/flag?id={id}")]
+        public void FlagPicture(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            Picture data = PictureController.Fetch(id);
+
+            // TODO: we should log this action
             PictureController.Delete(data);
         }
 
