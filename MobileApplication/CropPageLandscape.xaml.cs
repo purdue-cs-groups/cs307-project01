@@ -17,21 +17,16 @@ using System.Windows.Resources;
 
 namespace WinstagramPan
 {
-    public partial class CropPage : PhoneApplicationPage
+    public partial class CropPageLandscape : PhoneApplicationPage
     {
-        public CropPage()
+        public CropPageLandscape()
         {
             InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
-            y1 = (int)cropArea.Margin.Top;
-            y1min = y1;
-            y1max = y1 + 134;
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            SetPhoto();
+            x1 = (int)cropArea.Margin.Right;
+            x1min = x1;
+            x1max = x1 + 134;
         }
 
         private void SetPhoto()
@@ -40,25 +35,25 @@ namespace WinstagramPan
         }
 
         public static Image cropped = new Image();
-        public static int y1 = 0;
-        public static int y1min = 0;
-        public static int y1max = 0;
+        public static int x1 = 0;
+        public static int x1min = 0;
+        public static int x1max = 0;
         private void CropPhoto()
         {
-            int y0 = (int)originalPhoto.Margin.Top;
+            int x0 = (int)originalPhoto.Margin.Right;
 
-            int yDisplacement = y0 - y1;
+            int xDisplacement = x0 - x1;
 
             WriteableBitmap wb = new WriteableBitmap((int)cropArea.Width, (int)cropArea.Height);
             TranslateTransform t = new TranslateTransform();
-            t.Y = yDisplacement;
+            t.X = xDisplacement;
             Point p = new Point((int)cropArea.Width, (int)cropArea.Height);
             t.Transform(p);
             wb.Render(originalPhoto, t);
             wb.Invalidate();
             cropped.Source = wb;
 
-            MainPage.isLandscape = false;
+            MainPage.isLandscape = true;
             NavigationService.Navigate(new Uri("/EditPicture.xaml", UriKind.Relative));
         }
 
@@ -70,20 +65,25 @@ namespace WinstagramPan
         private TranslateTransform drag;
         private void cropArea_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            drag.Y += e.DeltaManipulation.Translation.Y;
-            if (drag.Y < 0)
-                drag.Y = 0;
-            if (drag.Y > 134)
-                drag.Y = 134;
+            drag.X += e.DeltaManipulation.Translation.X;
+            if (drag.X < 0)
+                drag.X = 0;
+            if (drag.X > 134)
+                drag.X = 134;
 
-            int temp = y1 + (int)e.DeltaManipulation.Translation.Y;
-            if (temp < y1min)
-                y1 = y1min;
-            else if (temp > y1max)
-                y1 = y1max;
+            int temp = x1 + (int)e.DeltaManipulation.Translation.X;
+            if (temp < x1min)
+                x1 = x1min;
+            else if (temp > x1max)
+                x1 = x1max;
             else
-                y1 = temp;
+                x1 = temp;
 
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetPhoto();
         }
     }
 }

@@ -22,7 +22,14 @@ namespace WinstagramPan
 
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
         {
-            capturedImage.Source = CropPage.cropped.Source;
+            if (!MainPage.isLandscape)
+            {
+                capturedImage.Source = CropPage.cropped.Source;
+            }
+            else
+            {
+                capturedImage.Source = CropPageLandscape.cropped.Source;
+            }
         }
     }
 }

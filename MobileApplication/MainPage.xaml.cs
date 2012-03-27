@@ -161,10 +161,12 @@ namespace WinstagramPan
             cam.Show();
         }
 
+        public static Boolean isLandscape = false;
         public static Image captured = new Image();
         public static BitmapImage bmp = new BitmapImage();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
+            bool land = false;
             // figure out the orientation from EXIF data
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
@@ -179,12 +181,14 @@ namespace WinstagramPan
                 case ExifOrientation.TopLeft:
                 case ExifOrientation.Undefined:
                     _angle = 0;
+                    land = true;
                     break;
                 case ExifOrientation.TopRight:
                     _angle = 90;
                     break;
                 case ExifOrientation.BottomRight:
                     _angle = 180;
+                    land = true;
                     break;
                 case ExifOrientation.BottomLeft:
                     _angle = 270;
@@ -205,7 +209,14 @@ namespace WinstagramPan
             // wait til UI thread is done, then navigate
             Dispatcher.BeginInvoke(() =>
             {
-                NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
+                if (land)
+                {
+                    NavigationService.Navigate(new Uri("/CropPageLandscape.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
+                }
             });
         }
 

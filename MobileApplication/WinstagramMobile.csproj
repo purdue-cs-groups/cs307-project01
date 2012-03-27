@@ -89,6 +89,9 @@
     <Compile Include="CropPage.xaml.cs">
       <DependentUpon>CropPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CropPageLandscape.xaml.cs">
+      <DependentUpon>CropPageLandscape.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPicture.xaml.cs">
       <DependentUpon>EditPicture.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CropPageLandscape.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
