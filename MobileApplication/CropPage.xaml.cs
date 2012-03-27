@@ -26,7 +26,7 @@ namespace WinstagramPan
             cropArea.RenderTransform = drag;
             y1 = (int)cropArea.Margin.Top;
             y1min = y1;
-            y1max = y1 + 134;
+            y1max = y1 + 92;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -73,8 +73,8 @@ namespace WinstagramPan
             drag.Y += e.DeltaManipulation.Translation.Y;
             if (drag.Y < 0)
                 drag.Y = 0;
-            if (drag.Y > 134)
-                drag.Y = 134;
+            if (drag.Y > 92)
+                drag.Y = 92;
 
             int temp = y1 + (int)e.DeltaManipulation.Translation.Y;
             if (temp < y1min)
