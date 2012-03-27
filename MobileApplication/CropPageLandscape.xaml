@@ -31,8 +31,8 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="130,-50,12,0">
-            <Image  Height="400" HorizontalAlignment="Left" Margin="28,97,0,0" Name="originalPhoto" Stretch="UniformToFill" VerticalAlignment="Top" Width="533" />
-            <Image  Height="400" HorizontalAlignment="Left" Margin="27,97,0,0" Name="cropArea" Stretch="Fill" VerticalAlignment="Top" Width="400" Source="/WinstagramPan;component/Images/crop.png" Opacity="0.5" ManipulationDelta="cropArea_ManipulationDelta" />
+            <Image  Height="440" HorizontalAlignment="Left" Margin="27,57,0,0" Name="originalPhoto" Stretch="UniformToFill" VerticalAlignment="Top" Width="533" />
+            <Image  Height="440" HorizontalAlignment="Left" Margin="27,57,0,0" Name="cropArea" Stretch="Fill" VerticalAlignment="Top" Width="440" Source="/WinstagramPan;component/Images/crop.png" Opacity="0.35" ManipulationDelta="cropArea_ManipulationDelta" />
         </Grid>
         
     </Grid>

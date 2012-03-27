@@ -26,7 +26,7 @@ namespace WinstagramPan
             cropArea.RenderTransform = drag;
             x1 = (int)cropArea.Margin.Right;
             x1min = x1;
-            x1max = x1 + 134;
+            x1max = x1 + 92;
         }
 
         private void SetPhoto()
@@ -68,8 +68,8 @@ namespace WinstagramPan
             drag.X += e.DeltaManipulation.Translation.X;
             if (drag.X < 0)
                 drag.X = 0;
-            if (drag.X > 134)
-                drag.X = 134;
+            if (drag.X > 92)
+                drag.X = 92;
 
             int temp = x1 + (int)e.DeltaManipulation.Translation.X;
             if (temp < x1min)
