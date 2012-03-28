@@ -31,6 +31,12 @@ namespace MobileClientLibrary.Models
             set;
         }
 
+        public string Password
+        {
+            get;
+            set;
+        }
+        
         public string Biography
         {
             get;
