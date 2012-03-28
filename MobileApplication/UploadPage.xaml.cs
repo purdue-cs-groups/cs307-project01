@@ -24,15 +24,6 @@ namespace WinstagramPan
         {
             if (e.Key == Key.Enter)
             {
-                Dispatcher.BeginInvoke(() => captionBox.Focus());
-                Dispatcher.BeginInvoke(() => locationBox.Focus());
-            }
-        }
-
-        private void locationKey(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
                 this.Focus();
             }
         }
