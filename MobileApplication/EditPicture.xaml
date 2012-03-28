@@ -22,7 +22,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image Height="400" HorizontalAlignment="Left" Margin="29,20,0,0" Name="capturedImage" Stretch="Fill" VerticalAlignment="Top" Width="400" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" />
+            <Image Height="400" Margin="29,20,27,0" Name="capturedImage" Stretch="Fill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="400" />
             <TextBox Height="81" HorizontalAlignment="Left" Margin="16,426,0,0" Name="textBox1" Text="Add caption" VerticalAlignment="Top" Width="425" />
             <ScrollViewer Height="107" HorizontalAlignment="Left" Margin="29,532,0,0" Name="filterOptions" VerticalAlignment="Top" Width="400" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"/>
             <Button Content="Upload" Height="80" HorizontalAlignment="Left" Margin="16,645,0,0" Name="button1" VerticalAlignment="Top" Width="219" />
