@@ -32,7 +32,6 @@ namespace WinstagramPan
             InitializeComponent();
 
             // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             // Library call to fetch news feed to populate RecentPictures
@@ -43,11 +42,6 @@ namespace WinstagramPan
         public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
-
             if (isFromLogin)
             {
                 isFromLogin = false;

@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using MobileClientLibrary.Models;
+using MobileClientLibrary;
 
 namespace WinstagramPan
 {
@@ -84,6 +86,18 @@ namespace WinstagramPan
         {
             // TODO: Validate Input!
 
+            User data = new User();
+            data.Username = this.usernameInput.Text;
+            data.Name = this.fullnameInput.Text;
+            data.Password = this.passwordInput.Password;
+            data.EmailAddress = this.emailInput.Text;
+
+            App.WinstagramService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(WinstagramService_CreateUserCompleted);
+            App.WinstagramService.CreateUser(data);
+        }
+
+        private void WinstagramService_CreateUserCompleted(object sender, RequestCompletedEventArgs e)
+        {
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
 

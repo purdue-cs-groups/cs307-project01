@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using MobileClientLibrary;
 
 namespace WinstagramPan
 {
@@ -21,6 +22,12 @@ namespace WinstagramPan
         }
 
         private void Login_Click(object sender, EventArgs e)
+        {
+            App.WinstagramService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(WinstagramService_AuthenticateCompleted);
+            App.WinstagramService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+        }
+
+        private void WinstagramService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
