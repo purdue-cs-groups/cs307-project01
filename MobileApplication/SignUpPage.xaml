@@ -1,9 +1,9 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="WinstagramPan.LandingPage"
+    x:Class="WinstagramPan.SignupPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,42 +14,49 @@
     mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False">
 
-    <!--Welcome Screen-->
-    <Grid x:Name="WelcomeScreen" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="sign up" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
 
-            <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTileTap" Margin="0,0,12,0">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-            </Grid>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel Margin="12,0,12,0">
+                <!-- Username -->
+                <TextBlock Text="username" />
+                <TextBox InputScope="PersonalFullName" Name="usernameInput" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" />
 
-            <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="signUpTileTap">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-            </Grid>
+                <!-- Full Name -->
+                <TextBlock Text="full name" />
+                <TextBox InputScope="PersonalFullName" Name="fullnameInput" Margin="-12,0,0,0" KeyUp="fullnameInput_KeyUp" />
 
-            <Grid Grid.Row="1" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="0,12,0,0" Tap="browseTileTap">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Browse" VerticalAlignment="Bottom" FontSize="32" Width="142" />
-            </Grid>
+                <!-- Password -->
+                <TextBlock Text="password" />
+                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" />
+
+                <!-- Confirm Password -->
+                <TextBlock Text="confirm password" />
+                <PasswordBox x:Name="confirmPasswordInput" Margin="-12,0,0,0" KeyUp="confirmPasswordInput_KeyUp" />
+
+                <!-- Email -->
+                <TextBlock Text="email" />
+                <TextBox InputScope="EmailNameOrAddress" Name="emailInput" Margin="-12,0,0,0" KeyUp="emailInput_KeyUp" />
+            </StackPanel>
         </Grid>
     </Grid>
 
+
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.75">
+        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Accept_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" Click="Cancel_Click" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about" Click="About_Click"/>
+                <shell:ApplicationBarMenuItem Text="about" Click="AboutMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
@@ -75,4 +82,5 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
+
 </phone:PhoneApplicationPage>

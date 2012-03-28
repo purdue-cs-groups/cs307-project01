@@ -13,17 +13,11 @@ using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class SettingsPage : PhoneApplicationPage
+    public partial class AboutPage : PhoneApplicationPage
     {
-        public SettingsPage()
+        public AboutPage()
         {
             InitializeComponent();
-        }
-
-        private void connectaccounts_Click(object sender, RoutedEventArgs e)
-        {
-            //enter twitter information
-            //user control in conjunction with twitter API
         }
 
     }

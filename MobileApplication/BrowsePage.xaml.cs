@@ -9,19 +9,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Microsoft.Phone.Controls;
 
 namespace WinstagramPan
 {
-    public partial class PopupControl : UserControl
+    public partial class BrowsePage : PhoneApplicationPage
     {
-        public PopupControl()
+        public BrowsePage()
         {
             InitializeComponent();
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

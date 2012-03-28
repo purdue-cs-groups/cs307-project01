@@ -17,13 +17,14 @@
     shell:SystemTray.IsVisible="False" Opacity="1">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
         <!--Panorama control-->
-        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto">
+        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="winstagram" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0">
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--Panorama item one-->
-                <controls:PanoramaItem Header="popular">
+
+            <!--Panorama item one-->
+            <controls:PanoramaItem Header="popular" IsTabStop="False" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
                     <Grid Width="Auto" HorizontalAlignment="Left" Margin="0,0,0,75">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -181,30 +182,33 @@
                                          GroupTag="Pic" Tap="hubTilePictureTap" 
                                          Message="pictureID" Style="{StaticResource SmallHubTile}" />
                     </Grid>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <!--NEWS FEED-->
-                <controls:PanoramaItem Header="recent">
-                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
+
+
+            <!--RECENT -->
+            <controls:PanoramaItem Header="recent" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
+                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-6,0,0,75" HorizontalAlignment="Left">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Image Margin="20,0,0,0" Height="65" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="65" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                                    <TextBlock Margin="118,17,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
-                                    <TextBlock Text="3 hours ago" Margin="0,25,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,80,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
-                                    <Grid Margin="20,560,0,0">
+                                    <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
+                                    <TextBlock Margin="70,10,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
+                                    <TextBlock Text="3 hours ago" Margin="0,22,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,45,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
+                                    <Grid Margin="20,495,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="Auto"  />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="90"  />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="26" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
-                                        <Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">
+                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
+                                        <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
+                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.light.png">
                                             <toolkit:ContextMenuService.ContextMenu>
                                                 <toolkit:ContextMenu>
                                                     <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
@@ -213,34 +217,46 @@
                                                     <toolkit:MenuItem Header="cancel" />
                                                 </toolkit:ContextMenu>
                                             </toolkit:ContextMenuService.ContextMenu>
-                                        </Button>
+                                        </Image>
+                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.png">
+                                            <toolkit:ContextMenuService.ContextMenu>
+                                                <toolkit:ContextMenu>
+                                                    <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                                    <toolkit:MenuItem Header="share" />
+                                                    <toolkit:MenuItem Header="flag for review" />
+                                                    <toolkit:MenuItem Header="cancel" />
+                                                </toolkit:ContextMenu>
+                                            </toolkit:ContextMenuService.ContextMenu>
+                                        </Image>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
 
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <controls:PanoramaItem Header="profile">
+
+
+            <controls:PanoramaItem Header="profile" Margin="0,-15,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <!--Double line list with image placeholder and text wrapping-->
-                    <Grid Margin="0,0,0,75">
-                        <Grid Tap="ViewUserDetailTap">
+                    <Grid Margin="-12,0,0,75">
+                        <Grid Tap="ViewUserDetailTap" HorizontalAlignment="Left" Width="407">
                             <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <TextBlock Height="45" HorizontalAlignment="Left" Margin="178,-9,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
-                            <TextBlock Height="40" HorizontalAlignment="Left" Margin="177,36,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
-                            <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,170,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
-                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,89,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,8,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="176,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="250,113,0,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="331,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
-                            <TextBlock Height="43" HorizontalAlignment="Left" Margin="174,75,0,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
-                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="255,75,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
-                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="335,75,0,0" Name="textBlock8" Text="5" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                            <TextBlock Height="45" HorizontalAlignment="Left" Margin="172,0,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
+                            <TextBlock Height="40" HorizontalAlignment="Left" Margin="170,42,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
+                            <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,160,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
+                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,80,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
+                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,0,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="185,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Right" Margin="0,113,83,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
+                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="337,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
+                            <TextBlock Height="43" HorizontalAlignment="Right" Margin="0,73,170,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
+                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="261,73,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
+                            <TextBlock FontSize="32" HorizontalAlignment="Left" Margin="341,73,0,841" Name="textBlock8" Text="5" TextAlignment="Center" Width="54" />
                         </Grid>
-                        <Grid Width="370" HorizontalAlignment="Left"  Margin="17,150,0,20">
+                        <Grid Width="Auto" HorizontalAlignment="Left"  Margin="17,150,0,20">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -282,8 +298,9 @@
 
                         </Grid>
                     </Grid>
-                </controls:PanoramaItem>
-            </ScrollViewer>
+                </ScrollViewer>
+            </controls:PanoramaItem>
+
         </controls:Panorama>
     </Grid>
 
@@ -291,10 +308,10 @@
         <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" Click="ApplicationBarIconButton_Click" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="EditProfile_Click" />
                 <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
-                <shell:ApplicationBarMenuItem Text="user search" Click="UserSearch_Click" />
+                <shell:ApplicationBarMenuItem Text="find friends" Click="UserSearch_Click" />
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

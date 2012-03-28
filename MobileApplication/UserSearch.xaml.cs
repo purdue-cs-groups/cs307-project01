@@ -30,73 +30,37 @@ namespace WinstagramPan
             InitializeComponent();
         }
 
-        private void searchbutton_Click(object sender, RoutedEventArgs e)
+        public static ObservableCollection<User> SearchResults = new ObservableCollection<User>();
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            //here we want to take the information from the search box, and search it against a list of users
-            //we will finally get the users from the webservice, but initially we will have a local group of users
+            SearchResults.Clear();
 
-            //this will eventually be a search for actual users from the database...right now it's fake!
-            switch (usernameInput.Text) { 
-                case "jo":
-                case "Jo":
-                    usernameInput.Text = "Search";
-                    JoePic.Visibility = System.Windows.Visibility.Visible;
-                    joeusername.Visibility = System.Windows.Visibility.Visible;
-                    JoshPic.Visibility = System.Windows.Visibility.Visible;
-                    joshusername.Visibility = System.Windows.Visibility.Visible;
-                break;
-                case "Joe":
-                case "Martella":
-                case "Joe Martella":
-                case "joe martella":
-                case "joe":
-                case "martella":  
-                    //display a basic user page
-                    usernameInput.Text = "Search";
-                    JoePic.Visibility = System.Windows.Visibility.Visible;
-                    joeusername.Visibility = System.Windows.Visibility.Visible;
-                     //display here the results for Joe
-                    break;
-                default: //display no results found
-                    noresults.Visibility = System.Windows.Visibility.Visible;
-                    usernameInput.Text = "Search";
-                    break;
+            User u = new User();
+            u.Name = "Joe Martella";
+            u.Username = "martellaj";
+            SearchResults.Add(u);
 
-            }
-        }
+            User u2 = new User();
+            u2.Name = "Matt McCormick";
+            u2.Username = "mbmccormick";
+            SearchResults.Add(u2);
 
-        private void usernameInput_GotFocus(object sender, RoutedEventArgs e) {
-            if (usernameInput.Text == "Search") {
-                usernameInput.Text = "";
-                SolidColorBrush Brush1 = new SolidColorBrush();
-                Brush1.Color = Colors.Black;
-                usernameInput.Foreground = Brush1;
-            }
-            noresults.Visibility = System.Windows.Visibility.Collapsed;
-            JoePic.Visibility = System.Windows.Visibility.Collapsed;
-            joeusername.Visibility = System.Windows.Visibility.Collapsed;
-            JoshPic.Visibility = System.Windows.Visibility.Collapsed;
-            joshusername.Visibility = System.Windows.Visibility.Collapsed;
-        }
+            User u3 = new User();
+            u3.Name = "James Ma";
+            u3.Username = "jimmymama";
+            SearchResults.Add(u3);
 
-        private void usernameInput_LostFocus(object sender, RoutedEventArgs e) {
-            if (usernameInput.Text == String.Empty)
-            {
-                SolidColorBrush Brush2 = new SolidColorBrush();
-                Brush2.Color = Colors.Gray;
-                usernameInput.Foreground = Brush2;
-                        
-                usernameInput.Text = "Search";
-                noresults.Visibility = System.Windows.Visibility.Visible;
-            }
-        }
+            User u4 = new User();
+            u4.Name = "Josh William";
+            u4.Username = "jdawg";
+            SearchResults.Add(u4);
 
-        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e) {
-            JoePic.Visibility = System.Windows.Visibility.Collapsed;
-            joeusername.Visibility = System.Windows.Visibility.Collapsed;
-            JoshPic.Visibility = System.Windows.Visibility.Collapsed;
-            joshusername.Visibility = System.Windows.Visibility.Collapsed;
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+            User u5 = new User();
+            u5.Name = "Jeremiah Theurer";
+            u5.Username = "jerryThizzle";
+            SearchResults.Add(u5);
+
+            searchResults.ItemsSource = SearchResults;
         }
     }
 }

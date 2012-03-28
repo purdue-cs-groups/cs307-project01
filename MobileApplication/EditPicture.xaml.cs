@@ -20,9 +20,23 @@ namespace WinstagramPan
             InitializeComponent();
         }
 
+        public static Image editedPicture = new Image();
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
         {
-            capturedImage.Source = MainPage.captured.Source;
+            if (!MainPage.isLandscape)
+            {
+                capturedImage.Source = CropPage.cropped.Source;
+            }
+            else
+            {
+                capturedImage.Source = CropPageLandscape.cropped.Source;
+            }
+        }
+
+        private void Check_Click(object sender, EventArgs e)
+        {
+            editedPicture.Source = capturedImage.Source;
+            NavigationService.Navigate(new Uri("/UploadPage.xaml", UriKind.Relative));
         }
     }
 }

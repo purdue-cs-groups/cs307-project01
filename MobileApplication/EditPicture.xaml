@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,8 +11,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,26 +21,103 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
+            <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="apply a filter" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+        
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image Height="400" Margin="29,20,27,0" Name="capturedImage" Stretch="Fill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="400" />
-            <TextBox Height="81" HorizontalAlignment="Left" Margin="16,426,0,0" Name="textBox1" Text="Add caption" VerticalAlignment="Top" Width="425" />
-            <ScrollViewer Height="107" HorizontalAlignment="Left" Margin="29,532,0,0" Name="filterOptions" VerticalAlignment="Top" Width="400" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden"/>
-            <Button Content="Upload" Height="80" HorizontalAlignment="Left" Margin="16,645,0,0" Name="button1" VerticalAlignment="Top" Width="219" />
-            <Button Content="Discard" Height="80" HorizontalAlignment="Left" Margin="222,645,0,0" Name="button2" VerticalAlignment="Top" Width="219" />
+            <Image Height="440" Margin="12,20,0,0" Name="capturedImage" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
+            <ScrollViewer Height="125" HorizontalAlignment="Left" Margin="12,468,0,0" Name="filterOptions" VerticalAlignment="Top" Width="440" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="filter name" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
 
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Check_Click" />
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!-- sexy transitions -->
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
 </phone:PhoneApplicationPage>

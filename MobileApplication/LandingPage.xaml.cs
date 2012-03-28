@@ -20,14 +20,24 @@ namespace WinstagramPan
             InitializeComponent();
         }
 
-        #region logInTileTap Codebehind
-        /***************************************
-         ***** logInTileTap Codebehind *********
-         ***************************************/
         private void logInTileTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/LoginScreen.xaml", UriKind.Relative));
         }
-        #endregion logInTileTap Codebehind
+
+        private void signUpTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
+        }
+
+        private void browseTileTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/BrowsePage.xaml", UriKind.Relative));
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
     }
 }

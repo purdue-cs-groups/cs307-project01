@@ -11,65 +11,58 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="373*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <!-- <TextBlock x:Name="ApplicationTitle" Text="winstagram" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold"/> -->
-            <TextBlock x:Name="PageTitle" Text="user search" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-       
-
-        <Grid x:Name="userInputFields" Grid.Row="1">
-            <!-- StackPanel for user input fields -->
-            <StackPanel Margin="12,0,12,0">
-                <TextBlock Text="search by username or email address"/>
-                <TextBox x:Name="usernameInput" AcceptsReturn="False" Text="Search" Foreground="Gray" GotFocus="usernameInput_GotFocus" LostFocus="usernameInput_LostFocus"/>
-            </StackPanel>
-        </Grid>
-         <Grid Grid.Row="2">
-                <Button x:Name="searchbutton" Content="search" Margin="12,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="searchbutton_Click" />
-                <!--button stuff goes here, displays search results-->
-         </Grid>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" Height="Auto">
+            <TextBlock x:Name="ApplicationTitle" Text="WINSTAGRAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="find friends" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!-- results go here -->
-        <!-- We'll set up the view for the results as a ListBox with DataBinding to a collection of matching Users -->
-        <ScrollViewer Height="364" HorizontalAlignment="Left" Margin="12,0,0,0" Name="scrollViewer1" VerticalAlignment="Top" Width="456" Grid.Row="1">
-            <StackPanel x:Name="results">
-                <TextBlock x:Name="noresults" Visibility="Collapsed" Text="no results found" Style="{StaticResource PhoneTextTitle2Style}"/>
-                <Image Margin="20,0,0,0" Visibility="Collapsed" Height="90" HorizontalAlignment="Left" Name="JoePic" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                <TextBlock Margin="100,20,0,0" Visibility ="Collapsed" Text="Joe" Height="38" Name="joeusername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailTap" />
-                <Image Margin="20,0,0,0" Visibility="Collapsed" Height="90" HorizontalAlignment="Left" Name="JoshPic" Stretch="Fill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJosh.png" Tap="ViewUserDetailTap" />
-                <TextBlock Margin="100,20,0,0" Visibility ="Collapsed" Text="Josh" Height="38" Name="joshusername" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailTap" />
-            </StackPanel>
-          
-            
-            
-        </ScrollViewer>
-        
-        
-        
-        
+
+        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="search by username or email address" Margin="12,0,0,0" />
+            <TextBox Grid.Row="1" x:Name="usernameInput" AcceptsReturn="False" Text="" Margin="0,0,0,0" />
+            <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="SearchButton_Click" />
+
+            <ListBox Height="500"  Grid.Row="3" Name="searchResults" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Margin="12,5,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" />
+                            <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo"/>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar x:Name="MainPageAppBar" Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about"/>
-                <shell:ApplicationBarMenuItem Text="edit profile"/>
-                <shell:ApplicationBarMenuItem Text="settings" />
-                <shell:ApplicationBarMenuItem Text="sign out" />
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
+                <shell:ApplicationBarMenuItem Text="edit profile" Click="Edit_Click" />
+                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
+                <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
 
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
@@ -92,5 +85,5 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
 </phone:PhoneApplicationPage>

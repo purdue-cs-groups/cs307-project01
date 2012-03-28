@@ -33,6 +33,7 @@ namespace WinstagramPan
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            // change drastically when the time comes
             if (SenderPage == 1)
             {
                 String pictureID = MainPage.selectedPicture.Message;
@@ -51,19 +52,6 @@ namespace WinstagramPan
                 pictureView.Source = p.Photo.Source;
                 pictureCaption.Text = p.Caption;
             }
-        }
-
-        private void shareButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShareLinkTask shareLinkTask = new ShareLinkTask();
-
-            shareLinkTask.Title = pictureCaption.Text;
-
-            // replace with Web Application URL
-            shareLinkTask.LinkUri = new Uri("http://img.tgdaily.com/sites/default/files/stock/450teaser/steveballmer.jpg", UriKind.Absolute);
-            shareLinkTask.Message = "Shared via Winstagram";
-
-            shareLinkTask.Show();
         }
 
         #region Application Bar Codebehind
@@ -192,9 +180,17 @@ namespace WinstagramPan
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
         }
 
-        private void recentPicture_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        private void Share(object sender, EventArgs e)
         {
+            ShareLinkTask shareLinkTask = new ShareLinkTask();
 
+            shareLinkTask.Title = pictureCaption.Text;
+
+            // replace with Web Application URL
+            shareLinkTask.LinkUri = new Uri("http://img.tgdaily.com/sites/default/files/stock/450teaser/steveballmer.jpg", UriKind.Absolute);
+            shareLinkTask.Message = "Shared via Winstagram";
+
+            shareLinkTask.Show();
         }
     }
 }

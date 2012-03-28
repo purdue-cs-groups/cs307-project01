@@ -77,11 +77,29 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrowsePage.xaml.cs">
+      <DependentUpon>BrowsePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CropPage.xaml.cs">
+      <DependentUpon>CropPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CropPageLandscape.xaml.cs">
+      <DependentUpon>CropPageLandscape.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditPicture.xaml.cs">
       <DependentUpon>EditPicture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
@@ -94,11 +112,14 @@
     </Compile>
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="PhotoCrop.xaml.cs">
-      <DependentUpon>PhotoCrop.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPage.xaml.cs">
+      <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserDetailPage.xaml.cs">
       <DependentUpon>UserDetailPage.xaml</DependentUpon>
@@ -114,16 +135,37 @@
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="PopupControl.xaml.cs">
-      <DependentUpon>PopupControl.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BrowsePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CropPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CropPageLandscape.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditPicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ForgotPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,11 +185,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
-    <Page Include="PhotoCrop.xaml">
+    <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPage.xaml">
+    <Page Include="SignUpPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UploadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,10 +209,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PopupControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
@@ -175,16 +217,30 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="ApplicationIcon.png" />
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\appbar.check.png" />
-    <Resource Include="Images\appbar.check.rest.png" />
-    <Resource Include="Images\appbar.close.rest.png" />
+    <Content Include="Images\appbar.arrow.down.png" />
+    <Content Include="Images\appbar.arrow.up.png" />
+    <Content Include="Images\appbar.check.rest.png" />
+    <Content Include="Images\appbar.close.rest.png" />
+    <Content Include="Images\appbar.crop.png" />
+    <Content Include="Images\appbar.download.rest.png" />
+    <Content Include="Images\appbar.flag.png" />
+    <Resource Include="Images\appbar.overflowdots.png" />
+    <Resource Include="Images\appbar.overflowdots.light.png" />
+    <Content Include="Images\appbar.questionmark.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
+    <Content Include="Images\appbar.share.rest.png" />
+    <Content Include="Images\appbar.upload.rest.png" />
+    <Resource Include="Images\camera.png" />
+    <Resource Include="Images\smallJames.jpg" />
+    <Resource Include="Images\smallJeremiah.jpg" />
+    <Resource Include="Images\smallMatt.jpg" />
+    <Resource Include="Images\crop.png" />
+    <Resource Include="Images\scenic.jpg" />
     <Content Include="Images\windowsphone.jpg" />
     <Content Include="Images\james.jpg" />
     <Content Include="Images\jeremiah.jpg" />
@@ -195,11 +251,10 @@
     <Content Include="Images\seattle.jpg" />
     <Content Include="Images\shruti.jpg" />
     <Resource Include="Images\smallJoe.png" />
-    <Content Include="Images\smallJosh.png" />
+    <Resource Include="Images\smallJosh.png" />
     <Content Include="Images\test.png" />
     <Content Include="References\ExifLib.dll" />
     <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
-    <Content Include="SplashScreenImage.jpg" />
     <Resource Include="PanoramaBackground.png" />
     <Content Include="Images\appbar.camera.png" />
     <Content Include="Images\appbar.image.png" />
