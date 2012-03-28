@@ -16,7 +16,7 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
-            var query = new QueryDocument("ID", id);
+            var query = new QueryDocument("_id", id);
 
             return consumers.FindOne(query);
         }
@@ -59,7 +59,7 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
-            var query = new QueryDocument("ID", data.ID);
+            var query = new QueryDocument("_id", data.ID);
 
             consumers.FindAndRemove(query, new SortByDocument());
         }

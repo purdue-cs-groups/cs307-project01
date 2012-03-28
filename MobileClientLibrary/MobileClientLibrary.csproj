@@ -70,9 +70,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\MD5CryptoServiceProvider.cs" />
+    <Compile Include="Common\PictureURL.cs" />
     <Compile Include="Common\UserCredentials.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="WebServiceClient.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
