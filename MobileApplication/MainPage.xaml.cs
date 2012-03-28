@@ -211,7 +211,7 @@ namespace WinstagramPan
             {
                 if (land)
                 {
-                    NavigationService.Navigate(new Uri("/CropPageLandscape.xaml", UriKind.Relative));
+                    NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
                 else
                 {

@@ -29,7 +29,7 @@ namespace WinstagramPan
             }
             else
             {
-                capturedImage.Source = CropPageLandscape.cropped.Source;
+                capturedImage.Source = CropPageLandscapeOrientation.cropped.Source;
             }
         }
 

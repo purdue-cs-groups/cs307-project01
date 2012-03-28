@@ -17,21 +17,27 @@ using System.Windows.Resources;
 
 namespace WinstagramPan
 {
-    public partial class CropPageLandscape : PhoneApplicationPage
+    public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {
-        public CropPageLandscape()
+        public CropPageLandscapeOrientation()
         {
+            InitializeComponent();
             InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
             x1 = (int)cropArea.Margin.Right;
             x1min = x1;
-            x1max = x1 + 92;
+            x1max = x1 + 78;
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetPhoto();
         }
 
         private void SetPhoto()
         {
-            originalPhoto.Source = MainPage.captured.Source;
+            this.originalPhoto.Source = MainPage.captured.Source;
         }
 
         public static Image cropped = new Image();
@@ -68,8 +74,8 @@ namespace WinstagramPan
             drag.X += e.DeltaManipulation.Translation.X;
             if (drag.X < 0)
                 drag.X = 0;
-            if (drag.X > 92)
-                drag.X = 92;
+            if (drag.X > 78)
+                drag.X = 78;
 
             int temp = x1 + (int)e.DeltaManipulation.Translation.X;
             if (temp < x1min)
@@ -78,12 +84,6 @@ namespace WinstagramPan
                 x1 = x1max;
             else
                 x1 = temp;
-
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            SetPhoto();
         }
     }
 }
