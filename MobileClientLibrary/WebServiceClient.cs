@@ -7,6 +7,8 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary.Common;
 using System.Text;
 using ClientLibrary.Common;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace MobileClientLibrary
 {
@@ -34,10 +36,11 @@ namespace MobileClientLibrary
         private UserCredentials _Credentials = null;
         private string _Token = null;
 
+        private int _AuthenticationAttempts = 0;
+
         public WebServiceClient(string APIkey)
         {
             _APIKey = APIkey;
-
             _Client = new WebClient();
         }
 
@@ -50,6 +53,8 @@ namespace MobileClientLibrary
             _Credentials = new UserCredentials(username, this.HashPassword(password));
 
             var jsonData = JsonConvert.SerializeObject(_Credentials);
+
+            _AuthenticationAttempts++;
 
             _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(Authenticate_UploadStringCompleted);
             _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "authenticate?key={0}", _APIKey)), jsonData);
@@ -67,6 +72,8 @@ namespace MobileClientLibrary
 
                     _IsAuthenticated = true;
                     _Token = jsonData.Token;
+
+                    _AuthenticationAttempts = 0;
 
                     AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
                 }
@@ -124,11 +131,28 @@ namespace MobileClientLibrary
         {
             if (FetchUserCompleted != null)
             {
-                string stringData = e.Result;
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
 
-                var jsonData = JsonConvert.DeserializeObject<User>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
 
-                FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                    FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
             }
         }
 
@@ -146,11 +170,28 @@ namespace MobileClientLibrary
         {
             if (FetchAllUsersCompleted != null)
             {
-                string stringData = e.Result;
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
 
-                var jsonData = JsonConvert.DeserializeObject<List<User>>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<List<User>>(stringData);
 
-                FetchAllUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                    FetchAllUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
             }
         }
 
@@ -168,7 +209,24 @@ namespace MobileClientLibrary
         {
             if (CreateUserCompleted != null)
             {
-                CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                if (e.Error == null)
+                {
+                    CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
             }
         }
 
@@ -188,7 +246,24 @@ namespace MobileClientLibrary
         {
             if (UpdateUserCompleted != null)
             {
-                UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                if (e.Error == null)
+                {
+                    UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
             }
         }
 
@@ -206,7 +281,340 @@ namespace MobileClientLibrary
         {
             if (DeleteUserCompleted != null)
             {
-                DeleteUserCompleted(sender, new RequestCompletedEventArgs(null));
+                if (e.Error == null)
+                {
+                    DeleteUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Picture Methods
+
+        public event RequestCompletedEventHandler UploadPictureCompleted;
+
+        public void UploadPicture(Stream image)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            // convert image stream to byte array string
+            string byteArray = ReadToEnd(image).ToString();
+
+            _Client.OpenWriteCompleted += new OpenWriteCompletedEventHandler(UploadPicture_OpenWriteCompleted);
+            _Client.OpenWriteAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/upload?key={0}&token={1}", _APIKey, _Token)), "POST", byteArray);
+        }
+
+        private byte[] ReadToEnd(Stream data)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = data.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                return ms.ToArray();
+            }
+        }
+
+        private void UploadPicture_OpenWriteCompleted(object sender, OpenWriteCompletedEventArgs e)
+        {
+            if (UploadPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    var stringData = e.Result.ToString();
+
+                    var jsonData = JsonConvert.DeserializeObject<PictureURL>(stringData);
+
+                    UploadPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler FetchPictureCompleted;
+
+        public void FetchPicture(string id)
+        {
+            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPicture_DownloadStringCompleted);
+            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
+
+                    FetchPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler FetchNewsFeedCompleted;
+
+        public void FetchNewsFeed()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchNewsFeed_DownloadStringCompleted);
+            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&token={1}", _APIKey, _Token)));
+        }
+
+        private void FetchNewsFeed_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchNewsFeedCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<Picture>>(stringData);
+
+                    FetchNewsFeedCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler FetchPopularNewsFeedCompleted;
+
+        public void FetchPopularNewsFeed()
+        {
+            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPopularNewsFeed_DownloadStringCompleted);
+            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/popular/fetch?key={0}", _APIKey)));
+        }
+
+        private void FetchPopularNewsFeed_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchPopularNewsFeedCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<Picture>>(stringData);
+
+                    FetchPopularNewsFeedCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreatePictureCompleted;
+
+        public void CreatePicture(Picture data)
+        {
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreatePicture_UploadStringCompleted);
+            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreatePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreatePictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    CreatePictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdatePictureCompleted;
+
+        public void UpdatePicture(Picture data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdatePicture_UploadStringCompleted);
+            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdatePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdatePictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    UpdatePictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeletePictureCompleted;
+
+        public void DeletePicture(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeletePicture_UploadStringCompleted);
+            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+        }
+
+        private void DeletePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeletePictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeletePictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler FlagPictureCompleted;
+
+        public void FlagPicture(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(FlagPicture_UploadStringCompleted);
+            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/flag?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+        }
+
+        private void FlagPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (FlagPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    FlagPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
             }
         }
 

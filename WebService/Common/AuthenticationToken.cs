@@ -13,7 +13,7 @@ namespace WebService.Common
             UniqueIdentifier = uniqueIdentifier;
             Identity = identity;
 
-            LastAccessDate = DateTime.Now;
+            LastAccessDate = DateTime.UtcNow;
         }
 
         public string UniqueIdentifier

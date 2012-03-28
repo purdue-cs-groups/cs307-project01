@@ -53,7 +53,7 @@ namespace WebService.Common
 
             if (token != null)
             {
-                token.LastAccessDate = DateTime.Now;
+                token.LastAccessDate = DateTime.UtcNow;
             }
             else
             {
@@ -77,7 +77,7 @@ namespace WebService.Common
             if (IsValidAuthenticationToken(uniqueIdentifier))
             {
                 AuthenticationToken token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.UniqueIdentifier == uniqueIdentifier);
-                token.LastAccessDate = DateTime.Now;
+                token.LastAccessDate = DateTime.UtcNow;
 
                 return token;
             }
@@ -91,7 +91,7 @@ namespace WebService.Common
         private static bool IsValidAuthenticationToken(string uniqueIdentifier)
         {
             if (TokenList.Where(t => t.UniqueIdentifier == uniqueIdentifier &&
-                                     t.ExpirationDate > DateTime.Now).Count() > 0)
+                                     t.ExpirationDate > DateTime.UtcNow).Count() > 0)
             {
                 return true;
             }
