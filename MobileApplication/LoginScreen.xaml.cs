@@ -23,8 +23,17 @@ namespace WinstagramPan
 
         private void Login_Click(object sender, EventArgs e)
         {
+            // For now, we set isLoggedIn to true
+            Settings.isLoggedIn.Value = true;
+
+            MainPage.isFromLogin = true;
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+
+            // Joe commented this out because I don't know a username/password combo lol
+            /*
             App.WinstagramService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(WinstagramService_AuthenticateCompleted);
             App.WinstagramService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            */
         }
 
         private void WinstagramService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)

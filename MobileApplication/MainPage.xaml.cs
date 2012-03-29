@@ -160,8 +160,13 @@ namespace WinstagramPan
         public static BitmapImage bmp = new BitmapImage();
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
+            // if no picture was taken
+            if (e.ChosenPhoto == null)
+                return;
+
             bool land = false;
             // figure out the orientation from EXIF data
+
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
 
