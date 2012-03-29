@@ -13,6 +13,10 @@ using WebService.Common;
 using System.Configuration;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.ServiceModel.Channels;
+using System.Collections.Specialized;
 
 namespace WebService
 {
@@ -168,29 +172,102 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            StreamReader reader = new StreamReader(data);
+            byte[] image = ReadToEnd(data);
+            MemoryStream imageStream = new MemoryStream(image);
+
+            StreamReader reader = new StreamReader(imageStream);
             string stringData = reader.ReadToEnd();
 
             // initialize blob storage
             this.InitializeBlogStorage();
 
+            // parse API key
+            string apiKey = AuthorizationManager.ParseAPIKey(OperationContext.Current);
+
             // generate key for this picture
             Guid id = Guid.NewGuid();
-            string fileName = String.Format("{0}.jpg", id);
+
+            CloudBlob blob;
+
+            #region Upload Image to Blob Storage
 
             // locate blob reference for this key
-            CloudBlob blob = container.GetBlobReference(fileName);
+            string largeFileName = String.Format("{0}/{1}_l.jpg", apiKey, id);
+            blob = container.GetBlobReference(largeFileName);
 
-            // upload image data to blob storage
             reader.BaseStream.Seek(0, SeekOrigin.Begin);
             blob.UploadFromStream(reader.BaseStream);
 
-            // close stream
+            string largeURL = blob.Uri.AbsoluteUri.ToLower().Replace("https://", "http://");
+
+            // locate blob reference for this key
+            Stream mediumImage = new MemoryStream();
+            ResizeImage(0.5, reader.BaseStream, mediumImage);
+
+            string mediumFileName = String.Format("{0}/{1}_m.jpg", apiKey, id);
+            blob = container.GetBlobReference(mediumFileName);
+
+            mediumImage.Seek(0, SeekOrigin.Begin);
+            blob.UploadFromStream(mediumImage);
+
+            string mediumURL = blob.Uri.AbsoluteUri.ToLower().Replace("https://", "http://");
+
+            // locate blob reference for this key
+            Stream smallImage = new MemoryStream();
+            ResizeImage(0.1, reader.BaseStream, smallImage);
+
+            string smallFileName = String.Format("{0}/{1}_s.jpg", apiKey, id);
+            blob = container.GetBlobReference(smallFileName);
+
+            smallImage.Seek(0, SeekOrigin.Begin);
+            blob.UploadFromStream(smallImage);
+
+            string smallURL = blob.Uri.AbsoluteUri.ToLower().Replace("https://", "http://");
+
+            #endregion
+
+            // return reference to blob
             reader.Close();
             reader.Dispose();
 
-            // return reference to blob
-            return new PictureURL(blob.Uri.AbsoluteUri.ToLower().Replace("https://", "http://"));
+            return new PictureURL(largeURL, mediumURL, smallURL);
+        }
+
+        private void ResizeImage(double scaleFactor, Stream fromStream, Stream toStream)
+        {
+            var image = Image.FromStream(fromStream);
+            var newWidth = (int)(image.Width * scaleFactor);
+            var newHeight = (int)(image.Height * scaleFactor);
+            var thumbnailBitmap = new Bitmap(newWidth, newHeight);
+
+            var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
+            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
+            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
+            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            var imageRectangle = new Rectangle(0, 0, newWidth, newHeight);
+            thumbnailGraph.DrawImage(image, imageRectangle);
+
+            thumbnailBitmap.Save(toStream, image.RawFormat);
+
+            thumbnailGraph.Dispose();
+            thumbnailBitmap.Dispose();
+            image.Dispose();
+        }
+
+        private byte[] ReadToEnd(Stream data)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = data.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+
+                return ms.ToArray();
+            }
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]

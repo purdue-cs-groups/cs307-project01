@@ -68,7 +68,7 @@ namespace WebService.Common
             }
         }
 
-        private string ParseAPIKey(OperationContext context)
+        public static string ParseAPIKey(OperationContext context)
         {
             var request = context.RequestContext.RequestMessage;
             var requestProperty = (HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name];

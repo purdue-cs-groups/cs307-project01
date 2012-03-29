@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Routing;
 using System.ServiceModel.Activation;
+using System.Diagnostics;
 
 namespace WebService
 {
@@ -24,7 +25,9 @@ namespace WebService
         private void RegisterRoutes()
         {
             WebServiceHostFactory factory = new WebServiceHostFactory();
+            
             RouteTable.Routes.Add(new ServiceRoute("v1", factory, typeof(WebService)));
+            RouteTable.Routes.Add("Picture", new Route("p/{id}", new PageRouteHandler("~/ViewPicture.aspx")));
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace WebService
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            Debug.WriteLine(Context.Request.Url.AbsoluteUri);
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

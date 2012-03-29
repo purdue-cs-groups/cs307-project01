@@ -199,6 +199,9 @@ namespace MobileClientLibrary
 
         public void CreateUser(User data)
         {
+            // force password hashing
+            data.Password = this.HashPassword(data.Password);
+
             var jsonData = JsonConvert.SerializeObject(data);
 
             _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
@@ -306,17 +309,55 @@ namespace MobileClientLibrary
 
         #region Picture Methods
 
+        #region Upload Picture
+
         public event RequestCompletedEventHandler UploadPictureCompleted;
+
+        private Stream ImageUploadStream;
 
         public void UploadPicture(Stream image)
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            // convert image stream to byte array string
-            string byteArray = ReadToEnd(image).ToString();
+            var request = HttpWebRequest.Create(new Uri(String.Format(_WebServiceEndpoint + "pictures/upload?key={0}&token={1}", _APIKey, _Token)));
+            request.Method = "POST";
 
-            _Client.OpenWriteCompleted += new OpenWriteCompletedEventHandler(UploadPicture_OpenWriteCompleted);
-            _Client.OpenWriteAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/upload?key={0}&token={1}", _APIKey, _Token)), "POST", byteArray);
+            var result = (IAsyncResult)request.BeginGetRequestStream(new AsyncCallback(UploadPicture_GetRequestStreamCallback), request);
+
+            ImageUploadStream = image;
+        }
+
+        private void UploadPicture_GetRequestStreamCallback(IAsyncResult asyncResult)
+        {
+            HttpWebRequest request = (HttpWebRequest)asyncResult.AsyncState;
+            Stream postStream = request.EndGetRequestStream(asyncResult);
+
+            postStream.Write(ReadToEnd(ImageUploadStream), 0, (int)ImageUploadStream.Length);
+            postStream.Close();
+
+            request.BeginGetResponse(new AsyncCallback(UploadPicture_GetResponseCallback), request);
+        }
+
+        void UploadPicture_GetResponseCallback(IAsyncResult asyncResult)
+        {
+            if (UploadPictureCompleted != null)
+            {
+                HttpWebRequest r = (HttpWebRequest)asyncResult.AsyncState;
+                HttpWebResponse response = (HttpWebResponse)r.EndGetResponse(asyncResult);
+
+                var stringData = "";
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    responseStream.Seek(0, SeekOrigin.Begin);
+                    StreamReader reader = new StreamReader(responseStream);
+
+                    stringData = reader.ReadToEnd();
+                }
+
+                var jsonData = JsonConvert.DeserializeObject<PictureURL>(stringData);
+
+                UploadPictureCompleted(this, new RequestCompletedEventArgs(jsonData));
+            }
         }
 
         private byte[] ReadToEnd(Stream data)
@@ -334,34 +375,9 @@ namespace MobileClientLibrary
             }
         }
 
-        private void UploadPicture_OpenWriteCompleted(object sender, OpenWriteCompletedEventArgs e)
-        {
-            if (UploadPictureCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    var stringData = e.Result.ToString();
+        #endregion
 
-                    var jsonData = JsonConvert.DeserializeObject<PictureURL>(stringData);
-
-                    UploadPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
+        #region Fetch Picture
 
         public event RequestCompletedEventHandler FetchPictureCompleted;
 
@@ -399,6 +415,10 @@ namespace MobileClientLibrary
                 }
             }
         }
+
+        #endregion
+
+        #region Fetch News Feed
 
         public event RequestCompletedEventHandler FetchNewsFeedCompleted;
 
@@ -439,6 +459,10 @@ namespace MobileClientLibrary
             }
         }
 
+        #endregion
+
+        #region Fetch Popular News Feed
+
         public event RequestCompletedEventHandler FetchPopularNewsFeedCompleted;
 
         public void FetchPopularNewsFeed()
@@ -476,6 +500,10 @@ namespace MobileClientLibrary
             }
         }
 
+        #endregion
+
+        #region Create Picture
+
         public event RequestCompletedEventHandler CreatePictureCompleted;
 
         public void CreatePicture(Picture data)
@@ -510,6 +538,10 @@ namespace MobileClientLibrary
                 }
             }
         }
+
+        #endregion
+
+        #region Update Picture 
 
         public event RequestCompletedEventHandler UpdatePictureCompleted;
 
@@ -548,6 +580,10 @@ namespace MobileClientLibrary
             }
         }
 
+        #endregion
+
+        #region Delete Picture
+
         public event RequestCompletedEventHandler DeletePictureCompleted;
 
         public void DeletePicture(string id)
@@ -583,6 +619,10 @@ namespace MobileClientLibrary
             }
         }
 
+        #endregion
+
+        #region Flag Picture
+
         public event RequestCompletedEventHandler FlagPictureCompleted;
 
         public void FlagPicture(string id)
@@ -617,6 +657,8 @@ namespace MobileClientLibrary
                 }
             }
         }
+
+        #endregion
 
         #endregion
     }
