@@ -27,7 +27,6 @@ namespace MobileClientLibrary
 
     public class WebServiceClient
     {
-        private WebClient _Client = null;
         private const string _WebServiceEndpoint = "http://winstagram.cloudapp.net/v1/";
 
         private string _APIKey = null;
@@ -41,7 +40,6 @@ namespace MobileClientLibrary
         public WebServiceClient(string APIkey)
         {
             _APIKey = APIkey;
-            _Client = new WebClient();
         }
 
         #region Authentication Methods
@@ -56,8 +54,9 @@ namespace MobileClientLibrary
 
             _AuthenticationAttempts++;
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(Authenticate_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "authenticate?key={0}", _APIKey)), jsonData);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(Authenticate_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "authenticate?key={0}", _APIKey)), jsonData);
         }
 
         private void Authenticate_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -123,8 +122,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
         }
 
         private void FetchUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -162,8 +162,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
         }
 
         private void FetchAllUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -204,8 +205,9 @@ namespace MobileClientLibrary
 
             var jsonData = JsonConvert.SerializeObject(data);
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void CreateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -241,8 +243,9 @@ namespace MobileClientLibrary
 
             var jsonData = JsonConvert.SerializeObject(data);
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUser_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void UpdateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -276,8 +279,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
         }
 
         private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -383,8 +387,9 @@ namespace MobileClientLibrary
 
         public void FetchPicture(string id)
         {
-            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPicture_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&id={2}", _APIKey, _Token, id)));
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&id={2}", _APIKey, _Token, id)));
         }
 
         private void FetchPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -426,8 +431,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchNewsFeed_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&token={1}", _APIKey, _Token)));
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchNewsFeed_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/fetch?key={0}&token={1}", _APIKey, _Token)));
         }
 
         private void FetchNewsFeed_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -467,8 +473,9 @@ namespace MobileClientLibrary
 
         public void FetchPopularNewsFeed()
         {
-            _Client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPopularNewsFeed_DownloadStringCompleted);
-            _Client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/popular/fetch?key={0}", _APIKey)));
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchPopularNewsFeed_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/popular/fetch?key={0}", _APIKey)));
         }
 
         private void FetchPopularNewsFeed_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -510,8 +517,9 @@ namespace MobileClientLibrary
         {
             var jsonData = JsonConvert.SerializeObject(data);
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreatePicture_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreatePicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void CreatePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -551,8 +559,9 @@ namespace MobileClientLibrary
 
             var jsonData = JsonConvert.SerializeObject(data);
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdatePicture_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdatePicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
         }
 
         private void UpdatePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -590,8 +599,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeletePicture_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeletePicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
         }
 
         private void DeletePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
@@ -629,8 +639,9 @@ namespace MobileClientLibrary
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
-            _Client.UploadStringCompleted += new UploadStringCompletedEventHandler(FlagPicture_UploadStringCompleted);
-            _Client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/flag?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(FlagPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/flag?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
         }
 
         private void FlagPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
