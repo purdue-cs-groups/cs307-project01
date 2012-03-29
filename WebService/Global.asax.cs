@@ -24,7 +24,9 @@ namespace WebService
         private void RegisterRoutes()
         {
             WebServiceHostFactory factory = new WebServiceHostFactory();
+            
             RouteTable.Routes.Add(new ServiceRoute("v1", factory, typeof(WebService)));
+            RouteTable.Routes.Add("Picture", new Route("p/{id}", new PageRouteHandler("~/ViewPicture.aspx")));
         }
 
         protected void Session_Start(object sender, EventArgs e)
