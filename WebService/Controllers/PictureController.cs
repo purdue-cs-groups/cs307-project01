@@ -5,6 +5,7 @@ using System.Web;
 using WebService.Models;
 using MongoDB.Driver;
 using WebService.Common;
+using MongoDB.Driver.Builders;
 
 namespace WebService.Controllers
 {
@@ -29,7 +30,7 @@ namespace WebService.Controllers
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
             // TODO: query the pictures properly
-            return pictures.FindAll().ToList<Picture>();
+            return pictures.FindAll().SetSortOrder(SortBy.Descending("CreatedDate")).ToList<Picture>();
         }
 
         public static List<Picture> FetchPopularNewsFeed()
@@ -40,7 +41,7 @@ namespace WebService.Controllers
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
             // TODO: query the pictures properly
-            return pictures.FindAll().ToList<Picture>();
+            return pictures.FindAll().SetSortOrder(SortBy.Descending("CreatedDate")).ToList<Picture>();
         }
 
         public static void Create(Picture data)
