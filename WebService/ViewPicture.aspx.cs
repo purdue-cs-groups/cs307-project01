@@ -19,6 +19,9 @@ namespace WebService
         protected void Page_Load(object sender, EventArgs e)
         {
             string id = Request.QueryString["id"];
+            if (id == null)
+                id = Page.RouteData.Values["id"].ToString();
+
             Picture picture = PictureController.Fetch(id);
 
             User user = UserController.Fetch(picture.UserID);
