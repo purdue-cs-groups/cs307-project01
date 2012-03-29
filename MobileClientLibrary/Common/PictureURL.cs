@@ -6,12 +6,26 @@ namespace MobileClientLibrary.Common
 {
     public class PictureURL
     {
-        public PictureURL(string url)
+        public PictureURL(string largeURL, string mediumURL, string smallURL)
         {
-            URL = url;
+            LargeURL = largeURL;
+            MediumURL = mediumURL;
+            SmallURL = smallURL;
         }
 
-        public string URL
+        public string LargeURL
+        {
+            get;
+            set;
+        }
+
+        public string MediumURL
+        {
+            get;
+            set;
+        }
+
+        public string SmallURL
         {
             get;
             set;

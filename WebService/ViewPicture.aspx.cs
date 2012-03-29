@@ -24,7 +24,7 @@ namespace WebService
             User user = UserController.Fetch(picture.UserID);
 
             // image
-            this.imgPicture.ImageUrl = picture.URL;
+            this.imgPicture.ImageUrl = picture.MediumURL;
 
             // caption
             this.lblCaption.Text = picture.Caption;

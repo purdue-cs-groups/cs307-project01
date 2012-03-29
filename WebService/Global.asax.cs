@@ -6,6 +6,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Routing;
 using System.ServiceModel.Activation;
+using System.Diagnostics;
 
 namespace WebService
 {
@@ -36,7 +37,7 @@ namespace WebService
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            Debug.WriteLine(Context.Request.Url.AbsoluteUri);
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

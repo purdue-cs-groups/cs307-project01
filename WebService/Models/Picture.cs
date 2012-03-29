@@ -57,13 +57,27 @@ namespace WebService.Models
         }
 
         [DataMember(Order = 6)]
-        public string URL
+        public string LargeURL
         {
             get;
             set;
         }
 
         [DataMember(Order = 7)]
+        public string MediumURL
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 8)]
+        public string SmallURL
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 9)]
         public int CreatedDate
         {
             get;

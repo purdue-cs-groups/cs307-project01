@@ -43,7 +43,19 @@ namespace MobileClientLibrary.Models
             set;
         }
 
-        public string URL
+        public string LargeURL
+        {
+            get;
+            set;
+        }
+
+        public string MediumURL
+        {
+            get;
+            set;
+        }
+
+        public string SmallURL
         {
             get;
             set;
