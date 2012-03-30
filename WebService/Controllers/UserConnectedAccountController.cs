@@ -11,89 +11,48 @@ namespace WebService.Controllers
 {
     public class UserConnectedAccountController
     {
-        //Returns all the accounts that a user has connected.
-        public static MongoCursor<BsonDocument> FetchConnectedAccounts(string uid)
+        public static UserConnectedAccount Fetch(string id)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<BsonDocument> connectedAccount = database.GetCollection<BsonDocument>("ConnectedAccount");
-            var query = new QueryDocument("uid", uid);
+            MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
+            var query = new QueryDocument("_id", id);
 
-
-            return connectedAccount.Find(query);
+            return userConnectedAccounts.FindOne(query);
         }
 
-        //Adds a new connected account.
-        public static Boolean AddConnectedAccount(UserConnectedAccount account)
+        public static void Create(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<BsonDocument> connectedAccount = database.GetCollection<BsonDocument>("ConnectedAccount");
+            MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
 
-            if (account != null)
-            {
-                connectedAccount.Insert(account);
-                return true;
-            }
-            return false;
-            
+            data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
+
+            userConnectedAccounts.Insert(data);
         }
 
-        //Deletes an already connected account.
-        public static Boolean DeleteConnectedAccount(string uid, string account)
+        public static void Update(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<BsonDocument> connectedAccount = database.GetCollection<BsonDocument>("ConnectedAccount");
-            var query = new QueryDocument
-            {
-                {"uid", uid},
-                {"Account", account}
-            };
+            MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
 
-            connectedAccount.Remove(query);
-            return true;
+            userConnectedAccounts.Save(data);
         }
 
-        //Updates the username or password of an already connected account.
-        public static Boolean UpdateConnectedAccount(string uid, string updatedField, string data)
+        public static void Delete(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<BsonDocument> relationship = database.GetCollection<BsonDocument>("Relationship");
-            var query = new QueryDocument
-            {
-                { "uid", uid}
-            };
-            if(updatedField.Equals("Username"))
-            {
-                var update = new UpdateDocument
-                {
-                    {"$set", new BsonDocument("Username", data)}
-                };
-                SafeModeResult updateRelation = relationship.Update(query, update);
-                if (updateRelation.LastErrorMessage == null)
-                {
-                    return true;
-                }
-            }
-            if(updatedField.Equals("Password"))
-            {
-                var update = new UpdateDocument
-                {
-                    {"$set", new BsonDocument("Password", data)}
-                };
-                SafeModeResult updateRelation = relationship.Update(query, update);
-                if (updateRelation.LastErrorMessage == null)
-                {
-                    return true;
-                }
-            }            
-            return false;
+            MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
+            var query = new QueryDocument("_id", data.ID);
+
+            userConnectedAccounts.FindAndRemove(query, new SortByDocument());
         }
     }
 }

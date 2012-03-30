@@ -3,26 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using MobileClientLibrary.Common;
 
-namespace ClientLibrary.Models
+namespace MobileClientLibrary.Models
 {
     public class Relationship
     {
-        public string UID
+        public string ID
         {
             get;
             set;
         }
 
-        public string Followers
+        public string UserID
         {
             get;
             set;
         }
 
-        public string Following
+        public string FollowingUserID
         {
             get;
             set;
+        }
+
+        public int CreatedDate
+        {
+            get;
+            set;
+        }
+
+        public DateTime FriendlyCreatedDate
+        {
+            get
+            {
+                return Utilities.ConvertFromUnixTime(this.CreatedDate);
+            }
+
+            set
+            {
+                this.CreatedDate = Utilities.ConvertToUnixTime(value);
+            }
         }
     }
 }

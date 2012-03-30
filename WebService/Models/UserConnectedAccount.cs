@@ -14,31 +14,60 @@ namespace WebService.Models
     public class UserConnectedAccount
     {
         [DataMember(Order = 0)]
-        public string UID
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+        public string ID
         {
             get;
             set;
         }
 
         [DataMember(Order = 1)]
-        public string Account
+        public string UserID
         {
             get;
             set;
         }
 
         [DataMember(Order = 2)]
-        public string Username
+        public string AccountName
         {
             get;
             set;
         }
 
         [DataMember(Order = 3)]
-        public string Password
+        public string ClientToken
         {
             get;
             set;
+        }
+
+        [DataMember(Order = 4)]
+        public string ClientSecret
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 5)]
+        public int CreatedDate
+        {
+            get;
+            set;
+        }
+
+        [BsonIgnore]
+        public DateTime FriendlyCreatedDate
+        {
+            get
+            {
+                return Utilities.ConvertFromUnixTime(this.CreatedDate);
+            }
+
+            set
+            {
+                this.CreatedDate = Utilities.ConvertToUnixTime(value);
+            }
         }
     }
 }
