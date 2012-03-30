@@ -25,12 +25,6 @@ namespace WebService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class WebService
     {
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/common/helloWorld?name={name}")]
-        public string HelloWorld(string name)
-        {
-            return "Hello World! Your name is " + name + ".";
-        }
-
         #region Authentication Methods
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/authenticate")]
@@ -58,70 +52,6 @@ namespace WebService
                 ErrorResponseHandler.GenerateErrorResponse(OperationContext.Current, ErrorType.InvalidUserCredentials);
                 return null;
             }
-        }
-
-        #endregion
-
-        #region User Methods
-
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?id={id}")]
-        public User FetchUser(string id)
-        {
-            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
-
-            return UserController.Fetch(id);
-        }
-
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
-        public List<User> FetchAllUsers()
-        {
-            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
-
-            return UserController.FetchAll();
-        }
-
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
-        public void CreateUser(Stream data)
-        {
-            StreamReader reader = new StreamReader(data);
-            string stringData = reader.ReadToEnd();
-
-            reader.Close();
-            reader.Dispose();
-
-            var jsonData = Json.Decode<User>(stringData);
-
-            // force server-side values
-            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
-
-            UserController.Create(jsonData);
-        }
-
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
-        public void UpdateUser(Stream data)
-        {
-            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
-
-            StreamReader reader = new StreamReader(data);
-            string stringData = reader.ReadToEnd();
-
-            reader.Close();
-            reader.Dispose();
-
-            var jsonData = Json.Decode<User>(stringData);
-
-            UserController.Update(jsonData);
-        }
-
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
-        public void DeleteUser()
-        {
-            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
-
-            User data = token.Identity;
-            UserController.Delete(data);
-
-            // TODO: delete all user pictures
         }
 
         #endregion
@@ -172,7 +102,7 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            byte[] image = ReadToEnd(data);
+            byte[] image = Utilities.ReadToEnd(data);
             MemoryStream imageStream = new MemoryStream(image);
 
             StreamReader reader = new StreamReader(imageStream);
@@ -253,21 +183,6 @@ namespace WebService
             thumbnailGraph.Dispose();
             thumbnailBitmap.Dispose();
             image.Dispose();
-        }
-
-        private byte[] ReadToEnd(Stream data)
-        {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = data.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-
-                return ms.ToArray();
-            }
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
@@ -355,6 +270,202 @@ namespace WebService
 
             // TODO: we should log this action
             PictureController.Delete(data);
+        }
+
+        #endregion
+
+        #region Relationship Methods
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/fetch?id={id}")]
+        public Relationship FetchRelationship(string id)
+        {
+            return RelationshipController.Fetch(id);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/create")]
+        public void CreateRelationship(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<Relationship>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            RelationshipController.Create(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/update")]
+        public void UpdateRelationship(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<Relationship>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+
+            RelationshipController.Update(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/delete?id={id}")]
+        public void DeleteRelationship(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            Relationship data = RelationshipController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                RelationshipController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that Relationship.");
+            }
+        }
+
+        #endregion
+
+        #region User Methods
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?id={id}")]
+        public User FetchUser(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            return UserController.Fetch(id);
+        }
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
+        public List<User> FetchAllUsers()
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            return UserController.FetchAll();
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
+        public void CreateUser(Stream data)
+        {
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<User>(stringData);
+
+            // force server-side values
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            UserController.Create(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
+        public void UpdateUser(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<User>(stringData);
+
+            UserController.Update(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
+        public void DeleteUser()
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            User data = token.Identity;
+            UserController.Delete(data);
+
+            // TODO: delete all user pictures
+        }
+
+        #endregion
+
+        #region User Connected Account Methods
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/fetch?id={id}")]
+        public UserConnectedAccount FetchUserConnectedAccount(string id)
+        {
+            return UserConnectedAccountController.Fetch(id);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/create")]
+        public void CreateUserConnectedAccount(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<UserConnectedAccount>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            UserConnectedAccountController.Create(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/update")]
+        public void UpdateUserConnectedAccount(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<UserConnectedAccount>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+
+            UserConnectedAccountController.Update(jsonData);
+        }
+
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/delete?id={id}")]
+        public void DeleteUserConnectedAccount(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            UserConnectedAccount data = UserConnectedAccountController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                UserConnectedAccountController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that UserConnectedAccount.");
+            }
         }
 
         #endregion

@@ -14,56 +14,41 @@ using MobileClientLibrary;
 using MobileClientLibrary.Common;
 using MobileClientLibrary.Models;
 using System.Windows.Resources;
+using System.Windows.Media.Imaging;
+using System.Threading;
+using System.Collections.ObjectModel;
+using SampleApplication.Models;
+using PictureEffects.Effects;
+
 
 namespace SampleApplication
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        WebServiceClient client = null;
-
         public MainPage()
         {
             InitializeComponent();
 
-            client = new WebServiceClient("4f5685ce5ad9850e545bb48d");
-
-            // login with user's credentials
-            client.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
-            client.Authenticate("mbmccormick", "password");
+            BitmapImage image = new BitmapImage(new Uri("/SampleApplication;component/sample.jpg", UriKind.Relative));
+            this.imgPicture.Source = image;
         }
 
-        private void client_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
+        private void btnFilter_Click(object sender, RoutedEventArgs e)
         {
-            StreamResourceInfo image = Application.GetResourceStream(new Uri("/SampleApplication;component/sample.jpg", UriKind.Relative)); 
-            
-            // upload the image
-            client.UploadPictureCompleted += new RequestCompletedEventHandler(client_UploadPictureCompleted);
-            client.UploadPicture(image.Stream);
-        }
+            BitmapImage image = new BitmapImage(new Uri("/SampleApplication;component/sample.jpg", UriKind.Relative));
+            this.imgPicture.Source = image;
 
-        private void client_UploadPictureCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            // extract response
-            PictureURL result = e.Data as PictureURL;
+            Models.EffectItem item = (Models.EffectItem)this.lstFilters.SelectedItem;
+            IEffect effect = item.Effect;
 
-            // create new picture
-            Picture data = new Picture();
+            WriteableBitmap bitmap = new WriteableBitmap(this.imgPicture, null);
 
-            data.Caption = "This is the first Winstagram picture ever!";
-            data.Latitude = Convert.ToDecimal(40.446980);
-            data.Longitude = Convert.ToDecimal(-86.944189);
-            data.LargeURL = result.LargeURL;
-            data.MediumURL = result.MediumURL;
-            data.SmallURL = result.SmallURL;
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
 
-            // upload the picture object
-            client.CreatePictureCompleted += new RequestCompletedEventHandler(client_CreatePictureCompleted);
-            client.CreatePicture(data);
-        }
-
-        private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            // your picture was uploaded successfully!
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+            this.imgPicture.Source = newBitmap;
         }
     }
 }
