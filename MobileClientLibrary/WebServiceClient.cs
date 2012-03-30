@@ -12,6 +12,8 @@ using System.IO;
 
 namespace MobileClientLibrary
 {
+    #region RequestCompleted Event Declarations
+
     public delegate void RequestCompletedEventHandler(object sender, RequestCompletedEventArgs e);
 
     public class RequestCompletedEventArgs : EventArgs
@@ -24,6 +26,8 @@ namespace MobileClientLibrary
             Data = data;
         }
     }
+
+    #endregion
 
     public class WebServiceClient
     {
@@ -109,203 +113,6 @@ namespace MobileClientLibrary
             else
             {
                 return null;
-            }
-        }
-
-        #endregion
-
-        #region User Methods
-
-        public event RequestCompletedEventHandler FetchUserCompleted;
-
-        public void FetchUser(string id)
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
-        }
-
-        private void FetchUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            if (FetchUserCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    string stringData = e.Result;
-
-                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
-
-                    FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
-
-        public event RequestCompletedEventHandler FetchAllUsersCompleted;
-
-        public void FetchAllUsers()
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
-        }
-
-        private void FetchAllUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            if (FetchAllUsersCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    string stringData = e.Result;
-
-                    var jsonData = JsonConvert.DeserializeObject<List<User>>(stringData);
-
-                    FetchAllUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
-
-        public event RequestCompletedEventHandler CreateUserCompleted;
-
-        public void CreateUser(User data)
-        {
-            // force password hashing
-            data.Password = this.HashPassword(data.Password);
-
-            var jsonData = JsonConvert.SerializeObject(data);
-
-            WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
-        }
-
-        private void CreateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (CreateUserCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
-
-        public event RequestCompletedEventHandler UpdateUserCompleted;
-
-        public void UpdateUser(User data)
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            var jsonData = JsonConvert.SerializeObject(data);
-
-            WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
-        }
-
-        private void UpdateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (UpdateUserCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
-
-        public event RequestCompletedEventHandler DeleteUserCompleted;
-
-        public void DeleteUser()
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
-        }
-
-        private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (DeleteUserCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    DeleteUserCompleted(sender, new RequestCompletedEventArgs(null));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
             }
         }
 
@@ -549,7 +356,7 @@ namespace MobileClientLibrary
 
         #endregion
 
-        #region Update Picture 
+        #region Update Picture
 
         public event RequestCompletedEventHandler UpdatePictureCompleted;
 
@@ -670,6 +477,515 @@ namespace MobileClientLibrary
         }
 
         #endregion
+
+        #endregion
+
+        #region Relationship Methods
+
+        public event RequestCompletedEventHandler FetchRelationshipCompleted;
+
+        public void FetchRelationship(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchRelationship_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchRelationship_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchRelationshipCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
+
+                    FetchRelationshipCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreateRelationshipCompleted;
+
+        public void CreateRelationship(Relationship data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateRelationship_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreateRelationship_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreateRelationshipCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    CreateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdateRelationshipCompleted;
+
+        public void UpdateRelationship(Relationship data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateRelationship_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdateRelationship_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdateRelationshipCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    UpdateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteRelationshipCompleted;
+
+        public void DeleteRelationship()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteRelationship_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/delete?key={0}&token={1}", _APIKey, _Token)), null);
+        }
+
+        private void DeleteRelationship_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeleteRelationshipCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region User Methods
+
+        public event RequestCompletedEventHandler FetchUserCompleted;
+
+        public void FetchUser(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUser_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchUserCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
+
+                    FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler FetchAllUsersCompleted;
+
+        public void FetchAllUsers()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
+        }
+
+        private void FetchAllUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchAllUsersCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<User>>(stringData);
+
+                    FetchAllUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreateUserCompleted;
+
+        public void CreateUser(User data)
+        {
+            // force password hashing
+            data.Password = this.HashPassword(data.Password);
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreateUserCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdateUserCompleted;
+
+        public void UpdateUser(User data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdateUserCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteUserCompleted;
+
+        public void DeleteUser()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
+        }
+
+        private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeleteUserCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteUserCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region UserConnectedAccount Methods
+
+        public event RequestCompletedEventHandler FetchUserConnectedAccountCompleted;
+
+        public void FetchUserConnectedAccount(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserConnectedAccount_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchUserConnectedAccount_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchUserConnectedAccountCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<UserConnectedAccount>(stringData);
+
+                    FetchUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreateUserConnectedAccountCompleted;
+
+        public void CreateUserConnectedAccount(UserConnectedAccount data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUserConnectedAccount_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreateUserConnectedAccount_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreateUserConnectedAccountCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    CreateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdateUserConnectedAccountCompleted;
+
+        public void UpdateUserConnectedAccount(UserConnectedAccount data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateUserConnectedAccount_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdateUserConnectedAccount_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdateUserConnectedAccountCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    UpdateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteUserConnectedAccountCompleted;
+
+        public void DeleteUserConnectedAccount()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUserConnectedAccount_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/delete?key={0}&token={1}", _APIKey, _Token)), null);
+        }
+
+        private void DeleteUserConnectedAccount_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeleteUserConnectedAccountCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
 
         #endregion
     }
