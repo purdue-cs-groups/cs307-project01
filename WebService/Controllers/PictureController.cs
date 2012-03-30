@@ -39,9 +39,9 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
-
-            // TODO: query the pictures properly
-            return pictures.FindAll().SetSortOrder(SortBy.Descending("CreatedDate")).ToList<Picture>();
+            var query = Query.GT("CreatedDate", Utilities.ConvertToUnixTime(DateTime.UtcNow.AddDays(-7)));
+            
+            return pictures.Find(query).SetSortOrder(SortBy.Descending("ViewCount")).SetLimit(25).ToList<Picture>();
         }
 
         public static void Create(Picture data)
