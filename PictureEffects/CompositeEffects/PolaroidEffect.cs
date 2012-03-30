@@ -1,35 +1,100 @@
-﻿// Index was out of range. Must be non-negative and less than the size of the collection.
-// Parameter name: index
-//    at ..(List`1 graph, Int32 getFrom)
-//    at ..(List`1 graph)
-//    at ..(List`1 graph)
-//    at ..(List`1 graph)
-//    at ..()
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Int32 index, BlockStatement block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock start, InstructionBlock limit, BlockStatement block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction, Statement loop, BlockStatement body)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.OnBlt(Instruction instruction)
-//    at ..(Instruction instruction, IInstructionVisitor visitor)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.OnBr(Instruction instruction)
-//    at ..(Instruction instruction, IInstructionVisitor visitor)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(Instruction instruction)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.(InstructionBlock block)
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.()
-//    at Telerik.JustDecompiler.Decompiler.StatementDecompiler.Process(DecompilationContext context, BlockStatement body)
-//    at Telerik.JustDecompiler.Decompiler.DecompilationPipeline.Run(MethodBody body, ILanguage language)
-//    at Telerik.JustDecompiler.Decompiler.Extensions.(DecompilationPipeline pipeline, ILanguage language, MethodBody body)
-//    at Telerik.JustDecompiler.Languages.BaseImperativeLanguageWriter.Write(MethodDefinition method)
-//    at Telerik.JustDecompiler.Languages.BaseLanguageWriter.(IMemberDefinition member, Boolean isFirstMember)
-//    at Telerik.JustDecompiler.Languages.BaseLanguageWriter.(TypeDefinition type, Func`3 writeMember, Boolean writeNewLine, Boolean showCompilerGeneratedMembers)
-//    at Telerik.JustDecompiler.Languages.BaseLanguageWriter.Write(TypeDefinition type, Func`3 writeMember, Boolean writeNewLine, Boolean showCompilerGeneratedMembers)
-//    at Telerik.JustDecompiler.Languages.BaseLanguageWriter.WriteType(TypeDefinition type, Boolean showCompilerGeneratedMembers)
-//    at Telerik.JustDecompiler.Languages.NamespaceImperativeLanguageWriter.WriteTypeAndNamespaces(TypeDefinition type, Boolean showCompilerGeneratedMembers)
-//    at JustDecompile.Tools.MSBuildProjectBuilder.MSBuildProjectBuilder.BuildProject(CancellationToken cancellationToken) in c:\Builds\126\Behemoth\JustDecompile Production build - PatternMatching\Sources\Tools\MSBuildProjectCreator\MSBuildProjectBuilder.cs:line 104
+﻿using PictureEffects.Effects;
+using System;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+namespace PictureEffects.CompositeEffects
+{
+    /// <summary>
+    /// Polaroid-like conversion effect.
+    /// </summary>
+    public class PolaroidEffect : IEffect
+    {
+        readonly GaussianBlurEffect blurFx;
+        readonly VignetteEffect vignetteFx;
+        readonly TintEffect tintFx;
+        readonly BitmapMixer mixer;
+
+        public string Name { get { return "Poladroid"; } }
+
+        /// <summary>
+        /// The blurriness factor. 
+        /// Should be in the range [0, 1]. 
+        /// Default is 0.15
+        /// </summary>
+        public float Blurriness
+        {
+            get { return blurFx.Sigma; }
+            set { blurFx.Sigma = value; }
+        }
+
+        /// <summary>
+        /// The size of the vignette. 
+        /// Should be in the range [0, 1]. 
+        /// Default is 0.5
+        /// </summary>
+        public float Vignette
+        {
+            get { return vignetteFx.Size; }
+            set { vignetteFx.Size = value; }
+        }
+
+        /// <summary>
+        /// The amount of tinting (mix between original and tinted version). 
+        /// Should be in the range [0, 1]. 
+        /// Default is 0.5
+        /// </summary>
+        public float Tinting
+        {
+            get { return mixer.Mixture; }
+            set { mixer.Mixture = value; }
+        }
+
+        /// <summary>
+        /// The tinting color. 
+        /// Default is Sepia.
+        /// </summary>
+        public Color TintColor
+        {
+            get { return tintFx.Color; }
+            set { tintFx.Color = value; }
+        }
+
+
+        public PolaroidEffect()
+        {
+            blurFx = new GaussianBlurEffect { Sigma = 0.15f };
+            vignetteFx = new VignetteEffect();
+            tintFx = TintEffect.Sepia;
+            mixer = new BitmapMixer { Mixture = 0.5f };
+        }
+
+        /// <summary>
+        /// Processes a bitmap and returns a new processed WriteabelBitmap.
+        /// </summary>
+        /// <param name="input">The input bitmap.</param>
+        /// <returns>The result of WriteabelBitmap processing.</returns>
+        public WriteableBitmap Process(WriteableBitmap input)
+        {
+            // Prepare some variables
+            var width = input.PixelWidth;
+            var height = input.PixelHeight;
+            return Process(input.Pixels, width, height).ToWriteableBitmap(width, height);
+        }
+
+        /// <summary>
+        /// Processes an ARGB32 integer bitmap and returns the new processed bitmap data.
+        /// </summary>
+        /// <param name="inputPixels">The input bitmap as integer array.</param>
+        /// <param name="width">The width of the bitmap.</param>
+        /// <param name="height">The height of the bitmap.</param>
+        /// <returns>The result of the processing.</returns>
+        public int[] Process(int[] inputPixels, int width, int height)
+        {
+            var resultPixels = blurFx.Process(inputPixels, width, height);
+            resultPixels = vignetteFx.Process(resultPixels, width, height);
+            var tintedPixels = tintFx.Process(resultPixels, width, height);
+            return mixer.Mix(resultPixels, tintedPixels, width, height);
+        }
+    }
+}

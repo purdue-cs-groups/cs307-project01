@@ -88,7 +88,6 @@
     <Compile Include="CompositeEffects\YoshimotoEffect.cs" />
     <Compile Include="Effects\BitmapMixer.cs" />
     <Compile Include="Effects\BrightnessContrastEffect.cs" />
-    <Compile Include="Effects\EffectItem.cs" />
     <Compile Include="Effects\GaussianBlurEffect.cs" />
     <Compile Include="Effects\IEffect.cs" />
     <Compile Include="Effects\SaturateEffect.cs">

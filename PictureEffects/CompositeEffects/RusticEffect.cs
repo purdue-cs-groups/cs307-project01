@@ -7,6 +7,7 @@ namespace PictureEffects.CompositeEffects
     public class RusticEffect : IEffect
     {
         private BlackWhiteEffect zebraEffect;
+        private PolaroidEffect polaroidEffect;
 
         public string Name
         {
@@ -19,6 +20,7 @@ namespace PictureEffects.CompositeEffects
         public RusticEffect()
         {
             this.zebraEffect = new BlackWhiteEffect();
+            this.polaroidEffect = new PolaroidEffect();
         }
 
         public WriteableBitmap Process(WriteableBitmap input)
@@ -31,6 +33,7 @@ namespace PictureEffects.CompositeEffects
         public int[] Process(int[] inputPixels, int width, int height)
         {
             int[] numArray = this.zebraEffect.Process(inputPixels, width, height);
+            numArray = this.polaroidEffect.Process(numArray, width, height);
             return numArray;
         }
     }

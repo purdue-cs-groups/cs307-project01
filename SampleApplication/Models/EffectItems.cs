@@ -22,6 +22,7 @@ namespace SampleApplication.Models
             Add(new Models.EffectItem(new BlackWhiteEffect()));
             Add(new Models.EffectItem(new CyanEffect()));
             Add(new Models.EffectItem(new GrungeEffect()));
+            Add(new Models.EffectItem(new PolaroidEffect()));
             Add(new Models.EffectItem(new PopEffect()));
             Add(new Models.EffectItem(new RusticEffect()));
             Add(new Models.EffectItem(new StormEffect()));

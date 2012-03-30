@@ -43,28 +43,39 @@ namespace PictureEffects.Effects
 
         public int[] Process(int[] inputPixels, int width, int height)
         {
-            int[] numArray = new int[(int)inputPixels.Length];
+            int[] numArray = new int[inputPixels.Length];
+
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            for (int i = 0; i < (int)inputPixels.Length; i++)
+            
+            for (int i = 0; i < inputPixels.Length; i++)
             {
-                int num = inputPixels[i];
-                byte a = (byte)(num >> 24);
-                byte r = (byte)(num >> 16);
-                byte g = (byte)(num >> 8);
-                byte b = (byte)num;
+                var c = inputPixels[i];
+
+                var a = (byte)(c >> 24);
+                var r = (byte)(c >> 16);
+                var g = (byte)(c >> 8);
+                var b = (byte)(c);
+
                 HslColor hSLAndSaturateAndLighten = HslColor.ConvertToHSLAndSaturateAndLighten(a, r, g, b, (double)this.SatEffect, (double)this.LightnessFactor);
+                
                 Color color1 = hSLAndSaturateAndLighten.ToColor();
                 a = color1.A;
+
                 Color color2 = hSLAndSaturateAndLighten.ToColor();
                 r = color2.R;
+
                 Color color3 = hSLAndSaturateAndLighten.ToColor();
                 g = color3.G;
+
                 Color color4 = hSLAndSaturateAndLighten.ToColor();
                 b = color4.B;
-                numArray[i] = a << 24 | r << 16 | g << 8 | b;
+
+                numArray[i] = (a << 24) | (r << 16) | (g << 8) | b;
             }
+
             stopwatch.Stop();
+
             return numArray;
         }
     }
