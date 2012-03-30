@@ -5,26 +5,20 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2F3E1248-D185-4F17-BC74-B5E46E8E4D16}</ProjectGuid>
+    <ProjectGuid>{CCA57A3C-CD19-4CA1-82C8-7A96C8D6D2F3}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SampleApplication</RootNamespace>
-    <AssemblyName>SampleApplication</AssemblyName>
+    <RootNamespace>PictureEffects</RootNamespace>
+    <AssemblyName>PictureEffects</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
-    <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures>
-    </SupportedCultures>
-    <XapOutputs>true</XapOutputs>
-    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>SampleApplication.xap</XapFilename>
-    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>SampleApplication.App</SilverlightAppEntry>
+    <SilverlightApplication>false</SilverlightApplication>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -37,7 +31,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -64,58 +57,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="WriteableBitmapExWinPhone">
+      <HintPath>Libraries\WriteableBitmapExWinPhone.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
+    <Compile Include="Common\ArrayExtensions.cs" />
+    <Compile Include="Common\HslColor.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Common\WriteableBitmapMediaLibraryExtensions.cs" />
+    <Compile Include="CompositeEffects\AntiqueEffect.cs" />
+    <Compile Include="CompositeEffects\BettyEffect.cs" />
+    <Compile Include="CompositeEffects\BlackWhiteEffect.cs" />
+    <Compile Include="CompositeEffects\CyanEffect.cs" />
+    <Compile Include="CompositeEffects\GrungeEffect.cs" />
+    <Compile Include="CompositeEffects\PolaroidEffect.cs" />
+    <Compile Include="CompositeEffects\PopEffect.cs" />
+    <Compile Include="CompositeEffects\RusticEffect.cs" />
+    <Compile Include="CompositeEffects\StormEffect.cs" />
+    <Compile Include="CompositeEffects\TiltShiftEffect.cs" />
+    <Compile Include="CompositeEffects\WasabiEffect.cs" />
+    <Compile Include="CompositeEffects\YoshimotoEffect.cs" />
+    <Compile Include="Effects\BitmapMixer.cs" />
+    <Compile Include="Effects\BrightnessContrastEffect.cs" />
+    <Compile Include="Effects\EffectItem.cs" />
+    <Compile Include="Effects\GaussianBlurEffect.cs" />
+    <Compile Include="Effects\IEffect.cs" />
+    <Compile Include="Effects\SaturateEffect.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\EffectItem.cs" />
-    <Compile Include="Models\EffectItems.cs" />
+    <Compile Include="Effects\TintEffect.cs" />
+    <Compile Include="Effects\VignetteEffect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="sample.jpg" />
-    <Content Include="SplashScreenImage.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MobileClientLibrary\MobileClientLibrary.csproj">
-      <Project>{563005C0-77BC-4DA0-883A-9917DA9B8F92}</Project>
-      <Name>MobileClientLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PictureEffects\PictureEffects.csproj">
-      <Project>{CCA57A3C-CD19-4CA1-82C8-7A96C8D6D2F3}</Project>
-      <Name>PictureEffects</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -131,6 +112,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -138,5 +120,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ProjectExtensions />
 </Project>
