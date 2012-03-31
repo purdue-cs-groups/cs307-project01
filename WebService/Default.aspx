@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Winstagram</title>
+    <title>Metrocam</title>
     <style type="text/css">
         body
         {
@@ -23,9 +23,9 @@
             margin: 0px auto;
         }
         
-        .caption
+        .title
         {
-            font-size: 24px;
+            font-size: 32px;
             margin: 0px;
         }
         
@@ -42,21 +42,49 @@
             font-size: 14px;
             font-style: italic;
         }
+        
+        .tile
+        {
+            display: inline-block;
+            margin-right: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .tile a
+        {
+        }
+        
+        .tile a img
+        {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .footer
+        {
+            line-height: 1.5em;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div class="layout">
-        <p class="caption">
-            Winstagram</p>
+        <p class="title">
+            Metrocam</p>
         <p class="tagline">
-            Winstagram is a fun & quirky way to share your life with friends through a series
+            Metrocam is a fun & quirky way to share your life with friends through a series
             of pictures. Snap a photo, then choose a filter to transform the look and feel of
             the shot into a memory to keep around forever.
         </p>
         <br />
-        <asp:Literal ID="litDatabase" runat="server" />
-    </div>
+        <div class="list">
+            <asp:Literal ID="litDatabase" runat="server" />
+        </div>
+        <br />
+        <div class="footer">
+            Copyright &copy; 2012 Metrocam. All rights reserved.
+        </div>
     </div>
     </form>
 </body>

@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class LoginScreen : PhoneApplicationPage
     {
@@ -31,12 +31,12 @@ namespace WinstagramPan
 
             // Joe commented this out because I don't know a username/password combo lol
             /*
-            App.WinstagramService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(WinstagramService_AuthenticateCompleted);
-            App.WinstagramService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
             */
         }
 
-        private void WinstagramService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
+        private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;

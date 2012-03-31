@@ -11,12 +11,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
-using WinstagramPan.Models;
+using MetrocamPan.Models;
 
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class UserDetailPage : PhoneApplicationPage
     {

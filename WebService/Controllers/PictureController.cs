@@ -40,8 +40,8 @@ namespace WebService.Controllers
 
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
             var query = Query.GT("CreatedDate", Utilities.ConvertToUnixTime(DateTime.UtcNow.AddDays(-7)));
-            
-            return pictures.Find(query).SetSortOrder(SortBy.Descending("ViewCount")).SetLimit(25).ToList<Picture>();
+
+            return pictures.Find(query).SetSortOrder(SortBy.Descending("ViewCount")).SetSortOrder(SortBy.Descending("CreatedDate")).SetLimit(25).ToList<Picture>();
         }
 
         public static void Create(Picture data)

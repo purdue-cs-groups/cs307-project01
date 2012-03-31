@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
   public static class Settings
   {

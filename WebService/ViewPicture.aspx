@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Winstagram</title>
+    <title>Metrocam</title>
     <style type="text/css">
         body
         {
@@ -78,7 +78,7 @@
             <br />
             <br />
             <p class="tagline">
-                Winstagram is a fun & quirky way to share your life with friends through a series
+                Metrocam is a fun & quirky way to share your life with friends through a series
                 of pictures. Snap a photo, then choose a filter to transform the look and feel of
                 the shot into a memory to keep around forever.
             </p>

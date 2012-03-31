@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Reflection;
 using System.Windows.Resources;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {

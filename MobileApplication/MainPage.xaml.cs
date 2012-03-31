@@ -16,13 +16,13 @@ using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
-using WinstagramPan.Models;
+using MetrocamPan.Models;
 using Microsoft.Phone.Tasks;
 
 using System.IO;
 using ExifLib;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {

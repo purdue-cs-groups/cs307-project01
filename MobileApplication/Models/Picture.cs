@@ -9,7 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace WinstagramPan.Models
+namespace MetrocamPan.Models
 {
     public class Picture
     {

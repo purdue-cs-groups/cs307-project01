@@ -6,16 +6,17 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
     xmlns:vm="clr-namespace:SampleApplication.Models" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Visible">
+    <Grid x:Name="LayoutRoot" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -26,15 +27,22 @@
             <StackPanel.Resources>
                 <vm:EffectItems x:Key="effects"/>
             </StackPanel.Resources>
-            <Image x:Name="imgPicture" Height="400" />
-            <Button x:Name="btnFilter" Content="Filter" Click="btnFilter_Click" />
-            <ListBox x:Name="lstFilters" SelectionMode="Single" ItemsSource="{StaticResource effects}">
-                <ListBox.ItemTemplate>
+            <Image x:Name="imgPicture" Height="360" />
+            <toolkit:ListPicker x:Name="lstFilters" ItemsSource="{StaticResource effects}" SelectionChanged="lstFilters_SelectionChanged">
+                <toolkit:ListPicker.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeNormal}" />
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </toolkit:ListPicker.ItemTemplate>
+
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="0,12,12,12" />
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+            </toolkit:ListPicker>
+            <TextBox x:Name="txtCaption" />
+            <Button x:Name="btnUpload" Content="upload" Click="btnUpload_Click" />
         </StackPanel>
     </Grid>
 

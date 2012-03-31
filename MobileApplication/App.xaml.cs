@@ -14,12 +14,12 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MobileClientLibrary;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class App : Application
     {
         public static String APIKey = "4f7124f25ad9850a042a5f2d";
-        public static WebServiceClient WinstagramService = null;
+        public static WebServiceClient MetrocamService = null;
         
         public PhoneApplicationFrame RootFrame { get; private set; }
 
@@ -37,7 +37,7 @@ namespace WinstagramPan
             // Phone-specific initialization
             InitializePhoneApplication();
 
-            WinstagramService = new WebServiceClient(APIKey);
+            MetrocamService = new WebServiceClient(APIKey);
         }
 
         // Code to execute when the application is launching (eg, from Start)

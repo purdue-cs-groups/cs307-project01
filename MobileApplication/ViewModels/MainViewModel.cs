@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public class MainViewModel : INotifyPropertyChanged
     {

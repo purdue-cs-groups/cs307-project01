@@ -29,10 +29,10 @@ namespace WebService
 
             MailMessage message = new MailMessage();
 
-            message.From = new MailAddress("system@winstagram.cloudapp.net");
+            message.From = new MailAddress("system@metrocam.cloudapp.net");
             message.To.Add(new MailAddress(data.EmailAddress));
-            message.Subject = "Your Winstagram API Key";
-            message.Body = "Thank you for registering for the Winstagram API. We look forward to seeing the unique and innovative applications that developers like you create with our service. Your API key is listed below. Please let us know if you have any problems.\n\n" + data.Key + "\n\n--\nWinstagram\nhttp://winstagram.cloudapp.net\n";
+            message.Subject = "Your Metrocam API Key";
+            message.Body = "Thank you for registering for the Metrocam API. We look forward to seeing the unique and innovative applications that developers like you create with our service. Your API key is listed below. Please let us know if you have any problems.\n\n" + data.Key + "\n\n--\nMetrocam\nhttp://metrocam.cloudapp.net\n";
 
             SmtpClient client = new SmtpClient();
             client.Send(message);

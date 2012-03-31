@@ -12,13 +12,13 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
-using WinstagramPan.Models;
+using MetrocamPan.Models;
 
 using ExifLib;
 using System.Windows.Media.Imaging;
 using System.IO;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class PictureView : PhoneApplicationPage
     {
@@ -188,7 +188,7 @@ namespace WinstagramPan
 
             // replace with Web Application URL
             shareLinkTask.LinkUri = new Uri("http://img.tgdaily.com/sites/default/files/stock/450teaser/steveballmer.jpg", UriKind.Absolute);
-            shareLinkTask.Message = "Shared via Winstagram";
+            shareLinkTask.Message = "Shared via Metrocam";
 
             shareLinkTask.Show();
         }

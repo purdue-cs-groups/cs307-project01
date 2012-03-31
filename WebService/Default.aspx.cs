@@ -17,8 +17,11 @@ namespace WebService
 
             foreach (Picture picture in pictures)
             {
-                this.litDatabase.Text += "<a href=\"http://winstagram.cloudapp.net/p/" + picture.ID + "\">http://winstagram.cloudapp.net/p/" + picture.ID + "</a><br />\n";
-                this.litDatabase.Text += "<br />\n";
+                this.litDatabase.Text += "<div class=\"tile\">\n";
+                this.litDatabase.Text += "<a href=\"http://metrocam.cloudapp.net/p/" + picture.ID + "\">\n";
+                this.litDatabase.Text += "<img src=\"" + picture.SmallURL + "\" />\n";
+                this.litDatabase.Text += "</a>\n";
+                this.litDatabase.Text += "</div>\n";
             }
         }
     }

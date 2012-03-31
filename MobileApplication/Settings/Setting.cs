@@ -1,7 +1,7 @@
 ﻿
 using System.IO.IsolatedStorage;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     // Encapsulates a key/value pair stored in Isolated Storage ApplicationSettings
     public class Setting<T>

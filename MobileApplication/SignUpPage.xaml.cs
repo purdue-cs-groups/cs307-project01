@@ -13,7 +13,7 @@ using Microsoft.Phone.Controls;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
 
-namespace WinstagramPan
+namespace MetrocamPan
 {
     public partial class SignupPage : PhoneApplicationPage
     {
@@ -92,11 +92,11 @@ namespace WinstagramPan
             data.Password = this.passwordInput.Password;
             data.EmailAddress = this.emailInput.Text;
 
-            App.WinstagramService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(WinstagramService_CreateUserCompleted);
-            App.WinstagramService.CreateUser(data);
+            App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
+            App.MetrocamService.CreateUser(data);
         }
 
-        private void WinstagramService_CreateUserCompleted(object sender, RequestCompletedEventArgs e)
+        private void MetrocamService_CreateUserCompleted(object sender, RequestCompletedEventArgs e)
         {
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
