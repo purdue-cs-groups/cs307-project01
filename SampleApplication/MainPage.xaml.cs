@@ -124,17 +124,17 @@ namespace SampleApplication
             Dispatcher.BeginInvoke(() =>
             {
                 data.Caption = this.txtCaption.Text;
+
+                data.Latitude = Convert.ToDecimal(40.446980);
+                data.Longitude = Convert.ToDecimal(-86.944189);
+                data.LargeURL = result.LargeURL;
+                data.MediumURL = result.MediumURL;
+                data.SmallURL = result.SmallURL;
+
+                // upload the picture object
+                client.CreatePictureCompleted += new RequestCompletedEventHandler(client_CreatePictureCompleted);
+                client.CreatePicture(data);
             });
-
-            data.Latitude = Convert.ToDecimal(40.446980);
-            data.Longitude = Convert.ToDecimal(-86.944189);
-            data.LargeURL = result.LargeURL;
-            data.MediumURL = result.MediumURL;
-            data.SmallURL = result.SmallURL;
-
-            // upload the picture object
-            client.CreatePictureCompleted += new RequestCompletedEventHandler(client_CreatePictureCompleted);
-            client.CreatePicture(data);
         }
 
         private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)
