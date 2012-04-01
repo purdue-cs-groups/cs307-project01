@@ -243,7 +243,7 @@
                     <!--Double line list with image placeholder and text wrapping-->
                     <Grid Margin="-12,0,0,75">
                         <Grid Tap="ViewUserDetailTap" HorizontalAlignment="Left" Width="407">
-                            <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/MetrocamPan;component/Images/smallJoe.png" />
+                            <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
                             <TextBlock Height="45" HorizontalAlignment="Left" Margin="172,0,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
                             <TextBlock Height="40" HorizontalAlignment="Left" Margin="170,42,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
                             <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,160,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
@@ -272,29 +272,29 @@
                             </Grid.RowDefinitions>
 
                             <!-- set Tag equal to index of UserPicture colleciton -->
-                            <Image Grid.Row="0" Grid.Column="0" Name="i1" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="0" Grid.Column="1" Name="i2" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="0" Grid.Column="2" Name="i3" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="0" Grid.Column="0" Name="i1" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="0" Grid.Column="1" Name="i2" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="0" Grid.Column="2" Name="i3" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
 
-                            <Image Grid.Row="1" Grid.Column="0" Name="i4" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="1" Grid.Column="1" Name="i5" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="1" Grid.Column="2" Name="i6" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="1" Grid.Column="0" Name="i4" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="1" Grid.Column="1" Name="i5" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="1" Grid.Column="2" Name="i6" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
 
-                            <Image Grid.Row="2" Grid.Column="0" Name="i7" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="2" Grid.Column="1" Name="i8" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="2" Grid.Column="2" Name="i9" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="2" Grid.Column="0" Name="i7" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="2" Grid.Column="1" Name="i8" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="2" Grid.Column="2" Name="i9" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
 
-                            <Image Grid.Row="3" Grid.Column="0" Name="i10" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="3" Grid.Column="1" Name="i11" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="3" Grid.Column="2" Name="i12"  Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="3" Grid.Column="0" Name="i10" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="3" Grid.Column="1" Name="i11" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="3" Grid.Column="2" Name="i12"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
 
-                            <Image Grid.Row="4" Grid.Column="0" Name="i13"  Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="4" Grid.Column="1" Name="i14" Width="120" Height="120"  Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="4" Grid.Column="2" Name="i15" Width="120" Height="120"  Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="4" Grid.Column="0" Name="i13"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="4" Grid.Column="1" Name="i14" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="4" Grid.Column="2" Name="i15" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
 
-                            <Image Grid.Row="5" Grid.Column="0" Name="i16" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="5" Grid.Column="1" Name="i17" Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="5" Grid.Column="2" Name="i18"  Width="120" Height="120" Margin="12,12,0,0" Source="/MetrocamPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="5" Grid.Column="0" Name="i16" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                            <Image Grid.Row="5" Grid.Column="1" Name="i17" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
+                            <Image Grid.Row="5" Grid.Column="2" Name="i18"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
 
                         </Grid>
                     </Grid>

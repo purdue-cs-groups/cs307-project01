@@ -33,9 +33,6 @@ namespace MetrocamPan
 
             // Set the data context of the listbox control to the sample data
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
-
-            // Library call to fetch news feed to populate RecentPictures
-            populateRecentPictures();
         }
 
         // Load data for the ViewModel Items
@@ -49,6 +46,8 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
             }
+
+            populateRecentPictures();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

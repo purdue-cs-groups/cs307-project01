@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinstagramPan</RootNamespace>
+    <RootNamespace>MetrocamPan</RootNamespace>
     <AssemblyName>WinstagramPan</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -20,9 +20,9 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>WinstagramPan.xap</XapFilename>
+    <XapFilename>MetrocamPan.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>WinstagramPan.App</SilverlightAppEntry>
+    <SilverlightAppEntry>MetrocamPan.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -276,6 +276,10 @@
     <ProjectReference Include="..\MobileClientLibrary\MobileClientLibrary.csproj">
       <Project>{563005C0-77BC-4DA0-883A-9917DA9B8F92}</Project>
       <Name>MobileClientLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PictureEffects\PictureEffects.csproj">
+      <Project>{CCA57A3C-CD19-4CA1-82C8-7A96C8D6D2F3}</Project>
+      <Name>PictureEffects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
