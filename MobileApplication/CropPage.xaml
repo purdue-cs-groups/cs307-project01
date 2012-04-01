@@ -30,7 +30,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image  Height="533" HorizontalAlignment="Left" Margin="12,20,0,0" Name="originalPhoto" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" />
-            <Image  Height="440" HorizontalAlignment="Left" Margin="12,20,0,0" Name="cropArea" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Source="/MetrocamPan;component/Images/crop.png" Opacity="0.35" ManipulationDelta="cropArea_ManipulationDelta" />
+            <Image  Height="440" HorizontalAlignment="Left" Margin="12,20,0,0" Name="cropArea" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Source="/WinstagramPan;component/Images/crop.png" Opacity="0.35" ManipulationDelta="cropArea_ManipulationDelta" />
         </Grid>
     </Grid>
  
