@@ -18,35 +18,35 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot x:Name="AboutPivot" Title="WINSTAGRAM">
+        <controls:Pivot x:Name="AboutPivot" Title="METROCAM">
             <!--Pivot item one-->
             <controls:PivotItem x:Name="about" Header="about">
                 <Grid>
                     <Rectangle Height="175" HorizontalAlignment="Left" Margin="12,17,0,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="175" Fill="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Height="83" HorizontalAlignment="Left" Margin="204,7,0,0" Name="textBlock1" Text="Metrocam" VerticalAlignment="Top" Width="206" Foreground="{StaticResource PhoneAccentBrush}" FontSize="36" />
-                    <Image Height="175" HorizontalAlignment="Left" Margin="12,17,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/MetrocamPan;component/Images/camera.png" />
+                    <Image Height="175" HorizontalAlignment="Left" Margin="12,17,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="175" Source="/WinstagramPan;component/Images/camera.png" />
                     <TextBlock Height="43" HorizontalAlignment="Left" Margin="204,54,0,0" Name="textBlock2" Text="metrocam.cloudapp.net" VerticalAlignment="Top" Width="235" />
                     <TextBlock Height="30" HorizontalAlignment="Left" Margin="204,104,0,0" Name="textBlock3" Text="Version: 1.0" VerticalAlignment="Top" Width="111" />
                     <TextBlock Height="40" HorizontalAlignment="Left" Margin="204,134,0,0" Name="textBlock4" Text="Review this app" VerticalAlignment="Top" Width="155" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Height="30" HorizontalAlignment="Left" Margin="204,164,0,0" Name="textBlock5" Text="Feedback" VerticalAlignment="Top" Width="111" />
 
-                    <Image Margin="12,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/MetrocamPan;component/Images/smallMatt.jpg"/>
+                    <Image Margin="12,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallMatt.jpg"/>
                     <TextBlock Margin="95,270,11,0" Text="@mbmccormick"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="95,246,9,0" Text="Matt McCormick"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="240,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/MetrocamPan;component/Images/smallJoe.png"/>
+                    <Image Margin="240,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJoe.png"/>
                     <TextBlock Margin="323,270,11,0" Text="@martellaj"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="323,246,9,0" Text="Joe Martella"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="12,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/MetrocamPan;component/Images/smallJames.jpg"/>
+                    <Image Margin="12,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJames.jpg"/>
                     <TextBlock Margin="95,380,11,0" Text="@jamesmajunyan"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="95,356,9,0" Text="James Ma"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="240,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/MetrocamPan;component/Images/smallJosh.png"/>
+                    <Image Margin="240,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJosh.png"/>
                     <TextBlock Margin="323,380,11,0" Text="@jdlwilliams"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="323,356,9,0" Text="Josh Williams"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="12,460,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/MetrocamPan;component/Images/smallJeremiah.jpg"/>
+                    <Image Margin="12,460,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJeremiah.jpg"/>
                     <TextBlock Margin="95,490,11,0" Text="@J_Ar_Thur"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="95,466,9,0" Text="Jeremiah Theurer"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
                 </Grid>
