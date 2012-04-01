@@ -295,5 +295,35 @@ namespace MetrocamPan
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
+
+        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        {
+            PhotoChooserTask picker = new PhotoChooserTask();
+            picker.ShowCamera = false;
+            picker.Completed += new EventHandler<PhotoResult>(picker_Completed);
+
+            picker.Show();
+        }
+
+        void picker_Completed(object sender, PhotoResult e)
+        {
+            if (e.ChosenPhoto == null)
+                return;
+
+            bmp.SetSource(e.ChosenPhoto);
+            captured.Source = bmp;
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                if (captured.Width > captured.Height)
+                {
+                    NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
+                }
+            });
+        }
     }
 }

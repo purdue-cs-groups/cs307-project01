@@ -231,6 +231,7 @@
     <Content Include="Images\appbar.flag.png" />
     <Resource Include="Images\appbar.overflowdots.png" />
     <Resource Include="Images\appbar.overflowdots.light.png" />
+    <Content Include="Images\appbar.folder.rest.png" />
     <Content Include="Images\appbar.questionmark.rest.png" />
     <Content Include="Images\appbar.refresh.rest.png" />
     <Content Include="Images\appbar.share.rest.png" />
