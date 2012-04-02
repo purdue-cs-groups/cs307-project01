@@ -17,6 +17,8 @@ using MobileClientLibrary;
 using System.IO;
 using MobileClientLibrary.Common;
 using MobileClientLibrary.Models;
+using System.IO.IsolatedStorage;
+using Microsoft.Xna.Framework.Media;
 
 namespace MetrocamPan
 {
@@ -70,6 +72,40 @@ namespace MetrocamPan
             bitmap.SaveJpeg(ms, width, height, 0, 100);
             ms.Seek(0, SeekOrigin.Begin);
 
+            /******
+             * 
+             *  save photos to phone
+             * 
+             */
+            long timestamp = DateTime.Now.ToFileTime();
+            String editedFilename = "MetrocamEdited_" + timestamp.ToString() +".jpg";
+            String originalFilename = "MetrocamOriginal_" + timestamp.ToString() + ".jpg";
+
+            var myStore = IsolatedStorageFile.GetUserStoreForApplication();
+            IsolatedStorageFileStream myFileStream = myStore.CreateFile(editedFilename);
+
+            bitmap.SaveJpeg(myFileStream, width, height, 0, 100);
+            myFileStream.Close();
+     
+            myFileStream = myStore.OpenFile(editedFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+            var lib = new MediaLibrary();
+
+            if (Settings.saveEdited.Value)
+                lib.SavePicture(editedFilename, myFileStream);
+
+            if (Settings.saveOriginal.Value && MainPage.tookPhoto)
+            {
+                IsolatedStorageFileStream myFileStream2 = myStore.CreateFile(originalFilename);
+                WriteableBitmap w = new WriteableBitmap((BitmapSource)MainPage.bmp);
+                w.SaveJpeg(myFileStream2, w.PixelWidth, w.PixelHeight, 0, 100);
+                myFileStream2.Close();
+
+                myFileStream2 = myStore.OpenFile(originalFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                lib.SavePictureToCameraRoll(originalFilename, myFileStream2);
+            }
+
+
             // upload the image
             App.MetrocamService.UploadPictureCompleted += new RequestCompletedEventHandler(client_UploadPictureCompleted);
             App.MetrocamService.UploadPicture(ms);
@@ -84,7 +120,7 @@ namespace MetrocamPan
             PictureURL result = e.Data as PictureURL;
 
             // create new picture
-            Picture data = new Picture();
+            MobileClientLibrary.Models.Picture data = new MobileClientLibrary.Models.Picture();
 
             Dispatcher.BeginInvoke(() =>
             {
@@ -123,10 +159,6 @@ namespace MetrocamPan
                 MessageBox.Show("Your picture was uploaded successfully!");
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             });
-        }
-
-        private void SavePhotosToLibrary()
-        {
         }
     }
 }
