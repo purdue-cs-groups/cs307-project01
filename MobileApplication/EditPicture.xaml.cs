@@ -86,5 +86,77 @@ namespace MetrocamPan
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
         }
+
+        private void ApplyBetty(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new BettyEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyBandW(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new BlackWhiteEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyCyan(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new CyanEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyGrunge(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new GrungeEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
     }
 }
