@@ -90,8 +90,17 @@ namespace MetrocamPan
             {
                 data.Caption = this.captionBox.Text;
 
-                data.Latitude = Convert.ToDecimal(MainPage.lat);
-                data.Longitude = Convert.ToDecimal(MainPage.lng);
+                if (Settings.locationService.Value)
+                {
+                    data.Latitude = Convert.ToDecimal(MainPage.lat);
+                    data.Longitude = Convert.ToDecimal(MainPage.lng);
+                }
+                else
+                {
+                    data.Latitude  = Convert.ToDecimal(0.00);
+                    data.Longitude = Convert.ToDecimal(0.00);
+                }
+
                 data.LargeURL = result.LargeURL;
                 data.MediumURL = result.MediumURL;
                 data.SmallURL = result.SmallURL;

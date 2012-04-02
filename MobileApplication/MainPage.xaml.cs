@@ -29,7 +29,7 @@ namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        GeoCoordinateWatcher watcher;
+        public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
         public static double lng = 0;
 
@@ -41,12 +41,17 @@ namespace MetrocamPan
             // Set the data context of the listbox control to the sample data
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
+            setUpLocation();
+        }
+
+        public static void setUpLocation()
+        {
             // set up location
             if (watcher == null)
             {
                 watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High); // using high accuracy
                 watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
-                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);    
+                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
             }
         }
 
@@ -330,6 +335,12 @@ namespace MetrocamPan
             if (e.ChosenPhoto == null)
                 return;
 
+            e.ChosenPhoto.Position = 0;
+            JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
+
+            lat = info.GpsLatitude[1];
+            lng = info.GpsLongitude[1];
+
             bmp.SetSource(e.ChosenPhoto);
             captured.Source = bmp;
 
@@ -348,7 +359,7 @@ namespace MetrocamPan
 
         // Event handler for the GeoCoordinateWatcher.StatusChanged event.
         public static Boolean hasLocationData = false;
-        void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        public static void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
             switch (e.Status)
             {

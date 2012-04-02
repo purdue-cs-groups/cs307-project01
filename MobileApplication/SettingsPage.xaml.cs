@@ -18,6 +18,13 @@ namespace MetrocamPan
         public SettingsPage()
         {
             InitializeComponent();
+
+            if (Settings.locationService.Value)
+                lToggle.IsChecked = true;
+            if (Settings.saveOriginal.Value)
+                oToggle.IsChecked = true;
+            if (Settings.saveEdited.Value)
+                eToggle.IsChecked = true;
         }
 
         private void connectaccounts_Click(object sender, RoutedEventArgs e)
@@ -44,6 +51,20 @@ namespace MetrocamPan
         private void editedUncheck(object sender, RoutedEventArgs e)
         {
             Settings.saveEdited.Value = false;
+        }
+
+        private void locCheck(object sender, RoutedEventArgs e)
+        {
+            Settings.locationService.Value = true;
+            MainPage.watcher.Start();
+        }
+
+        private void locUncheck(object sender, RoutedEventArgs e)
+        {
+            Settings.locationService.Value = false;
+            MainPage.lat = 0;
+            MainPage.lng = 0;
+            MainPage.watcher.Stop();
         }
 
     }
