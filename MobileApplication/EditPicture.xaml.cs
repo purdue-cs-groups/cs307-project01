@@ -212,5 +212,77 @@ namespace MetrocamPan
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
         }
+
+        private void ApplyStorm(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new StormEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyWasabi(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new WasabiEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyTiltShift(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new TiltShiftEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyYoshimoto(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new YoshimotoEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
     }
 }

@@ -112,6 +112,42 @@
                         <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
                         <TextBlock Grid.Row="1" Text="rustic" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
                     </Grid>
+
+                    <Grid x:Name="StormGrid" Tap="ApplyStorm">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="storm" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid x:Name="TiltShiftGrid" Tap="ApplyTiltShift">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="tilt shift" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid x:Name="WasabiGrid" Tap="ApplyWasabi">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="wasabi" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
+                    <Grid x:Name="YoshimotoGrid" Tap="ApplyYoshimoto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="yoshimoto" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
