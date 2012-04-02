@@ -157,6 +157,8 @@ namespace MetrocamPan
         public static Boolean isLandscape = false;
         public static Image captured = new Image();
         public static BitmapImage bmp = new BitmapImage();
+        public static double lat = 0;
+        public static double lng = 0;
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
             // if no picture was taken

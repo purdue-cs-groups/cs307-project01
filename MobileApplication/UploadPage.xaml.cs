@@ -35,9 +35,14 @@ namespace MetrocamPan
             }
         }
 
+        private Boolean isUploading = false;
         private void Upload_Click(object sender, EventArgs e)
         {
-            ApplicationBar.Buttons.RemoveAt(0);
+            if (!isUploading)
+                isUploading = true;
+            else
+                return;
+
             captionBox.IsReadOnly = true;
 
             ProgressBar bar = new ProgressBar();
@@ -99,6 +104,8 @@ namespace MetrocamPan
 
         private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            isUploading = false;
+
             // unregister previous event handler
             App.MetrocamService.CreatePictureCompleted -= client_CreatePictureCompleted;
 
@@ -107,6 +114,10 @@ namespace MetrocamPan
                 MessageBox.Show("Your picture was uploaded successfully!");
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             });
+        }
+
+        private void SavePhotosToLibrary()
+        {
         }
     }
 }
