@@ -21,6 +21,31 @@ namespace MetrocamPan
             + "@"
             + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
 
+        public static int usernameLowerBoundary = 4;
+        public static int usernameUpperBoundary = 12;
+        public static int passwordLowerBoundary = 6;
+        public static int passwordUpperBoundary = 12;
+
+        /*
+         * Validates that the String is between the range specified
+         */
+        public static bool isValidLength(String str, String nameOfInput, int lower, int upper)
+        {
+            if (str == null)
+            {
+                return false;
+            }
+
+            // Check length
+            if (str.Length < lower || str.Length > upper)
+            {
+                MessageBox.Show("Please ensure your credentials is of appropriate length");
+                return false;
+            }
+
+            return true;
+        }
+
         /*
          * Validates that password is a strong password
          * Conditions:
