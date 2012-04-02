@@ -23,6 +23,13 @@ namespace MetrocamPan
 
         private void Login_Click(object sender, EventArgs e)
         {
+            // Validate input, prevent buffer overflows
+            if (!InputValidator.isValidLength(this.usernameInput.Text, "username", InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary) ||
+                !InputValidator.isValidLength(this.passwordInput.Password, "password", InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary))
+            {
+                return;
+            }
+
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
 
@@ -60,8 +67,6 @@ namespace MetrocamPan
         {
             if (e.Key == Key.Enter)
             {
-                // TODO: Validate Input!
-
                 // Switch focus to next input field
                 Dispatcher.BeginInvoke(() =>
                     passwordInput.Focus());
@@ -72,8 +77,6 @@ namespace MetrocamPan
         {
             if (e.Key == Key.Enter)
             {
-                // TODO: Validate Input!
-
                 // Lose Focus on the keyboard
                 Dispatcher.BeginInvoke(() =>
                     this.Focus());

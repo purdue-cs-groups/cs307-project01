@@ -24,8 +24,6 @@ namespace MetrocamPan
         {
             if (e.Key == Key.Enter)
             {
-                // TODO: Validate Input!
-
                 // Switch focus to next input field
                 Dispatcher.BeginInvoke(() =>
                     emailInput.Focus());
@@ -36,8 +34,6 @@ namespace MetrocamPan
         {
             if (e.Key == Key.Enter)
             {
-                // TODO: Validate Input!
-
                 // Lose Focus on the keyboard
                 Dispatcher.BeginInvoke(() =>
                     this.Focus());
@@ -51,7 +47,12 @@ namespace MetrocamPan
 
         private void Accept_Click(object sender, EventArgs e)
         {
-            // TODO: Validate Input!
+            // Validate input
+            if (!InputValidator.isValidLength(this.usernameInput.Text, "username", InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary) ||
+                !InputValidator.isValidEmail(this.emailInput.Text))
+            {
+                return;
+            }
 
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
