@@ -22,10 +22,17 @@ using Microsoft.Phone.Tasks;
 using System.IO;
 using ExifLib;
 
+using System.Device;
+using System.Device.Location;
+
 namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        GeoCoordinateWatcher watcher;
+        public static double lat = 0;
+        public static double lng = 0;
+
         // Constructor
         public MainPage()
         {
@@ -33,6 +40,14 @@ namespace MetrocamPan
 
             // Set the data context of the listbox control to the sample data
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+
+            // set up location
+            if (watcher == null)
+            {
+                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High); // using high accuracy
+                watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
+                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);    
+            }
         }
 
         // Load data for the ViewModel Items
@@ -156,14 +171,15 @@ namespace MetrocamPan
 
         public static Boolean isLandscape = false;
         public static Image captured = new Image();
-        public static BitmapImage bmp = new BitmapImage();
-        public static double lat = 0;
-        public static double lng = 0;
+        public static BitmapImage bmp = new BitmapImage();      
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
             // if no picture was taken
             if (e.ChosenPhoto == null)
                 return;
+
+            // collect location data
+            watcher.Start();
 
             bool land = false;
             // figure out the orientation from EXIF data
@@ -328,6 +344,43 @@ namespace MetrocamPan
                     NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
                 }
             });
+        }
+
+        // Event handler for the GeoCoordinateWatcher.StatusChanged event.
+        public static Boolean hasLocationData = false;
+        void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            switch (e.Status)
+            {
+                case GeoPositionStatus.Disabled:
+                    // The Location Service is disabled or unsupported.
+                    // Check to see whether the user has disabled the Location Service.
+                    if (watcher.Permission == GeoPositionPermission.Denied)
+                    {
+                        // The user has disabled the Location Service on their device.
+                        hasLocationData = false;
+                    }
+                    else
+                    {
+                        hasLocationData = false;
+                    }
+                    break;
+
+                case GeoPositionStatus.NoData:
+                    // The Location Service is working, but it cannot get location data.
+                    // Alert the user and enable the Stop Location button.
+                    hasLocationData = false;
+                    break;
+
+                case GeoPositionStatus.Ready:
+                    // The Location Service is working and is receiving location data.
+                    // Show the current position and enable the Stop Location button.
+                    lat = watcher.Position.Location.Latitude;
+                    lng = watcher.Position.Location.Longitude;
+                    hasLocationData = true;
+                    watcher.Stop();
+                    break;
+            }
         }
     }
 }

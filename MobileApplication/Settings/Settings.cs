@@ -20,5 +20,8 @@ namespace MetrocamPan
 
       public static readonly Setting<bool> saveEdited =
           new Setting<bool>("SaveEdited", false);
+
+      public static readonly Setting<bool> locationService =
+          new Setting<bool>("LocationService", false);
   }
 }
