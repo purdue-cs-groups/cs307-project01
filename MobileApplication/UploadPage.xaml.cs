@@ -37,6 +37,9 @@ namespace MetrocamPan
 
         private void Upload_Click(object sender, EventArgs e)
         {
+            ApplicationBar.Buttons.RemoveAt(0);
+            captionBox.IsReadOnly = true;
+
             ProgressBar bar = new ProgressBar();
             bar.IsIndeterminate = true;
 
