@@ -109,7 +109,7 @@
                                     <StackPanel>
                                         <TextBlock Text="active since" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="activeSinceTextBlock" Text="{Binding CreatedDate}"
+                                        <TextBlock x:Name="activeSinceTextBlock" Text="{Binding CreatedDate, StringFormat='MM/dd/yyyy'}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"
                                                    Foreground="{StaticResource PhoneSubtleBrush}">
                                         </TextBlock>
