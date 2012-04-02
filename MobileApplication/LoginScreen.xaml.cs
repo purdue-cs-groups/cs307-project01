@@ -30,23 +30,17 @@ namespace MetrocamPan
                 return;
             }
 
-            // For now, we set isLoggedIn to true
-            Settings.isLoggedIn.Value = true;
-
-            MainPage.isFromLogin = true;
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-
             // Joe commented this out because I don't know a username/password combo lol
-            /*
             App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
             App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
-            */
         }
 
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
+            Settings.username.Value = this.usernameInput.Text;
+            Settings.password.Value = this.passwordInput.Password;
 
             MainPage.isFromLogin = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

@@ -8,5 +8,11 @@ namespace MetrocamPan
   {
       public static readonly Setting<bool> isLoggedIn =
           new Setting<bool>("IsLoggedIn", false);
+
+      public static readonly Setting<string> username =
+          new Setting<string>("Username", "");
+
+      public static readonly Setting<string> password =
+          new Setting<string>("Password", "");
   }
 }

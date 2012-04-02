@@ -47,7 +47,7 @@ namespace MetrocamPan
 
             // login with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
-            App.MetrocamService.Authenticate("martellaj", "password");
+            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
         }
 
         private void client_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
