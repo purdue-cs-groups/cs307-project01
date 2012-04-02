@@ -150,6 +150,24 @@ namespace MetrocamPan
             capturedImage.InvalidateMeasure();
         }
 
+        private void ApplyDawn(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new DawnEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
         private void ApplyPolaroid(object sender, System.Windows.Input.GestureEventArgs e)
         {
             EffectItem item = new EffectItem(new PolaroidEffect());

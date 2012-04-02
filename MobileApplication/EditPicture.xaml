@@ -77,6 +77,15 @@
                         <TextBlock Grid.Row="1" Text="cyan" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
                     </Grid>
 
+                    <Grid x:Name="DawnGrid" Tap="ApplyDawn">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="dawn" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
+
                     <Grid x:Name="GrungeGrid" Tap="ApplyGrunge">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
