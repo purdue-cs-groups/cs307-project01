@@ -31,6 +31,7 @@ namespace MetrocamPan.Models
             Add(new Models.EffectItem(new TiltShiftEffect()));
             Add(new Models.EffectItem(new WasabiEffect()));
             Add(new Models.EffectItem(new YoshimotoEffect()));
+            Add(new Models.EffectItem(new GoGoGaGaEffect()));
         }
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="CompositeEffects\BettyEffect.cs" />
     <Compile Include="CompositeEffects\BlackWhiteEffect.cs" />
     <Compile Include="CompositeEffects\CyanEffect.cs" />
+    <Compile Include="CompositeEffects\GoGoGaGaEffect.cs" />
     <Compile Include="CompositeEffects\GrungeEffect.cs" />
     <Compile Include="CompositeEffects\PolaroidEffect.cs" />
     <Compile Include="CompositeEffects\PopEffect.cs" />

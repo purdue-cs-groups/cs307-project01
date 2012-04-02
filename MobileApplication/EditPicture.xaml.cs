@@ -62,6 +62,15 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/UploadPage.xaml", UriKind.Relative));
         }
 
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            // Edit picture cancelled, go back
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
         private void RemoveEffect(object sender, System.Windows.Input.GestureEventArgs e)
         {
             capturedImage.Source = bitmap;
@@ -281,6 +290,40 @@ namespace MetrocamPan
             WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
 
             capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyGoGoGaGa(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (bitmap == null) return;
+
+            // First apply GrungeEffect
+            EffectItem item1 = new EffectItem(new GrungeEffect());
+            IEffect effect1 = item1.Effect;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect1.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap1 = resultPixels.ToWriteableBitmap(width, height);
+
+            // Second, apply TiltShiftEffect with custom settings
+            TiltShiftEffect tsEffect = new TiltShiftEffect();
+            tsEffect.ContrastFactor = 0.2f;
+            tsEffect.Blurriness = 1.35f;
+            tsEffect.UpperFallOff = 0.20f;
+            tsEffect.LowerFallOff = 0.80f;
+
+            EffectItem item2 = new EffectItem(tsEffect);
+            IEffect effect2 = item2.Effect;
+
+            resultPixels = effect2.Process(newBitmap1.Pixels, width, height);
+
+            WriteableBitmap newBitmap2 = resultPixels.ToWriteableBitmap(width, height);
+
+            // newBitmap2 is final product
+            capturedImage.Source = newBitmap2;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
         }

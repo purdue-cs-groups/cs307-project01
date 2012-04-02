@@ -148,6 +148,15 @@
                         <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
                         <TextBlock Grid.Row="1" Text="yoshimoto" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
                     </Grid>
+
+                    <Grid x:Name="GoGoGaGa" Tap="ApplyGoGoGaGa">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
+                        <TextBlock Grid.Row="1" Text="gogogaga" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -157,7 +166,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Check_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" />
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="cancel" Click="Cancel_Click" />
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
