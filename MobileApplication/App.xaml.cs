@@ -77,6 +77,14 @@ namespace MetrocamPan
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            // Catches this error
+            if (e.ExceptionObject is UnauthorizedAccessException)
+            {
+                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
+                e.Handled = true;
+                return;
+            }
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger

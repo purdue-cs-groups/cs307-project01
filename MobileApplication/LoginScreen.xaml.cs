@@ -30,9 +30,18 @@ namespace MetrocamPan
                 return;
             }
 
-            // Joe commented this out because I don't know a username/password combo lol
-            App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            try
+            {
+                // Joe commented this out because I don't know a username/password combo lol
+                App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                // Calls authenticate method
+                App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO: waiting for Matt
+            }
+            
         }
 
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
