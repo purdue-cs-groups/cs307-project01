@@ -19,6 +19,13 @@ namespace MetrocamPan
 {
     public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {
+        public int MAX_WIDTH = 110;
+
+        public static Image cropped = new Image();
+        public static int x1 = 0;
+        public static int x1min = 0;
+        public static int x1max = 0;
+
         public CropPageLandscapeOrientation()
         {
             InitializeComponent();
@@ -27,7 +34,7 @@ namespace MetrocamPan
             cropArea.RenderTransform = drag;
             x1 = (int)cropArea.Margin.Right;
             x1min = x1;
-            x1max = x1 + 78;
+            x1max = x1 + MAX_WIDTH;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -40,10 +47,6 @@ namespace MetrocamPan
             this.originalPhoto.Source = MainPage.captured.Source;
         }
 
-        public static Image cropped = new Image();
-        public static int x1 = 0;
-        public static int x1min = 0;
-        public static int x1max = 0;
         private void CropPhoto()
         {
             int x0 = (int)originalPhoto.Margin.Right;
@@ -74,8 +77,8 @@ namespace MetrocamPan
             drag.X += e.DeltaManipulation.Translation.X;
             if (drag.X < 0)
                 drag.X = 0;
-            if (drag.X > 78)
-                drag.X = 78;
+            if (drag.X > MAX_WIDTH)
+                drag.X = MAX_WIDTH;
 
             int temp = x1 + (int)e.DeltaManipulation.Translation.X;
             if (temp < x1min)
