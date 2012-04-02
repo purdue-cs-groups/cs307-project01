@@ -351,7 +351,7 @@ namespace MetrocamPan
 
             Dispatcher.BeginInvoke(() =>
             {
-                if (captured.Width > captured.Height)
+                if (bmp.PixelWidth > bmp.PixelHeight)
                 {
                     NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
