@@ -141,6 +141,60 @@ namespace MetrocamPan
             capturedImage.InvalidateMeasure();
         }
 
+        private void ApplyPolaroid(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new PolaroidEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyPop(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new PopEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
+        private void ApplyRustic(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            EffectItem item = new EffectItem(new RusticEffect());
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            capturedImage.Source = newBitmap;
+            capturedImage.InvalidateArrange();
+            capturedImage.InvalidateMeasure();
+        }
+
         private void ApplyGrunge(object sender, System.Windows.Input.GestureEventArgs e)
         {
             EffectItem item = new EffectItem(new GrungeEffect());
