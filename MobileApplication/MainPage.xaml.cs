@@ -290,9 +290,8 @@ namespace MetrocamPan
 
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
         {
-            Settings.isLoggedIn.Value = false;
-            Settings.username.Value = "";
-            Settings.password.Value = "";
+            // Reset all isolate storage Setting objects to default values
+            Settings.resetToDefault();
 
             changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }
