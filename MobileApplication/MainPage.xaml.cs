@@ -176,7 +176,8 @@ namespace MetrocamPan
 
         public static Boolean isLandscape = false;
         public static Image captured = new Image();
-        public static BitmapImage bmp = new BitmapImage();      
+        public static BitmapImage bmp = new BitmapImage();
+        public static Boolean tookPhoto = false;
         private void cameraCaptureTask_Completed(object sender, PhotoResult e)
         {
             // if no picture was taken
@@ -185,6 +186,8 @@ namespace MetrocamPan
 
             // collect location data
             watcher.Start();
+
+            tookPhoto = true;
 
             bool land = false;
             // figure out the orientation from EXIF data
@@ -334,6 +337,8 @@ namespace MetrocamPan
         {
             if (e.ChosenPhoto == null)
                 return;
+
+            tookPhoto = false;
 
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
