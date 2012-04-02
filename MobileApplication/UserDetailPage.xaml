@@ -45,11 +45,11 @@
                             
                             <TextBlock x:Name="fullName" Grid.Row="0"
                                        Margin="12,0,0,0"
-                                       Text="Joe Martella"
+                                       Text="{Binding Name}"
                                        FontSize="{StaticResource PhoneFontSizeLarge}"/>
                             <TextBlock x:Name="hometown" Grid.Row="1"
                                        Margin="12,2,0,0"
-                                       Text="West Lafayette, IN"
+                                       Text="{Binding Location}"
                                        Foreground="{StaticResource PhoneSubtleBrush}"
                                        FontSize="{StaticResource PhoneFontSizeSmall}"/>
                             
@@ -77,7 +77,7 @@
                                     <StackPanel>
                                         <TextBlock Text="username" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="usernameTextBlock" Text="JoeM"
+                                        <TextBlock x:Name="usernameTextBlock" Text="{Binding Username}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"
                                                    Foreground="{StaticResource PhoneSubtleBrush}"/>
                                     </StackPanel>
@@ -88,10 +88,9 @@
                                         <TextBlock Text="biography" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
                                         <TextBlock x:Name="biographyTextBlock" TextWrapping="Wrap"
+                                                   Text="{Binding Biography}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"
-                                                   Foreground="{StaticResource PhoneSubtleBrush}">
-                                            <Run>I'm a Computer Science Senior studying at Purdue University. I'm a software engineer and I develop Windows Phone applications! By the way, I am a XAML god and yes you may worship me =P.</Run>
-                                        </TextBlock>
+                                                   Foreground="{StaticResource PhoneSubtleBrush}" />
                                     </StackPanel>
                                 </Grid>
 
@@ -99,7 +98,7 @@
                                     <StackPanel>
                                         <TextBlock Text="email" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="emailTextBlock" Text="joemartella@purdue.edu"
+                                        <TextBlock x:Name="emailTextBlock" Text="{Binding EmailAddress}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"
                                                    Foreground="{StaticResource PhoneAccentBrush}" Tap="SendEmail_Tap">
                                         </TextBlock>
@@ -110,7 +109,7 @@
                                     <StackPanel>
                                         <TextBlock Text="active since" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="activeSinceTextBlock" Text="20 February 2012"
+                                        <TextBlock x:Name="activeSinceTextBlock" Text="{Binding CreatedDate}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"
                                                    Foreground="{StaticResource PhoneSubtleBrush}">
                                         </TextBlock>

@@ -94,10 +94,18 @@ namespace MetrocamPan
             data.Password = this.passwordInput.Password;
             data.EmailAddress = this.emailInput.Text;
 
-            // Subscribe event to CreateUserCompleted
-            App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
-            // Calls CreateUser to WebService
-            App.MetrocamService.CreateUser(data);
+            try
+            {
+                // Subscribe event to CreateUserCompleted
+                App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
+
+                // Calls CreateUser to WebService
+                App.MetrocamService.CreateUser(data);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // TODO: waiting for Matt
+            }
         }
 
         private void MetrocamService_CreateUserCompleted(object sender, RequestCompletedEventArgs e)
