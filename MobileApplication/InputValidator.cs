@@ -25,6 +25,8 @@ namespace MetrocamPan
         public static int usernameUpperBoundary = 12;
         public static int passwordLowerBoundary = 6;
         public static int passwordUpperBoundary = 12;
+        public static int emailLowerBoundary = 12;
+        public static int emailUpperBoundary = 20;
 
         /*
          * Validates that the String is between the range specified

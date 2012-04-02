@@ -75,6 +75,10 @@ namespace MetrocamPan
         private void Accept_Click(object sender, EventArgs e)
         {
             // Validate Input
+            //      First checks username valid?
+            //      Then checks email valid?
+            //      Then checks password similar?
+            //      Then checks password strong?
             if (!InputValidator.isValidUsername(this.usernameInput.Text) ||
                 !InputValidator.isValidEmail(this.emailInput.Text) ||
                 !InputValidator.isPasswordSame(this.passwordInput.Password, this.confirmPasswordInput.Password) || 
