@@ -298,8 +298,10 @@ namespace MetrocamPan
         {
             if (bitmap == null) return;
 
-            // First apply GrungeEffect
-            EffectItem item1 = new EffectItem(new GrungeEffect());
+            // First apply BrightnessContrastEffect
+            BrightnessContrastEffect bcEffect = new BrightnessContrastEffect();
+            bcEffect.ContrastFactor = 0.2f;
+            EffectItem item1 = new EffectItem(bcEffect);
             IEffect effect1 = item1.Effect;
 
             var width = bitmap.PixelWidth;
