@@ -26,5 +26,25 @@ namespace MetrocamPan
             //user control in conjunction with twitter API
         }
 
+        private void originalCheck(object sender, RoutedEventArgs e)
+        {
+            Settings.saveOriginal.Value = true;
+        }
+
+        private void originalUncheck(object sender, RoutedEventArgs e)
+        {
+            Settings.saveOriginal.Value = false;
+        }
+
+        private void editedCheck(object sender, RoutedEventArgs e)
+        {
+            Settings.saveEdited.Value = true;
+        }
+
+        private void editedUncheck(object sender, RoutedEventArgs e)
+        {
+            Settings.saveEdited.Value = false;
+        }
+
     }
 }

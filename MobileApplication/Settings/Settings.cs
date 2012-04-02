@@ -14,5 +14,11 @@ namespace MetrocamPan
 
       public static readonly Setting<string> password =
           new Setting<string>("Password", "");
+
+      public static readonly Setting<bool> saveOriginal =
+          new Setting<bool>("SaveOriginal", false);
+
+      public static readonly Setting<bool> saveEdited =
+          new Setting<bool>("SaveEdited", false);
   }
 }
