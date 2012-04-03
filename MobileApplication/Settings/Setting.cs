@@ -15,6 +15,13 @@ namespace MetrocamPan
         {
             this.name = name;
             this.defaultValue = defaultValue;
+
+            /**
+             * Had to add this, otherwise, settings weren't being saved unless
+             * you tried to access it or change its value.
+             */
+            if (!IsolatedStorageSettings.ApplicationSettings.Contains(name))
+                IsolatedStorageSettings.ApplicationSettings[name] = defaultValue;
         }
 
         public T Value

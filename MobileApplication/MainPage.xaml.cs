@@ -291,7 +291,7 @@ namespace MetrocamPan
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
         {
             // Reset all isolate storage Setting objects to default values
-            Settings.resetToDefault();
+            Settings.logoutUser();
 
             changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }

@@ -1,33 +1,51 @@
 ﻿
 using System.Windows.Media;
 using System.Collections.ObjectModel;
+using System.IO.IsolatedStorage;
+using System;
 
 namespace MetrocamPan
 {
   public static class Settings
   {
-      public static readonly Setting<bool> isLoggedIn =
-          new Setting<bool>("IsLoggedIn", false);
+      public static Setting<bool> isLoggedIn = new Setting<bool>("isLoggedIn", false);
 
-      public static readonly Setting<string> username =
-          new Setting<string>("Username", "");
+      public static Setting<string> username;
+      public static Setting<string> password;
+      public static Setting<int>    userid;
+      public static Setting<bool>   saveOriginal;
+      public static Setting<bool>   saveEdited;
+      public static Setting<bool>   locationService;
 
-      public static readonly Setting<string> password =
-          new Setting<string>("Password", "");
+      public static void getSettings(String currentUser)
+      {
+          var iso = IsolatedStorageSettings.ApplicationSettings;
 
-      public static readonly Setting<int> userid =
-          new Setting<int>("Userid", -1);
+          // check to see if this user exists
+          if (!iso.Contains(currentUser + "Username"))
+          {
+              username        = new Setting<string>(currentUser + "Username", "");
+              password        = new Setting<string>(currentUser + "Password", "");
+              userid          = new Setting<int>(currentUser + "Userid", -1);
+              saveOriginal    = new Setting<bool>(currentUser + "SaveOriginal", false);
+              saveEdited      = new Setting<bool>(currentUser + "SaveEdited", false);
+              locationService = new Setting<bool>(currentUser + "LocationService", false);
+          }
+          else
+          {
+              username        = new Setting<string>(currentUser + "Username", (IsolatedStorageSettings.ApplicationSettings[currentUser + "Username"]).ToString());
+              password        = new Setting<string>(currentUser + "Username", (IsolatedStorageSettings.ApplicationSettings[currentUser + "Password"]).ToString());
+              userid          = new Setting<int>(currentUser + "Userid", Convert.ToInt32(IsolatedStorageSettings.ApplicationSettings[currentUser + "Userid"]));
+              saveOriginal    = new Setting<bool>(currentUser + "SaveOriginal", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveOriginal"]));
+              saveEdited      = new Setting<bool>(currentUser + "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
+              locationService = new Setting<bool>(currentUser + "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
+          }
+      }
 
-      // Setting for save original photo into media library
-      public static readonly Setting<bool> saveOriginal =
-          new Setting<bool>("SaveOriginal", false);
-
-      // Setting for save edited photo into media library
-      public static readonly Setting<bool> saveEdited =
-          new Setting<bool>("SaveEdited", false);
-
-      public static readonly Setting<bool> locationService =
-          new Setting<bool>("LocationService", false);
+      public static void logoutUser()
+      {
+          isLoggedIn.Value = false;
+      }
 
       // Reset all Setting objects to default values
       public static void resetToDefault()

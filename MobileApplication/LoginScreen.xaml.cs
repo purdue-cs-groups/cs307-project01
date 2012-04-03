@@ -32,8 +32,8 @@ namespace MetrocamPan
 
             try
             {
-                // Joe commented this out because I don't know a username/password combo lol
                 App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                
                 // Calls authenticate method
                 App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
             }
@@ -46,6 +46,10 @@ namespace MetrocamPan
 
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
+            App.MetrocamService.AuthenticateCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+
+            Settings.getSettings(this.usernameInput.Text);
+
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
             Settings.username.Value = this.usernameInput.Text;
