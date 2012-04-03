@@ -19,7 +19,7 @@ namespace MetrocamPan
 {
     public partial class CropPage : PhoneApplicationPage
     {
-        public int MAX_HEIGHT = 82;
+        public int MAX_HEIGHT = 133;
         public CropPage()
         {
             InitializeComponent();
