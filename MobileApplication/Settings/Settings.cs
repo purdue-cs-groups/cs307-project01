@@ -9,10 +9,10 @@ namespace MetrocamPan
   public static class Settings
   {
       public static Setting<bool> isLoggedIn = new Setting<bool>("isLoggedIn", false);
+      public static Setting<string> username = new Setting<string>("Username", ""); 
+      public static Setting<string> password = new Setting<string>("Password", "");
+      public static Setting<int>    userid   = new Setting<int>("Userid", -1);
 
-      public static Setting<string> username;
-      public static Setting<string> password;
-      public static Setting<int>    userid;
       public static Setting<bool>   saveOriginal;
       public static Setting<bool>   saveEdited;
       public static Setting<bool>   locationService;
@@ -22,20 +22,14 @@ namespace MetrocamPan
           var iso = IsolatedStorageSettings.ApplicationSettings;
 
           // check to see if this user exists
-          if (!iso.Contains(currentUser + "Username"))
+          if (!iso.Contains(currentUser + "SaveOriginal"))
           {
-              username        = new Setting<string>(currentUser + "Username", "");
-              password        = new Setting<string>(currentUser + "Password", "");
-              userid          = new Setting<int>(currentUser + "Userid", -1);
               saveOriginal    = new Setting<bool>(currentUser + "SaveOriginal", false);
               saveEdited      = new Setting<bool>(currentUser + "SaveEdited", false);
               locationService = new Setting<bool>(currentUser + "LocationService", false);
           }
           else
           {
-              username        = new Setting<string>(currentUser + "Username", (IsolatedStorageSettings.ApplicationSettings[currentUser + "Username"]).ToString());
-              password        = new Setting<string>(currentUser + "Username", (IsolatedStorageSettings.ApplicationSettings[currentUser + "Password"]).ToString());
-              userid          = new Setting<int>(currentUser + "Userid", Convert.ToInt32(IsolatedStorageSettings.ApplicationSettings[currentUser + "Userid"]));
               saveOriginal    = new Setting<bool>(currentUser + "SaveOriginal", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveOriginal"]));
               saveEdited      = new Setting<bool>(currentUser + "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
               locationService = new Setting<bool>(currentUser + "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
@@ -45,6 +39,8 @@ namespace MetrocamPan
       public static void logoutUser()
       {
           isLoggedIn.Value = false;
+          username.Value = "";
+          password.Value = "";
       }
 
       // Reset all Setting objects to default values
