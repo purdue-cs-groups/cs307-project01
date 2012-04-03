@@ -196,8 +196,8 @@
                                 <Grid>
                                     <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
                                     <TextBlock Margin="70,10,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
-                                    <TextBlock Text="3 hours ago" Margin="0,22,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,45,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
+                                    <TextBlock Text="3 hours ago" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,44,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
                                     <Grid Margin="20,495,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
