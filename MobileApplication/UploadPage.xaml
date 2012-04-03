@@ -33,7 +33,7 @@
 
         <!--ContentPanel - place additional content here-->
         <StackPanel Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:PhoneTextBox Hint="photo caption" ActualHintVisibility="Visible" Name="captionBox" KeyDown="captionKey" />
+            <toolkit:PhoneTextBox Hint="photo caption" ActualHintVisibility="Visible" Name="captionBox" KeyDown="captionKey" InputScope="Text" />
             <toolkit:ToggleSwitch Content="Share with Twitter" IsChecked="false" IsEnabled="False" />
             <toolkit:ToggleSwitch Content="Share with Facebook" IsChecked="false" IsEnabled="False" />
             <toolkit:ToggleSwitch Content="Share with foursquare" IsChecked="false" IsEnabled="False" />
