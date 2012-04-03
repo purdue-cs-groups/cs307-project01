@@ -26,7 +26,7 @@ namespace MetrocamPan
           {
               saveOriginal    = new Setting<bool>(currentUser + "SaveOriginal", false);
               saveEdited      = new Setting<bool>(currentUser + "SaveEdited", false);
-              locationService = new Setting<bool>(currentUser + "LocationService", false);
+              locationService = new Setting<bool>(currentUser + "LocationService", true);
           }
           else
           {
