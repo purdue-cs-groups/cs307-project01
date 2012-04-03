@@ -25,8 +25,6 @@ namespace MetrocamPan
         public static int usernameUpperBoundary = 12;
         public static int passwordLowerBoundary = 6;
         public static int passwordUpperBoundary = 12;
-        public static int emailLowerBoundary = 12;
-        public static int emailUpperBoundary = 20;
 
         /*
          * Validates that the String is between the range specified
@@ -41,7 +39,7 @@ namespace MetrocamPan
             // Check length
             if (str.Length < lower || str.Length > upper)
             {
-                MessageBox.Show("Please ensure your credentials is of appropriate length");
+                MessageBox.Show(nameOfInput + " must be between " + lower + " and " + upper + " characters long", "Invalid Input", MessageBoxButton.OK);
                 return false;
             }
 
@@ -59,6 +57,15 @@ namespace MetrocamPan
          */
         public static bool isStrongPassword(String password)
         {
+            String errorMessage =
+                    "must be between " + passwordLowerBoundary + " to " + passwordUpperBoundary + " in length"
+                    + "\r\n" +
+                    "cannot have special characters or spaces"
+                    + "\r\n" +
+                    "must have at least one number"
+                    + "\r\n" +
+                    "must have at least one capital letter";
+
             // Check for null
             if (password == null)
             {
@@ -66,9 +73,9 @@ namespace MetrocamPan
             }
 
             // Minimum and Maximum Length of field - 6 to 12 Characters
-            if (password.Length < 6 || password.Length > 12)
+            if (password.Length < passwordLowerBoundary || password.Length > passwordUpperBoundary)
             {
-                MessageBox.Show("Password must be between 6 to 12 characters");
+                MessageBox.Show(errorMessage, "Invalid Password", MessageBoxButton.OK);
                 return false;
             }
 
@@ -76,21 +83,21 @@ namespace MetrocamPan
             // Spaces - Not Allowed
             if (!(password.All(c => char.IsLetterOrDigit(c))))
             {
-                MessageBox.Show("Password cannot have special characters or spaces");
+                MessageBox.Show(errorMessage, "Invalid Password", MessageBoxButton.OK);
                 return false;
             }
 
             // Numeric Character - At least one character
             if (!password.Any(c => char.IsNumber(c)))
             {
-                MessageBox.Show("Password must have at least one number");
+                MessageBox.Show(errorMessage, "Invalid Password", MessageBoxButton.OK);
                 return false;
             }
 
             // At least one Capital Letter
             if (!password.Any(c => char.IsUpper(c)))
             {
-                MessageBox.Show("Password must have at least one capital alphabet");
+                MessageBox.Show(errorMessage, "Invalid Password", MessageBoxButton.OK);
                 return false;
             }
 
@@ -104,7 +111,7 @@ namespace MetrocamPan
         {
             if (!password1.Equals(password2))
             {
-                MessageBox.Show("Passwords entered do not match");
+                MessageBox.Show("Passwords entered do not match", "Invalid Password", MessageBoxButton.OK);
                 return false;
             }
             return true;
@@ -123,7 +130,7 @@ namespace MetrocamPan
             // Matches regex pattern
             if (!Regex.IsMatch(email, emailPattern))
             {
-                MessageBox.Show("Email address is not of valid format");
+                MessageBox.Show("Email address is not of valid format", "Invalid Email", MessageBoxButton.OK);
                 return false;
             }
 
@@ -139,6 +146,11 @@ namespace MetrocamPan
          */
         public static bool isValidUsername(String username)
         {
+            String errorMessage =
+                "must be between " + usernameLowerBoundary + " to " + usernameUpperBoundary + " in length"
+                + "\r\n" +
+                "cannot have special characters or spaces";
+
             // Check for null
             if (username == null)
             {
@@ -146,9 +158,9 @@ namespace MetrocamPan
             }
 
             // Minimum and Maximum Length of field - 4 to 12 Characters
-            if (username.Length < 4 || username.Length > 12)
+            if (username.Length < usernameLowerBoundary || username.Length > usernameUpperBoundary)
             {
-                MessageBox.Show("Username must be between 6 to 12 characters");
+                MessageBox.Show(errorMessage, "Invalid Username", MessageBoxButton.OK);
                 return false;
             }
 
@@ -156,10 +168,23 @@ namespace MetrocamPan
             // Spaces - Not Allowed
             if (!(username.All(c => char.IsLetterOrDigit(c))))
             {
-                MessageBox.Show("Username cannot have special characters or spaces");
+                MessageBox.Show(errorMessage, "Invalid Username", MessageBoxButton.OK);
                 return false;
             }
 
+            return true;
+        }
+
+        /*
+         * Checks whether this string is empty, returns true if empty
+         */
+        public static bool isNonEmpty(String input, String nameOfInput)
+        {
+            if (input.Trim().Length == 0)
+            {
+                MessageBox.Show("Please enter something for " + nameOfInput, "Invalid Input", MessageBoxButton.OK);
+                return false;
+            }
             return true;
         }
     }
