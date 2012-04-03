@@ -19,7 +19,7 @@ namespace MetrocamPan
 {
     public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {
-        public int MAX_WIDTH = 110;
+        public int MAX_WIDTH = 111;
 
         public static Image cropped = new Image();
         public static int x1 = 0;

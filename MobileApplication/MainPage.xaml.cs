@@ -332,6 +332,8 @@ namespace MetrocamPan
             picker.Show();
         }
 
+        public static int MAX_HEIGHT = 92;
+        public static int MAX_WIDTH = 110;
         void picker_Completed(object sender, PhotoResult e)
         {
             if (e.ChosenPhoto == null)
@@ -356,7 +358,17 @@ namespace MetrocamPan
                 }
                 else
                 {
-                    NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
+                    double ratio = Convert.ToDouble(Convert.ToDouble(bmp.PixelHeight) / Convert.ToDouble(bmp.PixelWidth));
+
+                    if (ratio > 1.30 && ratio < 1.36)
+                    {
+                        MAX_HEIGHT = 133;
+                        NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
+                    }
+                    else
+                    {
+
+                    }
                 }
             });
         }

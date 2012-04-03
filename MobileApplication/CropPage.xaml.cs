@@ -19,14 +19,17 @@ namespace MetrocamPan
 {
     public partial class CropPage : PhoneApplicationPage
     {
+        public int MAX_HEIGHT = 82;
         public CropPage()
         {
             InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
+
+            MAX_HEIGHT = MainPage.MAX_HEIGHT;
             y1 = (int)cropArea.Margin.Top;
             y1min = y1;
-            y1max = y1 + 92;
+            y1max = y1 + MAX_HEIGHT;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -73,8 +76,8 @@ namespace MetrocamPan
             drag.Y += e.DeltaManipulation.Translation.Y;
             if (drag.Y < 0)
                 drag.Y = 0;
-            if (drag.Y > 92)
-                drag.Y = 92;
+            if (drag.Y > MAX_HEIGHT)
+                drag.Y = MAX_HEIGHT;
 
             int temp = y1 + (int)e.DeltaManipulation.Translation.Y;
             if (temp < y1min)
