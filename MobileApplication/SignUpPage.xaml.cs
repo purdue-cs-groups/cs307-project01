@@ -76,13 +76,15 @@ namespace MetrocamPan
         {
             // Validate Input
             //      First checks username valid?
-            //      Then checks email valid?
+            //      Then checks name empty?
             //      Then checks password similar?
             //      Then checks password strong?
+            //      Then checks email valid?
             if (!InputValidator.isValidUsername(this.usernameInput.Text) ||
-                !InputValidator.isValidEmail(this.emailInput.Text) ||
+                !InputValidator.isNonEmpty(this.fullnameInput.Text, "full name") ||
                 !InputValidator.isPasswordSame(this.passwordInput.Password, this.confirmPasswordInput.Password) || 
-                !InputValidator.isStrongPassword(this.passwordInput.Password))
+                !InputValidator.isStrongPassword(this.passwordInput.Password) ||
+                !InputValidator.isValidEmail(this.emailInput.Text))
             {
                 // Do nothing
                 return;

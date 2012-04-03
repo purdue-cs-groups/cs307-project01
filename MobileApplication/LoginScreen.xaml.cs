@@ -41,7 +41,6 @@ namespace MetrocamPan
             {
                 // TODO: waiting for Matt
             }
-            
         }
 
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
