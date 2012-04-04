@@ -76,6 +76,9 @@ namespace MetrocamPan
                 Dispatcher.BeginInvoke(() => 
                     popularHubTiles.DataContext = App.PopularPictures);
             }
+
+            if (App.RecentPictures.Count == 0)
+                Dispatcher.BeginInvoke(() => refreshRecentPictures());
         }       
 
         // When this page becomes active page in a frame
