@@ -96,7 +96,7 @@ namespace MetrocamPan
         {
             if (flag)
             {
-                
+                Settings.getSettings(Settings.username.Value);
             }
             else
             {
