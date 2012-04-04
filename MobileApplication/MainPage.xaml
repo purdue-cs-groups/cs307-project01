@@ -25,11 +25,13 @@
             <!--Panorama item one-->
             <controls:PanoramaItem Header="popular" IsTabStop="False" Margin="0,-15,0,0">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
-                    <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <!-- Title will be replaced with Username when Web Service is updated -->
-                                <toolkit:HubTile 
+                    <StackPanel>
+                        <TextBlock Name="LoadingMessage" Text="Good evening!" Margin="12,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" />
+                        <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <!-- Title will be replaced with Username when Web Service is updated -->
+                                    <toolkit:HubTile 
                                     Style="{StaticResource SmallHubTile}"
                                     Margin="12,12,0,0"
                                     DisplayNotification="True" 
@@ -39,15 +41,16 @@
                                     Message="{Binding ID}"
                                     Tag="{Binding UserID}"
                                     GroupTag="PopularTiles"
-                                    Tap="hubTilePictureTap" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <toolkit:WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
+                                    Tap="hubTilePictureTap" Loaded="HubTile_Loaded" Visibility="Collapsed" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <toolkit:WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </StackPanel>
                 </ScrollViewer>
             </controls:PanoramaItem>
 

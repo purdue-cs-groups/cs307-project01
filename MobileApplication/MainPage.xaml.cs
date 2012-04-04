@@ -415,5 +415,14 @@ namespace MetrocamPan
                     break;
             }
         }
+
+        private void HubTile_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (LoadingMessage.Visibility == Visibility.Visible)
+                LoadingMessage.Visibility = Visibility.Collapsed;
+
+            HubTile curr = sender as HubTile;
+            curr.Visibility = Visibility.Visible;
+        }
     }
 }
