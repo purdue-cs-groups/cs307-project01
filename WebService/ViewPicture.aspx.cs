@@ -22,9 +22,7 @@ namespace WebService
             if (id == null)
                 id = Page.RouteData.Values["id"].ToString();
 
-            Picture picture = PictureController.Fetch(id);
-
-            User user = UserController.Fetch(picture.UserID);
+            PictureInfo picture = PictureController.Fetch(id);
 
             // image
             this.imgPicture.ImageUrl = picture.MediumURL;
@@ -33,7 +31,7 @@ namespace WebService
             this.lblCaption.Text = picture.Caption;
             
             // username
-            this.lnkUsername.Text = user.Username;
+            this.lnkUsername.Text = picture.User.Username;
             this.lnkUsername.NavigateUrl = "#";
 
             // date

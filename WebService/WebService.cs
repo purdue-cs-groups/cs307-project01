@@ -186,13 +186,13 @@ namespace WebService
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
-        public Picture FetchPicture(string id)
+        public PictureInfo FetchPicture(string id)
         {
             return PictureController.Fetch(id);
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
-        public List<Picture> FetchNewsFeed()
+        public List<PictureInfo> FetchNewsFeed()
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -200,7 +200,7 @@ namespace WebService
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/popular/fetch")]
-        public List<Picture> FetchPopularNewsFeed()
+        public List<PictureInfo> FetchPopularNewsFeed()
         {
             return PictureController.FetchPopularNewsFeed();
         }
@@ -249,9 +249,9 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            Picture data = PictureController.Fetch(id);
+            PictureInfo data = PictureController.Fetch(id);
 
-            if (data.UserID == token.Identity.ID)
+            if (data.User.ID == token.Identity.ID)
             {
                 PictureController.Delete(data);
             }
@@ -266,7 +266,7 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            Picture data = PictureController.Fetch(id);
+            PictureInfo data = PictureController.Fetch(id);
 
             // TODO: we should log this action
             PictureController.Delete(data);

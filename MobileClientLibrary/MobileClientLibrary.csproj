@@ -75,6 +75,7 @@
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\PictureInfo.cs" />
     <Compile Include="Models\Relationship.cs" />
     <Compile Include="Models\UserConnectedAccount.cs" />
     <Compile Include="WebServiceClient.cs" />
