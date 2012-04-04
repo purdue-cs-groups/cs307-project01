@@ -187,11 +187,11 @@ namespace MetrocamPan
         {
             ShareLinkTask shareLinkTask = new ShareLinkTask();
 
-            shareLinkTask.Title = pictureCaption.Text;
+            shareLinkTask.Title = "Shared via Metrocam";
 
             // replace with Web Application URL
             shareLinkTask.LinkUri = new Uri("http://metrocam.cloudapp.net/p/" + p.ID, UriKind.Absolute);
-            shareLinkTask.Message = "Shared via Metrocam";
+            shareLinkTask.Message = pictureCaption.Text; 
 
             shareLinkTask.Show();
         }
