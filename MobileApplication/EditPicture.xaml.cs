@@ -40,7 +40,12 @@ namespace MetrocamPan
         public EditPicture()
         {
             InitializeComponent();
+
+            // Initialize transparent color
             transparent = new SolidColorBrush(Colors.Transparent);
+
+            // Initially highlight "RemoveEffect/original"
+            this.OriginalGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         public static WriteableBitmap bitmap = null;
