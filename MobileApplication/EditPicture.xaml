@@ -30,142 +30,177 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image Source="{Binding CapturedSource}" Height="440" Margin="12,20,0,0" Name="capturedImage" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
-            <ScrollViewer Height="125" HorizontalAlignment="Left" Margin="12,468,0,0" Name="filterOptions" VerticalAlignment="Top" Width="440" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <Grid x:Name="OriginalGrid" Tap="RemoveEffect">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" VerticalAlignment="Top" />
-                        <TextBlock Grid.Row="1" Text="original" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+            <ScrollViewer Height="120" HorizontalAlignment="Left" Margin="12,468,0,0" Name="filterOptions" VerticalAlignment="Top" Width="440" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="BorderWrapper" HorizontalAlignment="Left" Orientation="Horizontal">
+                    
+                    <Border x:Name="OriginalGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="OriginalGrid" Tap="RemoveEffect" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" VerticalAlignment="Top" />
+                            <TextBlock Grid.Row="1" Text="original" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="AntiqueGrid" Tap="ApplyAntique">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="antique" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="AntiqueGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="AntiqueGrid" Tap="ApplyAntique" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="antique" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="BettyGrid" Tap="ApplyBetty">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="betty" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="BettyGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="BettyGrid" Tap="ApplyBetty" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="betty" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="BlackAndWhiteGrid" Tap="ApplyBandW">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="b &amp; w" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="BlackAndWhiteBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="BlackAndWhiteGrid" Tap="ApplyBandW" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="b &amp; w" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="CyanGrid" Tap="ApplyCyan">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="cyan" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="CyanGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="CyanGrid" Tap="ApplyCyan" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="cyan" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="DawnGrid" Tap="ApplyDawn">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="dawn" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
 
-                    <Grid x:Name="GrungeGrid" Tap="ApplyGrunge">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="grunge" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="DawnGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="DawnGrid" Tap="ApplyDawn" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="dawn" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="PolaroidGrid" Tap="ApplyPolaroid">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="polaroid" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
 
-                    <Grid x:Name="PopGrid" Tap="ApplyPop">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="pop" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="GrungeGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="GrungeGrid" Tap="ApplyGrunge" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="grunge" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="RusticGrid" Tap="ApplyRustic">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="rustic" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="PolaroidGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="PolaroidGrid" Tap="ApplyPolaroid" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="polaroid" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="StormGrid" Tap="ApplyStorm">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="storm" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="PopGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="PopGrid" Tap="ApplyPop" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="pop" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="TiltShiftGrid" Tap="ApplyTiltShift">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="tilt shift" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="RusticGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="RusticGrid" Tap="ApplyRustic" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="rustic" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="WasabiGrid" Tap="ApplyWasabi">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="wasabi" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
 
-                    <Grid x:Name="YoshimotoGrid" Tap="ApplyYoshimoto">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="yoshimoto" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="StormGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="StormGrid" Tap="ApplyStorm" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="storm" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
-                    <Grid x:Name="GoGoGaGa" Tap="ApplyGoGoGaGa">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" Margin="0,0,24,0" />
-                        <TextBlock Grid.Row="1" Text="gogogaga" FontSize="18" TextAlignment="Center" Margin="0,0,24,0" />
-                    </Grid>
+                    <Border x:Name="TiltShiftGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="TiltShiftGrid" Tap="ApplyTiltShift" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="tilt shift" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="WasabiGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="WasabiGrid" Tap="ApplyWasabi" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="wasabi" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="YoshimotoGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="YoshimotoGrid" Tap="ApplyYoshimoto" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="yoshimoto" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="GoGoGaGaGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="GoGoGaGaGrid" Tap="ApplyGoGoGaGa" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="gogogaga" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    
                 </StackPanel>
             </ScrollViewer>
         </Grid>

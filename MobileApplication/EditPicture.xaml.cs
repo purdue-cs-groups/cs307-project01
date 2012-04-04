@@ -21,6 +21,9 @@ namespace MetrocamPan
 {
     public partial class EditPicture : PhoneApplicationPage
     {
+        // Transparent SolidColorBrush to paint BorderBrush
+        SolidColorBrush transparent;
+
         private ImageSource capturedSource;
         public ImageSource CapturedSource
         {
@@ -37,6 +40,12 @@ namespace MetrocamPan
         public EditPicture()
         {
             InitializeComponent();
+
+            // Initialize transparent color
+            transparent = new SolidColorBrush(Colors.Transparent);
+
+            // Initially highlight "RemoveEffect/original"
+            this.OriginalGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         public static WriteableBitmap bitmap = null;
@@ -71,11 +80,29 @@ namespace MetrocamPan
             }
         }
 
+        // Takes in an UIElementCollection, typecast to Border, and changes to transparent
+        private void MakeBorderTransparent()
+        {
+            UIElementCollection borderCollection = this.BorderWrapper.Children;
+
+            foreach (UIElement element in borderCollection)
+            {
+                Border b = (Border)element;
+                b.BorderBrush = transparent;
+            }
+        }
+
         private void RemoveEffect(object sender, System.Windows.Input.GestureEventArgs e)
         {
             capturedImage.Source = bitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.OriginalGridBorder.BorderBrush = (System.Windows.Media.Brush) Resources["PhoneAccentBrush"];
         }
 
         private void ApplyAntique(object sender, System.Windows.Input.GestureEventArgs e)
@@ -94,6 +121,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.AntiqueGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyBetty(object sender, System.Windows.Input.GestureEventArgs e)
@@ -112,6 +145,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.BettyGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyBandW(object sender, System.Windows.Input.GestureEventArgs e)
@@ -130,6 +169,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.BlackAndWhiteBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyCyan(object sender, System.Windows.Input.GestureEventArgs e)
@@ -148,6 +193,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.CyanGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyDawn(object sender, System.Windows.Input.GestureEventArgs e)
@@ -166,6 +217,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.DawnGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyPolaroid(object sender, System.Windows.Input.GestureEventArgs e)
@@ -184,6 +241,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.PolaroidGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyPop(object sender, System.Windows.Input.GestureEventArgs e)
@@ -202,6 +265,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.PopGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyRustic(object sender, System.Windows.Input.GestureEventArgs e)
@@ -220,6 +289,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.RusticGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyGrunge(object sender, System.Windows.Input.GestureEventArgs e)
@@ -238,6 +313,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.GrungeGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyStorm(object sender, System.Windows.Input.GestureEventArgs e)
@@ -256,6 +337,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.StormGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyWasabi(object sender, System.Windows.Input.GestureEventArgs e)
@@ -274,6 +361,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.WasabiGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyTiltShift(object sender, System.Windows.Input.GestureEventArgs e)
@@ -292,6 +385,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.TiltShiftGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyYoshimoto(object sender, System.Windows.Input.GestureEventArgs e)
@@ -310,6 +409,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.YoshimotoGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
         private void ApplyGoGoGaGa(object sender, System.Windows.Input.GestureEventArgs e)
@@ -328,6 +433,12 @@ namespace MetrocamPan
             capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
+
+            // Make all other borderbrushes transparent
+            MakeBorderTransparent();
+
+            // Set this borderbrush to a noticable color
+            this.GoGoGaGaGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
     }
 }
