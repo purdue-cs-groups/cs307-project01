@@ -40,8 +40,7 @@
                                     Title="{Binding User.Username}" 
                                     Message="{Binding ID}"
                                     Tag="Pic"
-                                    GroupTag="PopularTiles"
-                                    Tap="hubTilePictureTap" Loaded="HubTile_Loaded" Visibility="Collapsed" />
+                                    GroupTag="PopularTiles" Loaded="HubTile_Loaded" Visibility="Collapsed" Tap="popularPicture_Tap" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                             <ListBox.ItemsPanel>
@@ -66,7 +65,7 @@
                                     <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
                                     <TextBlock Margin="70,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
                                     <TextBlock Text="{Binding FriendlyCreatedDate}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,44,0,0" Source="{Binding MediumURL}"  Height="460" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" Tap="newsFeedPictureTap" />
+                                    <Image Margin="20,44,0,0" Source="{Binding MediumURL}"  Height="460" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
                                     <Grid Margin="20,495,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -180,8 +179,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take pic" Click="ApplicationBarIconButton_Click" />
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic" Click="ApplicationBarIconButton_Click_1" />
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take pic" Click="CameraButton_Click" />
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.image.png" Text="choose pic" Click="ChoosePicture_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
                 <shell:ApplicationBarMenuItem Text="edit profile" Click="EditProfile_Click" />

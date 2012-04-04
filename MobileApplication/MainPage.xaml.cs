@@ -73,11 +73,6 @@ namespace MetrocamPan
             {            
                 Dispatcher.BeginInvoke(() => popularHubTiles.DataContext = App.PopularPictures);       
             }
-
-            if (App.RecentPictures.Count == 0)
-            {
-                refreshRecentPictures();
-            }
         }       
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -107,12 +102,9 @@ namespace MetrocamPan
         public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
-        /***************************************
-         ******* Popular Pivot Codebehind ******
-         ***************************************/
 
         public static HubTile selectedPicture;
-        private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void popularPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             HubTileService.FreezeGroup("PopularTiles");
 
@@ -145,6 +137,10 @@ namespace MetrocamPan
         }
         #endregion 
 
+        #endregion Popular Pivot Codebehind
+
+        #region News Feed Codebehind
+
         #region refreshRecent
 
         public void refreshRecentPictures()
@@ -175,29 +171,26 @@ namespace MetrocamPan
 
         #endregion 
 
-        #endregion Popular Pivot Codebehind
-
-        #region News Feed Codebehind
-        /***************************************
-         ***** News Feed Codebehind ************
-         ***************************************/
-
-        public static PictureInfo selectedNewsFeedPicture;
-        private void newsFeedPictureTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void recentPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
         }
+
+        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+        }
+
         #endregion News Feed Codebehind
 
         #region Application Bar Codebehind
-        /***************************************
-         ***** Application Bar Codebehind ******
-         ***************************************/
 
-        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        #region Camera Button 
+
+        private void CameraButton_Click(object sender, EventArgs e)
         {
             CameraCaptureTask cam = new CameraCaptureTask();
             cam.Completed += new EventHandler<PhotoResult>(cameraCaptureTask_Completed);
@@ -275,7 +268,9 @@ namespace MetrocamPan
             });
         }
 
-        // thanks, interwebs
+        /**
+         * rotates picture appropriately
+         */
         private Stream RotateStream(Stream stream, int angle)
         {
             stream.Position = 0;
@@ -326,35 +321,10 @@ namespace MetrocamPan
 
             changeVisibilityOfContent(Settings.isLoggedIn.Value);
         }
+        #endregion
 
-        private void Settings_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
-        }
-
-        private void UserSearch_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
-        }
-
-        #endregion Application Bar Codebehind
-
-        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
-        }
-
-        private void EditProfile_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
-        }
-
-        private void About_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
-        }
-
-        private void ApplicationBarIconButton_Click_1(object sender, EventArgs e)
+        #region ChoosePicture Button
+        private void ChoosePicture_Click(object sender, EventArgs e)
         {
             PhotoChooserTask picker = new PhotoChooserTask();
             picker.ShowCamera = false;
@@ -403,6 +373,34 @@ namespace MetrocamPan
                 }
             });
         }
+
+        #endregion
+
+        #region Menu Options
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void UserSearch_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
+        }
+
+        private void EditProfile_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        #endregion
+
+        #endregion Application Bar Codebehind
 
         // Event handler for the GeoCoordinateWatcher.StatusChanged event.
         public static Boolean hasLocationData = false;
