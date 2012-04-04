@@ -57,9 +57,6 @@ namespace MetrocamPan
             username.Value = "";
             password.Value = "";
             userid.Value = -1;
-            saveOriginal.Value = false;
-            saveEdited.Value = false;
-            locationService.Value = false;
         }
     }
 }

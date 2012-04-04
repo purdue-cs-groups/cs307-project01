@@ -15,9 +15,9 @@ using MobileClientLibrary;
 
 namespace MetrocamPan
 {
-    public partial class SignupPage : PhoneApplicationPage
+    public partial class SignUpPage : PhoneApplicationPage
     {
-        public SignupPage()
+        public SignUpPage()
         {
             InitializeComponent();
         }
