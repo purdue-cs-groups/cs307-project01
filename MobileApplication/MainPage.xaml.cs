@@ -114,8 +114,6 @@ namespace MetrocamPan
         public static HubTile selectedPicture;
         private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            PictureView.SenderPage = 1;
- 
             HubTileService.FreezeGroup("PopularTiles");
 
             HubTile tile = sender as HubTile;
