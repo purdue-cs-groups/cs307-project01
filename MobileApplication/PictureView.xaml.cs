@@ -39,21 +39,12 @@ namespace MetrocamPan
             // change drastically when the time comes
             if (SenderPage == 1)
             {
-                Picture p = (from pic in App.PopularPictures where pic.ID.Equals(MainPage.selectedPicture.Message.ToString()) select pic).First<Picture>();
+                PictureInfo p = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
 
-                String ownerName = MainPage.selectedPicture.Title;
-                String ownerID = MainPage.selectedPicture.Tag as String;
-                String pictureCaptionText = MainPage.selectedPicture.Notification;
-                String pictureTaken = p.FriendlyCreatedDate.ToString();
-                ImageSource pictureSource = MainPage.selectedPicture.Source;
-
-                pictureView.Source = pictureSource;
-                pictureOwnerName.Text = ownerName;     
-                pictureCaption.Text = pictureCaptionText;
-                pictureTakenTime.Text = pictureTaken;
-
-                ownerToGet = ownerID;
-                getOwner();
+                pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
+                pictureOwnerName.Text = p.User.Username;     
+                pictureCaption.Text = p.Caption;
+                pictureTakenTime.Text = p.FriendlyCreatedDate.ToString();
             }
             else if (SenderPage == 2)
             {
@@ -62,28 +53,6 @@ namespace MetrocamPan
                 pictureView.Source = p.Photo.Source;
                 pictureCaption.Text = p.Caption;*/
             }
-        }
-
-        private void getOwner()
-        {
-            // authenticate with user's credentials
-            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
-            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-        }
-
-        private void client_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            // unregister previous event handler
-            App.MetrocamService.AuthenticateCompleted -= client_AuthenticateCompleted;
-
-            App.MetrocamService.FetchUserCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
-            App.MetrocamService.FetchUser(ownerToGet);
-        }
-
-        void MetrocamService_FetchUserCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            User owner = e.Data as User;
-            pictureOwnerName.Text = owner.Username;
         }
 
         #region Application Bar Codebehind
