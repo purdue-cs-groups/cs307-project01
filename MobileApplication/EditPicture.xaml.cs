@@ -314,36 +314,18 @@ namespace MetrocamPan
 
         private void ApplyGoGoGaGa(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (bitmap == null) return;
+            EffectItem item = new EffectItem(new GoGoGaGaEffect());
+            IEffect effect = item.Effect;
 
-            // First apply BrightnessContrastEffect
-            BrightnessContrastEffect bcEffect = new BrightnessContrastEffect();
-            bcEffect.ContrastFactor = 0.2f;
-            EffectItem item1 = new EffectItem(bcEffect);
-            IEffect effect1 = item1.Effect;
+            if (bitmap == null) return;
 
             var width = bitmap.PixelWidth;
             var height = bitmap.PixelHeight;
-            var resultPixels = effect1.Process(bitmap.Pixels, width, height);
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
 
-            WriteableBitmap newBitmap1 = resultPixels.ToWriteableBitmap(width, height);
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
 
-            // Second, apply TiltShiftEffect with custom settings
-            TiltShiftEffect tsEffect = new TiltShiftEffect();
-            tsEffect.ContrastFactor = 0.2f;
-            tsEffect.Blurriness = 1.35f;
-            tsEffect.UpperFallOff = 0.20f;
-            tsEffect.LowerFallOff = 0.80f;
-
-            EffectItem item2 = new EffectItem(tsEffect);
-            IEffect effect2 = item2.Effect;
-
-            resultPixels = effect2.Process(newBitmap1.Pixels, width, height);
-
-            WriteableBitmap newBitmap2 = resultPixels.ToWriteableBitmap(width, height);
-
-            // newBitmap2 is final product
-            capturedImage.Source = newBitmap2;
+            capturedImage.Source = newBitmap;
             capturedImage.InvalidateArrange();
             capturedImage.InvalidateMeasure();
         }
