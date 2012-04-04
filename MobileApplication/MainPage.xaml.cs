@@ -34,6 +34,7 @@ namespace MetrocamPan
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
         public static double lng = 0;
+        public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         // Constructor
         public MainPage()
@@ -46,9 +47,9 @@ namespace MetrocamPan
             setUpLocation();
         }
 
+        // Set up location
         public static void setUpLocation()
         {
-            // set up location
             if (watcher == null)
             {
                 watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High); // using high accuracy
@@ -63,6 +64,7 @@ namespace MetrocamPan
         {
             if (isFromLogin)
             {
+                // Clear the entire back stack of this application
                 isFromLogin = false;
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
@@ -70,36 +72,29 @@ namespace MetrocamPan
             }
 
             if (popularHubTiles.ItemsSource == null)
-            {            
-                Dispatcher.BeginInvoke(() => popularHubTiles.DataContext = App.PopularPictures);       
+            {
+                Dispatcher.BeginInvoke(() => 
+                    popularHubTiles.DataContext = App.PopularPictures);
             }
         }       
 
+        // When this page becomes active page in a frame
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            changeVisibilityOfContent(Settings.isLoggedIn.Value);
-        }
-
-        /* 
-         * Change visibility of content based on flag
-         * true: only panorama MainContent is visible
-         * false: only tiled WelcomeScreen is visible 
-         */
-        private void changeVisibilityOfContent(bool flag)
-        {
-            if (flag)
+            // Checks if user is already logged in
+            if (Settings.isLoggedIn.Value)
             {
+                // User is already logged in, grab user Settings using the stored username
                 Settings.getSettings(Settings.username.Value);
             }
             else
             {
+                // Not logged in, navigate to landing page
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
             }
         }
-
-        public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
 
@@ -314,12 +309,14 @@ namespace MetrocamPan
             return targetStream;
         }
 
+        // Sign out
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
         {
             // Reset all isolate storage Setting objects to default values
             Settings.logoutUser();
 
-            changeVisibilityOfContent(Settings.isLoggedIn.Value);
+            // Navigate to landing page
+            NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
         }
         #endregion
 
