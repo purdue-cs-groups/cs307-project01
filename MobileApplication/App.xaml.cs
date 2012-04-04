@@ -13,6 +13,10 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using MobileClientLibrary;
+using MobileClientLibrary.Models;
+
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace MetrocamPan
 {
@@ -44,6 +48,27 @@ namespace MetrocamPan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            populatePopularPictures();
+        }
+
+        public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+        public void populatePopularPictures()
+        {
+            App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+            App.MetrocamService.FetchPopularNewsFeed();
+        }
+
+        void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            PopularPictures.Clear();
+
+            foreach (Picture p in e.Data as List<Picture>)
+            {
+                if (PopularPictures.Count == 24)
+                    continue;
+
+                PopularPictures.Add(p);
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

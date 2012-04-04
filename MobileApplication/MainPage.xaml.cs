@@ -68,7 +68,11 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
             }
 
-            populatePopularPictures();
+            if (popularHubTiles.ItemsSource == null)
+            {
+                popularHubTiles.ItemsSource = App.PopularPictures;
+            }
+
             populateRecentPictures();
         }
 
@@ -98,7 +102,6 @@ namespace MetrocamPan
 
         public static String APIToken;
         public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
-        public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
         public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
@@ -111,11 +114,12 @@ namespace MetrocamPan
         {
             PictureView.SenderPage = 1;
 
+            HubTileService.FreezeGroup("PopularTiles");
             selectedPicture = (HubTile) sender;
-            NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));          
         }
 
-        private void populatePopularPictures()
+        public void refreshPopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
             App.MetrocamService.FetchPopularNewsFeed();
@@ -123,17 +127,17 @@ namespace MetrocamPan
 
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            PopularPictures.Clear();
+            App.PopularPictures.Clear();
 
             foreach (Picture p in e.Data as List<Picture>) 
             {
-                if (PopularPictures.Count == 24)
+                if (App.PopularPictures.Count == 24)
                     continue;
 
-                PopularPictures.Add(p); 
+                App.PopularPictures.Add(p); 
             }
 
-            popularHubTiles.ItemsSource = PopularPictures;
+            popularHubTiles.ItemsSource = App.PopularPictures;
         }
 
         #endregion Popular Pivot Codebehind

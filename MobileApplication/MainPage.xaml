@@ -37,8 +37,8 @@
                                     Notification="{Binding Caption}" 
                                     Title="A Metrocammer" 
                                     Message="{Binding ID}"
-                                    Tag="{Binding FriendlyCreatedDate}"
-                                    GroupTag="{Binding UserID}"
+                                    Tag="{Binding UserID}"
+                                    GroupTag="PopularTiles"
                                     Tap="hubTilePictureTap" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>

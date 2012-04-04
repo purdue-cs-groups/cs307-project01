@@ -39,10 +39,12 @@ namespace MetrocamPan
             // change drastically when the time comes
             if (SenderPage == 1)
             {
+                Picture p = (from pic in App.PopularPictures where pic.ID.Equals(MainPage.selectedPicture.Message.ToString()) select pic).First<Picture>();
+
                 String ownerName = MainPage.selectedPicture.Title;
-                String ownerID = MainPage.selectedPicture.GroupTag;
+                String ownerID = MainPage.selectedPicture.Tag as String;
                 String pictureCaptionText = MainPage.selectedPicture.Notification;
-                String pictureTaken = MainPage.selectedPicture.Tag.ToString();
+                String pictureTaken = p.FriendlyCreatedDate.ToString();
                 ImageSource pictureSource = MainPage.selectedPicture.Source;
 
                 pictureView.Source = pictureSource;
@@ -221,6 +223,11 @@ namespace MetrocamPan
             shareLinkTask.Message = "Shared via Metrocam";
 
             shareLinkTask.Show();
+        }
+
+        private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HubTileService.UnfreezeGroup("PopularTiles");
         }
     }
 }
