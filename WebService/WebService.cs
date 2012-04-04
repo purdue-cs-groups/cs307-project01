@@ -354,7 +354,15 @@ namespace WebService
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
-        public List<User> FetchAllUsers()
+        public List<UserInfo> FetchAllUsers()
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            return UserController.FetchAll();
+        }
+
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?query={query}")]
+        public List<UserInfo> FetchAllUsers(string query)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -405,7 +413,7 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            User data = token.Identity;
+            UserInfo data = token.Identity;
             UserController.Delete(data);
 
             // TODO: delete all user pictures

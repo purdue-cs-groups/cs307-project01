@@ -36,7 +36,7 @@ namespace WebService.Controllers
             return new UserInfo(u, p);
         }
 
-        public static User FetchByUsername(string username)
+        public static UserInfo FetchByUsername(string username)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -44,10 +44,14 @@ namespace WebService.Controllers
             MongoCollection<User> users = database.GetCollection<User>("Users");
             var query = new QueryDocument("Username", username);
 
-            return users.FindOne(query);
+            User u = users.FindOne(query);
+
+            Picture p = PictureController.Fetch(u.ProfilePictureID);
+
+            return new UserInfo(u, p);
         }
 
-        public static User FetchByEmailAddress(string emailAddress)
+        public static UserInfo FetchByEmailAddress(string emailAddress)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -55,19 +59,71 @@ namespace WebService.Controllers
             MongoCollection<User> users = database.GetCollection<User>("Users");
             var query = new QueryDocument("EmailAddress", emailAddress);
 
-            return users.FindOne(query);
+            User u = users.FindOne(query);
+
+            Picture p = PictureController.Fetch(u.ProfilePictureID);
+
+            return new UserInfo(u, p);
         }
 
-        public static List<User> FetchAll()
+        public static List<UserInfo> FetchAll()
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
 
-            return users.FindAll().ToList<User>();
+            List<UserInfo> list = new List<UserInfo>();
+            foreach (User u in users.FindAll().ToList<User>())
+            {
+                Picture p = PictureController.Fetch(u.ProfilePictureID);
+                UserInfo i = new UserInfo(u, p);
+
+                list.Add(i);
+            }
+
+            return list;
         }
-        
+
+        public static List<UserInfo> FetchAll(string query)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<User> users = database.GetCollection<User>("Users");
+
+            List<UserInfo> list = new List<UserInfo>();
+
+            foreach (User u in users.Find(new QueryDocument("Name", query)).ToList<User>())
+            {
+                Picture p = PictureController.Fetch(u.ProfilePictureID);
+                UserInfo i = new UserInfo(u, p);
+
+                if (list.Contains(i) == false)
+                    list.Add(i);
+            } 
+            
+            foreach (User u in users.Find(new QueryDocument("Username", query)).ToList<User>())
+            {
+                Picture p = PictureController.Fetch(u.ProfilePictureID);
+                UserInfo i = new UserInfo(u, p);
+
+                if (list.Contains(i) == false)
+                    list.Add(i);
+            }
+
+            foreach (User u in users.Find(new QueryDocument("EmailAddress", query)).ToList<User>())
+            {
+                Picture p = PictureController.Fetch(u.ProfilePictureID);
+                UserInfo i = new UserInfo(u, p);
+
+                if (list.Contains(i) == false)
+                    list.Add(i);
+            }
+
+            return list;
+        }
+
         public static void Create(User data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
@@ -90,7 +146,7 @@ namespace WebService.Controllers
             users.Save(data);
         }
 
-        public static void Delete(User data)
+        public static void Delete(UserInfo data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);

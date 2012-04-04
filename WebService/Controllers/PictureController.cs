@@ -37,7 +37,7 @@ namespace WebService.Controllers
             return new PictureInfo(p, u);
         }
 
-        public static List<PictureInfo> FetchNewsFeed(User data)
+        public static List<PictureInfo> FetchNewsFeed(UserInfo data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);

@@ -8,7 +8,7 @@ namespace WebService.Common
 {
     public class AuthenticationToken
     {
-        public AuthenticationToken(string uniqueIdentifier, User identity, APIConsumer consumer)
+        public AuthenticationToken(string uniqueIdentifier, UserInfo identity, APIConsumer consumer)
         {
             UniqueIdentifier = uniqueIdentifier;
             Identity = identity;
@@ -23,7 +23,7 @@ namespace WebService.Common
             set;
         }
 
-        public User Identity
+        public UserInfo Identity
         {
             get;
             set;

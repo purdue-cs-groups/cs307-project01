@@ -33,7 +33,7 @@ namespace WebService.Common
 
         public static bool IsValidUserCredentials(UserCredentials credential)
         {
-            User data = UserController.FetchByUsername(credential.Username);
+            UserInfo data = UserController.FetchByUsername(credential.Username);
 
             // if user is null, try looking up by email address
             if (data == null)
@@ -61,7 +61,7 @@ namespace WebService.Common
                 string uniqueIdentifier = Guid.NewGuid().ToString();
                 uniqueIdentifier = uniqueIdentifier.Replace("-", "");
 
-                User user = UserController.FetchByUsername(username);
+                UserInfo user = UserController.FetchByUsername(username);
 
                 APIConsumer apiConsumer = APIConsumerController.Fetch(key);
 
