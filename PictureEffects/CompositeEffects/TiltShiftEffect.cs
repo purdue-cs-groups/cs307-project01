@@ -16,7 +16,13 @@ namespace PictureEffects.CompositeEffects
 
         const float MaxFallOffFactor = 0.3f;
 
-        public string Name { get { return "Tilt Shift"; } }
+        public string Name 
+        { 
+            get 
+            { 
+                return "Tilt Shift"; 
+            } 
+        }
 
         /// <summary>
         /// The blurriness factor. 

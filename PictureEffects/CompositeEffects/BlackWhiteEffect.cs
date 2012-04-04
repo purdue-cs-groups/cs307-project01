@@ -26,7 +26,7 @@ namespace PictureEffects.CompositeEffects
         {
             get
             {
-                return "Black&White";
+                return "B & W";
             }
         }
 

@@ -24,7 +24,12 @@ namespace MetrocamPan
         // Transparent SolidColorBrush to paint BorderBrush
         SolidColorBrush transparent;
 
+        EffectItems imageFilters;
+
+        public static WriteableBitmap bitmap = null;
+        public static Image editedPicture = new Image();
         private ImageSource capturedSource;
+
         public ImageSource CapturedSource
         {
             get 
@@ -41,15 +46,16 @@ namespace MetrocamPan
         {
             InitializeComponent();
 
-            // Initialize transparent color
             transparent = new SolidColorBrush(Colors.Transparent);
 
+            imageFilters = new EffectItems();
+
+            LoadImageFilters();
+
             // Initially highlight "RemoveEffect/original"
-            this.OriginalGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
+            //this.OriginalGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
 
-        public static WriteableBitmap bitmap = null;
-        public static Image editedPicture = new Image();
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
         {
             if (!MainPage.isLandscape)
@@ -63,6 +69,31 @@ namespace MetrocamPan
 
             bitmap = new WriteableBitmap((BitmapSource)capturedSource);
             capturedImage.Source = CapturedSource;
+        }
+
+        private void LoadImageFilters()
+        {
+            if (ImageFiltersWrapper.ItemsSource == null)
+            {
+                ImageFiltersWrapper.ItemsSource = imageFilters;
+            }
+        }
+
+        // Apply image filter upon selection changed
+        private void ImageFiltersWrapper_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EffectItem item = (EffectItem)this.ImageFiltersWrapper.SelectedItem;
+            IEffect effect = item.Effect;
+
+            if (bitmap == null) return;
+
+            var width = bitmap.PixelWidth;
+            var height = bitmap.PixelHeight;
+            var resultPixels = effect.Process(bitmap.Pixels, width, height);
+
+            WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
+
+            this.capturedImage.Source = newBitmap;
         }
 
         private void Check_Click(object sender, EventArgs e)
@@ -80,6 +111,7 @@ namespace MetrocamPan
             }
         }
 
+        /*
         // Takes in an UIElementCollection, typecast to Border, and changes to transparent
         private void MakeBorderTransparent()
         {
@@ -440,5 +472,6 @@ namespace MetrocamPan
             // Set this borderbrush to a noticable color
             this.GoGoGaGaGridBorder.BorderBrush = (System.Windows.Media.Brush)Resources["PhoneAccentBrush"];
         }
+        */
     }
 }

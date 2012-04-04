@@ -19,10 +19,14 @@ namespace MetrocamPan.Models
     {
         public EffectItems()
         {
+            // Sort them in whatever order that will be displayed in EditPicture.xaml
+            // Concurrently sorted alphabetically
             Add(new Models.EffectItem(new AntiqueEffect()));
             Add(new Models.EffectItem(new BettyEffect()));
             Add(new Models.EffectItem(new BlackWhiteEffect()));
             Add(new Models.EffectItem(new CyanEffect()));
+            Add(new Models.EffectItem(new DawnEffect()));
+            Add(new Models.EffectItem(new GoGoGaGaEffect()));
             Add(new Models.EffectItem(new GrungeEffect()));
             Add(new Models.EffectItem(new PolaroidEffect()));
             Add(new Models.EffectItem(new PopEffect()));
@@ -31,8 +35,6 @@ namespace MetrocamPan.Models
             Add(new Models.EffectItem(new TiltShiftEffect()));
             Add(new Models.EffectItem(new WasabiEffect()));
             Add(new Models.EffectItem(new YoshimotoEffect()));
-            Add(new Models.EffectItem(new GoGoGaGaEffect()));
-            Add(new Models.EffectItem(new BrightnessContrastEffect()));
         }
     }
 }

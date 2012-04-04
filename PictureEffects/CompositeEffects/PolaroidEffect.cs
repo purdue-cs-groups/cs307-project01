@@ -15,7 +15,13 @@ namespace PictureEffects.CompositeEffects
         readonly TintEffect tintFx;
         readonly BitmapMixer mixer;
 
-        public string Name { get { return "Poladroid"; } }
+        public string Name 
+        {
+            get 
+            { 
+                return "Polaroid"; 
+            } 
+        }
 
         /// <summary>
         /// The blurriness factor. 
