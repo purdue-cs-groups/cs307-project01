@@ -29,7 +29,7 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
-        public static int SenderPage = 0; 
+        public static int SenderPage = 0;
         // 1 = Popular
         // 2 = News Feed
 
@@ -38,23 +38,12 @@ namespace MetrocamPan
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             // change drastically when the time comes
-            if (SenderPage == 1)
-            {
-                p = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
+            p = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
 
-                pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
-                pictureOwnerName.Text = p.User.Username;     
-                pictureCaption.Text = p.Caption;
-                pictureTakenTime.Text = p.FriendlyCreatedDate.ToString();
-            }
-            else if (SenderPage == 2)
-            {
-                p = MainPage.selectedNewsFeedPicture;
-                pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
-                pictureOwnerName.Text = p.User.Username;
-                pictureCaption.Text = p.Caption;
-                pictureTakenTime.Text = p.FriendlyCreatedDate.ToString();
-            }
+            pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
+            pictureOwnerName.Text = p.User.Username;
+            pictureCaption.Text = p.Caption;
+            pictureTakenTime.Text = p.FriendlyCreatedDate.ToString();
         }
 
         #region Application Bar Codebehind
@@ -71,8 +60,8 @@ namespace MetrocamPan
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
-        #endregion Application Bar Codebehind 
-     
+        #endregion Application Bar Codebehind
+
         private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
@@ -86,7 +75,7 @@ namespace MetrocamPan
 
             // replace with Web Application URL
             shareLinkTask.LinkUri = new Uri("http://metrocam.cloudapp.net/p/" + p.ID, UriKind.Absolute);
-            shareLinkTask.Message = pictureCaption.Text; 
+            shareLinkTask.Message = pictureCaption.Text;
 
             shareLinkTask.Show();
         }
