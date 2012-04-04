@@ -48,10 +48,11 @@ namespace MetrocamPan
             }
             else if (SenderPage == 2)
             {
-                /*Picture p = (from pic in MainPage.RecentPictures where pic.PictureID == Convert.ToInt16(MainPage.pictureID) select pic).First<Picture>();
-                pictureOwnerName.Text = p.Username;
-                pictureView.Source = p.Photo.Source;
-                pictureCaption.Text = p.Caption;*/
+                PictureInfo p = MainPage.selectedNewsFeedPicture;
+                pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
+                pictureOwnerName.Text = p.User.Username;
+                pictureCaption.Text = p.Caption;
+                pictureTakenTime.Text = p.FriendlyCreatedDate.ToString();
             }
         }
 

@@ -147,17 +147,16 @@ namespace MetrocamPan
          ***** News Feed Codebehind ************
          ***************************************/
 
-        public static String pictureID;
+        public static PictureInfo selectedNewsFeedPicture;
         private void newsFeedPictureTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            int index = recentPictures.SelectedIndex;
             PictureView.SenderPage = 2;
-
-            Image i = (Image) sender;
 
             // the Tag field of each Image on the News Feed will be the pictureID of the Picture
             // in the database
 
-            pictureID = i.Tag.ToString();  
+            selectedNewsFeedPicture = App.RecentPictures.ElementAt<PictureInfo>(index);
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
         #endregion News Feed Codebehind
