@@ -5,7 +5,7 @@ using MobileClientLibrary.Common;
 
 namespace MobileClientLibrary.Models
 {
-    public class PictureInfo
+    public class UserInfo
     {
         public string ID
         {
@@ -13,49 +13,43 @@ namespace MobileClientLibrary.Models
             set;
         }
 
-        public UserInfo User
+        public string Username
         {
             get;
             set;
         }
 
-        public string Caption
+        public string Name
         {
             get;
             set;
         }
 
-        public decimal Latitude
+        public string EmailAddress
         {
             get;
             set;
         }
 
-        public decimal Longitude
+        public string Password
         {
             get;
             set;
         }
 
-        public int ViewCount
+        public string Biography
         {
             get;
             set;
         }
 
-        public string LargeURL
+        public Picture ProfilePicture
         {
             get;
             set;
         }
 
-        public string MediumURL
-        {
-            get;
-            set;
-        }
-
-        public string SmallURL
+        public string Location
         {
             get;
             set;

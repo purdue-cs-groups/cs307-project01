@@ -21,6 +21,21 @@ namespace WebService.Controllers
             return users.FindOne(query);
         }
 
+        public static UserInfo FetchInfo(string id)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<User> users = database.GetCollection<User>("Users");
+            var query = new QueryDocument("_id", id);
+
+            User u = users.FindOne(query);
+
+            Picture p = PictureController.Fetch(u.ProfilePictureID);
+
+            return new UserInfo(u, p);
+        }
+
         public static User FetchByUsername(string username)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

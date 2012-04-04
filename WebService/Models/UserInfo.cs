@@ -10,21 +10,20 @@ using WebService.Common;
 
 namespace WebService.Models
 {
-    [DataContract(Name = "Picture")]
-    public class PictureInfo
+    [DataContract(Name = "User")]
+    public class UserInfo
     {
-        public PictureInfo(Picture p, UserInfo u)
+        public UserInfo(User u, Picture p)
         {
-            ID = p.ID;
-            User = u;
-            Caption = p.Caption;
-            Latitude = p.Latitude;
-            Longitude = p.Longitude;
-            ViewCount = p.ViewCount;
-            LargeURL = p.LargeURL;
-            MediumURL = p.MediumURL;
-            SmallURL = p.SmallURL;
-            CreatedDate = p.CreatedDate;
+            ID = u.ID;
+            Username = u.Username;
+            Name = u.Name;
+            EmailAddress = u.EmailAddress;
+            Password = u.Password;
+            Biography = u.Biography;
+            ProfilePicture = p;
+            Location = u.Location;
+            CreatedDate = u.CreatedDate;
         }
 
         [DataMember(Order = 0)]
@@ -36,62 +35,54 @@ namespace WebService.Models
         }
 
         [DataMember(Order = 1)]
-        public UserInfo User
+        public string Username
         {
             get;
             set;
         }
 
         [DataMember(Order = 2)]
-        public string Caption
+        public string Name
         {
             get;
             set;
         }
 
         [DataMember(Order = 3)]
-        public decimal Latitude
+        public string EmailAddress
+        {
+            get;
+            set;
+        }
+
+        public string Password
         {
             get;
             set;
         }
 
         [DataMember(Order = 4)]
-        public decimal Longitude
+        public string Biography
         {
             get;
             set;
         }
 
         [DataMember(Order = 5)]
-        public int ViewCount
+        public Picture ProfilePicture
         {
             get;
             set;
         }
 
         [DataMember(Order = 6)]
-        public string LargeURL
+        public string Location
         {
             get;
             set;
         }
 
         [DataMember(Order = 7)]
-        public string MediumURL
-        {
-            get;
-            set;
-        }
-
-        [DataMember(Order = 8)]
-        public string SmallURL
-        {
-            get;
-            set;
-        }
-
-        [DataMember(Order = 9)]
         public int CreatedDate
         {
             get;

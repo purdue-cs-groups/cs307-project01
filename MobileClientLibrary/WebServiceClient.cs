@@ -657,7 +657,7 @@ namespace MobileClientLibrary
                 {
                     string stringData = e.Result;
 
-                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<UserInfo>(stringData);
 
                     FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }

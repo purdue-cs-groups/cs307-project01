@@ -188,7 +188,7 @@ namespace WebService
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
         public PictureInfo FetchPicture(string id)
         {
-            return PictureController.Fetch(id);
+            return PictureController.FetchInfo(id);
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
@@ -249,7 +249,7 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            PictureInfo data = PictureController.Fetch(id);
+            PictureInfo data = PictureController.FetchInfo(id);
 
             if (data.User.ID == token.Identity.ID)
             {
@@ -266,7 +266,7 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            PictureInfo data = PictureController.Fetch(id);
+            PictureInfo data = PictureController.FetchInfo(id);
 
             // TODO: we should log this action
             PictureController.Delete(data);
@@ -343,11 +343,11 @@ namespace WebService
         #region User Methods
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?id={id}")]
-        public User FetchUser(string id)
+        public UserInfo FetchUser(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return UserController.Fetch(id);
+            return UserController.FetchInfo(id);
         }
 
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]

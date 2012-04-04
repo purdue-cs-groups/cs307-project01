@@ -22,7 +22,7 @@ namespace WebService
             if (id == null)
                 id = Page.RouteData.Values["id"].ToString();
 
-            PictureInfo picture = PictureController.Fetch(id);
+            PictureInfo picture = PictureController.FetchInfo(id);
 
             // image
             this.imgPicture.ImageUrl = picture.MediumURL;
