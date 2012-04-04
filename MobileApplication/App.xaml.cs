@@ -51,7 +51,7 @@ namespace MetrocamPan
             populatePopularPictures();
         }
 
-        public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<PictureInfo> PopularPictures = new ObservableCollection<PictureInfo>();
         public void populatePopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
@@ -62,7 +62,7 @@ namespace MetrocamPan
         {
             PopularPictures.Clear();
 
-            foreach (Picture p in e.Data as List<Picture>)
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (PopularPictures.Count == 24)
                     continue;

@@ -115,8 +115,11 @@ namespace MetrocamPan
             PictureView.SenderPage = 1;
 
             HubTileService.FreezeGroup("PopularTiles");
-            selectedPicture = (HubTile) sender;
-            NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));          
+
+            HubTile tile = sender as HubTile;
+            PictureInfo info = tile.DataContext as PictureInfo;
+
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));          
         }
 
         public void refreshPopularPictures()
@@ -129,7 +132,7 @@ namespace MetrocamPan
         {
             App.PopularPictures.Clear();
 
-            foreach (Picture p in e.Data as List<Picture>) 
+            foreach (PictureInfo p in e.Data as List<PictureInfo>) 
             {
                 if (App.PopularPictures.Count == 24)
                     continue;

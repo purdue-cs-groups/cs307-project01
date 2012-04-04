@@ -39,7 +39,7 @@
                                     Notification="{Binding Caption}" 
                                     Title="A Metrocammer" 
                                     Message="{Binding ID}"
-                                    Tag="{Binding UserID}"
+                                    Tag="{Binding User.Username}"
                                     GroupTag="PopularTiles"
                                     Tap="hubTilePictureTap" Loaded="HubTile_Loaded" Visibility="Collapsed" />
                                 </DataTemplate>
