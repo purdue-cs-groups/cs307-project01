@@ -42,7 +42,7 @@ namespace MetrocamPan
                 Picture p = (from pic in App.PopularPictures where pic.ID.Equals(MainPage.selectedPicture.Message.ToString()) select pic).First<Picture>();
 
                 String ownerName = MainPage.selectedPicture.Title;
-                String ownerID = MainPage.selectedPicture.Tag as String;
+                String ownerID = p.UserID;
                 String pictureCaptionText = MainPage.selectedPicture.Notification;
                 String pictureTaken = p.FriendlyCreatedDate.ToString();
                 ImageSource pictureSource = MainPage.selectedPicture.Source;
@@ -53,7 +53,7 @@ namespace MetrocamPan
                 pictureTakenTime.Text = pictureTaken;
 
                 ownerToGet = ownerID;
-                getOwner();
+                //getOwner();
             }
             else if (SenderPage == 2)
             {

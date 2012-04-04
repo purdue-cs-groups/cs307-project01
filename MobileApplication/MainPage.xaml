@@ -19,7 +19,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
         <!--Panorama control-->
-        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="metrocam" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0">
+        <controls:Panorama TitleTemplate="{StaticResource SmallPanoramaTitle}" x:Name="MainContent" Title="metrocam" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0" SelectionChanged="MainContent_SelectionChanged">
 
 
             <!--Panorama item one-->
@@ -27,7 +27,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
                     <StackPanel>
                         <TextBlock Name="LoadingMessage" Text="Good evening!" Margin="12,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" />
-                        <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75">
+                        <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75" ItemsSource="{Binding}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <!-- Title will be replaced with Username when Web Service is updated -->
@@ -59,14 +59,14 @@
             <!--RECENT -->
             <controls:PanoramaItem Header="recent" Margin="0,-15,0,0">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0">
-                    <ListBox Name="feed" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-6,0,0,75" HorizontalAlignment="Left">
+                    <ListBox Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-6,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetailTap" />
-                                    <TextBlock Margin="70,10,0,0" Text="{Binding Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
-                                    <TextBlock Text="3 hours ago" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,44,0,0"  Source="{Binding Photo.Source}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
+                                    <TextBlock Margin="70,10,0,0" Text="A Metrocammer"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailTap" />
+                                    <TextBlock Text="{Binding FriendlyCreatedDate}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <Image Margin="20,44,0,0"  Source="{Binding MediumURL}"  Height="460" HorizontalAlignment="Left" Name="recentPicture" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" Tag="{Binding PictureID}" />
                                     <Grid Margin="20,495,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
@@ -101,6 +101,11 @@
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
                     </ListBox>
                 </ScrollViewer>
             </controls:PanoramaItem>

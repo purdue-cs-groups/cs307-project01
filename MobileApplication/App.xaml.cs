@@ -17,6 +17,7 @@ using MobileClientLibrary.Models;
 
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace MetrocamPan
 {
@@ -48,10 +49,17 @@ namespace MetrocamPan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            populatePopularPictures();
+            if (Settings.isLoggedIn.Value)
+            {
+                populatePopularPictures();
+                populateRecentPictures();
+            }
         }
 
+        #region FetchPopular
+
         public static ObservableCollection<Picture> PopularPictures = new ObservableCollection<Picture>();
+
         public void populatePopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
@@ -70,6 +78,39 @@ namespace MetrocamPan
                 PopularPictures.Add(p);
             }
         }
+        #endregion
+
+        #region FetchRecent
+
+        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+
+        public void populateRecentPictures()
+        {
+            // authenticate with user's credentials
+            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(fetchRecent);
+            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+        }
+
+        private void fetchRecent(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+            App.MetrocamService.FetchNewsFeed();
+        }
+
+        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            RecentPictures.Clear();
+
+            foreach (Picture p in e.Data as List<Picture>)
+            {
+                if (RecentPictures.Count == 10)
+                    break;
+
+                RecentPictures.Add(p);
+            }
+        }
+
+        #endregion
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched

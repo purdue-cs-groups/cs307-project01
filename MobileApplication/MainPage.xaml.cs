@@ -25,6 +25,7 @@ using ExifLib;
 using System.Device;
 using System.Device.Location;
 using MobileClientLibrary.Models;
+using MobileClientLibrary;
 
 namespace MetrocamPan
 {
@@ -69,12 +70,10 @@ namespace MetrocamPan
             }
 
             if (popularHubTiles.ItemsSource == null)
-            {
-                popularHubTiles.ItemsSource = App.PopularPictures;
+            {            
+                Dispatcher.BeginInvoke(() => popularHubTiles.DataContext = App.PopularPictures);       
             }
-
-            populateRecentPictures();
-        }
+        }       
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -100,8 +99,6 @@ namespace MetrocamPan
             }
         }
 
-        public static String APIToken;
-        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
         public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
         #region Popular Pivot Codebehind
@@ -113,9 +110,10 @@ namespace MetrocamPan
         private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             PictureView.SenderPage = 1;
-
+ 
             HubTileService.FreezeGroup("PopularTiles");
             selectedPicture = (HubTile) sender;
+
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));          
         }
 
@@ -146,11 +144,6 @@ namespace MetrocamPan
         /***************************************
          ***** News Feed Codebehind ************
          ***************************************/
-        
-        private void populateRecentPictures()
-        {
-            RecentPictures.Clear();
-        }
 
         public static String pictureID;
         private void newsFeedPictureTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -419,10 +412,18 @@ namespace MetrocamPan
         private void HubTile_Loaded(object sender, RoutedEventArgs e)
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
+            {
                 LoadingMessage.Visibility = Visibility.Collapsed;
+            }
 
             HubTile curr = sender as HubTile;
             curr.Visibility = Visibility.Visible;
+        }
+
+        private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
+                Dispatcher.BeginInvoke(() => recentPictures.DataContext = App.RecentPictures);
         }
     }
 }
