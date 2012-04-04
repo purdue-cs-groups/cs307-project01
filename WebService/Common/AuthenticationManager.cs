@@ -46,10 +46,11 @@ namespace WebService.Common
                 return false;
         }
 
-        public static AuthenticationToken GenerateToken(string username)
+        public static AuthenticationToken GenerateToken(string key, string username)
         {
             AuthenticationToken token = null;
-            token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.Identity.Username == username);
+            token = TokenList.SingleOrDefault<AuthenticationToken>(t => t.Identity.Username == username &&
+                                                                        t.Consumer.Key == key);
 
             if (token != null)
             {
@@ -60,9 +61,11 @@ namespace WebService.Common
                 string uniqueIdentifier = Guid.NewGuid().ToString();
                 uniqueIdentifier = uniqueIdentifier.Replace("-", "");
 
-                User data = UserController.FetchByUsername(username);
+                User user = UserController.FetchByUsername(username);
 
-                token = new AuthenticationToken(uniqueIdentifier, data);
+                APIConsumer apiConsumer = APIConsumerController.Fetch(key);
+
+                token = new AuthenticationToken(uniqueIdentifier, user, apiConsumer);
 
                 TokenList.Add(token);
             }
@@ -101,7 +104,7 @@ namespace WebService.Common
             }
         }
 
-        private static string ParseUniqueIdentifider(OperationContext context)
+        public static string ParseUniqueIdentifider(OperationContext context)
         {
             var request = context.RequestContext.RequestMessage;
             var requestProperty = (HttpRequestMessageProperty)request.Properties[HttpRequestMessageProperty.Name];

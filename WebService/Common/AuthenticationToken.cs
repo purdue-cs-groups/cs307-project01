@@ -8,10 +8,11 @@ namespace WebService.Common
 {
     public class AuthenticationToken
     {
-        public AuthenticationToken(string uniqueIdentifier, User identity)
+        public AuthenticationToken(string uniqueIdentifier, User identity, APIConsumer consumer)
         {
             UniqueIdentifier = uniqueIdentifier;
             Identity = identity;
+            Consumer = consumer;
 
             LastAccessDate = DateTime.UtcNow;
         }
@@ -23,6 +24,12 @@ namespace WebService.Common
         }
 
         public User Identity
+        {
+            get;
+            set;
+        }
+
+        public APIConsumer Consumer
         {
             get;
             set;

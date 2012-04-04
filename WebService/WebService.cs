@@ -30,6 +30,8 @@ namespace WebService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/authenticate")]
         public Token Authenticate(Stream data)
         {
+            string key = AuthorizationManager.ParseAPIKey(OperationContext.Current);
+
             StreamReader reader = new StreamReader(data);
             string stringData = reader.ReadToEnd();
 
@@ -40,10 +42,11 @@ namespace WebService
 
             if (AuthenticationManager.IsValidUserCredentials(jsonData))
             {
-                AuthenticationToken token = AuthenticationManager.GenerateToken(jsonData.Username);
+                AuthenticationToken token = AuthenticationManager.GenerateToken(key, jsonData.Username);
 
                 Token jsonToken = new Token();
                 jsonToken.UniqueIdentifier = token.UniqueIdentifier;
+                jsonToken.User = UserController.FetchInfo(token.Identity.ID);
 
                 return jsonToken;
             }

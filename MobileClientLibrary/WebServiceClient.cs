@@ -39,11 +39,15 @@ namespace MobileClientLibrary
         private UserCredentials _Credentials = null;
         private string _Token = null;
 
-        private int _AuthenticationAttempts = 0;
-
         public WebServiceClient(string APIkey)
         {
             _APIKey = APIkey;
+        }
+
+        public UserInfo CurrentUser
+        {
+            get;
+            set;
         }
 
         #region Authentication Methods
@@ -55,8 +59,6 @@ namespace MobileClientLibrary
             _Credentials = new UserCredentials(username, this.HashPassword(password));
 
             var jsonData = JsonConvert.SerializeObject(_Credentials);
-
-            _AuthenticationAttempts++;
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(Authenticate_UploadStringCompleted);
@@ -76,7 +78,7 @@ namespace MobileClientLibrary
                     _IsAuthenticated = true;
                     _Token = jsonData.Token;
 
-                    _AuthenticationAttempts = 0;
+                    CurrentUser = jsonData.User;
 
                     AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
                 }
