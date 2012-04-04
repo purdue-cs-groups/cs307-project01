@@ -371,9 +371,15 @@ namespace WebService
             reader.Dispose();
 
             var jsonData = Json.Decode<User>(stringData);
+            
+            if (UserController.FetchByUsername(jsonData.Username) != null ||
+                UserController.FetchByEmailAddress(jsonData.EmailAddress) != null)
+            {
+                throw new Exception("A user with this Username or EmailAddress already exists!");
+            }
 
             // force server-side values
-            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;           
 
             UserController.Create(jsonData);
         }
