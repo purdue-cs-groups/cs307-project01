@@ -41,6 +41,9 @@ namespace MetrocamPan
           isLoggedIn.Value = false;
           username.Value = "";
           password.Value = "";
+
+          App.PopularPictures.Clear();
+          App.RecentPictures.Clear();
       }
 
       // Reset all Setting objects to default values

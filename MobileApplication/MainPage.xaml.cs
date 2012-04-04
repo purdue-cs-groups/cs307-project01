@@ -73,6 +73,11 @@ namespace MetrocamPan
             {            
                 Dispatcher.BeginInvoke(() => popularHubTiles.DataContext = App.PopularPictures);       
             }
+
+            if (App.RecentPictures.Count == 0)
+            {
+                refreshRecentPictures();
+            }
         }       
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -119,6 +124,7 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));          
         }
 
+        #region refreshPopular
         public void refreshPopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
@@ -139,6 +145,37 @@ namespace MetrocamPan
 
             popularHubTiles.ItemsSource = App.PopularPictures;
         }
+        #endregion 
+
+        #region refreshRecent
+
+        public void refreshRecentPictures()
+        {
+            // authenticate with user's credentials
+            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(fetchRecent);
+            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+        }
+
+        private void fetchRecent(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+            App.MetrocamService.FetchNewsFeed();
+        }
+
+        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.RecentPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                if (App.RecentPictures.Count == 10)
+                    break;
+
+                App.RecentPictures.Add(p);
+            }
+        }
+
+        #endregion 
 
         #endregion Popular Pivot Codebehind
 
