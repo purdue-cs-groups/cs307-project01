@@ -29,9 +29,9 @@
             <!-- StackPanel for user input fields -->
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="username"/>
-                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" Text="" />
+                <TextBox x:Name="usernameInput" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" Text="martellaj" />
                 <TextBlock Text="password" />
-                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" Password="" />
+                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" Password="password" />
             </StackPanel>
         </Grid>
     </Grid>
