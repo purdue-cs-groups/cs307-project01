@@ -28,7 +28,7 @@
 
         <!--ContentPanel contains image and filters-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image x:Name="capturedImage" Source="{Binding CapturedSource}" Height="440" Margin="12,20,0,0" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
+            <Image x:Name="CapturedImage" Source="{Binding CapturedSource}" Height="440" Margin="12,20,0,0" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
             <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,470,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
