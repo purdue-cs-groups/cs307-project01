@@ -30,18 +30,22 @@ namespace MetrocamPan
             }
             else
             {
-                saveOriginal = new Setting<bool>(currentUser + "SaveOriginal", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveOriginal"]));
-                saveEdited = new Setting<bool>(currentUser + "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
-                locationService = new Setting<bool>(currentUser + "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
+                saveOriginal = new Setting<bool>(currentUser + 
+                    "SaveOriginal", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveOriginal"]));
+                saveEdited = new Setting<bool>(currentUser + 
+                    "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
+                locationService = new Setting<bool>(currentUser + 
+                    "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
             }
         }
 
+        // Logout user and reset specific settings to default
         public static void logoutUser()
         {
-            isLoggedIn.Value = false;
-            username.Value = "";
-            password.Value = "";
+            // Change user specific settings to default
+            resetToDefault();
 
+            // Clear views
             App.PopularPictures.Clear();
             App.RecentPictures.Clear();
         }
