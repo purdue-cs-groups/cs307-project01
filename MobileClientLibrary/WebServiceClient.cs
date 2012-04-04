@@ -207,7 +207,7 @@ namespace MobileClientLibrary
                 {
                     string stringData = e.Result;
 
-                    var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<PictureInfo>(stringData);
 
                     FetchPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
@@ -251,7 +251,7 @@ namespace MobileClientLibrary
                 {
                     string stringData = e.Result;
 
-                    var jsonData = JsonConvert.DeserializeObject<List<Picture>>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<List<PictureInfo>>(stringData);
 
                     FetchNewsFeedCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
@@ -293,7 +293,7 @@ namespace MobileClientLibrary
                 {
                     string stringData = e.Result;
 
-                    var jsonData = JsonConvert.DeserializeObject<List<Picture>>(stringData);
+                    var jsonData = JsonConvert.DeserializeObject<List<PictureInfo>>(stringData);
 
                     FetchPopularNewsFeedCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }

@@ -13,9 +13,9 @@ namespace WebService
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Picture> pictures = PictureController.FetchPopularNewsFeed();
+            List<PictureInfo> pictures = PictureController.FetchPopularNewsFeed();
 
-            foreach (Picture picture in pictures)
+            foreach (PictureInfo picture in pictures)
             {
                 this.litDatabase.Text += "<div class=\"tile\">\n";
                 this.litDatabase.Text += "<a href=\"/p/" + picture.ID + "\">\n";
