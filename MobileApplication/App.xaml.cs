@@ -81,7 +81,7 @@ namespace MetrocamPan
 
         #region FetchRecent
 
-        public static ObservableCollection<Picture> RecentPictures = new ObservableCollection<Picture>();
+        public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
 
         public void populateRecentPictures()
         {
@@ -100,7 +100,7 @@ namespace MetrocamPan
         {
             RecentPictures.Clear();
 
-            foreach (Picture p in e.Data as List<Picture>)
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (RecentPictures.Count == 10)
                     break;
