@@ -49,9 +49,10 @@ namespace MetrocamPan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            populatePopularPictures();
+
             if (Settings.isLoggedIn.Value)
-            {
-                populatePopularPictures();
+            { 
                 populateRecentPictures();
             }
         }

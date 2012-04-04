@@ -55,17 +55,6 @@
                         </Grid>
                     </Border>
 
-                    <Border x:Name="BettyGridBorder" BorderBrush="Transparent" BorderThickness="1">
-                        <Grid x:Name="BettyGrid" Tap="ApplyBetty" HorizontalAlignment="Center" Margin="10 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
-                            <TextBlock Grid.Row="1" Text="betty" FontSize="18" TextAlignment="Center" />
-                        </Grid>
-                    </Border>
-
                     <Border x:Name="BlackAndWhiteBorder" BorderBrush="Transparent" BorderThickness="1">
                         <Grid x:Name="BlackAndWhiteGrid" Tap="ApplyBandW" HorizontalAlignment="Center" Margin="10 0">
                             <Grid.RowDefinitions>
@@ -74,6 +63,17 @@
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
                             <TextBlock Grid.Row="1" Text="b &amp; w" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+
+                    <Border x:Name="RusticGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="RusticGrid" Tap="ApplyRustic" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="buster" FontSize="18" TextAlignment="Center" />
                         </Grid>
                     </Border>
 
@@ -88,7 +88,6 @@
                         </Grid>
                     </Border>
 
-
                     <Border x:Name="DawnGridBorder" BorderBrush="Transparent" BorderThickness="1">
                         <Grid x:Name="DawnGrid" Tap="ApplyDawn" HorizontalAlignment="Center" Margin="10 0">
                             <Grid.RowDefinitions>
@@ -100,6 +99,16 @@
                         </Grid>
                     </Border>
 
+                    <Border x:Name="GoGoGaGaGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="GoGoGaGaGrid" Tap="ApplyGoGoGaGa" HorizontalAlignment="Center" Margin="10 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
+                            <TextBlock Grid.Row="1" Text="gogogaga" FontSize="18" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
 
                     <Border x:Name="GrungeGridBorder" BorderBrush="Transparent" BorderThickness="1">
                         <Grid x:Name="GrungeGrid" Tap="ApplyGrunge" HorizontalAlignment="Center" Margin="10 0">
@@ -134,18 +143,18 @@
                         </Grid>
                     </Border>
 
-                    <Border x:Name="RusticGridBorder" BorderBrush="Transparent" BorderThickness="1">
-                        <Grid x:Name="RusticGrid" Tap="ApplyRustic" HorizontalAlignment="Center" Margin="10 0">
+                    <Border x:Name="BettyGridBorder" BorderBrush="Transparent" BorderThickness="1">
+                        <Grid x:Name="BettyGrid" Tap="ApplyBetty" HorizontalAlignment="Center" Margin="10 0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
-                            <TextBlock Grid.Row="1" Text="rustic" FontSize="18" TextAlignment="Center" />
+                            <TextBlock Grid.Row="1" Text="shruti" FontSize="18" TextAlignment="Center" />
                         </Grid>
                     </Border>
-
-
+                    
+                    
                     <Border x:Name="StormGridBorder" BorderBrush="Transparent" BorderThickness="1">
                         <Grid x:Name="StormGrid" Tap="ApplyStorm" HorizontalAlignment="Center" Margin="10 0">
                             <Grid.RowDefinitions>
@@ -188,18 +197,7 @@
                             <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
                             <TextBlock Grid.Row="1" Text="yoshimoto" FontSize="18" TextAlignment="Center" />
                         </Grid>
-                    </Border>
-
-                    <Border x:Name="GoGoGaGaGridBorder" BorderBrush="Transparent" BorderThickness="1">
-                        <Grid x:Name="GoGoGaGaGrid" Tap="ApplyGoGoGaGa" HorizontalAlignment="Center" Margin="10 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" Width="90" Height="90" />
-                            <TextBlock Grid.Row="1" Text="gogogaga" FontSize="18" TextAlignment="Center" />
-                        </Grid>
-                    </Border>
+                    </Border>               
                     
                 </StackPanel>
             </ScrollViewer>
