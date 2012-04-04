@@ -52,7 +52,7 @@ namespace MetrocamPan
 
             this.progress.Children.Add(bar);
 
-            // login with user's credentials
+            // authenticate with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
             App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
         }

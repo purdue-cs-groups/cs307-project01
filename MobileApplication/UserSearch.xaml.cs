@@ -20,6 +20,7 @@ using Microsoft.Phone.Tasks;
 
 using System.IO;
 using ExifLib;
+using MobileClientLibrary.Models;
 
 namespace MetrocamPan
 {

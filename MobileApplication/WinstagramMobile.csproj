@@ -114,8 +114,6 @@
     </Compile>
     <Compile Include="Models\EffectItem.cs" />
     <Compile Include="Models\EffectItems.cs" />
-    <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>

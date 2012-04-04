@@ -17,6 +17,8 @@ using MetrocamPan.Models;
 using ExifLib;
 using System.Windows.Media.Imaging;
 using System.IO;
+using MobileClientLibrary.Models;
+using MobileClientLibrary;
 
 namespace MetrocamPan
 {
@@ -31,27 +33,55 @@ namespace MetrocamPan
         // 1 = Popular
         // 2 = News Feed
 
+        public static String ownerToGet = null;
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             // change drastically when the time comes
             if (SenderPage == 1)
             {
-                String pictureID = MainPage.selectedPicture.Message;
                 String ownerName = MainPage.selectedPicture.Title;
+                String ownerID = MainPage.selectedPicture.GroupTag;
                 String pictureCaptionText = MainPage.selectedPicture.Notification;
+                String pictureTaken = MainPage.selectedPicture.Tag.ToString();
                 ImageSource pictureSource = MainPage.selectedPicture.Source;
 
-                pictureOwnerName.Text = ownerName;
                 pictureView.Source = pictureSource;
+                pictureOwnerName.Text = ownerName;     
                 pictureCaption.Text = pictureCaptionText;
+                pictureTakenTime.Text = pictureTaken;
+
+                ownerToGet = ownerID;
+                getOwner();
             }
             else if (SenderPage == 2)
             {
-                Picture p = (from pic in MainPage.RecentPictures where pic.PictureID == Convert.ToInt16(MainPage.pictureID) select pic).First<Picture>();
+                /*Picture p = (from pic in MainPage.RecentPictures where pic.PictureID == Convert.ToInt16(MainPage.pictureID) select pic).First<Picture>();
                 pictureOwnerName.Text = p.Username;
                 pictureView.Source = p.Photo.Source;
-                pictureCaption.Text = p.Caption;
+                pictureCaption.Text = p.Caption;*/
             }
+        }
+
+        private void getOwner()
+        {
+            // authenticate with user's credentials
+            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
+            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+        }
+
+        private void client_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            // unregister previous event handler
+            App.MetrocamService.AuthenticateCompleted -= client_AuthenticateCompleted;
+
+            App.MetrocamService.FetchUserCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
+            App.MetrocamService.FetchUser(ownerToGet);
+        }
+
+        void MetrocamService_FetchUserCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            User owner = e.Data as User;
+            pictureOwnerName.Text = owner.Username;
         }
 
         #region Application Bar Codebehind

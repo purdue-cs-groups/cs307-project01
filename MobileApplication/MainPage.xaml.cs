@@ -24,6 +24,7 @@ using ExifLib;
 
 using System.Device;
 using System.Device.Location;
+using MobileClientLibrary.Models;
 
 namespace MetrocamPan
 {
@@ -67,6 +68,7 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
             }
 
+            populatePopularPictures();
             populateRecentPictures();
         }
 
@@ -113,6 +115,27 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
         }
 
+        private void populatePopularPictures()
+        {
+            App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+            App.MetrocamService.FetchPopularNewsFeed();
+        }
+
+        void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            PopularPictures.Clear();
+
+            foreach (Picture p in e.Data as List<Picture>) 
+            {
+                if (PopularPictures.Count == 24)
+                    continue;
+
+                PopularPictures.Add(p); 
+            }
+
+            popularHubTiles.ItemsSource = PopularPictures;
+        }
+
         #endregion Popular Pivot Codebehind
 
         #region News Feed Codebehind
@@ -123,27 +146,6 @@ namespace MetrocamPan
         private void populateRecentPictures()
         {
             RecentPictures.Clear();
-
-            // first pic
-            Picture p1 = new Picture();
-            p1.Username = "Joe";
-            p1.Caption = "It's Joe! He is helping to write this awesome Windows Phone 7 application.";
-            p1.PictureID = 001;
-            p1.Photo.Source = new BitmapImage(new Uri("Images/joe.jpg", UriKind.Relative));
-
-            RecentPictures.Add(p1);
-
-            // second pic
-            Picture p2 = new Picture();
-            p2.Username = "Matt";
-            p2.Caption = "It's Matt!";
-            p2.PictureID = 002;
-            p2.Photo.Source = new BitmapImage(new Uri("Images/matt.jpg", UriKind.Relative));
-
-            RecentPictures.Add(p2);
-
-            // set ItemSource
-            feed.ItemsSource = RecentPictures;
         }
 
         public static String pictureID;
