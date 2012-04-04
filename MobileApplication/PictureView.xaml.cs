@@ -34,12 +34,13 @@ namespace MetrocamPan
         // 2 = News Feed
 
         public static String ownerToGet = null;
+        public static PictureInfo p = null;
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             // change drastically when the time comes
             if (SenderPage == 1)
             {
-                PictureInfo p = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
+                p = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
 
                 pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
                 pictureOwnerName.Text = p.User.Username;     
@@ -48,7 +49,7 @@ namespace MetrocamPan
             }
             else if (SenderPage == 2)
             {
-                PictureInfo p = MainPage.selectedNewsFeedPicture;
+                p = MainPage.selectedNewsFeedPicture;
                 pictureView.Source = new BitmapImage(new Uri(p.MediumURL));
                 pictureOwnerName.Text = p.User.Username;
                 pictureCaption.Text = p.Caption;
@@ -189,7 +190,7 @@ namespace MetrocamPan
             shareLinkTask.Title = pictureCaption.Text;
 
             // replace with Web Application URL
-            shareLinkTask.LinkUri = new Uri("http://img.tgdaily.com/sites/default/files/stock/450teaser/steveballmer.jpg", UriKind.Absolute);
+            shareLinkTask.LinkUri = new Uri("http://metrocam.cloudapp.net/p/" + p.ID, UriKind.Absolute);
             shareLinkTask.Message = "Shared via Metrocam";
 
             shareLinkTask.Show();
