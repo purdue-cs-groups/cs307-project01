@@ -337,39 +337,42 @@ namespace MetrocamPan
         public static int MAX_WIDTH = 110;
         void picker_Completed(object sender, PhotoResult e)
         {
+            tookPhoto = false;
+
             if (e.ChosenPhoto == null)
                 return;
-
-            tookPhoto = false;
 
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
 
-            lat = info.GpsLatitude[1];
-            lng = info.GpsLongitude[1];
+            /**
+             * get image location
+             */
+            lat = info.GpsLatitude[0];
+            lng = info.GpsLongitude[0];
+
+            if (info.GpsLatitudeRef == ExifGpsLatitudeRef.South)
+                lat = lat * -1;
+
+            if (info.GpsLongitudeRef == ExifGpsLongitudeRef.West)
+                lng = lng * -1;
+            ///////////////////////
 
             bmp.SetSource(e.ChosenPhoto);
             captured.Source = bmp;
 
             Dispatcher.BeginInvoke(() =>
             {
-                if (bmp.PixelWidth > bmp.PixelHeight)
+                /**
+                 * determine if picture is Portrait or Landscape
+                 */
+                if ( (Convert.ToDouble(bmp.PixelHeight) /  Convert.ToDouble(bmp.PixelWidth)) < 1)
                 {
                     NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
                 else
                 {
-                    double ratio = Convert.ToDouble(Convert.ToDouble(bmp.PixelHeight) / Convert.ToDouble(bmp.PixelWidth));
-
-                    if (ratio > 1.30 && ratio < 1.36)
-                    {
-                        MAX_HEIGHT = 133;
-                        NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
-                    }
-                    else
-                    {
-
-                    }
+                    NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
                 }
             });
         }
