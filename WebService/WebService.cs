@@ -423,13 +423,13 @@ namespace WebService
 
         #region User Connected Account Methods
 
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/fetch?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/fetch?id={id}")]
         public UserConnectedAccount FetchUserConnectedAccount(string id)
         {
             return UserConnectedAccountController.Fetch(id);
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/create")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/create")]
         public void CreateUserConnectedAccount(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -449,7 +449,7 @@ namespace WebService
             UserConnectedAccountController.Create(jsonData);
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/update")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/update")]
         public void UpdateUserConnectedAccount(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -468,7 +468,7 @@ namespace WebService
             UserConnectedAccountController.Update(jsonData);
         }
 
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/connections/delete?id={id}")]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/delete?id={id}")]
         public void DeleteUserConnectedAccount(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
