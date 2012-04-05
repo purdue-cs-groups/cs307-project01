@@ -691,15 +691,6 @@ namespace MobileClientLibrary
             client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}", _APIKey, _Token)));
         }
 
-        public void FetchAllUsers(string query)
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            WebClient client = new WebClient();
-            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchAllUsers_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/fetch?key={0}&token={1}&query={2}", _APIKey, _Token, query)));
-        }
-
         private void FetchAllUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (FetchAllUsersCompleted != null)
@@ -711,6 +702,46 @@ namespace MobileClientLibrary
                     var jsonData = JsonConvert.DeserializeObject<List<UserInfo>>(stringData);
 
                     FetchAllUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler SearchUsersCompleted;
+
+        public void SearchUsers(string query)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(SearchUsers_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/search?key={0}&token={1}&query={2}", _APIKey, _Token, query)));
+        }
+
+        private void SearchUsers_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (SearchUsersCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<UserInfo>>(stringData);
+
+                    SearchUsersCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {

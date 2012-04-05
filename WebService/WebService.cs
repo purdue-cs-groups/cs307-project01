@@ -361,12 +361,12 @@ namespace WebService
             return UserController.FetchAll();
         }
 
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?query={query}")]
-        public List<UserInfo> FetchAllUsers(string query)
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/search?query={query}")]
+        public List<UserInfo> SearchUsers(string query)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return UserController.FetchAll();
+            return UserController.FetchAll(query);
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
