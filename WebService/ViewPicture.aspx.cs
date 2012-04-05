@@ -11,13 +11,16 @@ using WebService.Models;
 using WebService.Controllers;
 using System.Net;
 using System.Web.Helpers;
+using WebService.Common.TimeZone;
 
 namespace WebService
 {
-    public partial class ViewPicture : System.Web.UI.Page
+    public partial class ViewPicture : LocalizedTimeZonePageBase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            InitializeLocalTime(1);
+
             string id = Request.QueryString["id"];
             if (id == null)
                 id = Page.RouteData.Values["id"].ToString();
@@ -35,7 +38,8 @@ namespace WebService
             this.lnkUsername.NavigateUrl = "#";
 
             // date
-            this.lblDate.Text = picture.FriendlyCreatedDate.ToLongDateString() + " at " + picture.FriendlyCreatedDate.ToShortTimeString();
+            DateTime createdDate = ConvertUtcToLocalTime(picture.FriendlyCreatedDate);
+            this.lblDate.Text = createdDate.ToLongDateString() + " at " + createdDate.ToShortTimeString();
 
             string location;
             try

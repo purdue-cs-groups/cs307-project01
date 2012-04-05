@@ -84,6 +84,11 @@
     <Compile Include="Common\AuthenticationManager.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
+    <Compile Include="Common\TimeZone\DateTimeHelper.cs" />
+    <Compile Include="Common\TimeZone\Helper.cs" />
+    <Compile Include="Common\TimeZone\LocalizedTimeZonePageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Common\PictureURL.cs" />
     <Compile Include="Common\ErrorResponseHandler.cs" />
     <Compile Include="Common\Utilities.cs" />
@@ -117,7 +122,6 @@
     </Compile>
     <Compile Include="ViewPicture.aspx.cs">
       <DependentUpon>ViewPicture.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewPicture.aspx.designer.cs">
       <DependentUpon>ViewPicture.aspx</DependentUpon>
