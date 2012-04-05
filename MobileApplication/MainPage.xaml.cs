@@ -345,8 +345,15 @@ namespace MetrocamPan
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
 
-            lat = info.GpsLatitude[1];
-            lng = info.GpsLongitude[1];
+            lat = info.GpsLatitude[0];
+            lng = info.GpsLongitude[0];
+
+            if (info.GpsLatitudeRef == ExifGpsLatitudeRef.South)
+                lat = lat * -1;
+
+            if (info.GpsLongitudeRef == ExifGpsLongitudeRef.West)
+                lng = lng * -1;
+
 
             bmp.SetSource(e.ChosenPhoto);
             captured.Source = bmp;
