@@ -100,6 +100,8 @@ namespace MetrocamPan
              * client already authenticated, get user connected accounts if they exist
              *
              */
+            
+            /// BROKEN
             /*if (Settings.twitterAuth.Value)
             {
                 App.MetrocamService.FetchUserConnectedAccountCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserConnectedAccountCompleted);
