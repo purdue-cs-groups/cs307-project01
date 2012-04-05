@@ -366,7 +366,7 @@ namespace MetrocamPan
                 /**
                  * determine if picture is Portrait or Landscape
                  */
-                if (bmp.PixelWidth > bmp.PixelHeight)
+                if ((Convert.ToDouble(bmp.PixelWidth) /  Convert.ToDouble(bmp.PixelHeight)) < 1)
                 {
                     NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
