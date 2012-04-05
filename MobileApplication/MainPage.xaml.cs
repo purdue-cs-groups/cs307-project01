@@ -337,14 +337,17 @@ namespace MetrocamPan
         public static int MAX_WIDTH = 110;
         void picker_Completed(object sender, PhotoResult e)
         {
+            tookPhoto = false;
+
             if (e.ChosenPhoto == null)
                 return;
-
-            tookPhoto = false;
 
             e.ChosenPhoto.Position = 0;
             JpegInfo info = ExifReader.ReadJpeg(e.ChosenPhoto, e.OriginalFileName);
 
+            /**
+             * get image location
+             */
             lat = info.GpsLatitude[0];
             lng = info.GpsLongitude[0];
 
@@ -353,6 +356,12 @@ namespace MetrocamPan
 
             if (info.GpsLongitudeRef == ExifGpsLongitudeRef.West)
                 lng = lng * -1;
+            ///////////////////////
+
+
+            int imageHeight = info.Height;
+            int imageWidth  = info.Width;
+
 
 
             bmp.SetSource(e.ChosenPhoto);

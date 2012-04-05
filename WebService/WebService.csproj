@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="ViewPicture.aspx.cs">
       <DependentUpon>ViewPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewPicture.aspx.designer.cs">
       <DependentUpon>ViewPicture.aspx</DependentUpon>

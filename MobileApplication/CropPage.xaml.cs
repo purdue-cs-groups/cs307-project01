@@ -19,17 +19,19 @@ namespace MetrocamPan
 {
     public partial class CropPage : PhoneApplicationPage
     {
-        public int MAX_HEIGHT = 133;
+        public static Image cropped = new Image();
+        public static int min = 0;                      // the smallest value the top margin can be
+        public static int max = 0;                      // the largest value the top margin can be (i.e. margin that makes it even with originalImage)
+        public static int current = 0;                  // the current value of the top margin of the cropArea (gray square)
+   
         public CropPage()
         {
             InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
 
-            MAX_HEIGHT = MainPage.MAX_HEIGHT;
-            y1 = (int)cropArea.Margin.Top;
-            y1min = y1;
-            y1max = y1 + MAX_HEIGHT;
+            min = (int)cropArea.Margin.Top;
+            max = (int)originalPhoto.Height - (int)cropArea.Height;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -42,15 +44,11 @@ namespace MetrocamPan
             originalPhoto.Source = MainPage.captured.Source;
         }
 
-        public static Image cropped = new Image();
-        public static int y1 = 0;
-        public static int y1min = 0;
-        public static int y1max = 0;
         private void CropPhoto()
         {
             int y0 = (int)originalPhoto.Margin.Top;
 
-            int yDisplacement = y0 - y1;
+            int yDisplacement = y0 - current;
 
             WriteableBitmap wb = new WriteableBitmap((int)cropArea.Width, (int)cropArea.Height);
             TranslateTransform t = new TranslateTransform();
@@ -73,19 +71,23 @@ namespace MetrocamPan
         private TranslateTransform drag;
         private void cropArea_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
+            /**
+             *  all of this code keeps the picture within the boundaries
+             */
+
             drag.Y += e.DeltaManipulation.Translation.Y;
             if (drag.Y < 0)
                 drag.Y = 0;
-            if (drag.Y > MAX_HEIGHT)
-                drag.Y = MAX_HEIGHT;
+            if (drag.Y > max)
+                drag.Y = max;
 
-            int temp = y1 + (int)e.DeltaManipulation.Translation.Y;
-            if (temp < y1min)
-                y1 = y1min;
-            else if (temp > y1max)
-                y1 = y1max;
+            int temp = current + (int)e.DeltaManipulation.Translation.Y;
+            if (temp < min)
+                current = min;
+            else if (temp > max)
+                current = max;
             else
-                y1 = temp;
+                current = temp;
 
         }
     }
