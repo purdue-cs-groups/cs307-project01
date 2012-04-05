@@ -28,10 +28,10 @@ namespace MetrocamPan
         {
             InitializeComponent();
 
-            if (Settings.twitterAuth.Value)
+            /*if (Settings.twitterAuth.Value)
             {
                 twitterSwitch.IsEnabled = true;
-            }
+            }*/
         }
 
         private void captionKey(object sender, KeyEventArgs e)
