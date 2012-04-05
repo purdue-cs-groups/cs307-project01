@@ -36,6 +36,17 @@ namespace MetrocamPan
                 
                 // Calls authenticate method
                 App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+
+                /*Settings.getSettings(this.usernameInput.Text);
+
+                // For now, we set isLoggedIn to true
+                Settings.isLoggedIn.Value = true;
+                Settings.username.Value = this.usernameInput.Text;
+                Settings.password.Value = this.passwordInput.Password;
+
+                MainPage.isFromLogin = true;
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));*/
+                
             }
             catch (UnauthorizedAccessException ex)
             {
