@@ -41,8 +41,8 @@ namespace MetrocamPan
                 locationService = new Setting<bool>(currentUser + 
                     "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
                 
-                //twitterAuth = new Setting<bool>(currentUser +
-                    //"TwitterAuth", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "TwitterAuth"]));
+                twitterAuth = new Setting<bool>(currentUser +
+                    "TwitterAuth", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "TwitterAuth"]));
             }
         }
 

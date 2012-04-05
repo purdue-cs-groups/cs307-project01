@@ -166,9 +166,11 @@ namespace MetrocamPan
 
             uca = new UserConnectedAccount();
             uca.AccountName  = "Twitter";
-            uca.ClientSecret = 1;
-            //uca.ClientSecret = twitteruser.AccessTokenSecret;
+            uca.ClientSecret = twitteruser.AccessTokenSecret;
             uca.ClientToken  = twitteruser.AccessToken;
+
+            MainPage.TwitterSecret = uca.ClientSecret;
+            MainPage.TwitterToken = uca.ClientToken;
 
             if (String.IsNullOrEmpty(twitteruser.AccessToken) || String.IsNullOrEmpty(twitteruser.AccessTokenSecret))
             {
@@ -198,6 +200,7 @@ namespace MetrocamPan
             {
                 if (NavigationService.CanGoBack)
                 {
+                    Settings.twitterAuth.Value = true;
                     MessageBox.Show("You've successfully authorized Metrocam with your Twitter accout!");
                     NavigationService.GoBack();
                 }

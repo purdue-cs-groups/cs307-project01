@@ -20,6 +20,12 @@ using MobileClientLibrary.Models;
 using System.IO.IsolatedStorage;
 using Microsoft.Xna.Framework.Media;
 
+using Newtonsoft.Json;
+using Hammock.Authentication.OAuth;
+using Hammock;
+using Hammock.Web;
+using System.Text;
+
 namespace MetrocamPan
 {
     public partial class UploadPage : PhoneApplicationPage
@@ -28,10 +34,10 @@ namespace MetrocamPan
         {
             InitializeComponent();
 
-            /*if (Settings.twitterAuth.Value)
+            if (Settings.twitterAuth.Value)
             {
                 twitterSwitch.IsEnabled = true;
-            }*/
+            }
         }
 
         private void captionKey(object sender, KeyEventArgs e)
@@ -146,10 +152,52 @@ namespace MetrocamPan
                 data.MediumURL = result.MediumURL;
                 data.SmallURL = result.SmallURL;
 
+                if (twitterSwitch.IsChecked == true)
+                {
+                    var credentials = new OAuthCredentials
+                    {
+                        Type = OAuthType.ProtectedResource,
+                        SignatureMethod = OAuthSignatureMethod.HmacSha1,
+                        ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
+                        ConsumerKey = TwitterSettings.ConsumerKey,
+                        ConsumerSecret = TwitterSettings.ConsumerKeySecret,
+                        Token = MainPage.TwitterToken,
+                        TokenSecret = MainPage.TwitterSecret,
+                        Version = "1.0"
+                    };
+
+                    var restClient = new RestClient
+                    {
+                        Authority = TwitterSettings.StatusUpdateUrl,
+                        HasElevatedPermissions = true,
+                        Credentials = credentials,
+                        Method = WebMethod.Post
+                    };
+
+                    restClient.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                    String Message = data.Caption + " " + data.LargeURL;
+
+                    // Create a Rest Request and fire it
+                    var restRequest = new RestRequest
+                    {
+                        Path = "1/statuses/update.xml?status=" + Message,
+                    };
+
+                    var ByteData = Encoding.UTF8.GetBytes(Message);
+                    restRequest.AddPostContent(ByteData);
+                    restClient.BeginRequest(restRequest, new RestCallback(PostTweetRequestCallback));
+                }
+
                 // upload the picture object
                 App.MetrocamService.CreatePictureCompleted += new RequestCompletedEventHandler(client_CreatePictureCompleted);
                 App.MetrocamService.CreatePicture(data);
             });
+        }
+
+        private void PostTweetRequestCallback(RestRequest request, Hammock.RestResponse response, object obj)
+        {
+            ;
         }
 
         private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)

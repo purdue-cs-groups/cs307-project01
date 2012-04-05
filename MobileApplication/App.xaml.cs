@@ -95,6 +95,23 @@ namespace MetrocamPan
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
             App.MetrocamService.FetchNewsFeed();
+
+            /**
+             * client already authenticated, get user connected accounts if they exist
+             *
+             */
+            /*if (Settings.twitterAuth.Value)
+            {
+                App.MetrocamService.FetchUserConnectedAccountCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserConnectedAccountCompleted);
+                App.MetrocamService.FetchUserConnectedAccount(App.MetrocamService.CurrentUser.ID);
+            }*/
+        }
+
+        void MetrocamService_FetchUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            UserConnectedAccount uca = e.Data as UserConnectedAccount;
+            MainPage.TwitterToken = uca.ClientToken;
+            MainPage.TwitterSecret = uca.ClientSecret;
         }
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)

@@ -31,6 +31,9 @@ namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public static String TwitterToken  = null;
+        public static String TwitterSecret = null;
+
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
         public static double lng = 0;
