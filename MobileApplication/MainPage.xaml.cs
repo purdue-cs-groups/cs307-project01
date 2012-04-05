@@ -358,34 +358,21 @@ namespace MetrocamPan
                 lng = lng * -1;
             ///////////////////////
 
-
-            int imageHeight = info.Height;
-            int imageWidth  = info.Width;
-
-
-
             bmp.SetSource(e.ChosenPhoto);
             captured.Source = bmp;
 
             Dispatcher.BeginInvoke(() =>
             {
+                /**
+                 * determine if picture is Portrait or Landscape
+                 */
                 if (bmp.PixelWidth > bmp.PixelHeight)
                 {
                     NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
                 else
                 {
-                    double ratio = Convert.ToDouble(Convert.ToDouble(bmp.PixelHeight) / Convert.ToDouble(bmp.PixelWidth));
-
-                    if (ratio > 1.30 && ratio < 1.36)
-                    {
-                        MAX_HEIGHT = 133;
-                        NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
-                    }
-                    else
-                    {
-
-                    }
+                    NavigationService.Navigate(new Uri("/CropPage.xaml", UriKind.Relative));
                 }
             });
         }

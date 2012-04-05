@@ -20,18 +20,16 @@ namespace MetrocamPan
     public partial class CropPage : PhoneApplicationPage
     {
         public static Image cropped = new Image();
-        public static int min = 0;                      // the smallest value the top margin can be
-        public static int max = 0;                      // the largest value the top margin can be (i.e. margin that makes it even with originalImage)
-        public static int current = 0;                  // the current value of the top margin of the cropArea (gray square)
+
+        public int min = 0;                      // the smallest value the top margin can be
+        public int max = 0;                      // the largest value the top margin can be (i.e. margin that makes it even with originalImage)
+        public int current = 0;                  // the current value of the top margin of the cropArea (gray square)
    
         public CropPage()
         {
             InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
-
-            min = (int)cropArea.Margin.Top;
-            max = (int)originalPhoto.Height - (int)cropArea.Height;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -41,7 +39,25 @@ namespace MetrocamPan
 
         private void SetPhoto()
         {
+            double height = MainPage.bmp.PixelHeight;
+            double width  = MainPage.bmp.PixelWidth;
+            double ratio  = height / width;
+
+            if (ratio < 4.00 / 3.00)
+            {
+                originalPhoto.Height = Convert.ToInt32((height * originalPhoto.Width) / width);
+            }
+            else
+            {
+                originalPhoto.Width = Convert.ToInt32((width * originalPhoto.Height) / height);
+                cropArea.Height     = originalPhoto.Width;
+                cropArea.Width      = originalPhoto.Width;
+            }
+
             originalPhoto.Source = MainPage.captured.Source;
+
+            min = (int)cropArea.Margin.Top;
+            max = (int)originalPhoto.Height - (int)cropArea.Height;
         }
 
         private void CropPhoto()

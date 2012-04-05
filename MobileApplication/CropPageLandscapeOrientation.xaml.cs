@@ -20,9 +20,10 @@ namespace MetrocamPan
     public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {
         public static Image cropped = new Image();
-        public static int min = 0;                      // the smallest value the left margin can be
-        public static int max = 0;                      // the largest value the left margin can be (i.e. margin that makes it even with originalImage)
-        public static int current = 0;                  // the current value of the left margin of the cropArea (gray square)
+
+        public int min = 0;                      // the smallest value the left margin can be
+        public int max = 0;                      // the largest value the left margin can be (i.e. margin that makes it even with originalImage)
+        public int current = 0;                  // the current value of the left margin of the cropArea (gray square)
 
         public CropPageLandscapeOrientation()
         {
