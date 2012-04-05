@@ -19,22 +19,19 @@ namespace MetrocamPan
 {
     public partial class CropPageLandscapeOrientation : PhoneApplicationPage
     {
-        public int MAX_WIDTH = 111;
-
         public static Image cropped = new Image();
-        public static int x1 = 0;
-        public static int x1min = 0;
-        public static int x1max = 0;
+        public static int min = 0;                      // the smallest value the left margin can be
+        public static int max = 0;                      // the largest value the left margin can be (i.e. margin that makes it even with originalImage)
+        public static int current = 0;                  // the current value of the left margin of the cropArea (gray square)
 
         public CropPageLandscapeOrientation()
         {
             InitializeComponent();
-            InitializeComponent();
             drag = new TranslateTransform();
             cropArea.RenderTransform = drag;
-            x1 = (int)cropArea.Margin.Right;
-            x1min = x1;
-            x1max = x1 + MAX_WIDTH;
+
+            min = (int)cropArea.Margin.Left;
+            max = (int)originalPhoto.Width - (int)cropArea.Width;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -49,9 +46,9 @@ namespace MetrocamPan
 
         private void CropPhoto()
         {
-            int x0 = (int)originalPhoto.Margin.Right;
+            int x0 = (int)originalPhoto.Margin.Left;
 
-            int xDisplacement = x0 - x1;
+            int xDisplacement = x0 - current;
 
             WriteableBitmap wb = new WriteableBitmap((int)cropArea.Width, (int)cropArea.Height);
             TranslateTransform t = new TranslateTransform();
@@ -77,16 +74,16 @@ namespace MetrocamPan
             drag.X += e.DeltaManipulation.Translation.X;
             if (drag.X < 0)
                 drag.X = 0;
-            if (drag.X > MAX_WIDTH)
-                drag.X = MAX_WIDTH;
+            if (drag.X > max)
+                drag.X = max;
 
-            int temp = x1 + (int)e.DeltaManipulation.Translation.X;
-            if (temp < x1min)
-                x1 = x1min;
-            else if (temp > x1max)
-                x1 = x1max;
+            int temp = current + (int)e.DeltaManipulation.Translation.X;
+            if (temp < min)
+                current = min;
+            else if (temp > max)
+                current = max;
             else
-                x1 = temp;
+                current = temp;
         }
     }
 }
