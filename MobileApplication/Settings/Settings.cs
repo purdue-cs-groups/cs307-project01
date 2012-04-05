@@ -17,6 +17,8 @@ namespace MetrocamPan
         public static Setting<bool> saveEdited;
         public static Setting<bool> locationService;
 
+        public static Setting<bool> twitterAuth;
+
         public static void getSettings(String currentUser)
         {
             var iso = IsolatedStorageSettings.ApplicationSettings;
@@ -27,6 +29,8 @@ namespace MetrocamPan
                 saveOriginal = new Setting<bool>(currentUser + "SaveOriginal", false);
                 saveEdited = new Setting<bool>(currentUser + "SaveEdited", false);
                 locationService = new Setting<bool>(currentUser + "LocationService", true);
+                
+                twitterAuth = new Setting<bool>(currentUser + "TwitterAuth", false);
             }
             else
             {
@@ -36,6 +40,9 @@ namespace MetrocamPan
                     "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
                 locationService = new Setting<bool>(currentUser + 
                     "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
+                
+                twitterAuth = new Setting<bool>(currentUser +
+                    "TwitterAuth", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "TwitterAuth"]));
             }
         }
 

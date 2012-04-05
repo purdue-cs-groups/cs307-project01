@@ -11,6 +11,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
+ 
+
 namespace MetrocamPan
 {
     public partial class SettingsPage : PhoneApplicationPage
@@ -25,12 +27,6 @@ namespace MetrocamPan
                 oToggle.IsChecked = true;
             if (Settings.saveEdited.Value)
                 eToggle.IsChecked = true;
-        }
-
-        private void connectaccounts_Click(object sender, RoutedEventArgs e)
-        {
-            //enter twitter information
-            //user control in conjunction with twitter API
         }
 
         private void originalCheck(object sender, RoutedEventArgs e)
@@ -65,6 +61,11 @@ namespace MetrocamPan
             MainPage.lat = 0;
             MainPage.lng = 0;
             MainPage.watcher.Stop();
+        }
+
+        private void ConnectToTwitter_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TwitterAuthorizationPage.xaml", UriKind.Relative));
         }
 
     }
