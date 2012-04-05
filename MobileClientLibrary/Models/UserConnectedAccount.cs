@@ -31,7 +31,7 @@ namespace MobileClientLibrary.Models
             set;
         }
 
-        public int ClientSecret
+        public string ClientSecret
         {
             get;
             set;
