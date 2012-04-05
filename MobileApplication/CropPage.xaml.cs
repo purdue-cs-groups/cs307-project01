@@ -34,6 +34,7 @@ namespace MetrocamPan
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            drag.Y = 0;
             SetPhoto();
         }
 
@@ -47,29 +48,31 @@ namespace MetrocamPan
             {
                 originalPhoto.Height = Convert.ToInt32((height * originalPhoto.Width) / width);
             }
-            else
+            else if (ratio > 4.00 / 3.00)
             {
                 originalPhoto.Width = Convert.ToInt32((width * originalPhoto.Height) / height);
                 cropArea.Height     = originalPhoto.Width;
                 cropArea.Width      = originalPhoto.Width;
             }
+            else
+                ;
 
             originalPhoto.Source = MainPage.captured.Source;
 
-            min = (int)cropArea.Margin.Top;
-            max = (int)originalPhoto.Height - (int)cropArea.Height;
+            current = (int)cropArea.Margin.Top;
+            min     = (int)cropArea.Margin.Top;
+            max     = (int)originalPhoto.Height - (int)cropArea.Height;
         }
 
         private void CropPhoto()
         {
             int y0 = (int)originalPhoto.Margin.Top;
-
             int yDisplacement = y0 - current;
 
             WriteableBitmap wb = new WriteableBitmap((int)cropArea.Width, (int)cropArea.Height);
             TranslateTransform t = new TranslateTransform();
             t.Y = yDisplacement;
-            Point p = new Point((int)cropArea.Width, (int)cropArea.Height);
+            Point p = new Point((int)cropArea.Width / 2, (int)cropArea.Height / 2);
             t.Transform(p);
             wb.Render(originalPhoto, t);
             wb.Invalidate();
