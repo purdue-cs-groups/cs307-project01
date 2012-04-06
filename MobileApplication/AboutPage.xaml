@@ -54,23 +54,19 @@
 
             <!--Pivot item two-->
             <controls:PivotItem x:Name="privacy" Header="privacy">
-                <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="-12,-50,0,0">
-                    <StackPanel x:Name="stackpanelroot" Width="500" Height="650" Background="Transparent" Margin="0,12,0,0">
-                        <ScrollViewer Height="650" Width="500" VerticalScrollBarVisibility="Hidden">
-                            <TextBlock x:Name="displaybox" Margin="20" TextWrapping="Wrap"
-                            
-                                                   FontSize="{StaticResource PhoneFontSizeMedium}"
-                                                   Style="{StaticResource PhoneTextTitle2Style}">
-                                            <Run>Metrocam agrees not to share any of your shit with anyone (password, email, etc) but accepts no responsibility for information and photographs you freely share as a part of your profile.  Metrocam will not store your Twitter credentials, but might steal some snacks from you, if you have some.  Cheez its are always good.  Bacon ipsum dolor sit amet ground round fatback salami bacon pork chop flank, filet mignon boudin. Flank strip steak ribeye, tenderloin corned beef ham short loin ball tip capicola. Short ribs boudin spare ribs, flank fatback andouille t-bone pork chop shoulder meatloaf salami brisket strip steak filet mignon. Ham hock drumstick chicken, pastrami shankle short ribs hamburger spare ribs t-bone kielbasa pork jerky turducken. Beef ribs pork loin ball tip capicola, shank brisket hamburger bacon pig jowl ground round chicken leberkas flank sausage. Jowl tri-tip sirloin short ribs, ball tip tongue biltong corned beef ribeye.
-
-                                            Pastrami tongue jerky, biltong short ribs tenderloin pork belly. Leberkas chicken flank, sausage jerky ham ball tip t-bone short ribs shoulder pork chop tri-tip bacon. Corned beef prosciutto t-bone jowl rump leberkas, ham sausage ground round meatloaf turducken bacon bresaola jerky brisket. Meatball pork loin sausage t-bone kielbasa, biltong pancetta capicola leberkas tenderloin. Tongue shoulder tri-tip swine, filet mignon hamburger spare ribs jerky salami pork chop fatback biltong. (c) Metrocam 2012</Run>
+                <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="0,0">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                            <TextBlock x:Name="displaybox" TextWrapping="Wrap"
+                                       FontSize="{StaticResource PhoneFontSizeMedium}"
+                                       Height="Auto" Width="Auto"
+                                       VerticalAlignment="Top"
+                                       Style="{StaticResource PhoneTextTitle2Style}">
+                                <Run>
+                                    Metrocam agrees not to share any of your shit with anyone (password, email, etc) but accepts no responsibility for information and photographs you freely share as a part of your profile.  Metrocam will not store your Twitter credentials, but might steal some snacks from you, if you have some.  Cheez its are always good.  Bacon ipsum dolor sit amet ground round fatback salami bacon pork chop flank, filet mignon boudin. Flank strip steak ribeye, tenderloin corned beef ham short loin ball tip capicola. Short ribs boudin spare ribs, flank fatback andouille t-bone pork chop shoulder meatloaf salami brisket strip steak filet mignon. Ham hock drumstick chicken, pastrami shankle short ribs hamburger spare ribs t-bone kielbasa pork jerky turducken. Beef ribs pork loin ball tip capicola, shank brisket hamburger bacon pig jowl ground round chicken leberkas flank sausage. Jowl tri-tip sirloin short ribs, ball tip tongue biltong corned beef ribeye. Pastrami tongue jerky, biltong short ribs tenderloin pork belly. Leberkas chicken flank, sausage jerky ham ball tip t-bone short ribs shoulder pork chop tri-tip bacon. Corned beef prosciutto t-bone jowl rump leberkas, ham sausage ground round meatloaf turducken bacon bresaola jerky brisket. Meatball pork loin sausage t-bone kielbasa, biltong pancetta capicola leberkas tenderloin. Tongue shoulder tri-tip swine, filet mignon hamburger spare ribs jerky salami pork chop fatback biltong. (c) Metrocam 2012
+                                </Run>
                             </TextBlock>
                         </ScrollViewer>
-                        <!-- <Button x:Name="okbtn" HorizontalAlignment="Center" Content="ok" Width="216"/>-->
-                    </StackPanel>
-
                 </Grid>
-
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
@@ -96,5 +92,5 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
 </phone:PhoneApplicationPage>
