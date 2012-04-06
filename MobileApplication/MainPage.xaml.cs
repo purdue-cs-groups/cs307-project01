@@ -26,6 +26,7 @@ using System.Device;
 using System.Device.Location;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -76,7 +77,8 @@ namespace MetrocamPan
 
             if (popularHubTiles.ItemsSource == null)
             {
-                Dispatcher.BeginInvoke(() => 
+                GlobalLoading.Instance.IsLoading = true;
+                Dispatcher.BeginInvoke(() =>
                     popularHubTiles.DataContext = App.PopularPictures);
             }
 
@@ -462,6 +464,7 @@ namespace MetrocamPan
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
             {
+                GlobalLoading.Instance.IsLoading = false;
                 LoadingMessage.Visibility = Visibility.Collapsed;
             }
 
@@ -472,7 +475,11 @@ namespace MetrocamPan
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
-                Dispatcher.BeginInvoke(() => recentPictures.DataContext = App.RecentPictures);
+                Dispatcher.BeginInvoke(() => {
+                    GlobalLoading.Instance.IsLoading = true;
+                    recentPictures.DataContext = App.RecentPictures;
+                    GlobalLoading.Instance.IsLoading = false;
+                });
         }
     }
 }
