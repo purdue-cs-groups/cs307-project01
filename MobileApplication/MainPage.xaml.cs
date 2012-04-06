@@ -166,6 +166,9 @@ namespace MetrocamPan
                 if (App.RecentPictures.Count == 10)
                     break;
 
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
                 App.RecentPictures.Add(p);
             }
         }

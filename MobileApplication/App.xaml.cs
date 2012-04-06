@@ -18,6 +18,7 @@ using MobileClientLibrary.Models;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -50,11 +51,6 @@ namespace MetrocamPan
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             populatePopularPictures();
-
-            if (Settings.isLoggedIn.Value)
-            { 
-                populateRecentPictures();
-            }
         }
 
         #region FetchPopular
@@ -73,7 +69,10 @@ namespace MetrocamPan
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (PopularPictures.Count == 24)
-                    continue;
+                    break;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
                 PopularPictures.Add(p);
             }
@@ -87,15 +86,12 @@ namespace MetrocamPan
         public void populateRecentPictures()
         {
             // authenticate with user's credentials
-            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(fetchRecent);
+            // App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(GetUserConnectedAccounts);
             App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
         }
 
-        private void fetchRecent(object sender, RequestCompletedEventArgs e)
+        private void GetUserConnectedAccounts(object sender, RequestCompletedEventArgs e)
         {
-            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
-            App.MetrocamService.FetchNewsFeed();
-
             /**
              * client already authenticated, get user connected accounts if they exist
              *
@@ -114,19 +110,6 @@ namespace MetrocamPan
             UserConnectedAccount uca = e.Data as UserConnectedAccount;
             MainPage.TwitterToken = uca.ClientToken;
             MainPage.TwitterSecret = uca.ClientSecret;
-        }
-
-        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            RecentPictures.Clear();
-
-            foreach (PictureInfo p in e.Data as List<PictureInfo>)
-            {
-                if (RecentPictures.Count == 10)
-                    break;
-
-                RecentPictures.Add(p);
-            }
         }
 
         #endregion

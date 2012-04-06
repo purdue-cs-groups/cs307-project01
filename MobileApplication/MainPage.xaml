@@ -13,8 +13,12 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:helpers="clr-namespace:MetrocamPan.Helpers"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False" Opacity="1">
+    <phone:PhoneApplicationPage.Resources>
+        <helpers:FriendlierTime x:Key="FriendlierTime" />
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
@@ -64,7 +68,7 @@
                                 <Grid>
                                     <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
                                     <TextBlock Margin="70,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
-                                    <TextBlock Text="{Binding FriendlyCreatedDate}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                    <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
                                     <Image Margin="20,44,0,0" Source="{Binding MediumURL}"  Height="420" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="420" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
                                     <Grid Margin="20,455,0,0">
                                         <Grid.RowDefinitions>
