@@ -28,18 +28,7 @@ namespace MetrocamPan
 
         void EditProfile_Loaded(object sender, RoutedEventArgs e)
         {
-            // Subscribe event handler
-            App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
-            // Calls fetch user
-            App.MetrocamService.FetchUser(Settings.userid.Value);
-        }
-
-        void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
-        {
-            // Unsubscribe
-            App.MetrocamService.FetchUserCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
-
-            currentUser = (UserInfo)e.Data;
+            currentUser = App.MetrocamService.CurrentUser;
 
             this.ContentPanel.DataContext = currentUser;
         }

@@ -66,7 +66,6 @@ namespace MetrocamPan
             Settings.getSettings(this.usernameInput.Text);
 
             Settings.isLoggedIn.Value = true;
-            Settings.userid.Value = currentUser.ID;                     // Save ID, important.
             Settings.username.Value = currentUser.Username;
             Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
