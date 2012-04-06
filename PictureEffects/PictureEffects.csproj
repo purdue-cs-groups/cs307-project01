@@ -81,6 +81,7 @@
     <Compile Include="CompositeEffects\DawnEffect.cs" />
     <Compile Include="CompositeEffects\GoGoGaGaEffect.cs" />
     <Compile Include="CompositeEffects\GrungeEffect.cs" />
+    <Compile Include="CompositeEffects\OriginalEffect.cs" />
     <Compile Include="CompositeEffects\PolaroidEffect.cs" />
     <Compile Include="CompositeEffects\PopEffect.cs" />
     <Compile Include="CompositeEffects\RusticEffect.cs" />

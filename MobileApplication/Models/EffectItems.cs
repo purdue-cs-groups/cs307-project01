@@ -21,6 +21,7 @@ namespace MetrocamPan.Models
         {
             // Sort them in whatever order that will be displayed in EditPicture.xaml
             // Concurrently sorted alphabetically
+            Add(new Models.EffectItem(new OriginalEffect()));
             Add(new Models.EffectItem(new AntiqueEffect()));
             Add(new Models.EffectItem(new BettyEffect()));
             Add(new Models.EffectItem(new BlackWhiteEffect()));

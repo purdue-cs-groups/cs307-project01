@@ -43,8 +43,12 @@ namespace MetrocamPan
             InitializeComponent();
 
             imageFilters = new EffectItems();
+
             // data bind imageFilters to ListBox
             ImageFiltersWrapper.ItemsSource = imageFilters;
+
+            // set Original image filter to be highlight on default
+            ImageFiltersWrapper.SelectedItem = imageFilters.ElementAt(0);
         }
 
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
@@ -65,7 +69,17 @@ namespace MetrocamPan
         // Apply image filter upon selection changed
         private void ImageFiltersWrapper_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // If original filter is selected, remove filter effect
+            if (this.ImageFiltersWrapper.SelectedItem is OriginalEffect)
+            {
+                this.CapturedImage.Source = bitmap;
+                this.CapturedImage.InvalidateArrange();
+                this.CapturedImage.InvalidateMeasure();
+                return;
+            }
+
             EffectItem item = (EffectItem)this.ImageFiltersWrapper.SelectedItem;
+
             IEffect effect = item.Effect;
 
             if (bitmap == null) return;
