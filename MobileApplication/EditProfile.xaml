@@ -7,6 +7,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="clr-namespace:MetrocamPan.Helpers"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -31,13 +32,13 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="name" />
-                <TextBox InputScope="PersonalFullName" Name="usernameInput" Margin="-12,0,0,0" KeyDown="usernameInput_KeyDown" />
+                <TextBox x:Name="UsernameInput" Text="{Binding Name}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="UsernameInput_KeyDown" />
                 <TextBlock Text="email" />
-                <TextBox InputScope="PersonalFullName" Name="textBox1" Margin="-12,0,0,0" KeyDown="textBox1_KeyDown" />
+                <TextBox x:Name="EmailInput" Text="{Binding EmailAddress}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="EmailInput_KeyDown" />
                 <TextBlock Text="location" />
-                <TextBox InputScope="PersonalFullName" Name="textBox2" Margin="-12,0,0,0" KeyDown="textBox2_KeyDown" />
+                <TextBox x:Name="LocationInput" Text="{Binding Location}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="LocationInput_KeyDown" />
                 <TextBlock Text="bio" />
-                <TextBox InputScope="PersonalFullName" Name="textBox3" Text="" Margin="-12,0,0,0" TextWrapping="Wrap" Height="159" Width="Auto" KeyDown="textBox3_KeyDown" />
+                <TextBox x:Name="BiographyInput" Text="{Binding Biography}" InputScope="PersonalFullName" Margin="-12,0,0,0" TextWrapping="Wrap" Height="160" Width="Auto" KeyDown="BiographyInput_KeyDown" />
             </StackPanel>
         </Grid>
     </Grid>
