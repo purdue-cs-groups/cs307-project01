@@ -34,8 +34,8 @@
                 <Image Height="460" HorizontalAlignment="Left" Margin="12,56,0,0" Name="pictureView" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" />
 
                 <!-- Get owner picture from ownerID -->
-                <Image Height="40" HorizontalAlignment="Left" Margin="12,12,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="pictureOwnerPicture_Tap" />
-                <TextBlock Margin="62,22,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}"/>
+                <Image Height="40" HorizontalAlignment="Left" Margin="12,12,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
+                <TextBlock Margin="62,22,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetail_Tap" />
                 <TextBlock Text="3 hours ago" Margin="0,28,0,0"  Height="38" Name="pictureTakenTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
                 <Grid Margin="12,512,0,0">
                     <Grid.RowDefinitions>

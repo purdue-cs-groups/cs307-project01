@@ -41,9 +41,9 @@ namespace MetrocamPan
             pictureTakenTime.Text = CurrentPicture.FriendlyCreatedDate.ToString();
         }
 
-        private void pictureOwnerPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.User.ID, UriKind.Relative));
         }
 
         private void Share(object sender, EventArgs e)

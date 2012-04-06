@@ -180,10 +180,18 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
         }
 
-        private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
+
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.User.ID, UriKind.Relative));
+        }
+
+        private void ViewUserDetailFromUsername_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            TextBlock username = sender as TextBlock;
+            PictureInfo info = username.DataContext as PictureInfo;
 
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.User.ID, UriKind.Relative));
         }

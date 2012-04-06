@@ -51,7 +51,14 @@ namespace MetrocamPan
 
             // Set default text
             if (fetchedUser.Biography == null)
-                this.biographyTextBlock.Text = "unknown";
+                this.biographyTextBlock.Text = "Just another Metrocammer!";
+            else
+                biographyTextBlock.Text = fetchedUser.Biography;
+
+            if (fetchedUser.Location == null)
+                this.hometown.Text = "Earth";
+            else
+                hometown.Text = fetchedUser.Location;
 
             // Set created date (active since)
             DateTime activeSince = fetchedUser.FriendlyCreatedDate;
