@@ -18,7 +18,7 @@ namespace MetrocamPan
     public partial class EditProfile : PhoneApplicationPage
     {
         private UserInfo currentUser;
-
+      
         public EditProfile()
         {
             InitializeComponent();
