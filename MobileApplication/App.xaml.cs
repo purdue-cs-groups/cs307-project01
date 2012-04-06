@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using MetrocamPan.Helpers;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -149,6 +150,8 @@ namespace MetrocamPan
 
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+
+            GlobalLoading.Instance.Initialize(RootFrame);
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;

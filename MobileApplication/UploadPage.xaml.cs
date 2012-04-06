@@ -25,6 +25,7 @@ using Hammock.Authentication.OAuth;
 using Hammock;
 using Hammock.Web;
 using System.Text;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -58,10 +59,7 @@ namespace MetrocamPan
 
             captionBox.IsReadOnly = true;
 
-            ProgressBar bar = new ProgressBar();
-            bar.IsIndeterminate = true;
-
-            this.progress.Children.Add(bar);
+            GlobalLoading.Instance.IsLoading = true;
 
             // authenticate with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
@@ -202,6 +200,7 @@ namespace MetrocamPan
 
         private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            GlobalLoading.Instance.IsLoading = false;
             isUploading = false;
 
             // unregister previous event handler
