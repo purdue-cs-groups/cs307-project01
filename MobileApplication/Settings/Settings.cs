@@ -11,7 +11,7 @@ namespace MetrocamPan
         public static Setting<bool> isLoggedIn = new Setting<bool>("isLoggedIn", false);
         public static Setting<string> username = new Setting<string>("Username", "");
         public static Setting<string> password = new Setting<string>("Password", "");
-        public static Setting<int> userid = new Setting<int>("Userid", -1);
+        public static Setting<string> userid = new Setting<string>("Userid", "");
 
         public static Setting<bool> saveOriginal;
         public static Setting<bool> saveEdited;
@@ -63,7 +63,7 @@ namespace MetrocamPan
             isLoggedIn.Value = false;
             username.Value = "";
             password.Value = "";
-            userid.Value = -1;
+            userid.Value = "";
         }
     }
 }

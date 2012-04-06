@@ -18,7 +18,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <controls:Pivot Title="JOE MARTELLA">
             <!--PROFILE pivot item-->
-            <controls:PivotItem Header="profile">
+            <controls:PivotItem x:Name="profilePivot" Header="profile">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
                     <Grid x:Name="ProfilePanelLevel1">
                         <Grid.RowDefinitions>
@@ -34,7 +34,7 @@
                         <Image x:Name="profilePicture" Grid.Row="0" Grid.Column="0"
                                Height="140" Width="140"
                                Source="/MetrocamPan;component/Images/smallJoe.png"/>
-                        
+
                         <!--Right Column for fullname, hometown and rectangles-->
                         <Grid x:Name="ProfilePanelLevel2" Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
@@ -42,7 +42,7 @@
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="65"/>
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock x:Name="fullName" Grid.Row="0"
                                        Margin="12,0,0,0"
                                        Text="{Binding Name}"
@@ -52,7 +52,7 @@
                                        Text="{Binding Location}"
                                        Foreground="{StaticResource PhoneSubtleBrush}"
                                        FontSize="{StaticResource PhoneFontSizeSmall}"/>
-                            
+
                             <!--Grid for the 3 rectangles-->
                             <Grid x:Name="RectanglesPanel" Grid.Row="2">
                                 <Grid.ColumnDefinitions>
@@ -62,17 +62,21 @@
                                 <TextBlock Height="49" HorizontalAlignment="Left" Margin="60,17,0,0" Name="followingStatus" Text="Following" VerticalAlignment="Top" Width="Auto" />
                             </Grid>
                         </Grid>
-                        
+
                         <!--Rest of the data: username, bio, etc-->
                         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>    <!--Row for username-->
-                                    <RowDefinition/>    <!--Row for biography-->
-                                    <RowDefinition/>    <!--Row for email-->
-                                    <RowDefinition/>    <!--Row for active since-->
+                                    <RowDefinition/>
+                                    <!--Row for username-->
+                                    <RowDefinition/>
+                                    <!--Row for biography-->
+                                    <RowDefinition/>
+                                    <!--Row for email-->
+                                    <RowDefinition/>
+                                    <!--Row for active since-->
                                 </Grid.RowDefinitions>
-                                
+
                                 <Grid x:Name="usernameGrid" Grid.Row="0">
                                     <StackPanel>
                                         <TextBlock Text="username" Margin="0,12,0,0"
@@ -82,11 +86,12 @@
                                                    Foreground="{StaticResource PhoneSubtleBrush}"/>
                                     </StackPanel>
                                 </Grid>
-                                
+
                                 <Grid x:Name="bioGrid" Grid.Row="1">
                                     <StackPanel>
                                         <TextBlock Text="biography" Margin="0,12,0,0"
                                                    FontSize="{StaticResource PhoneFontSizeLarge}"/>
+
                                         <TextBlock x:Name="biographyTextBlock" TextWrapping="Wrap"
                                                    Text="{Binding Biography}"
                                                    FontSize="{StaticResource PhoneFontSizeSmall}"

@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary;
+using MobileClientLibrary.Models;
 
 namespace MetrocamPan
 {
@@ -58,12 +59,16 @@ namespace MetrocamPan
         {
             App.MetrocamService.AuthenticateCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
 
+            // Obtain UserInfo object from web service
+            UserInfo currentUser = App.MetrocamService.CurrentUser;
+
+            // Load user specific settings
             Settings.getSettings(this.usernameInput.Text);
 
-            // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
-            Settings.username.Value = this.usernameInput.Text;
-            Settings.password.Value = this.passwordInput.Password;
+            Settings.userid.Value = currentUser.ID;                     // Save ID, important.
+            Settings.username.Value = currentUser.Username;
+            Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
             MainPage.isFromLogin = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

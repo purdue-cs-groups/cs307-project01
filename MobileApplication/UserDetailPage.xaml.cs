@@ -34,22 +34,28 @@ namespace MetrocamPan
 
         void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
-            // Testing Data binding
-            user = new User();
-            user.Username = "JoeM";
-            user.Biography = "I'm a Computer Science Senior studying at Purdue University. I'm a software engineer and I develop Windows Phone applications! By the way, I am a XAML god and yes you may worship me =P.";
-            user.EmailAddress = "joemartella@purdue.edu";
-            //user.CreatedDate = System.DateTime.Today;
-            user.Name = "Joe Martella";
-            user.Location = "West Lafayette, Indiana";
+            // Subscribe event handler
+            App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
+            // Calls fetch user
+            App.MetrocamService.FetchUser(Settings.userid.Value);
+        }
 
-            // Set DataContexts
-            usernameGrid.DataContext = user;
-            bioGrid.DataContext = user;
-            emailGrid.DataContext = user;
-            activeSinceGrid.DataContext = user;
-            fullName.DataContext = user;
-            hometown.DataContext = user;
+        void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            // Always unsubscribe the event handler just in case
+            App.MetrocamService.FetchUserCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
+
+            UserInfo fetchedUser = (UserInfo)e.Data;
+
+            this.profilePivot.DataContext = fetchedUser;
+
+            // Set default text
+            if (fetchedUser.Biography == null)
+                this.biographyTextBlock.Text = "unknown";
+
+            // Set created date (active since)
+            DateTime activeSince = fetchedUser.FriendlyCreatedDate;
+            this.activeSinceTextBlock.Text = activeSince.ToString();
         }
 
         private void SendEmail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
