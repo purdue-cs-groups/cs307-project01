@@ -92,8 +92,7 @@ namespace MetrocamPan
             // Checks if user is already logged in
             if (Settings.isLoggedIn.Value)
             {
-                // User is already logged in, grab user Settings using the stored username
-                Settings.getSettings(Settings.username.Value);
+                ;
             }
             else
             {

@@ -11,8 +11,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="False">
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -29,7 +29,7 @@
         <!--ContentPanel contains image and filters-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Image x:Name="CapturedImage" Source="{Binding CapturedSource}" Height="440" Margin="12,20,0,0" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
-            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,470,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
+            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,465,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="10 0">
@@ -38,7 +38,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" VerticalAlignment="Top" Width="90" Height="90" />
-                            <TextBlock Grid.Row="1" Text="{Binding Name}" TextAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Bottom" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -83,35 +83,6 @@ namespace MetrocamPan
 
         public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
 
-        public void populateRecentPictures()
-        {
-            // authenticate with user's credentials
-            // App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(GetUserConnectedAccounts);
-            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-        }
-
-        private void GetUserConnectedAccounts(object sender, RequestCompletedEventArgs e)
-        {
-            /**
-             * client already authenticated, get user connected accounts if they exist
-             *
-             */
-            
-            /// BROKEN
-            /*if (Settings.twitterAuth.Value)
-            {
-                App.MetrocamService.FetchUserConnectedAccountCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserConnectedAccountCompleted);
-                App.MetrocamService.FetchUserConnectedAccount(App.MetrocamService.CurrentUser.ID);
-            }*/
-        }
-
-        void MetrocamService_FetchUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            UserConnectedAccount uca = e.Data as UserConnectedAccount;
-            MainPage.TwitterToken = uca.ClientToken;
-            MainPage.TwitterSecret = uca.ClientSecret;
-        }
-
         #endregion
 
         // Code to execute when the application is activated (brought to foreground)
