@@ -32,7 +32,7 @@ namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        public static String TwitterToken  = null;
+        public static String TwitterToken = null;
         public static String TwitterSecret = null;
 
         public static GeoCoordinateWatcher watcher;
@@ -40,12 +40,16 @@ namespace MetrocamPan
         public static double lng = 0;
         public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
 
+        public static bool isFromLandingPage = false;
+        public static bool isFromAppLaunch = false;
+        public static bool isFromAppActivate = false;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-            // Set the data context of the listbox control to the sample data
+            // Calls MainPage_Loaded when this page is constructed
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             setUpLocation();
@@ -63,44 +67,81 @@ namespace MetrocamPan
         }
 
         // Load data for the ViewModel Items
-        public static bool isFromLogin = false;
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (isFromLogin)
-            {
-                // Clear the entire back stack of this application
-                isFromLogin = false;
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-            }
-
             if (popularHubTiles.ItemsSource == null)
             {
                 GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
                     popularHubTiles.DataContext = App.PopularPictures);
             }
-
-            if (App.RecentPictures.Count == 0)
-                Dispatcher.BeginInvoke(() => refreshRecentPictures());
-        }       
+        }
 
         // When this page becomes active page in a frame
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            // Checks if user is already logged in
-            if (Settings.isLoggedIn.Value)
-            {
-                ;
-            }
-            else
+            // Checks if user is already logged in previously
+            if (!Settings.isLoggedIn.Value)
             {
                 // Not logged in, navigate to landing page
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
             }
+
+            // User is logged in previously, check how this app got to main page
+            if (isFromAppLaunch)
+            {
+                // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+            }
+            else if (isFromAppActivate)
+            {
+                // App is activated from tombstone. We need to authenticate, then populate Recent
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+            }
+            else if (isFromLandingPage)
+            {
+                // Reset back to false
+                isFromLandingPage = false;
+
+                // Clears back stack so user cannot go back to LandingPage(s)
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+
+                // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
+                populatePopularPictures();
+                fetchRecent();
+            }
+            else
+            {
+                // MainPage is navigated here from a page in the forward stack, so do nothing
+
+                // Unfreeze HubTiles
+                //HubTileService.UnfreezeGroup("PopularTiles");
+            }
+        }
+
+        void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            // Unsubcribe
+            App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+
+            if (isFromAppLaunch)
+            {
+                populatePopularPictures();
+            }
+            if (isFromAppLaunch || isFromAppActivate)
+            {
+                fetchRecent();
+            }
+
+            // Reset back to false
+            isFromAppLaunch = false;
+            isFromAppActivate = false;
         }
 
         #region Popular Pivot Codebehind
@@ -108,18 +149,17 @@ namespace MetrocamPan
         public static HubTile selectedPicture;
         private void popularPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            HubTileService.FreezeGroup("PopularTiles");
+            //HubTileService.FreezeGroup("PopularTiles");
 
             HubTile tile = sender as HubTile;
             PictureInfo info = tile.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));          
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
         }
 
-        #region refreshPopular
-        public void refreshPopularPictures()
+        public void populatePopularPictures()
         {
-            App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+            App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
             App.MetrocamService.FetchPopularNewsFeed();
         }
 
@@ -127,32 +167,22 @@ namespace MetrocamPan
         {
             App.PopularPictures.Clear();
 
-            foreach (PictureInfo p in e.Data as List<PictureInfo>) 
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (App.PopularPictures.Count == 24)
                     continue;
 
-                App.PopularPictures.Add(p); 
+                App.PopularPictures.Add(p);
             }
 
             popularHubTiles.ItemsSource = App.PopularPictures;
         }
-        #endregion 
 
         #endregion Popular Pivot Codebehind
 
         #region News Feed Codebehind
 
-        #region refreshRecent
-
-        public void refreshRecentPictures()
-        {
-            // authenticate with user's credentials
-            App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(fetchRecent);
-            App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-        }
-
-        private void fetchRecent(object sender, RequestCompletedEventArgs e)
+        private void fetchRecent()
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
             App.MetrocamService.FetchNewsFeed();
@@ -173,8 +203,6 @@ namespace MetrocamPan
                 App.RecentPictures.Add(p);
             }
         }
-
-        #endregion 
 
         private void recentPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -204,7 +232,7 @@ namespace MetrocamPan
 
         #region Application Bar Codebehind
 
-        #region Camera Button 
+        #region Camera Button
 
         private void CameraButton_Click(object sender, EventArgs e)
         {
@@ -384,7 +412,7 @@ namespace MetrocamPan
                 /**
                  * determine if picture is Portrait or Landscape
                  */
-                if ( (Convert.ToDouble(bmp.PixelHeight) /  Convert.ToDouble(bmp.PixelWidth)) < 1)
+                if ((Convert.ToDouble(bmp.PixelHeight) / Convert.ToDouble(bmp.PixelWidth)) < 1)
                 {
                     NavigationService.Navigate(new Uri("/CropPageLandscapeOrientation.xaml", UriKind.Relative));
                 }
@@ -475,7 +503,8 @@ namespace MetrocamPan
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
-                Dispatcher.BeginInvoke(() => {
+                Dispatcher.BeginInvoke(() =>
+                {
                     GlobalLoading.Instance.IsLoading = true;
                     recentPictures.DataContext = App.RecentPictures;
                     GlobalLoading.Instance.IsLoading = false;

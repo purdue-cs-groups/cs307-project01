@@ -24,6 +24,13 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            MainPage.isFromLandingPage = true;
+        }
+
         private void usernameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -84,7 +91,7 @@ namespace MetrocamPan
             //      Then checks email valid?
             if (!InputValidator.isValidUsername(this.usernameInput.Text) ||
                 !InputValidator.isNonEmpty(this.fullnameInput.Text, "full name") ||
-                !InputValidator.isPasswordSame(this.passwordInput.Password, this.confirmPasswordInput.Password) || 
+                !InputValidator.isPasswordSame(this.passwordInput.Password, this.confirmPasswordInput.Password) ||
                 !InputValidator.isStrongPassword(this.passwordInput.Password) ||
                 !InputValidator.isValidEmail(this.emailInput.Text))
             {
@@ -102,18 +109,11 @@ namespace MetrocamPan
             currentUser.Biography = "Just another Metrocammer!";
             currentUser.Location = "Metrocam City";
 
-            try
-            {
-                // Subscribe event to CreateUserCompleted
-                App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
+            // Subscribe event to CreateUserCompleted
+            App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
 
-                // Calls CreateUser to WebService
-                App.MetrocamService.CreateUser(currentUser);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                // TODO: waiting for Matt
-            }
+            // Calls CreateUser to WebService
+            App.MetrocamService.CreateUser(currentUser);
         }
 
         private void MetrocamService_CreateUserCompleted(object sender, RequestCompletedEventArgs e)
@@ -136,13 +136,14 @@ namespace MetrocamPan
             UserInfo obtainedUser = App.MetrocamService.CurrentUser;
 
             // Load user specific settings
-            Settings.getSettings(this.usernameInput.Text);
+            Settings.getUserSpecificSettings(obtainedUser.Username);
 
+            // Store into isolated storage
             Settings.isLoggedIn.Value = true;
             Settings.username.Value = currentUser.Username;
-            Settings.password.Value = currentUser.Password;      // As of now, currentUser.Password returns a hashed password.
+            Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
-            MainPage.isFromLogin = true;
+            MainPage.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 

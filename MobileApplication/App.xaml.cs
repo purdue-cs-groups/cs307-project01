@@ -27,6 +27,8 @@ namespace MetrocamPan
     {
         public static String APIKey = "4f7124f25ad9850a042a5f2d";
         public static WebServiceClient MetrocamService = null;
+        public static ObservableCollection<PictureInfo> PopularPictures = new ObservableCollection<PictureInfo>();
+        public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
         
         public PhoneApplicationFrame RootFrame { get; private set; }
 
@@ -51,57 +53,28 @@ namespace MetrocamPan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            populatePopularPictures();
+            MainPage.isFromAppLaunch = true;
         }
-
-        #region FetchPopular
-        public static ObservableCollection<PictureInfo> PopularPictures = new ObservableCollection<PictureInfo>();
-
-        public void populatePopularPictures()
-        {
-            App.MetrocamService.FetchPopularNewsFeedCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
-            App.MetrocamService.FetchPopularNewsFeed();
-        }
-
-        void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
-        {
-            PopularPictures.Clear();
-
-            foreach (PictureInfo p in e.Data as List<PictureInfo>)
-            {
-                if (PopularPictures.Count == 24)
-                    break;
-
-                // changes to local time
-                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-
-                PopularPictures.Add(p);
-            }
-        }
-        #endregion
-
-        #region FetchRecent
-
-        public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
-
-        #endregion
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            MainPage.isFromAppActivate = true;
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+
         }
 
         // Code to execute if a navigation fails

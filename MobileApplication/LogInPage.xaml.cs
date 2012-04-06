@@ -22,6 +22,13 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            MainPage.isFromLandingPage = true;
+        }
+
         private void Login_Click(object sender, EventArgs e)
         {
             // Validate input, prevent buffer overflows
@@ -31,28 +38,8 @@ namespace MetrocamPan
                 return;
             }
 
-            try
-            {
-                App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                
-                // Calls authenticate method
-                App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
-
-                /*Settings.getSettings(this.usernameInput.Text);
-
-                // For now, we set isLoggedIn to true
-                Settings.isLoggedIn.Value = true;
-                Settings.username.Value = this.usernameInput.Text;
-                Settings.password.Value = this.passwordInput.Password;
-
-                MainPage.isFromLogin = true;
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));*/
-                
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                // TODO: waiting for Matt
-            }
+            App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
         }
 
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
@@ -63,13 +50,14 @@ namespace MetrocamPan
             UserInfo currentUser = App.MetrocamService.CurrentUser;
 
             // Load user specific settings
-            Settings.getSettings(this.usernameInput.Text);
+            Settings.getUserSpecificSettings(currentUser.Username);
 
+            // Store into isolated storage
             Settings.isLoggedIn.Value = true;
             Settings.username.Value = currentUser.Username;
             Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
-            MainPage.isFromLogin = true;
+            MainPage.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 

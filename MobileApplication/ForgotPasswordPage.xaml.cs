@@ -20,6 +20,13 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            MainPage.isFromLandingPage = true;
+        }
+
         private void usernameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -57,7 +64,7 @@ namespace MetrocamPan
             // For now, we set isLoggedIn to true
             Settings.isLoggedIn.Value = true;
 
-            MainPage.isFromLogin = true;
+            MainPage.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 

@@ -18,7 +18,7 @@ namespace MetrocamPan
 
         public static Setting<bool> twitterAuth;
 
-        public static void getSettings(String currentUser)
+        public static void getUserSpecificSettings(String currentUser)
         {
             var iso = IsolatedStorageSettings.ApplicationSettings;
 
@@ -56,7 +56,7 @@ namespace MetrocamPan
             App.RecentPictures.Clear();
         }
 
-        // Reset all Setting objects to default values
+        // Reset all non user specific Setting objects to default values
         public static void resetToDefault()
         {
             isLoggedIn.Value = false;
