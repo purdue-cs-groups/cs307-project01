@@ -182,7 +182,10 @@ namespace MetrocamPan
 
         private void ViewUserDetailTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml", UriKind.Relative));
+            Image image = sender as Image;
+            PictureInfo info = image.DataContext as PictureInfo;
+
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.User.ID, UriKind.Relative));
         }
 
         #endregion News Feed Codebehind

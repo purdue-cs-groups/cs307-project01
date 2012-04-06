@@ -37,7 +37,7 @@ namespace MetrocamPan
             // Subscribe event handler
             App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
             // Calls fetch user
-            App.MetrocamService.FetchUser(Settings.userid.Value);
+            App.MetrocamService.FetchUser(NavigationContext.QueryString["id"]);
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
