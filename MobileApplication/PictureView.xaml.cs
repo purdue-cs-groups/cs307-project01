@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -38,7 +39,7 @@ namespace MetrocamPan
             pictureView.Source = new BitmapImage(new Uri(CurrentPicture.MediumURL));
             pictureOwnerName.Text = CurrentPicture.User.Username;
             pictureCaption.Text = CurrentPicture.Caption;
-            pictureTakenTime.Text = CurrentPicture.FriendlyCreatedDate.ToString();
+            pictureTakenTime.Text = "shared " + FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
