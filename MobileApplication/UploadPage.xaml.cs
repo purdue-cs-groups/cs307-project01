@@ -118,6 +118,26 @@ namespace MetrocamPan
             // upload the image
             App.MetrocamService.UploadPictureCompleted += new RequestCompletedEventHandler(client_UploadPictureCompleted);
             App.MetrocamService.UploadPicture(ms);
+
+            // refresh newsfeed
+            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+            App.MetrocamService.FetchNewsFeed();
+        }
+
+        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.RecentPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                if (App.RecentPictures.Count == 10)
+                    break;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
+                App.RecentPictures.Add(p);
+            }
         }
 
         private void client_UploadPictureCompleted(object sender, RequestCompletedEventArgs e)

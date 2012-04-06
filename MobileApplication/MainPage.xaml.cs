@@ -114,14 +114,10 @@ namespace MetrocamPan
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 populatePopularPictures();
-                fetchRecent();
             }
             else
             {
                 // MainPage is navigated here from a page in the forward stack, so do nothing
-
-                // Unfreeze HubTiles
-                //HubTileService.UnfreezeGroup("PopularTiles");
             }
         }
 
@@ -165,12 +161,16 @@ namespace MetrocamPan
 
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
+            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.PopularPictures.Clear();
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (App.PopularPictures.Count == 24)
                     continue;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
                 App.PopularPictures.Add(p);
             }
@@ -190,6 +190,7 @@ namespace MetrocamPan
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
         {
+            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.RecentPictures.Clear();
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
