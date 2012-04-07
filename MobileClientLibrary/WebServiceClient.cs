@@ -337,6 +337,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
+
                     CreatePictureCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -543,6 +547,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
+
                     CreateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -780,6 +788,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
+
                     CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -936,6 +948,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<UserConnectedAccount>(stringData);
+
                     CreateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else

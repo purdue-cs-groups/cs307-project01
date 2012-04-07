@@ -79,7 +79,7 @@ namespace WebService.Controllers
             return list;
         }
 
-        public static void Create(Picture data)
+        public static Picture Create(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -89,6 +89,8 @@ namespace WebService.Controllers
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             pictures.Insert(data);
+
+            return data;
         }
 
         public static void Update(Picture data)

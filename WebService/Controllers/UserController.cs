@@ -124,7 +124,7 @@ namespace WebService.Controllers
             return list;
         }
 
-        public static void Create(User data)
+        public static User Create(User data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -134,6 +134,8 @@ namespace WebService.Controllers
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             users.Insert(data);
+
+            return data;
         }
 
         public static void Update(User data)

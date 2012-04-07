@@ -22,7 +22,7 @@ namespace WebService.Controllers
             return userConnectedAccounts.FindOne(query);
         }
 
-        public static void Create(UserConnectedAccount data)
+        public static UserConnectedAccount Create(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -32,6 +32,8 @@ namespace WebService.Controllers
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             userConnectedAccounts.Insert(data);
+
+            return data;
         }
 
         public static void Update(UserConnectedAccount data)

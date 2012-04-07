@@ -22,7 +22,7 @@ namespace WebService.Controllers
             return relationships.FindOne(query);
         }
 
-        public static void Create(Relationship data)
+        public static Relationship Create(Relationship data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -32,6 +32,8 @@ namespace WebService.Controllers
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             relationships.Insert(data);
+
+            return data;
         }
 
         public static void Update(Relationship data)

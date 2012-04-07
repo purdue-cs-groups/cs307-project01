@@ -209,7 +209,7 @@ namespace WebService
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/create")]
-        public void CreatePicture(Stream data)
+        public Picture CreatePicture(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -225,7 +225,7 @@ namespace WebService
             jsonData.UserID = token.Identity.ID;
             jsonData.FriendlyCreatedDate = DateTime.UtcNow;
 
-            PictureController.Create(jsonData);
+            return PictureController.Create(jsonData);
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/update")]
@@ -286,7 +286,7 @@ namespace WebService
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/create")]
-        public void CreateRelationship(Stream data)
+        public Relationship CreateRelationship(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -302,7 +302,7 @@ namespace WebService
             jsonData.UserID = token.Identity.ID;
             jsonData.FriendlyCreatedDate = DateTime.UtcNow;
 
-            RelationshipController.Create(jsonData);
+            return RelationshipController.Create(jsonData);
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/update")]
@@ -370,7 +370,7 @@ namespace WebService
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
-        public void CreateUser(Stream data)
+        public User CreateUser(Stream data)
         {
             StreamReader reader = new StreamReader(data);
             string stringData = reader.ReadToEnd();
@@ -389,7 +389,7 @@ namespace WebService
             // force server-side values
             jsonData.FriendlyCreatedDate = DateTime.UtcNow;           
 
-            UserController.Create(jsonData);
+            return UserController.Create(jsonData);
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
@@ -430,7 +430,7 @@ namespace WebService
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/create")]
-        public void CreateUserConnectedAccount(Stream data)
+        public UserConnectedAccount CreateUserConnectedAccount(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -446,7 +446,7 @@ namespace WebService
             jsonData.UserID = token.Identity.ID;
             jsonData.FriendlyCreatedDate = DateTime.UtcNow;
 
-            UserConnectedAccountController.Create(jsonData);
+            return UserConnectedAccountController.Create(jsonData);
         }
 
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/update")]

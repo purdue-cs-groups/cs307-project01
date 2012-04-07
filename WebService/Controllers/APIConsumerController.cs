@@ -31,7 +31,7 @@ namespace WebService.Controllers
             return consumers.FindAll().ToList<APIConsumer>();
         }
 
-        public static void Create(APIConsumer data)
+        public static APIConsumer Create(APIConsumer data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -41,6 +41,8 @@ namespace WebService.Controllers
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
             consumers.Insert(data);
+
+            return data;
         }
 
         public static void Update(APIConsumer data)
