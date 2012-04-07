@@ -8,9 +8,9 @@ namespace MetrocamPan
 {
     public static class Settings
     {
-        public static Setting<bool> isLoggedIn = new Setting<bool>("isLoggedIn", false);
-        public static Setting<string> username = new Setting<string>("Username", "");
-        public static Setting<string> password = new Setting<string>("Password", "");
+        public static readonly Setting<bool> isLoggedIn = new Setting<bool>("isLoggedIn", false);
+        public static readonly Setting<string> username = new Setting<string>("Username", "");
+        public static readonly Setting<string> password = new Setting<string>("Password", "");
 
         public static Setting<bool> saveOriginal;
         public static Setting<bool> saveEdited;
