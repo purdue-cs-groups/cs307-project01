@@ -429,6 +429,12 @@ namespace WebService
             return UserConnectedAccountController.Fetch(id);
         }
 
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/fetchByUserID?userid={userId}")]
+        public List<UserConnectedAccount> FetchUserConnectedAccountsByUserID(string userId)
+        {
+            return UserConnectedAccountController.FetchByUserID(userId);
+        }
+
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/create")]
         public UserConnectedAccount CreateUserConnectedAccount(Stream data)
         {

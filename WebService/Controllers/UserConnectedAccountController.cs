@@ -22,6 +22,17 @@ namespace WebService.Controllers
             return userConnectedAccounts.FindOne(query);
         }
 
+        public static List<UserConnectedAccount> FetchByUserID(string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
+            var query = new QueryDocument("UserID", userId);
+
+            return userConnectedAccounts.Find(query).ToList<UserConnectedAccount>();
+        }
+
         public static UserConnectedAccount Create(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

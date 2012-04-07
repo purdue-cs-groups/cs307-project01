@@ -929,6 +929,46 @@ namespace MobileClientLibrary
             }
         }
 
+        public event RequestCompletedEventHandler FetchUserConnectedAccountsByUserIDCompleted;
+
+        public void FetchUserConnectedAccountsByUserID(string userId)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserConnectedAccountsByUserID_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/fetchByUserID?key={0}&token={1}&userid={2}", _APIKey, _Token, userId)));
+        }
+
+        private void FetchUserConnectedAccountsByUserID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchUserConnectedAccountsByUserIDCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<UserConnectedAccount>>(stringData);
+
+                    FetchUserConnectedAccountsByUserIDCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
         public event RequestCompletedEventHandler CreateUserConnectedAccountCompleted;
 
         public void CreateUserConnectedAccount(UserConnectedAccount data)
