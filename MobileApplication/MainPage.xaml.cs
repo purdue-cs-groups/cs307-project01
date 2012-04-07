@@ -105,6 +105,8 @@ namespace MetrocamPan
             }
         }
 
+        #region Authenticate
+
         void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             // Unsubcribe
@@ -123,6 +125,8 @@ namespace MetrocamPan
             App.isFromAppLaunch = false;
             App.isFromAppActivate = false;
         }
+
+        #endregion 
 
         #region Popular Pivot Codebehind
 
@@ -484,9 +488,8 @@ namespace MetrocamPan
 
                 App.PopularPictures.Add(p);
             }
-
-            popularHubTiles.ItemsSource = App.PopularPictures;
         }
+
         #endregion
 
         #region FetchRecent
