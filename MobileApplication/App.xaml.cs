@@ -106,6 +106,13 @@ namespace MetrocamPan
                 return;
             }
 
+            if (e.ExceptionObject is WebException)
+            {
+                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
+                e.Handled = true;
+                return;
+            }
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger

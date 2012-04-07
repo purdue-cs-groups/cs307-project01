@@ -85,7 +85,6 @@ namespace MetrocamPan
                 }
                 catch (Exception ex)
                 {
-                    ;
                 }
             }
             else if (App.isFromAppActivate)
@@ -99,7 +98,6 @@ namespace MetrocamPan
                 }
                 catch (Exception ex)
                 {
-                    ;
                 }
             }
             else if (App.isFromLandingPage)
@@ -542,7 +540,6 @@ namespace MetrocamPan
             }
             catch (Exception e)
             {
-                ;
             }
         }
 
@@ -577,7 +574,6 @@ namespace MetrocamPan
             }
             catch (Exception e)
             {
-                ;
             }
         }
 
