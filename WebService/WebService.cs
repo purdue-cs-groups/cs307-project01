@@ -135,7 +135,7 @@ namespace WebService
 
             // locate blob reference for this key
             Stream mediumImage = new MemoryStream();
-            ResizeImage(0.5, reader.BaseStream, mediumImage);
+            ResizeImage(500, 500, reader.BaseStream, mediumImage);
 
             string mediumFileName = String.Format("{0}/{1}_m.jpg", apiKey, id);
             blob = container.GetBlobReference(mediumFileName);
@@ -147,7 +147,7 @@ namespace WebService
 
             // locate blob reference for this key
             Stream smallImage = new MemoryStream();
-            ResizeImage(0.1, reader.BaseStream, smallImage);
+            ResizeImage(100, 100, reader.BaseStream, smallImage);
 
             string smallFileName = String.Format("{0}/{1}_s.jpg", apiKey, id);
             blob = container.GetBlobReference(smallFileName);
@@ -166,11 +166,9 @@ namespace WebService
             return new PictureURL(largeURL, mediumURL, smallURL);
         }
 
-        private void ResizeImage(double scaleFactor, Stream fromStream, Stream toStream)
+        private void ResizeImage(int newWidth, int newHeight, Stream fromStream, Stream toStream)
         {
             var image = Image.FromStream(fromStream);
-            var newWidth = (int)(image.Width * scaleFactor);
-            var newHeight = (int)(image.Height * scaleFactor);
             var thumbnailBitmap = new Bitmap(newWidth, newHeight);
 
             var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
