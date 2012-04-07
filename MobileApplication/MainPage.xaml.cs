@@ -111,13 +111,13 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
+
+                // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
+                populatePopularPictures();
             }
             else
             {
                 // MainPage is navigated here from a page in the forward stack, so do nothing
-
-                // Unfreeze HubTiles
-                //HubTileService.UnfreezeGroup("PopularTiles");
             }
         }
 
@@ -161,19 +161,21 @@ namespace MetrocamPan
 
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
+            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.PopularPictures.Clear();
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 if (App.PopularPictures.Count == 24)
-                    break;
+                    continue;
 
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
                 App.PopularPictures.Add(p);
             }
+
+            popularHubTiles.ItemsSource = App.PopularPictures;
         }
 
         #endregion Popular Pivot Codebehind
