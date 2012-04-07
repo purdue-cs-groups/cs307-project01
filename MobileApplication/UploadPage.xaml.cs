@@ -215,5 +215,17 @@ namespace MetrocamPan
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             });
         }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            App.isFromUploadPage = true;
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.isFromUploadPage = true;
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
     }
 }
