@@ -12,13 +12,14 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary;
 using MobileClientLibrary.Models;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
     public partial class EditProfile : PhoneApplicationPage
     {
-        private UserInfo currentUser;
-      
+        private bool isUpdating = false;
+
         public EditProfile()
         {
             InitializeComponent();
@@ -28,28 +29,45 @@ namespace MetrocamPan
 
         void EditProfile_Loaded(object sender, RoutedEventArgs e)
         {
-            currentUser = App.MetrocamService.CurrentUser;
-
-            this.ContentPanel.DataContext = currentUser;
+            this.ContentPanel.DataContext = App.MetrocamService.CurrentUser;
         }
 
         private void Accept_Click(object sender, EventArgs e)
         {
+            if (isUpdating)
+                return;
+
             // Load in the data into currentUser
-            currentUser.Name = this.UsernameInput.Text;
-            currentUser.EmailAddress = this.EmailInput.Text;
-            currentUser.Location = this.LocationInput.Text;
-            currentUser.Biography = this.BiographyInput.Text;
+            App.MetrocamService.CurrentUser.Name = this.UsernameInput.Text;
+            App.MetrocamService.CurrentUser.EmailAddress = this.EmailInput.Text;
+            App.MetrocamService.CurrentUser.Location = this.LocationInput.Text;
+            App.MetrocamService.CurrentUser.Biography = this.BiographyInput.Text;
 
-            // TODO: Matt has to changed UpdateUser(User data) to UserInfo as arguments instead
+            // construct User object to pass to web service
+            User updatedData = new User();
+            updatedData.CreatedDate = App.MetrocamService.CurrentUser.CreatedDate;
+            updatedData.FriendlyCreatedDate = App.MetrocamService.CurrentUser.FriendlyCreatedDate;
+            updatedData.ID = App.MetrocamService.CurrentUser.ID;
+            updatedData.Username = App.MetrocamService.CurrentUser.Username;
+            updatedData.Password = App.MetrocamService.HashPassword(Settings.password.Value);
+            updatedData.ProfilePictureID = App.MetrocamService.CurrentUser.ProfilePicture.ID;
 
-            MessageBox.Show("Your profile has been updated.");
-            NavigationService.GoBack();
+            updatedData.Name = App.MetrocamService.CurrentUser.Name;
+            updatedData.EmailAddress = App.MetrocamService.CurrentUser.EmailAddress;
+            updatedData.Location = App.MetrocamService.CurrentUser.Location;
+            updatedData.Biography = App.MetrocamService.CurrentUser.Biography;
+
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.UpdateUserCompleted +=new RequestCompletedEventHandler(MetrocamService_UpdateUserCompleted);
+            App.MetrocamService.UpdateUser(updatedData);            
         }
 
         void MetrocamService_UpdateUserCompleted(object sender, RequestCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
+            GlobalLoading.Instance.IsLoading = false;
+            MessageBox.Show("Your profile has been updated.");
+            NavigationService.GoBack();
         }
 
         private void Cancel_Click(object sender, EventArgs e)
