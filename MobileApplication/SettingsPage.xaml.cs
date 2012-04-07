@@ -20,13 +20,15 @@ namespace MetrocamPan
         public SettingsPage()
         {
             InitializeComponent();
+        }
 
-            if (Settings.locationService.Value)
-                lToggle.IsChecked = true;
-            if (Settings.saveOriginal.Value)
-                oToggle.IsChecked = true;
-            if (Settings.saveEdited.Value)
-                eToggle.IsChecked = true;
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            this.lToggle.IsChecked = Settings.locationService.Value;
+            this.oToggle.IsChecked = Settings.saveOriginal.Value;
+            this.eToggle.IsChecked = Settings.saveEdited.Value;
         }
 
         private void originalCheck(object sender, RoutedEventArgs e)
