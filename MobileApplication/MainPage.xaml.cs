@@ -137,10 +137,15 @@ namespace MetrocamPan
             {
                 FetchRecentPictures();
             }
+            if (isRefreshingRecent)
+            {
+                FetchRecentPictures();
+            }
 
             // Reset back to false
             App.isFromAppLaunch = false;
             App.isFromAppActivate = false;
+            isRefreshingRecent = false;
         }
 
         #endregion 
@@ -392,6 +397,25 @@ namespace MetrocamPan
         }
 
         #endregion
+
+        public bool isRefreshingRecent = false;
+        private void Refresh_Click(object sender, EventArgs e)
+        {
+            if (MainContent.SelectedIndex == 0)
+            {
+                // refresh popular
+                App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+                App.MetrocamService.FetchPopularNewsFeed();
+            }
+            else if (MainContent.SelectedIndex == 1)
+            {
+                // authenticate and refresh recent
+                isRefreshingRecent = true;
+
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+            }
+        }
 
         #region Menu Options
 
