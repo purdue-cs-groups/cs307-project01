@@ -115,6 +115,32 @@ namespace MetrocamPan
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
             }
+            else if (App.isFromUploadPage)
+            {
+                // Reset back to false
+                App.isFromUploadPage = false;
+
+                // Clears back stack so user cannot go back to LandingPage(s)
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+
+                // Flag to refresh Recent
+                isRefreshingRecent = true;
+
+                // We need to authenticate, then populate Recent
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+
+                try
+                {
+                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                }
+                catch (Exception ex)
+                {
+                    ;
+                }
+            }
             else
             {
                 // MainPage is navigated here from a page in the forward stack, so do nothing

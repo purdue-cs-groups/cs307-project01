@@ -34,6 +34,7 @@ namespace MetrocamPan
         public static bool isFromLandingPage = false;
         public static bool isFromAppLaunch = false;
         public static bool isFromAppActivate = false;
+        public static bool isFromUploadPage = false;
         
         public PhoneApplicationFrame RootFrame { get; private set; }
 
