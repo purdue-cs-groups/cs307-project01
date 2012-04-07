@@ -39,7 +39,15 @@ namespace MetrocamPan
             }
 
             App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+
+            try
+            {
+                App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            }
+            catch (Exception ex)
+            {
+                ;
+            }
         }
 
         #region Authenticate
@@ -71,7 +79,15 @@ namespace MetrocamPan
         private void FetchRecentPictures()
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
-            App.MetrocamService.FetchNewsFeed();
+
+            try
+            {
+                App.MetrocamService.FetchNewsFeed();
+            }
+            catch (Exception e)
+            {
+                ;
+            }
         }
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)

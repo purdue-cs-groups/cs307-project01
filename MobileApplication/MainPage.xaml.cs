@@ -78,13 +78,29 @@ namespace MetrocamPan
             {
                 // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+
+                try
+                {
+                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                }
+                catch (Exception ex)
+                {
+                    ;
+                }
             }
             else if (App.isFromAppActivate)
             {
                 // App is activated from tombstone. We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+
+                try
+                {
+                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                }
+                catch (Exception ex)
+                {
+                    ;
+                }
             }
             else if (App.isFromLandingPage)
             {
@@ -111,6 +127,7 @@ namespace MetrocamPan
         {
             // Unsubcribe
             App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+            Settings.getUserSpecificSettings(App.MetrocamService.CurrentUser.ID);
 
             if (App.isFromAppLaunch)
             {
@@ -332,8 +349,6 @@ namespace MetrocamPan
             picker.Show();
         }
 
-        public static int MAX_HEIGHT = 92;
-        public static int MAX_WIDTH = 110;
         void picker_Completed(object sender, PhotoResult e)
         {
             tookPhoto = false;
@@ -470,7 +485,15 @@ namespace MetrocamPan
         public void FetchPopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
-            App.MetrocamService.FetchPopularNewsFeed();
+
+            try
+            {
+                App.MetrocamService.FetchPopularNewsFeed();
+            }
+            catch (Exception e)
+            {
+                ;
+            }
         }
 
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -497,7 +520,15 @@ namespace MetrocamPan
         public void FetchRecentPictures()
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
-            App.MetrocamService.FetchNewsFeed();
+
+            try
+            {
+                App.MetrocamService.FetchNewsFeed();
+            }
+            catch (Exception e)
+            {
+                ;
+            }
         }
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)

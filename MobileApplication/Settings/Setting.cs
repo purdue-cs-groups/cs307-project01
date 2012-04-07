@@ -15,6 +15,11 @@ namespace MetrocamPan
         {
             this.name = name;
             this.defaultValue = defaultValue;
+
+            if (!IsolatedStorageSettings.ApplicationSettings.Contains(name))
+            {
+                IsolatedStorageSettings.ApplicationSettings[name] = defaultValue;
+            }
         }
 
         public T Value
