@@ -27,8 +27,13 @@ namespace MetrocamPan
     {
         public static String APIKey = "4f7124f25ad9850a042a5f2d";
         public static WebServiceClient MetrocamService = null;
+
         public static ObservableCollection<PictureInfo> PopularPictures = new ObservableCollection<PictureInfo>();
         public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
+
+        public static bool isFromLandingPage = false;
+        public static bool isFromAppLaunch = false;
+        public static bool isFromAppActivate = false;
         
         public PhoneApplicationFrame RootFrame { get; private set; }
 
@@ -46,6 +51,7 @@ namespace MetrocamPan
             // Phone-specific initialization
             InitializePhoneApplication();
 
+            // Initialize Web Service Client
             MetrocamService = new WebServiceClient(APIKey);
         }
 
@@ -53,14 +59,14 @@ namespace MetrocamPan
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            MainPage.isFromAppLaunch = true;
+            isFromAppLaunch = true;
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            MainPage.isFromAppActivate = true;
+            isFromAppActivate = true;
         }
 
         // Code to execute when the application is deactivated (sent to background)

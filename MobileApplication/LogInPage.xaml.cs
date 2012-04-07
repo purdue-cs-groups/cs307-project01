@@ -26,7 +26,7 @@ namespace MetrocamPan
         {
             base.OnNavigatedTo(e);
 
-            MainPage.isFromLandingPage = true;
+            App.isFromLandingPage = true;
         }
 
         private void Login_Click(object sender, EventArgs e)
@@ -42,9 +42,13 @@ namespace MetrocamPan
             App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
         }
 
+        #region Authenticate
+
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
-            App.MetrocamService.AuthenticateCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+            App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted;
+
+            FetchRecentPictures();
 
             // Obtain UserInfo object from web service
             UserInfo currentUser = App.MetrocamService.CurrentUser;
@@ -57,8 +61,42 @@ namespace MetrocamPan
             Settings.username.Value = currentUser.Username;
             Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
-            MainPage.isFromLandingPage = true;
+            App.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        #endregion
+
+        #region FetchRecent
+        private void FetchRecentPictures()
+        {
+            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+            App.MetrocamService.FetchNewsFeed();
+        }
+
+        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
+            App.RecentPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                if (App.RecentPictures.Count == 10)
+                    break;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
+                App.RecentPictures.Add(p);
+            }
+        }
+        #endregion 
+
+        #region AppBar
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
 
         private void Cancel_Click(object sender, EventArgs e)
@@ -72,6 +110,9 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/ForgotPasswordPage.xaml", UriKind.Relative));
         }
 
+        #endregion 
+
+        #region Input
         private void usernameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -92,9 +133,6 @@ namespace MetrocamPan
             }
         }
 
-        private void About_Click(object sender, EventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
-        }
+        #endregion
     }
 }

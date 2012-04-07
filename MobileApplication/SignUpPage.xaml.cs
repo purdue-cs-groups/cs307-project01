@@ -28,7 +28,7 @@ namespace MetrocamPan
         {
             base.OnNavigatedTo(e);
 
-            MainPage.isFromLandingPage = true;
+            App.isFromLandingPage = true;
         }
 
         private void usernameInput_KeyUp(object sender, KeyEventArgs e)
@@ -143,7 +143,7 @@ namespace MetrocamPan
             Settings.username.Value = currentUser.Username;
             Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
-            MainPage.isFromLandingPage = true;
+            App.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 

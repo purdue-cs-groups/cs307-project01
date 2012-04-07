@@ -38,11 +38,6 @@ namespace MetrocamPan
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
         public static double lng = 0;
-        public static ObservableCollection<Picture> UserPictures = new ObservableCollection<Picture>();
-
-        public static bool isFromLandingPage = false;
-        public static bool isFromAppLaunch = false;
-        public static bool isFromAppActivate = false;
 
         // Constructor
         public MainPage()
@@ -52,18 +47,7 @@ namespace MetrocamPan
             // Calls MainPage_Loaded when this page is constructed
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
-            setUpLocation();
-        }
-
-        // Set up location
-        public static void setUpLocation()
-        {
-            if (watcher == null)
-            {
-                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High); // using high accuracy
-                watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
-                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
-            }
+            SetUpLocation();
         }
 
         // Load data for the ViewModel Items
@@ -90,22 +74,22 @@ namespace MetrocamPan
             }
 
             // User is logged in previously, check how this app got to main page
-            if (isFromAppLaunch)
+            if (App.isFromAppLaunch)
             {
                 // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
-            else if (isFromAppActivate)
+            else if (App.isFromAppActivate)
             {
                 // App is activated from tombstone. We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
-            else if (isFromLandingPage)
+            else if (App.isFromLandingPage)
             {
                 // Reset back to false
-                isFromLandingPage = false;
+                App.isFromLandingPage = false;
 
                 // Clears back stack so user cannot go back to LandingPage(s)
                 NavigationService.RemoveBackEntry();
@@ -113,7 +97,7 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
-                populatePopularPictures();
+                FetchPopularPictures();
             }
             else
             {
@@ -126,18 +110,18 @@ namespace MetrocamPan
             // Unsubcribe
             App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
 
-            if (isFromAppLaunch)
+            if (App.isFromAppLaunch)
             {
-                populatePopularPictures();
+                FetchPopularPictures();
             }
-            if (isFromAppLaunch || isFromAppActivate)
+            if (App.isFromAppLaunch || App.isFromAppActivate)
             {
-                fetchRecent();
+                FetchRecentPictures();
             }
 
             // Reset back to false
-            isFromAppLaunch = false;
-            isFromAppActivate = false;
+            App.isFromAppLaunch = false;
+            App.isFromAppActivate = false;
         }
 
         #region Popular Pivot Codebehind
@@ -153,57 +137,21 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
         }
 
-        public void populatePopularPictures()
+        private void HubTile_Loaded(object sender, RoutedEventArgs e)
         {
-            App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
-            App.MetrocamService.FetchPopularNewsFeed();
-        }
-
-        void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
-        {
-            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
-            App.PopularPictures.Clear();
-
-            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            if (LoadingMessage.Visibility == Visibility.Visible)
             {
-                if (App.PopularPictures.Count == 24)
-                    continue;
-
-                // changes to local time
-                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-
-                App.PopularPictures.Add(p);
+                GlobalLoading.Instance.IsLoading = false;
+                LoadingMessage.Visibility = Visibility.Collapsed;
             }
 
-            popularHubTiles.ItemsSource = App.PopularPictures;
+            HubTile curr = sender as HubTile;
+            curr.Visibility = Visibility.Visible;
         }
 
         #endregion Popular Pivot Codebehind
 
         #region News Feed Codebehind
-
-        private void fetchRecent()
-        {
-            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
-            App.MetrocamService.FetchNewsFeed();
-        }
-
-        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
-        {
-            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
-            App.RecentPictures.Clear();
-
-            foreach (PictureInfo p in e.Data as List<PictureInfo>)
-            {
-                if (App.RecentPictures.Count == 10)
-                    break;
-
-                // changes to local time
-                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-
-                App.RecentPictures.Add(p);
-            }
-        }
 
         private void recentPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -452,6 +400,19 @@ namespace MetrocamPan
 
         #endregion Application Bar Codebehind
 
+        #region GeoLocation
+
+        // Set up location
+        public static void SetUpLocation()
+        {
+            if (watcher == null)
+            {
+                watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High); // using high accuracy
+                watcher.MovementThreshold = 20; // use MovementThreshold to ignore noise in the signal
+                watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
+            }
+        }
+
         // Event handler for the GeoCoordinateWatcher.StatusChanged event.
         public static Boolean hasLocationData = false;
         public static void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
@@ -489,18 +450,6 @@ namespace MetrocamPan
             }
         }
 
-        private void HubTile_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (LoadingMessage.Visibility == Visibility.Visible)
-            {
-                GlobalLoading.Instance.IsLoading = false;
-                LoadingMessage.Visibility = Visibility.Collapsed;
-            }
-
-            HubTile curr = sender as HubTile;
-            curr.Visibility = Visibility.Visible;
-        }
-
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
@@ -511,5 +460,60 @@ namespace MetrocamPan
                     GlobalLoading.Instance.IsLoading = false;
                 });
         }
+        #endregion
+
+        #region FetchPopular
+        public void FetchPopularPictures()
+        {
+            App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+            App.MetrocamService.FetchPopularNewsFeed();
+        }
+
+        void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
+            App.PopularPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                if (App.PopularPictures.Count == 24)
+                    continue;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
+                App.PopularPictures.Add(p);
+            }
+
+            popularHubTiles.ItemsSource = App.PopularPictures;
+        }
+        #endregion
+
+        #region FetchRecent
+
+        public void FetchRecentPictures()
+        {
+            App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+            App.MetrocamService.FetchNewsFeed();
+        }
+
+        void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
+            App.RecentPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                if (App.RecentPictures.Count == 10)
+                    break;
+
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
+                App.RecentPictures.Add(p);
+            }
+        }
+
+        #endregion 
     }
 }
