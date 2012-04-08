@@ -56,11 +56,11 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Image Margin="20,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
-                                    <TextBlock Margin="70,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
+                                    <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
+                                    <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
                                     <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="20,44,0,0" Source="{Binding MediumURL}"  Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
-                                    <Grid Margin="20,472,0,0">
+                                    <Image Margin="0,44,0,0" Source="{Binding MediumURL}"  Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
+                                    <Grid Margin="0,472,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
