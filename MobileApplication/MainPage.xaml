@@ -20,15 +20,14 @@
         <helpers:FriendlierTime x:Key="FriendlierTime" />
     </phone:PhoneApplicationPage.Resources>
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="0">
+    <Grid Background="Transparent" Margin="0">
         <!--Panorama control-->
         <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0,0,0,0" SelectionChanged="MainContent_SelectionChanged">
             <!--Panorama item one-->
-            <controls:PivotItem Header="popular" IsTabStop="False" Margin="12,12,0,0">
-                <Grid Margin="12,0">
-                    <TextBlock Name="LoadingMessage" Text="Hi!" Margin="4,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
-                    <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" ItemsSource="{Binding}">
+            <controls:PivotItem Header="popular" IsTabStop="False" Margin="24,12,0,0">
+                <Grid Margin="0,0">
+                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="0,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
+                    <ListBox x:Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Image 
@@ -52,8 +51,8 @@
 
 
             <!--RECENT -->
-            <controls:PivotItem Header="recent" Width="Auto" Margin="0,12,0,0">
-                    <ListBox Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="9,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
+            <controls:PivotItem Header="recent" Width="Auto" Margin="24,12,0,0">
+                    <ListBox x:Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
