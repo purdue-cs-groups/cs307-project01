@@ -31,13 +31,13 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,-12,12,0">
             <Grid>
-                <Image Height="460" HorizontalAlignment="Left" Margin="12,56,0,0" Name="pictureView" Stretch="UniformToFill" VerticalAlignment="Top" Width="460" />
+                <Image Height="440" HorizontalAlignment="Left" Margin="12,56,0,0" Name="pictureView" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" />
 
                 <!-- Get owner picture from ownerID -->
                 <Image Height="40" HorizontalAlignment="Left" Margin="12,12,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
                 <TextBlock Margin="62,22,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetail_Tap" />
-                <TextBlock Text="3 hours ago" Margin="0,28,0,0"  Height="38" Name="pictureTakenTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                <Grid Margin="12,512,0,0">
+                <TextBlock Text="3 hours ago" Margin="0,28,5,0"  Height="38" Name="pictureTakenTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                <Grid Margin="12,492,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>

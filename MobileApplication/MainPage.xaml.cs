@@ -181,22 +181,19 @@ namespace MetrocamPan
         {
             //HubTileService.FreezeGroup("PopularTiles");
 
-            HubTile tile = sender as HubTile;
+            Image tile = sender as Image;
             PictureInfo info = tile.DataContext as PictureInfo;
 
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
         }
 
-        private void HubTile_Loaded(object sender, RoutedEventArgs e)
+        private void PopularPicture_Loaded(object sender, RoutedEventArgs e)
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
             {
                 GlobalLoading.Instance.IsLoading = false;
                 LoadingMessage.Visibility = Visibility.Collapsed;
             }
-
-            HubTile curr = sender as HubTile;
-            curr.Visibility = Visibility.Visible;
         }
 
         #endregion Popular Pivot Codebehind
