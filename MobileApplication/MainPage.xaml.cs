@@ -45,7 +45,7 @@ namespace MetrocamPan
             InitializeComponent();
 
             // Calls MainPage_Loaded when this page is constructed
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+            this.Loaded += new RoutedEventHandler(MainPage_Loaded);            
 
             SetUpLocation();
         }
@@ -59,6 +59,18 @@ namespace MetrocamPan
                 Dispatcher.BeginInvoke(() =>
                     popularHubTiles.DataContext = App.PopularPictures);
             }
+        }
+
+        private void LoadingMessage_Loaded(object sender, RoutedEventArgs e)
+        {
+            int currentHour = DateTime.Now.Hour;
+
+            if (currentHour < 12 && currentHour > 4)
+                LoadingMessage.Text = "Good morning, " + Settings.username.Value + "!";
+            else if (currentHour < 17 && currentHour >= 12)
+                LoadingMessage.Text = "Good afternoon, " + Settings.username.Value + "!";
+            else
+                LoadingMessage.Text = "Good evening, " + Settings.username.Value + "!";
         }
 
         // When this page becomes active page in a frame

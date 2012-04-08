@@ -28,7 +28,7 @@
             <controls:PivotItem Header="popular" IsTabStop="False" Margin="12,12,0,0">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="8,0,0,0">
                     <StackPanel>
-                        <TextBlock Name="LoadingMessage" Text="Good evening!" Margin="4,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" />
+                        <TextBlock Name="LoadingMessage" Text="Hi!" Margin="4,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
                         <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75" ItemsSource="{Binding}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
