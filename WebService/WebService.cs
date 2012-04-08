@@ -381,7 +381,7 @@ namespace WebService
             if (UserController.FetchByUsername(jsonData.Username) != null ||
                 UserController.FetchByEmailAddress(jsonData.EmailAddress) != null)
             {
-                throw new Exception("A user with this Username or EmailAddress already exists!");
+                throw new Exception("A user with this Username or Email Address already exists!");
             }
 
             // force server-side values
