@@ -26,37 +26,34 @@
         <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0,0,0,0" SelectionChanged="MainContent_SelectionChanged">
             <!--Panorama item one-->
             <controls:PivotItem Header="popular" IsTabStop="False" Margin="12,12,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="8,0,0,0">
-                    <StackPanel>
-                        <TextBlock Name="LoadingMessage" Text="Hi!" Margin="4,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
-                        <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,0,75" ItemsSource="{Binding}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Image 
+                <Grid Margin="12,0">
+                    <TextBlock Name="LoadingMessage" Text="Hi!" Margin="4,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
+                    <ListBox Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" ItemsSource="{Binding}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image 
                                         Width="144"
                                         Height="144"
                                         Margin="4,4,0,0"
                                         Source="{Binding MediumURL}"
                                         Tap="popularPicture_Tap" 
                                         Loaded="PopularPicture_Loaded" />
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <toolkit:WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                        </ListBox>
-                    </StackPanel>
-                </ScrollViewer>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
             </controls:PivotItem>
 
 
 
             <!--RECENT -->
             <controls:PivotItem Header="recent" Width="Auto" Margin="0,12,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,0,0">
-                    <ListBox Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="-6,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
+                    <ListBox Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="9,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -104,7 +101,6 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>
-                </ScrollViewer>
             </controls:PivotItem>
 
 
