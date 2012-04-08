@@ -31,7 +31,7 @@ namespace MobileClientLibrary
 
     public class WebServiceClient
     {
-        private const string _WebServiceEndpoint = "http://metrocam.cloudapp.net/v1/";
+        private const string _WebServiceEndpoint = "http://localhost:49726/v1/";
 
         private string _APIKey = null;
 
@@ -779,7 +779,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/create?key={0}", _APIKey)), jsonData);
         }
 
         private void CreateUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
