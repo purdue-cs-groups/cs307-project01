@@ -31,7 +31,7 @@ namespace MobileClientLibrary
 
     public class WebServiceClient
     {
-        private const string _WebServiceEndpoint = "http://localhost:49726/v1/";
+        private const string _WebServiceEndpoint = "http://metrocam.cloudapp.net/v1/";
 
         private string _APIKey = null;
 

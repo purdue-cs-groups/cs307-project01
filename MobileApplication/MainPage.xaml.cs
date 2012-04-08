@@ -45,7 +45,7 @@ namespace MetrocamPan
             InitializeComponent();
 
             // Calls MainPage_Loaded when this page is constructed
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);            
+            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             SetUpLocation();
         }
@@ -90,27 +90,13 @@ namespace MetrocamPan
             {
                 // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-
-                try
-                {
-                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                }
-                catch (Exception ex)
-                {
-                }
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
             else if (App.isFromAppActivate)
             {
                 // App is activated from tombstone. We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-
-                try
-                {
-                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                }
-                catch (Exception ex)
-                {
-                }
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
             else if (App.isFromLandingPage)
             {
@@ -141,15 +127,7 @@ namespace MetrocamPan
 
                 // We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-
-                try
-                {
-                    App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                }
-                catch (Exception ex)
-                {
-                    ;
-                }
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
             else
             {
@@ -168,6 +146,7 @@ namespace MetrocamPan
             if (App.isFromAppLaunch)
             {
                 FetchPopularPictures();
+                GetUserConnectedAccounts();
             }
             if (App.isFromAppLaunch || App.isFromAppActivate)
             {
@@ -184,7 +163,7 @@ namespace MetrocamPan
             isRefreshingRecent = false;
         }
 
-        #endregion 
+        #endregion
 
         #region Popular Pivot Codebehind
 
@@ -542,14 +521,7 @@ namespace MetrocamPan
         public void FetchPopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
-
-            try
-            {
-                App.MetrocamService.FetchPopularNewsFeed();
-            }
-            catch (Exception e)
-            {
-            }
+            App.MetrocamService.FetchPopularNewsFeed();
         }
 
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -576,14 +548,7 @@ namespace MetrocamPan
         public void FetchRecentPictures()
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
-
-            try
-            {
-                App.MetrocamService.FetchNewsFeed();
-            }
-            catch (Exception e)
-            {
-            }
+            App.MetrocamService.FetchNewsFeed();
         }
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
@@ -603,6 +568,14 @@ namespace MetrocamPan
             }
         }
 
-        #endregion 
+        #endregion
+
+        #region UserConnectedAccounts
+
+        private void GetUserConnectedAccounts()
+        {
+        }
+
+        #endregion
     }
 }
