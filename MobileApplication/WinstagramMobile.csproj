@@ -240,6 +240,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\dunsmore.png" />
     <Content Include="References\Hammock.WindowsPhone.dll" />
     <Content Include="References\Newtonsoft.Json.dll" />
     <Content Include="References\Twitt.dll" />

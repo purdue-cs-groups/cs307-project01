@@ -620,5 +620,17 @@ namespace MetrocamPan
         }
 
         #endregion
+
+        private void recentPictureOwner_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image proPic = sender as Image;
+            PictureInfo info = proPic.DataContext as PictureInfo;
+
+            if (info.User.ProfilePicture != null)
+            {
+                BitmapImage b = new BitmapImage(new Uri(info.MediumURL));
+                proPic.Source = b; 
+            }
+        }
     }
 }
