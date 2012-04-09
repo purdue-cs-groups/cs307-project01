@@ -21,6 +21,28 @@ namespace WebService.Controllers
             return users.FindOne(query);
         }
 
+        public static User FetchByUsername(string username)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<User> users = database.GetCollection<User>("Users");
+            var query = new QueryDocument("Username", username);
+
+            return users.FindOne(query);
+        }
+
+        public static User FetchByEmailAddress(string emailAddress)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<User> users = database.GetCollection<User>("Users");
+            var query = new QueryDocument("EmailAddress", emailAddress);
+
+            return users.FindOne(query);
+        }
+
         public static UserInfo FetchInfo(string id)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
@@ -36,7 +58,7 @@ namespace WebService.Controllers
             return new UserInfo(u, p);
         }
 
-        public static UserInfo FetchByUsername(string username)
+        public static UserInfo FetchInfoByUsername(string username)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -51,7 +73,7 @@ namespace WebService.Controllers
             return new UserInfo(u, p);
         }
 
-        public static UserInfo FetchByEmailAddress(string emailAddress)
+        public static UserInfo FetchInfoByEmailAddress(string emailAddress)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
