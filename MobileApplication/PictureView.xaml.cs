@@ -28,6 +28,7 @@ namespace MetrocamPan
     public partial class PictureView : PhoneApplicationPage
     {
         PictureInfo CurrentPicture = null;
+        Boolean AddedAppBarButton = false;
 
         public PictureView()
         {
@@ -49,16 +50,20 @@ namespace MetrocamPan
             pictureCaption.Text = CurrentPicture.Caption;
             pictureTakenTime.Text = "shared " + FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
 
-            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID) && !AddedAppBarButton)
             {
+                AddedAppBarButton = true;
+
                 ApplicationBarIconButton profilePic = new ApplicationBarIconButton(new Uri("Images/appbar.user.png", UriKind.Relative));
                 profilePic.Text = "profile pic";
                 profilePic.Click += new EventHandler(MakeProfilePicture);
 
                 ApplicationBar.Buttons.Add(profilePic);
             }
-            else
+            else if (!AddedAppBarButton)
             {
+                AddedAppBarButton = true;
+
                 ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
                 favorite.Text = "favorite";
                 favorite.Click += new EventHandler(Favorite);
@@ -94,6 +99,7 @@ namespace MetrocamPan
         {
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
             GlobalLoading.Instance.IsLoading = false;
+            MessageBox.Show("Your profile picture has been updated!");
         }
 
         private void Favorite (object sender, EventArgs e)
