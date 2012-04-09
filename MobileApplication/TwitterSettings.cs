@@ -23,6 +23,6 @@ namespace MetrocamPan
         public static string AuthorizeUri = "https://api.twitter.com/oauth/authorize";
         public static string AccessTokenUri = "https://api.twitter.com/oauth/access_token";
 
-        public static string StatusUpdateUrl { get { return "http://api.twitter.com"; } }
+        public static string StatusUpdateUrl { get { return "https://api.twitter.com"; } }
     }
 }

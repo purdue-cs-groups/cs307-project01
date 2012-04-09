@@ -68,7 +68,15 @@ namespace MetrocamPan
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            Settings.getUserSpecificSettings(MetrocamService.CurrentUser.ID);
+            try
+            {
+                Settings.getUserSpecificSettings(MetrocamService.CurrentUser.ID);
+            }
+            catch (Exception ex)
+            {
+                // may get caught if user hasn't authenticated yet
+            }
+
             isFromAppActivate = true;
         }
 

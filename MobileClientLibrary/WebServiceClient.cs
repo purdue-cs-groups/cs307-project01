@@ -341,7 +341,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
 
-                    CreatePictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreatePictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
