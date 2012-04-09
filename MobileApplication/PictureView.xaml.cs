@@ -20,6 +20,7 @@ using System.IO;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using MetrocamPan.Helpers;
+using Microsoft.Phone.Shell;
 
 namespace MetrocamPan
 {
@@ -38,7 +39,7 @@ namespace MetrocamPan
 
             if (CurrentPicture.User.ProfilePicture != null)
             {
-                BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL, UriKind.Relative));
+                BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute));
                 pictureOwnerPicture.Source = b;
             }
 
@@ -46,6 +47,33 @@ namespace MetrocamPan
             pictureOwnerName.Text = CurrentPicture.User.Username;
             pictureCaption.Text = CurrentPicture.Caption;
             pictureTakenTime.Text = "shared " + FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
+
+            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                ApplicationBarIconButton profilePic = new ApplicationBarIconButton(new Uri("Images/appbar.user.png", UriKind.Relative));
+                profilePic.Text = "profile pic";
+                profilePic.Click += new EventHandler(MakeProfilePicture);
+
+                ApplicationBar.Buttons.Add(profilePic);
+            }
+            else
+            {
+                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                favorite.Text = "favorite";
+                favorite.Click += new EventHandler(Favorite);
+
+                ApplicationBar.Buttons.Add(favorite);
+            }
+        }
+
+        private void MakeProfilePicture (object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Favorite (object sender, EventArgs e)
+        {
+
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
