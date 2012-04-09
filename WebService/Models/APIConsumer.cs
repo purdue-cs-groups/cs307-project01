@@ -22,13 +22,20 @@ namespace WebService.Models
         }
 
         [DataMember(Order = 1)]
-        public string EmailAddress
+        public string Name
         {
             get;
             set;
         }
 
         [DataMember(Order = 2)]
+        public string EmailAddress
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 3)]
         public string Key
         {
             get
@@ -37,7 +44,7 @@ namespace WebService.Models
             }
         }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 4)]
         public int CreatedDate
         {
             get;

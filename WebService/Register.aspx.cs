@@ -22,6 +22,7 @@ namespace WebService
         {
             APIConsumer data = new APIConsumer();
 
+            data.Name = this.txtApplicationName.Text;
             data.EmailAddress = this.txtEmailAddress.Text;
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
