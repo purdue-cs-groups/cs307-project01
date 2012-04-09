@@ -38,6 +38,9 @@ namespace MetrocamPan
             if (Settings.twitterAuth.Value)
             {
                 twitterSwitch.IsEnabled = true;
+
+                if (Settings.twitterDefault.Value)
+                    twitterSwitch.IsChecked = true;
             }
         }
 

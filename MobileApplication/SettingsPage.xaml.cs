@@ -26,9 +26,27 @@ namespace MetrocamPan
         {
             base.OnNavigatedTo(e);
 
+            if (Settings.twitterAuth.Value)
+            {
+                connectaccounts.Visibility = Visibility.Collapsed;
+                tweetToggle.Visibility = Visibility.Visible;
+
+                this.tweetToggle.IsChecked = Settings.twitterDefault.Value;
+            }
+
             this.lToggle.IsChecked = Settings.locationService.Value;
             this.oToggle.IsChecked = Settings.saveOriginal.Value;
             this.eToggle.IsChecked = Settings.saveEdited.Value;
+        }
+
+        private void tweetCheck(object sender, RoutedEventArgs e)
+        {
+            Settings.twitterDefault.Value = true;
+        }
+
+        private void tweetUncheck(object sender, RoutedEventArgs e)
+        {
+            Settings.twitterDefault.Value = false;
         }
 
         private void originalCheck(object sender, RoutedEventArgs e)

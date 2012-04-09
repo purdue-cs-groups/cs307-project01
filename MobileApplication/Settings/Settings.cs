@@ -17,6 +17,7 @@ namespace MetrocamPan
         public static Setting<bool> locationService;
 
         public static Setting<bool> twitterAuth;
+        public static Setting<bool> twitterDefault;
 
         public static void getUserSpecificSettings(String currentUser)
         {
@@ -30,6 +31,7 @@ namespace MetrocamPan
                 locationService = new Setting<bool>(currentUser + "LocationService", true);
                 
                 twitterAuth = new Setting<bool>(currentUser + "TwitterAuth", false);
+                twitterDefault = new Setting<bool>(currentUser + "TwitterDefault", false);
             }
             else
             {
@@ -42,6 +44,8 @@ namespace MetrocamPan
                 
                 twitterAuth = new Setting<bool>(currentUser +
                     "TwitterAuth", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "TwitterAuth"]));
+                twitterDefault = new Setting<bool>(currentUser +
+                    "TwitterDefault", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "TwitterDefault"]));
             }
         }
 
