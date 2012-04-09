@@ -36,6 +36,12 @@ namespace MetrocamPan
         {
             CurrentPicture = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
 
+            if (CurrentPicture.User.ProfilePicture != null)
+            {
+                BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL));
+                pictureOwnerPicture.Source = b;
+            }
+
             pictureView.Source = new BitmapImage(new Uri(CurrentPicture.MediumURL));
             pictureOwnerName.Text = CurrentPicture.User.Username;
             pictureCaption.Text = CurrentPicture.Caption;

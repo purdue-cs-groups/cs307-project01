@@ -57,7 +57,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/Images/dunsmore.png" Tap="ViewUserDetail_Tap" Loaded="recentPictureOwner_Loaded" />
+                                <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="{Binding User.ProfilePicture.MediumURL}" Tap="ViewUserDetail_Tap" />
                                 <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
                                 <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
                                 <Image Margin="0,44,0,0" Source="{Binding MediumURL}" Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap">

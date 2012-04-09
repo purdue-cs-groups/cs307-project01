@@ -574,6 +574,17 @@ namespace MetrocamPan
             {
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+                if (p.User.ProfilePicture == null)
+                {
+                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                }
+
+                if (p.User.ProfilePicture == null)
+                {
+                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                }
 
                 if (App.RecentPictures.Count < 10)
                 {
@@ -626,9 +637,9 @@ namespace MetrocamPan
             Image proPic = sender as Image;
             PictureInfo info = proPic.DataContext as PictureInfo;
 
-            if (info.User.ProfilePicture != null)
+            if (info.User.ProfilePicture == null)
             {
-                BitmapImage b = new BitmapImage(new Uri(info.MediumURL));
+                BitmapImage b = new BitmapImage(new Uri("Images/dunsmore.png", UriKind.Relative));
                 proPic.Source = b; 
             }
         }
