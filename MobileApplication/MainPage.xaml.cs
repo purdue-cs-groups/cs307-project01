@@ -87,7 +87,7 @@ namespace MetrocamPan
             base.OnNavigatedTo(e);
 
             // Checks if user is already logged in previously
-            if (!Settings.isLoggedIn.Value)
+            if (!Settings.isLoggedIn.Value || Settings.isLoggedIn == null)
             {
                 // Not logged in, navigate to landing page
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
