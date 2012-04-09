@@ -120,6 +120,334 @@ namespace MobileClientLibrary
 
         #endregion
 
+        #region Favorited Picture Methods
+
+        public event RequestCompletedEventHandler FetchFavoritedPictureCompleted;
+
+        public void FetchFavoritedPicture(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchFavoritedPicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchFavoritedPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchFavoritedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
+
+                    FetchFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreateFavoritedPictureCompleted;
+
+        public void CreateFavoritedPicture(FavoritedPicture data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateFavoritedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreateFavoritedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreateFavoritedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
+
+                    CreateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdateFavoritedPictureCompleted;
+
+        public void UpdateFavoritedPicture(FavoritedPicture data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateFavoritedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdateFavoritedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdateFavoritedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
+
+                    UpdateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteFavoritedPictureCompleted;
+
+        public void DeleteFavoritedPicture()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteFavoritedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}", _APIKey, _Token)), null);
+        }
+
+        private void DeleteFavoritedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeleteFavoritedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Flagged Picture Methods
+
+        public event RequestCompletedEventHandler FetchFlaggedPictureCompleted;
+
+        public void FetchFlaggedPicture(string id)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchFlaggedPicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+        }
+
+        private void FetchFlaggedPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchFlaggedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FlaggedPicture>(stringData);
+
+                    FetchFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler CreateFlaggedPictureCompleted;
+
+        public void CreateFlaggedPicture(FlaggedPicture data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(CreateFlaggedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/create?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void CreateFlaggedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (CreateFlaggedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FlaggedPicture>(stringData);
+
+                    CreateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler UpdateFlaggedPictureCompleted;
+
+        public void UpdateFlaggedPicture(FlaggedPicture data)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            var jsonData = JsonConvert.SerializeObject(data);
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(UpdateFlaggedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/update?key={0}&token={1}", _APIKey, _Token)), jsonData);
+        }
+
+        private void UpdateFlaggedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (UpdateFlaggedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FlaggedPicture>(stringData);
+
+                    UpdateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteFlaggedPictureCompleted;
+
+        public void DeleteFlaggedPicture()
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteFlaggedPicture_UploadStringCompleted);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/delete?key={0}&token={1}", _APIKey, _Token)), null);
+        }
+
+        private void DeleteFlaggedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (DeleteFlaggedPictureCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region Picture Methods
 
         #region Upload Picture

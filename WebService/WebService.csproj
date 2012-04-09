@@ -93,6 +93,8 @@
     <Compile Include="Common\ErrorResponseHandler.cs" />
     <Compile Include="Common\Utilities.cs" />
     <Compile Include="Controllers\APIConsumerController.cs" />
+    <Compile Include="Controllers\FavoritedPictureController.cs" />
+    <Compile Include="Controllers\FlaggedPictureController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -108,6 +110,8 @@
     <Compile Include="Models\APIConsumer.cs" />
     <Compile Include="Common\UserCredentials.cs" />
     <Compile Include="Common\Token.cs" />
+    <Compile Include="Models\FavoritedPicture.cs" />
+    <Compile Include="Models\FlaggedPicture.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\PictureInfo.cs" />
     <Compile Include="Models\User.cs" />

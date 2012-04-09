@@ -60,6 +60,146 @@ namespace WebService
 
         #endregion
 
+        #region Favorited Picture Methods
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/fetch?id={id}")]
+        public FavoritedPicture FetchFavoritedPicture(string id)
+        {
+            return FavoritedPictureController.Fetch(id);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/create")]
+        public FavoritedPicture CreateFavoritedPicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<FavoritedPicture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            return FavoritedPictureController.Create(jsonData);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/update")]
+        public FavoritedPicture UpdateFavoritedPicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<FavoritedPicture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+
+            return FavoritedPictureController.Update(jsonData);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/delete?id={id}")]
+        public void DeleteFavoritedPicture(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            FavoritedPicture data = FavoritedPictureController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                FavoritedPictureController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that FavoritedPicture.");
+            }
+        }
+
+        #endregion
+
+        #region Flagged Picture Methods
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/fetch?id={id}")]
+        public FlaggedPicture FetchFlaggedPicture(string id)
+        {
+            return FlaggedPictureController.Fetch(id);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/create")]
+        public FlaggedPicture CreateFlaggedPicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<FlaggedPicture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+            jsonData.FriendlyCreatedDate = DateTime.UtcNow;
+
+            return FlaggedPictureController.Create(jsonData);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/update")]
+        public FlaggedPicture UpdateFlaggedPicture(Stream data)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            StreamReader reader = new StreamReader(data);
+            string stringData = reader.ReadToEnd();
+
+            reader.Close();
+            reader.Dispose();
+
+            var jsonData = Json.Decode<FlaggedPicture>(stringData);
+
+            // force server-side values
+            jsonData.UserID = token.Identity.ID;
+
+            return FlaggedPictureController.Update(jsonData);
+        }
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/delete?id={id}")]
+        public void DeleteFlaggedPicture(string id)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            FlaggedPicture data = FlaggedPictureController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                FlaggedPictureController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that FlaggedPicture.");
+            }
+        }
+
+        #endregion
+
         #region Picture Methods
 
         private CloudBlobContainer container;
