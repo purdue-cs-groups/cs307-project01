@@ -31,8 +31,8 @@
         <StackPanel Grid.Row="1" Margin="12,0,12,0">
             <toolkit:PhoneTextBox Hint="photo caption" ActualHintVisibility="Visible" Name="captionBox" KeyDown="captionKey" InputScope="Text" />
             <toolkit:ToggleSwitch Content="Share with Twitter" IsChecked="false" IsEnabled="False" Name="twitterSwitch" />
-            <toolkit:ToggleSwitch Content="Share with Facebook" IsChecked="false" IsEnabled="False" />
-            <toolkit:ToggleSwitch Content="Share with foursquare" IsChecked="false" IsEnabled="False" />
+            <toolkit:ToggleSwitch Content="Share with Facebook" IsChecked="false" IsEnabled="False" Visibility="Collapsed" />
+            <toolkit:ToggleSwitch Content="Share with foursquare" IsChecked="false" IsEnabled="False" Visibility="Collapsed" />
         </StackPanel>
     </Grid>
 
