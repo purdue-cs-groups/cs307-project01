@@ -54,6 +54,7 @@ namespace MetrocamPan
             // Clear views
             App.PopularPictures.Clear();
             App.RecentPictures.Clear();
+            App.ContinuedRecentPictures.Clear();
         }
 
         // Reset all non user specific Setting objects to default values

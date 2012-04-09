@@ -46,7 +46,7 @@ namespace MetrocamPan
             }
             catch (Exception ex)
             {
-                ;
+                // Do nothing
             }
         }
 
@@ -84,9 +84,9 @@ namespace MetrocamPan
             {
                 App.MetrocamService.FetchNewsFeed();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                ;
+                // Do nothing
             }
         }
 

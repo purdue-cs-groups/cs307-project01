@@ -14,6 +14,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     xmlns:helpers="clr-namespace:MetrocamPan.Helpers"
+    xmlns:loaders="clr-namespace:MetrocamPan.ScrollLoaders"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Opacity="1">
     <phone:PhoneApplicationPage.Resources>
@@ -52,54 +53,54 @@
 
             <!--RECENT -->
             <controls:PivotItem Header="recent" Width="Auto" Margin="24,12,0,0">
-                    <ListBox x:Name="recentPictures" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
-                                    <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
-                                    <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                    <Image Margin="0,44,0,0" Source="{Binding MediumURL}"  Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
-                                    <Grid Margin="0,472,0,0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="90"  />
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
-                                        <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
-                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.light.png">
-                                            <toolkit:ContextMenuService.ContextMenu>
-                                                <toolkit:ContextMenu>
-                                                    <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
-                                                    <toolkit:MenuItem Header="share" />
-                                                    <toolkit:MenuItem Header="flag for review" />
-                                                    <toolkit:MenuItem Header="cancel" />
-                                                </toolkit:ContextMenu>
-                                            </toolkit:ContextMenuService.ContextMenu>
-                                        </Image>
-                                        <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.png">
-                                            <toolkit:ContextMenuService.ContextMenu>
-                                                <toolkit:ContextMenu>
-                                                    <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
-                                                    <toolkit:MenuItem Header="share" />
-                                                    <toolkit:MenuItem Header="flag for review" />
-                                                    <toolkit:MenuItem Header="cancel" />
-                                                </toolkit:ContextMenu>
-                                            </toolkit:ContextMenuService.ContextMenu>
-                                        </Image>
-                                    </Grid>
+                <ListBox x:Name="recentPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,75" HorizontalAlignment="Left" ItemsSource="{Binding}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="/WinstagramPan;component/Images/smallJoe.png" Tap="ViewUserDetail_Tap" />
+                                <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
+                                <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
+                                <Image Margin="0,44,0,0" Source="{Binding MediumURL}" Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" />
+                                <Grid Margin="0,472,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="90"  />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,12,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
+                                    <!--<Button Grid.Row="0" Grid.Column="1" Height="Auto" HorizontalAlignment="Right" Content="..." Margin="0,-12,-12,0" Width="100" VerticalAlignment="Center" FontSize="25">-->
+                                    <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.light.png">
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                                <toolkit:MenuItem Header="share" />
+                                                <toolkit:MenuItem Header="flag for review" />
+                                                <toolkit:MenuItem Header="cancel" />
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    </Image>
+                                    <Image Grid.Row="0" Grid.Column="1" Height="90" Width="90" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,7,-25,0" Source="/WinstagramPan;component/Images/appbar.overflowdots.png">
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu>
+                                                <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
+                                                <toolkit:MenuItem Header="share" />
+                                                <toolkit:MenuItem Header="flag for review" />
+                                                <toolkit:MenuItem Header="cancel" />
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+                                    </Image>
                                 </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
             </controls:PivotItem>
 
 

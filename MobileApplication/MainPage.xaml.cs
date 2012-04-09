@@ -28,6 +28,8 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using JeffWilcox.FourthAndMayor;
 
+using MetrocamPan.ScrollLoaders;
+
 namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
@@ -39,6 +41,8 @@ namespace MetrocamPan
         public static double lat = 0;
         public static double lng = 0;
 
+        //RecentViewModel recentViewModel;
+
         // Constructor
         public MainPage()
         {
@@ -48,6 +52,10 @@ namespace MetrocamPan
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             SetUpLocation();
+
+            //recentViewModel = new RecentViewModel();
+
+            DataContext = new RecentViewModel();
         }
 
         // Load data for the ViewModel Items
@@ -110,6 +118,7 @@ namespace MetrocamPan
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
+                FetchRecentPictures();
             }
             else if (App.isFromUploadPage)
             {
@@ -351,6 +360,8 @@ namespace MetrocamPan
             // Reset all isolate storage Setting objects to default values
             Settings.logoutUser();
 
+            this.DataContext = null;
+
             // Navigate to landing page
             NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
         }
@@ -555,17 +566,33 @@ namespace MetrocamPan
         {
             App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.RecentPictures.Clear();
+            App.ContinuedRecentPictures.Clear();
+
+            PictureInfo firstPicture = null;
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
-                if (App.RecentPictures.Count == 10)
-                    break;
-
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
-                App.RecentPictures.Add(p);
+                if (App.RecentPictures.Count < 10)
+                {
+                    if (App.RecentPictures.Count == 0)
+                    {
+                        firstPicture = p;
+                    }
+                    // Put only 10 PictureInfo objects in RecentPictures
+                    App.RecentPictures.Add(p);
+                }
+                else
+                {
+                    // Put the rest of the PictureInfo objects into ContinuedRecentPictures
+                    App.ContinuedRecentPictures.Add(p);
+                }
             }
+
+            // Scroll to top of scrollviewer
+            this.recentPictures.ScrollIntoView(firstPicture);
         }
 
         #endregion
