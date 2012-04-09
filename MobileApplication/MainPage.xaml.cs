@@ -601,6 +601,22 @@ namespace MetrocamPan
 
         private void GetUserConnectedAccounts()
         {
+            App.MetrocamService.FetchUserConnectedAccountsByUserIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserConnectedAccountsByUserIDCompleted);
+            App.MetrocamService.FetchUserConnectedAccountsByUserID(App.MetrocamService.CurrentUser.ID);
+        }
+
+        void MetrocamService_FetchUserConnectedAccountsByUserIDCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            List<UserConnectedAccount> UCAs = e.Data as List<UserConnectedAccount>;
+
+            foreach (UserConnectedAccount uca in UCAs)
+            {
+                if (uca.AccountName.Equals("Twitter"))
+                {
+                    TwitterSecret = uca.ClientSecret;
+                    TwitterToken  = uca.ClientToken;
+                }
+            }
         }
 
         #endregion
