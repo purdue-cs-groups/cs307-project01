@@ -79,6 +79,26 @@ namespace WebService.Controllers
             return list;
         }
 
+        public static List<PictureInfo> FetchUserPictures(string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
+            var query = new QueryDocument("UserID", userId);
+            
+            List<PictureInfo> list = new List<PictureInfo>();
+            foreach (Picture p in pictures.Find(query))
+            {
+                UserInfo u = UserController.FetchInfo(p.UserID);
+                PictureInfo i = new PictureInfo(p, u);
+
+                list.Add(i);
+            }
+
+            return list;
+        }
+
         public static Picture Create(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

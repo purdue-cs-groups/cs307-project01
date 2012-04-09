@@ -318,6 +318,48 @@ namespace MobileClientLibrary
 
         #endregion
 
+        #region Fetch User Pictures
+
+        public event RequestCompletedEventHandler FetchUserPicturesCompleted;
+
+        public void FetchUserPictures(string userId)
+        {
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserPictures_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/user/fetch?key={0}&userid={1}", _APIKey, userId)));
+        }
+
+        private void FetchUserPictures_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchUserPicturesCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<List<PictureInfo>>(stringData);
+
+                    FetchUserPicturesCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region Create Picture
 
         public event RequestCompletedEventHandler CreatePictureCompleted;
