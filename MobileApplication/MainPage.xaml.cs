@@ -184,7 +184,7 @@ namespace MetrocamPan
             Image tile = sender as Image;
             PictureInfo info = tile.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=popular", UriKind.Relative));
         }
 
         private void PopularPicture_Loaded(object sender, RoutedEventArgs e)
@@ -205,7 +205,7 @@ namespace MetrocamPan
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -213,7 +213,7 @@ namespace MetrocamPan
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.User.ID, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
         }
 
         private void ViewUserDetailFromUsername_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -221,7 +221,7 @@ namespace MetrocamPan
             TextBlock username = sender as TextBlock;
             PictureInfo info = username.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.User.ID, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
         }
 
         #endregion News Feed Codebehind
@@ -548,6 +548,12 @@ namespace MetrocamPan
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
+                if (p.User.ProfilePicture == null)
+                {
+                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                }
+
                 App.PopularPictures.Add(p);
             }
         }
@@ -574,12 +580,6 @@ namespace MetrocamPan
             {
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-                if (p.User.ProfilePicture == null)
-                {
-                    p.User.ProfilePicture = new Picture();
-                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
-                }
-
                 if (p.User.ProfilePicture == null)
                 {
                     p.User.ProfilePicture = new Picture();
@@ -631,17 +631,5 @@ namespace MetrocamPan
         }
 
         #endregion
-
-        private void recentPictureOwner_Loaded(object sender, RoutedEventArgs e)
-        {
-            Image proPic = sender as Image;
-            PictureInfo info = proPic.DataContext as PictureInfo;
-
-            if (info.User.ProfilePicture == null)
-            {
-                BitmapImage b = new BitmapImage(new Uri("Images/dunsmore.png", UriKind.Relative));
-                proPic.Source = b; 
-            }
-        }
     }
 }

@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True" >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="JOE MARTELLA">
+        <controls:Pivot Title="USER" Name="pivot">
             <!--PROFILE pivot item-->
             <controls:PivotItem x:Name="profilePivot" Header="profile">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
@@ -33,7 +33,7 @@
                         <!--Left Column for profile picture-->
                         <Image x:Name="profilePicture" Grid.Row="0" Grid.Column="0"
                                Height="140" Width="140"
-                               Source="/MetrocamPan;component/Images/smallJoe.png"/>
+                               Source="{Binding User.ProfilePicture.MediumURL}"/>
 
                         <!--Right Column for fullname, hometown and rectangles-->
                         <Grid x:Name="ProfilePanelLevel2" Grid.Row="0" Grid.Column="1">

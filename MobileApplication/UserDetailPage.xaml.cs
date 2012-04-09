@@ -16,6 +16,7 @@ using MetrocamPan.Models;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 using MobileClientLibrary.Models;
+using System.Windows.Media.Imaging;
 
 namespace MetrocamPan
 {
@@ -32,12 +33,49 @@ namespace MetrocamPan
             Loaded += new RoutedEventHandler(UserDetailPage_Loaded);
         }
 
+        PictureInfo SelectedPicture = null;
         void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
-            // Subscribe event handler
-            App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
-            // Calls fetch user
-            App.MetrocamService.FetchUser(NavigationContext.QueryString["id"]);
+            if (NavigationContext.QueryString["type"].Equals("popular"))
+            {
+                SelectedPicture = (from pic in App.PopularPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
+            else if (NavigationContext.QueryString["type"].Equals("recent"))
+            {
+                SelectedPicture = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
+
+            // pivot name
+            pivot.Title = SelectedPicture.User.Name;
+
+            // profile pic
+            profilePicture.Source = (new BitmapImage(new Uri(SelectedPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute))); 
+
+            // name
+            fullName.Text = SelectedPicture.User.Name;
+
+            // location
+            if (SelectedPicture.User.Location == null)
+                hometown.Text = "Earth";
+            else
+                hometown.Text = SelectedPicture.User.Location;
+
+            // username
+            usernameTextBlock.Text = SelectedPicture.User.Username;
+
+            // bio
+            if (SelectedPicture.User.Biography == null)
+                biographyTextBlock.Text = "Just another Metrocammer!";
+            else
+                biographyTextBlock.Text = SelectedPicture.User.Biography;            
+
+            // email
+            emailTextBlock.Text = SelectedPicture.User.EmailAddress;
+
+            // date
+            DateTime activeSince = SelectedPicture.User.FriendlyCreatedDate;
+            activeSinceTextBlock.Text = activeSince.ToString();
+
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -47,6 +85,8 @@ namespace MetrocamPan
 
             UserInfo fetchedUser = (UserInfo)e.Data;
 
+            pivot.Name = fetchedUser.Name;
+            this.profilePicture.Source = (new BitmapImage(new Uri(fetchedUser.ProfilePicture.MediumURL)));
             this.profilePivot.DataContext = fetchedUser;
 
             // Set default text

@@ -38,7 +38,7 @@ namespace MetrocamPan
 
             if (CurrentPicture.User.ProfilePicture != null)
             {
-                BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL));
+                BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL, UriKind.Relative));
                 pictureOwnerPicture.Source = b;
             }
 
@@ -50,7 +50,7 @@ namespace MetrocamPan
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.User.ID, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.ID + "&type=" + NavigationContext.QueryString["type"], UriKind.Relative));
         }
 
         private void Share(object sender, EventArgs e)
