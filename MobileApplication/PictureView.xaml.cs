@@ -21,6 +21,7 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using MetrocamPan.Helpers;
 using Microsoft.Phone.Shell;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -68,7 +69,31 @@ namespace MetrocamPan
 
         private void MakeProfilePicture (object sender, EventArgs e)
         {
-            
+            User updatedData = new User();
+            UserInfo u = App.MetrocamService.CurrentUser;
+
+            updatedData.Biography = u.Biography;
+            updatedData.CreatedDate = u.CreatedDate;
+            updatedData.EmailAddress = u.EmailAddress;
+            updatedData.FriendlyCreatedDate = u.FriendlyCreatedDate;
+            updatedData.ID = u.ID;
+            updatedData.Location = u.Location;
+            updatedData.Name = u.Name;
+            updatedData.Password = App.MetrocamService.HashPassword(Settings.password.Value);
+            updatedData.Username = u.Username;
+
+            // update ProfilePicture
+            updatedData.ProfilePictureID = CurrentPicture.ID;
+
+            App.MetrocamService.UpdateUserCompleted += new RequestCompletedEventHandler(MetrocamService_UpdateUserCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.UpdateUser(updatedData);
+        }
+
+        void MetrocamService_UpdateUserCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
+            GlobalLoading.Instance.IsLoading = false;
         }
 
         private void Favorite (object sender, EventArgs e)
