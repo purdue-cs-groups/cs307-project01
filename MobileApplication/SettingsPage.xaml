@@ -47,12 +47,6 @@
 
     </Grid>
 
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.camera.png" Text="take photo" />
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>

@@ -11,7 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" 
     Loaded="PhoneApplicationPage_Loaded" 
     BackKeyPress="PhoneApplicationPage_BackKeyPress">
@@ -53,7 +53,7 @@
 
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
+        <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="1">
             <shell:ApplicationBarIconButton IconUri="Images/appbar.share.rest.png" Text="share" Click="Share" />
             <shell:ApplicationBarIconButton IconUri="Images/appbar.flag.png" Text="flag"  />
         </shell:ApplicationBar>
