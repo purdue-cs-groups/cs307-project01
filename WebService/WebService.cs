@@ -27,6 +27,7 @@ namespace WebService
     {
         #region Authentication Methods
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/authenticate")]
         public Token Authenticate(Stream data)
         {
@@ -100,6 +101,7 @@ namespace WebService
             }
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/upload")]
         public PictureURL UploadPicture(Stream data)
         {
@@ -186,12 +188,14 @@ namespace WebService
             image.Dispose();
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
         public PictureInfo FetchPicture(string id)
         {
             return PictureController.FetchInfo(id);
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch")]
         public List<PictureInfo> FetchNewsFeed()
         {
@@ -200,12 +204,14 @@ namespace WebService
             return PictureController.FetchNewsFeed(token.Identity);
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/popular/fetch")]
         public List<PictureInfo> FetchPopularNewsFeed()
         {
             return PictureController.FetchPopularNewsFeed();
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/create")]
         public Picture CreatePicture(Stream data)
         {
@@ -226,8 +232,9 @@ namespace WebService
             return PictureController.Create(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/update")]
-        public void UpdatePicture(Stream data)
+        public Picture UpdatePicture(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -242,9 +249,10 @@ namespace WebService
             // force server-side values
             jsonData.UserID = token.Identity.ID;
 
-            PictureController.Update(jsonData);
+            return PictureController.Update(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/delete?id={id}")]
         public void DeletePicture(string id)
         {
@@ -262,6 +270,7 @@ namespace WebService
             }
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/flag?id={id}")]
         public void FlagPicture(string id)
         {
@@ -277,12 +286,14 @@ namespace WebService
 
         #region Relationship Methods
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/fetch?id={id}")]
         public Relationship FetchRelationship(string id)
         {
             return RelationshipController.Fetch(id);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/create")]
         public Relationship CreateRelationship(Stream data)
         {
@@ -303,8 +314,9 @@ namespace WebService
             return RelationshipController.Create(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/update")]
-        public void UpdateRelationship(Stream data)
+        public Relationship UpdateRelationship(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -319,9 +331,10 @@ namespace WebService
             // force server-side values
             jsonData.UserID = token.Identity.ID;
 
-            RelationshipController.Update(jsonData);
+            return RelationshipController.Update(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/delete?id={id}")]
         public void DeleteRelationship(string id)
         {
@@ -343,6 +356,7 @@ namespace WebService
 
         #region User Methods
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch?id={id}")]
         public UserInfo FetchUser(string id)
         {
@@ -351,6 +365,7 @@ namespace WebService
             return UserController.FetchInfo(id);
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
         public List<UserInfo> FetchAllUsers()
         {
@@ -359,6 +374,7 @@ namespace WebService
             return UserController.FetchAll();
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/search?query={query}")]
         public List<UserInfo> SearchUsers(string query)
         {
@@ -367,6 +383,7 @@ namespace WebService
             return UserController.FetchAll(query);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/create")]
         public User CreateUser(Stream data)
         {
@@ -390,8 +407,9 @@ namespace WebService
             return UserController.Create(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/update")]
-        public void UpdateUser(Stream data)
+        public User UpdateUser(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -403,9 +421,10 @@ namespace WebService
 
             var jsonData = Json.Decode<User>(stringData);
 
-            UserController.Update(jsonData);
+            return UserController.Update(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
         public void DeleteUser()
         {
@@ -421,18 +440,21 @@ namespace WebService
 
         #region User Connected Account Methods
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/fetch?id={id}")]
         public UserConnectedAccount FetchUserConnectedAccount(string id)
         {
             return UserConnectedAccountController.Fetch(id);
         }
 
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/fetchByUserID?userid={userId}")]
         public List<UserConnectedAccount> FetchUserConnectedAccountsByUserID(string userId)
         {
             return UserConnectedAccountController.FetchByUserID(userId);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/create")]
         public UserConnectedAccount CreateUserConnectedAccount(Stream data)
         {
@@ -453,8 +475,9 @@ namespace WebService
             return UserConnectedAccountController.Create(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/update")]
-        public void UpdateUserConnectedAccount(Stream data)
+        public UserConnectedAccount UpdateUserConnectedAccount(Stream data)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
@@ -469,9 +492,10 @@ namespace WebService
             // force server-side values
             jsonData.UserID = token.Identity.ID;
 
-            UserConnectedAccountController.Update(jsonData);
+            return UserConnectedAccountController.Update(jsonData);
         }
 
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/delete?id={id}")]
         public void DeleteUserConnectedAccount(string id)
         {

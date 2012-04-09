@@ -93,7 +93,7 @@ namespace WebService.Controllers
             return data;
         }
 
-        public static void Update(Picture data)
+        public static Picture Update(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -101,6 +101,8 @@ namespace WebService.Controllers
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
             pictures.Save(data);
+
+            return data;
         }
 
         public static void Delete(PictureInfo data)

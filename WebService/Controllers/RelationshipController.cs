@@ -36,7 +36,7 @@ namespace WebService.Controllers
             return data;
         }
 
-        public static void Update(Relationship data)
+        public static Relationship Update(Relationship data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -44,6 +44,8 @@ namespace WebService.Controllers
             MongoCollection<Relationship> relationships = database.GetCollection<Relationship>("Relationships");
 
             relationships.Save(data);
+
+            return data;
         }
 
         public static void Delete(Relationship data)

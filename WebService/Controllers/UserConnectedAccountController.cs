@@ -47,7 +47,7 @@ namespace WebService.Controllers
             return data;
         }
 
-        public static void Update(UserConnectedAccount data)
+        public static UserConnectedAccount Update(UserConnectedAccount data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -55,6 +55,8 @@ namespace WebService.Controllers
             MongoCollection<UserConnectedAccount> userConnectedAccounts = database.GetCollection<UserConnectedAccount>("UserConnectedAccounts");
 
             userConnectedAccounts.Save(data);
+
+            return data;
         }
 
         public static void Delete(UserConnectedAccount data)

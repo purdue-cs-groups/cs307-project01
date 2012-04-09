@@ -45,7 +45,7 @@ namespace WebService.Controllers
             return data;
         }
 
-        public static void Update(APIConsumer data)
+        public static APIConsumer Update(APIConsumer data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -53,6 +53,8 @@ namespace WebService.Controllers
             MongoCollection<APIConsumer> consumers = database.GetCollection<APIConsumer>("APIConsumers");
 
             consumers.Save(data);
+
+            return data;
         }
 
         public static void Delete(APIConsumer data)

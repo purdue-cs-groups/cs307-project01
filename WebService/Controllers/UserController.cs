@@ -160,7 +160,7 @@ namespace WebService.Controllers
             return data;
         }
 
-        public static void Update(User data)
+        public static User Update(User data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
@@ -168,6 +168,8 @@ namespace WebService.Controllers
             MongoCollection<User> users = database.GetCollection<User>("Users");
 
             users.Save(data);
+
+            return data;
         }
 
         public static void Delete(UserInfo data)

@@ -31,7 +31,7 @@ namespace MobileClientLibrary
 
     public class WebServiceClient
     {
-        private const string _WebServiceEndpoint = "http://metrocam.cloudapp.net/v1/";
+        private const string _WebServiceEndpoint = "http://localhost:49726/v1/";
 
         private string _APIKey = null;
 
@@ -383,6 +383,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
+
                     UpdatePictureCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -589,6 +593,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
+
                     UpdateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -668,6 +676,9 @@ namespace MobileClientLibrary
                     string stringData = e.Result;
 
                     var jsonData = JsonConvert.DeserializeObject<UserInfo>(stringData);
+
+                    if (jsonData.ID == CurrentUser.ID)
+                        CurrentUser = jsonData;
 
                     FetchUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
@@ -830,6 +841,13 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<User>(stringData);
+
+                    if (jsonData.ID == CurrentUser.ID)
+                        FetchUser(CurrentUser.ID);
+
                     UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
@@ -1030,6 +1048,10 @@ namespace MobileClientLibrary
             {
                 if (e.Error == null)
                 {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<UserConnectedAccount>(stringData);
+
                     UpdateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
