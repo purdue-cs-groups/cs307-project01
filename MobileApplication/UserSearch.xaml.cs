@@ -102,7 +102,7 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
