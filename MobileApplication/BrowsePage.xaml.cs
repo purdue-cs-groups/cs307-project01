@@ -16,6 +16,7 @@ using MobileClientLibrary;
 using MobileClientLibrary.Models;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -90,6 +91,13 @@ namespace MetrocamPan
 
             HubTile currentTile = sender as HubTile;
             currentTile.Visibility = Visibility.Visible;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

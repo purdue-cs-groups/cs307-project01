@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary;
 using MobileClientLibrary.Models;
+using JeffWilcox.FourthAndMayor;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -39,15 +41,8 @@ namespace MetrocamPan
             }
 
             App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-
-            try
-            {
-                App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
-            }
-            catch (Exception ex)
-            {
-                // Do nothing
-            }
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
         }
 
         #region Authenticate
@@ -55,6 +50,7 @@ namespace MetrocamPan
         private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted;
+            GlobalLoading.Instance.IsLoading = false;
 
             FetchRecentPictures();
 
@@ -150,5 +146,12 @@ namespace MetrocamPan
         }
 
         #endregion
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
+        }
     }
 }

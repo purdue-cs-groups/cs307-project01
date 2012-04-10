@@ -26,6 +26,7 @@ using Hammock.Web;
 using System.Text;
 using JeffWilcox.FourthAndMayor;
 using Microsoft.Xna.Framework.Media;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -231,6 +232,13 @@ namespace MetrocamPan
         {
             App.isFromUploadPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

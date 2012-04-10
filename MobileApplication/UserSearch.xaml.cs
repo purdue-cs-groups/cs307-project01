@@ -21,6 +21,7 @@ using Microsoft.Phone.Tasks;
 using System.IO;
 using ExifLib;
 using MobileClientLibrary.Models;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -45,6 +46,7 @@ namespace MetrocamPan
             searchResults.Visibility = System.Windows.Visibility.Collapsed;
             noresults.Visibility = System.Windows.Visibility.Collapsed;
             App.MetrocamService.SearchUsersCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_SearchUsersCompleted);
+            GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.SearchUsers(this.searchterms.Text);
         }
 
@@ -52,6 +54,7 @@ namespace MetrocamPan
         void MetrocamService_SearchUsersCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.SearchUsersCompleted -= MetrocamService_SearchUsersCompleted;
+            GlobalLoading.Instance.IsLoading = false;
             SearchResults.Clear();
 
             results = e.Data as List<UserInfo>;
@@ -97,6 +100,13 @@ namespace MetrocamPan
             UserInfo info = image.DataContext as UserInfo;
 
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

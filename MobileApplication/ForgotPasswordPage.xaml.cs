@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -71,6 +73,13 @@ namespace MetrocamPan
         {
             // GoBack() Automatically clears everything on this PortraitPage
             NavigationService.GoBack();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

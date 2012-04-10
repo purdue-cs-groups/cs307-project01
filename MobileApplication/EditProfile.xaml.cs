@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using MobileClientLibrary;
 using MobileClientLibrary.Models;
 using JeffWilcox.FourthAndMayor;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -109,6 +110,13 @@ namespace MetrocamPan
             {
                 this.Focus();
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

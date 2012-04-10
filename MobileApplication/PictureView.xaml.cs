@@ -22,6 +22,7 @@ using MobileClientLibrary;
 using MetrocamPan.Helpers;
 using Microsoft.Phone.Shell;
 using JeffWilcox.FourthAndMayor;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -128,6 +129,13 @@ namespace MetrocamPan
         private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
             HubTileService.UnfreezeGroup("PopularTiles");
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

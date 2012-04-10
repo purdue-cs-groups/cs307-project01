@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
+using System.Windows.Navigation;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -112,6 +114,8 @@ namespace MetrocamPan
             // Subscribe event to CreateUserCompleted
             App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
 
+            GlobalLoading.Instance.IsLoading = true;
+
             // Calls CreateUser to WebService
             App.MetrocamService.CreateUser(currentUser);
         }
@@ -132,6 +136,8 @@ namespace MetrocamPan
         {
             // Unsubscribe
             App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+
+            GlobalLoading.Instance.IsLoading = false;
 
             UserInfo obtainedUser = App.MetrocamService.CurrentUser;
 
@@ -159,6 +165,13 @@ namespace MetrocamPan
         private void AboutMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

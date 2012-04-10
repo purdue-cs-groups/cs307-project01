@@ -18,6 +18,7 @@ using Microsoft.Phone.Shell;
 using MobileClientLibrary.Models;
 using System.Windows.Media.Imaging;
 using JeffWilcox.FourthAndMayor;
+using System.Windows.Navigation;
 
 namespace MetrocamPan
 {
@@ -188,6 +189,13 @@ namespace MetrocamPan
         {
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

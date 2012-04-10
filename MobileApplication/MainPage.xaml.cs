@@ -775,5 +775,13 @@ namespace MetrocamPan
         }
 
         #endregion
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.IsLoading = false;
+        }
     }
 }
