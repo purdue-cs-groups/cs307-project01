@@ -17,6 +17,7 @@ using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 using MobileClientLibrary.Models;
 using System.Windows.Media.Imaging;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -76,33 +77,22 @@ namespace MetrocamPan
             DateTime activeSince = SelectedPicture.User.FriendlyCreatedDate;
             activeSinceTextBlock.Text = activeSince.ToString();
 
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(SelectedPicture.User.ID);
         }
 
-        void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        List<PictureInfo> userPictures = null;
+        void MetrocamService_FetchUserPicturesCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            // Always unsubscribe the event handler just in case
-            App.MetrocamService.FetchUserCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
+            userPictures = e.Data as List<PictureInfo>;
+            userPictures.Reverse();
 
-            UserInfo fetchedUser = (UserInfo)e.Data;
-
-            pivot.Name = fetchedUser.Name;
-            this.profilePicture.Source = (new BitmapImage(new Uri(fetchedUser.ProfilePicture.MediumURL)));
-            this.profilePivot.DataContext = fetchedUser;
-
-            // Set default text
-            if (fetchedUser.Biography == null)
-                this.biographyTextBlock.Text = "Just another Metrocammer!";
-            else
-                biographyTextBlock.Text = fetchedUser.Biography;
-
-            if (fetchedUser.Location == null)
-                this.hometown.Text = "Earth";
-            else
-                hometown.Text = fetchedUser.Location;
-
-            // Set created date (active since)
-            DateTime activeSince = fetchedUser.FriendlyCreatedDate;
-            this.activeSinceTextBlock.Text = activeSince.ToString();
+            if (UserPictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                    UserPictures.DataContext = userPictures.GetRange(0, 24));
+            }
         }
 
         private void SendEmail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -160,6 +150,12 @@ namespace MetrocamPan
         {
             isFollowing = false;
             UpdateAppBar();
+        }
+
+        private void HubTile_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
         }
     }
 }
