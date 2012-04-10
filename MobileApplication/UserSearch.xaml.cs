@@ -36,42 +36,42 @@ namespace MetrocamPan
             noresults.Visibility = System.Windows.Visibility.Collapsed;
             searchResults.Visibility = System.Windows.Visibility.Collapsed;
             SearchResults.Clear();
-
         }
 
-        public static ObservableCollection<User> SearchResults = new ObservableCollection<User>();
+        public static ObservableCollection<UserInfo> SearchResults = new ObservableCollection<UserInfo>();
         public static List<UserInfo> results;
         private void searchbutton_Click(object sender, EventArgs e)
         {
             searchResults.Visibility = System.Windows.Visibility.Collapsed;
             noresults.Visibility = System.Windows.Visibility.Collapsed;
-            App.MetrocamService.SearchUsersCompleted +=new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_SearchUsersCompleted);
+            App.MetrocamService.SearchUsersCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_SearchUsersCompleted);
             App.MetrocamService.SearchUsers(this.searchterms.Text);
         }
 
 
-        void  MetrocamService_SearchUsersCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        void MetrocamService_SearchUsersCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.SearchUsersCompleted -= MetrocamService_SearchUsersCompleted;
             SearchResults.Clear();
 
-            //link to profile
-            //profile picture
-
-
             results = e.Data as List<UserInfo>;
-            foreach (UserInfo uio in results) {
-                User result = new User();
-                result.Name = uio.Name;
-                result.Username = uio.Username;
-                SearchResults.Add(result);
+            foreach (UserInfo u in results)
+            {
+                if (u.ProfilePicture == null)
+                {
+                    u.ProfilePicture = new Picture();
+                    u.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                }
+
+                SearchResults.Add(u);
             }
 
             if (results.Count == 0)
             {
                 noresults.Visibility = System.Windows.Visibility.Visible;
             }
-            else {
+            else
+            {
                 searchResults.ItemsSource = SearchResults;
                 searchResults.Visibility = System.Windows.Visibility.Visible;
             }
@@ -85,18 +85,18 @@ namespace MetrocamPan
 
         private void ViewUserDetailFromUsername_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            MessageBox.Show("This should navigate to the user detail page.  Butttttt it doesn't.  Just FYI.");
-         /*   TextBlock username = sender as TextBlock;
+            TextBlock username = sender as TextBlock;
             UserInfo info = username.DataContext as UserInfo;
 
-            if (info.ID == null)
-            {
-                MessageBox.Show("the user info object is somehow wrong\n");
-            }
-            else
-            {
-                NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
-            }*/
-       }
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
+        }
+
+        private void ViewUserDetailFromPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Image image = sender as Image;
+            UserInfo info = image.DataContext as UserInfo;
+
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
+        }
     }
 }

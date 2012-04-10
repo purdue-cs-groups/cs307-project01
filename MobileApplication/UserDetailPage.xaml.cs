@@ -45,6 +45,12 @@ namespace MetrocamPan
             {
                 SelectedPicture = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
             }
+            else if (NavigationContext.QueryString["type"].Equals("search"))
+            {
+                App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
+                App.MetrocamService.FetchUser(NavigationContext.QueryString["id"]);
+                return;
+            }
 
             // pivot name
             pivot.Title = SelectedPicture.User.Name;
@@ -80,6 +86,46 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(SelectedPicture.User.ID);
+        }
+
+        void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            UserInfo u = e.Data as UserInfo;
+
+            // pivot name
+            pivot.Title = u.Name;
+
+            // profile pic
+            profilePicture.Source = (new BitmapImage(new Uri(u.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
+
+            // name
+            fullName.Text = u.Name;
+
+            // location
+            if (u.Location == null)
+                hometown.Text = "Earth";
+            else
+                hometown.Text = u.Location;
+
+            // username
+            usernameTextBlock.Text = u.Username;
+
+            // bio
+            if (u.Biography == null)
+                biographyTextBlock.Text = "Just another Metrocammer!";
+            else
+                biographyTextBlock.Text = u.Biography;
+
+            // email
+            emailTextBlock.Text = u.EmailAddress;
+
+            // date
+            DateTime activeSince = u.FriendlyCreatedDate;
+            activeSinceTextBlock.Text = activeSince.ToString();
+
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(u.ID);
         }
 
         List<PictureInfo> userPictures = null;
