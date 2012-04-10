@@ -197,5 +197,13 @@ namespace MetrocamPan
 
             GlobalLoading.Instance.IsLoading = false;
         }
+
+        private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            HubTile image = sender as HubTile;
+            PictureInfo info = image.DataContext as PictureInfo;
+
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=user", UriKind.Relative));
+        }
     }
 }

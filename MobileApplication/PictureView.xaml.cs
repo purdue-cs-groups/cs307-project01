@@ -38,7 +38,14 @@ namespace MetrocamPan
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            CurrentPicture = App.PopularPictures.Where(x => x.ID == NavigationContext.QueryString["id"]).SingleOrDefault<PictureInfo>();
+            if (NavigationContext.QueryString["type"].Equals("popular"))
+            {
+                CurrentPicture = (from pic in App.PopularPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
+            else if (NavigationContext.QueryString["type"].Equals("recent"))
+            {
+                CurrentPicture = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
 
             if (CurrentPicture.User.ProfilePicture != null)
             {
@@ -55,11 +62,11 @@ namespace MetrocamPan
             {
                 AddedAppBarButton = true;
 
-                ApplicationBarIconButton profilePic = new ApplicationBarIconButton(new Uri("Images/appbar.user.png", UriKind.Relative));
-                profilePic.Text = "profile pic";
+                ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
+                profilePic.Text = "make profile picture";
                 profilePic.Click += new EventHandler(MakeProfilePicture);
 
-                ApplicationBar.Buttons.Add(profilePic);
+                ApplicationBar.MenuItems.Add(profilePic);
             }
             else if (!AddedAppBarButton)
             {

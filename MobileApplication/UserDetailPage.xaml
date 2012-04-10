@@ -127,8 +127,7 @@
                                 Notification="{Binding Caption}"
                                 DisplayNotification="True"
                                 Margin="4,4,0,0"
-                                Loaded="HubTile_Loaded"
-                                />
+                                Loaded="HubTile_Loaded" Tap="HubTile_Tap" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>
