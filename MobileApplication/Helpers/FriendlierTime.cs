@@ -16,63 +16,48 @@ namespace MetrocamPan.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            String friendlier = "sometime in the past";
-            DateTime now        = DateTime.Now;
-            int timeDifference = 0;
-
+            // datetime to convert
             DateTime friendly = (DateTime)value;
 
-            if (now.Year - friendly.Year != 0)
+            var ts = new TimeSpan(DateTime.Now.Ticks - friendly.Ticks);
+            double delta = Math.Abs(ts.TotalSeconds);
+
+            if (delta < 60)
             {
-                timeDifference = now.Year - friendly.Year;
-                if (timeDifference == 1)
-                    friendlier = "a year ago";
-                else
-                    friendlier = timeDifference + " years ago";
+                return ts.Seconds == 1 ? "shared a second ago" : "shared " + ts.Seconds + " seconds ago";
             }
-            else if (now.Month - friendly.Month != 0)
+            if (delta < 120)
             {
-                timeDifference = now.Month - friendly.Month;
-                if (timeDifference == 1)
-                    friendlier = "a month ago";
-                else
-                    friendlier = timeDifference + " months ago";
+                return "shared " + "a minute ago";
             }
-            else if (now.Day - friendly.Day != 0)
+            if (delta < 2700) // 45 * 60
             {
-                timeDifference = now.Day - friendly.Day;
-                if (timeDifference == 1)
-                    friendlier = "yesterday";
-                else
-                    friendlier = timeDifference + " days ago";
+                return "shared " + ts.Minutes + " minutes ago";
             }
-            else if (now.Hour - friendly.Hour != 0)
+            if (delta < 5400) // 90 * 60
             {
-                timeDifference = now.Hour - friendly.Hour;
-                if (timeDifference == 1)
-                    friendlier = "an hour ago";
-                else
-                    friendlier = timeDifference + " hours ago";
+                return "shared " + "an hour ago";
             }
-            else if (now.Minute - friendly.Minute != 0)
+            if (delta < 86400) // 24 * 60 * 60
             {
-                timeDifference = now.Minute - friendly.Minute;
-                if (timeDifference == 1)
-                    friendlier = "a minute ago";
-                else
-                    friendlier = timeDifference + " minutes ago";
+                return "shared " + ts.Hours + " hours ago";
             }
-            else if (now.Second - friendly.Second != 0)
+            if (delta < 172800) // 48 * 60 * 60
             {
-                timeDifference = now.Second - friendly.Second;
-                if (timeDifference == 1)
-                    friendlier = "a second ago";
-                else
-                    friendlier = timeDifference + " seconds ago";
+                return "shared " + "yesterday";
+            }
+            if (delta < 2592000) // 30 * 24 * 60 * 60
+            {
+                return "shared " + ts.Days + " days ago";
+            }
+            if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
+            {
+                int months = System.Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                return months <= 1 ? "shared " + "a month ago" : "shared " + months + " months ago";
             }
 
-
-            return "shared " + friendlier;
+            int years = System.Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+            return years <= 1 ? "shared " + "a year ago" : "shared " + years + " years ago";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -82,61 +67,45 @@ namespace MetrocamPan.Helpers
 
         public static String Convert(DateTime friendly)
         {
-            String friendlier = "sometime in the past";
-            DateTime now = DateTime.Now;
-            int timeDifference = 0;
+            var ts = new TimeSpan(DateTime.Now.Ticks - friendly.Ticks);
+            double delta = Math.Abs(ts.TotalSeconds);
 
-            if (now.Year - friendly.Year != 0)
+            if (delta < 60)
             {
-                timeDifference = now.Year - friendly.Year;
-                if (timeDifference == 1)
-                    friendlier = "a year ago";
-                else
-                    friendlier = timeDifference + " years ago";
+                return ts.Seconds == 1 ? "shared a second ago" : "shared " + ts.Seconds + " seconds ago";
             }
-            else if (now.Month - friendly.Month != 0)
+            if (delta < 120)
             {
-                timeDifference = now.Month - friendly.Month;
-                if (timeDifference == 1)
-                    friendlier = "a month ago";
-                else
-                    friendlier = timeDifference + " months ago";
+                return "shared " + "a minute ago";
             }
-            else if (now.Day - friendly.Day != 0)
+            if (delta < 2700) // 45 * 60
             {
-                timeDifference = now.Day - friendly.Day;
-                if (timeDifference == 1)
-                    friendlier = "yesterday";
-                else
-                    friendlier = timeDifference + " days ago";
+                return "shared " + ts.Minutes + " minutes ago";
             }
-            else if (now.Hour - friendly.Hour != 0)
+            if (delta < 5400) // 90 * 60
             {
-                timeDifference = now.Hour - friendly.Hour;
-                if (timeDifference == 1)
-                    friendlier = "an hour ago";
-                else
-                    friendlier = timeDifference + " hours ago";
+                return "shared " + "an hour ago";
             }
-            else if (now.Minute - friendly.Minute != 0)
+            if (delta < 86400) // 24 * 60 * 60
             {
-                timeDifference = now.Minute - friendly.Minute;
-                if (timeDifference == 1)
-                    friendlier = "a minute ago";
-                else
-                    friendlier = timeDifference + " minutes ago";
+                return "shared " + ts.Hours + " hours ago";
             }
-            else if (now.Second - friendly.Second != 0)
+            if (delta < 172800) // 48 * 60 * 60
             {
-                timeDifference = now.Second - friendly.Second;
-                if (timeDifference == 1)
-                    friendlier = "a second ago";
-                else
-                    friendlier = timeDifference + " seconds ago";
+                return "shared " + "yesterday";
+            }
+            if (delta < 2592000) // 30 * 24 * 60 * 60
+            {
+                return "shared " + ts.Days + " days ago";
+            }
+            if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
+            {
+                int months = System.Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+                return months <= 1 ? "shared " + "a month ago" : "shared " + months + " months ago";
             }
 
-
-            return friendlier;
+            int years = System.Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+            return years <= 1 ? "shared " + "a year ago" : "shared " + years + " years ago";
         }
     }
 }

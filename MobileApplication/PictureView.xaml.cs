@@ -48,7 +48,7 @@ namespace MetrocamPan
             pictureView.Source = new BitmapImage(new Uri(CurrentPicture.MediumURL));
             pictureOwnerName.Text = CurrentPicture.User.Username;
             pictureCaption.Text = CurrentPicture.Caption;
-            pictureTakenTime.Text = "shared " + FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
+            pictureTakenTime.Text = FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
 
             if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID) && !AddedAppBarButton)
             {
