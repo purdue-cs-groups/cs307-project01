@@ -636,7 +636,7 @@ namespace MetrocamPan
 
             if (info.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
             {
-                ContextMenu CM = PopulateMyPictureMenuItems();
+                ContextMenu CM = PopulateMyPictureMenuItems(info);
                 ContextMenuService.SetContextMenu(image, CM);
             }
             else
@@ -646,7 +646,7 @@ namespace MetrocamPan
             }
         }
 
-        private ContextMenu PopulateMyPictureMenuItems()
+        private ContextMenu PopulateMyPictureMenuItems(PictureInfo info)
         {
             MenuItem ProfilePicture = new MenuItem();
             ProfilePicture.Header = "make profile picture";
@@ -661,7 +661,9 @@ namespace MetrocamPan
             Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
 
             ContextMenu CM = new ContextMenu();
-            CM.Items.Add(ProfilePicture);
+
+            if (!info.ID.Equals(App.MetrocamService.CurrentUser.ProfilePicture.ID))
+                CM.Items.Add(ProfilePicture);
             CM.Items.Add(DeletePicture);
             CM.Items.Add(Cancel);
 
