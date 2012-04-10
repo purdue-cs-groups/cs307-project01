@@ -38,6 +38,9 @@ namespace MetrocamPan
         PictureInfo SelectedPicture = null;
         void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
+            if (UserPictures.ItemsSource != null)
+                return;
+
             if (NavigationContext.QueryString["type"].Equals("popular"))
             {
                 SelectedPicture = (from pic in App.PopularPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
@@ -177,15 +180,6 @@ namespace MetrocamPan
             }
         }
 
-        public static HubTile selectedPicture;
-        private void hubTilePictureTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            /*
-            selectedPicture = (HubTile)sender;
-            NavigationService.Navigate(new Uri("/PictureView.xaml", UriKind.Relative));
-             */
-        }
-
         private void Follow(object sender, EventArgs e)
         {
             isFollowing = true;
@@ -204,7 +198,7 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = false;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
