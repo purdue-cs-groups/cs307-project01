@@ -428,6 +428,8 @@ namespace MetrocamPan
         {
             if (MainContent.SelectedIndex == 0)
             {
+                isRefreshingPopular = true;
+
                 // refresh popular
                 App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
                 App.MetrocamService.FetchPopularNewsFeed();
@@ -537,6 +539,7 @@ namespace MetrocamPan
             App.MetrocamService.FetchPopularNewsFeed();
         }
 
+        Boolean isRefreshingPopular = false;
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
@@ -557,17 +560,26 @@ namespace MetrocamPan
                     p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
                 }
 
-                if (App.PopularPictures.Count < 3)
+                if (!isRefreshingPopular)
                 {
-                    App.PopularPictures.Add(p);
+                    if (App.PopularPictures.Count < 3)
+                    {
+                        App.PopularPictures.Add(p);
+                    }
+                    else
+                    {
+                        App.ContinuedPopularPictures.Add(p);
+                    }
                 }
                 else
                 {
-                    App.ContinuedPopularPictures.Add(p);
+                    App.PopularPictures.Add(p);
                 }
 
                 count++;
             }
+
+            isRefreshingPopular = false;
         }
 
         #endregion
