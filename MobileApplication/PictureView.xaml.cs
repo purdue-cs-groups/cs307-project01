@@ -46,6 +46,10 @@ namespace MetrocamPan
             {
                 CurrentPicture = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
             }
+            else if (NavigationContext.QueryString["type"].Equals("user"))
+            {
+                CurrentPicture = (from pic in App.UserPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
 
             if (CurrentPicture.User.ProfilePicture != null)
             {
@@ -138,7 +142,7 @@ namespace MetrocamPan
             HubTileService.UnfreezeGroup("PopularTiles");
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 

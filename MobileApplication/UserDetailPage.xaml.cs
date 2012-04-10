@@ -128,6 +128,19 @@ namespace MetrocamPan
         {
             userPictures = e.Data as List<PictureInfo>;
             userPictures.Reverse();
+            App.UserPictures.Clear();
+
+            foreach (PictureInfo p in userPictures)
+            {
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+                if (p.User.ProfilePicture == null)
+                {
+                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                }
+
+                App.UserPictures.Add(p);
+            }
 
             if (UserPictures.ItemsSource == null)
             {
