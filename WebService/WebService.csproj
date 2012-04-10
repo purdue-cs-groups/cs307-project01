@@ -69,6 +69,7 @@
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
     <Content Include="Register.aspx" />
+    <Content Include="ResetPassword.aspx" />
     <Content Include="ViewPicture.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -84,6 +85,7 @@
     <Compile Include="Common\AuthenticationManager.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
+    <Compile Include="Common\MD5CryptoServiceProvider.cs" />
     <Compile Include="Common\TimeZone\DateTimeHelper.cs" />
     <Compile Include="Common\TimeZone\Helper.cs" />
     <Compile Include="Common\TimeZone\LocalizedTimeZonePageBase.cs">
@@ -123,6 +125,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewPicture.aspx.cs">
       <DependentUpon>ViewPicture.aspx</DependentUpon>
