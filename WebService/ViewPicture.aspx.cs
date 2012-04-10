@@ -44,6 +44,12 @@ namespace WebService
             string location;
             try
             {
+                if (picture.Latitude == 0 &&
+                    picture.Longitude == 0)
+                {
+                    throw new Exception();
+                }
+
                 WebClient client = new WebClient();
                 
                 var jsonResult2 = client.DownloadString("http://maps.googleapis.com/maps/api/geocode/json?address=" + picture.Latitude + "," + picture.Longitude + "&sensor=false");
@@ -63,7 +69,7 @@ namespace WebService
             }
             catch
             {
-                location = "<a href=\"http://www.bing.com/maps/default.aspx?lvl=12&cp=" + picture.Latitude + "~" + picture.Longitude + "\" target=\"blank\">(" + picture.Latitude + ", " + picture.Longitude + ")</a>";
+                location = "<a href=\"#\">Unknown Location</a>";
             }
 
             // location
