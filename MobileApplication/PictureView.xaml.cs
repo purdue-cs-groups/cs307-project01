@@ -121,7 +121,10 @@ namespace MetrocamPan
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.ID + "&type=" + NavigationContext.QueryString["type"], UriKind.Relative));
+            if (!NavigationContext.QueryString["type"].Equals("user"))
+            {
+                NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.ID + "&type=" + NavigationContext.QueryString["type"], UriKind.Relative));
+            }
         }
 
         private void Share(object sender, EventArgs e)
