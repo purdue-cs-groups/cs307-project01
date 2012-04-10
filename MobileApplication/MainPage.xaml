@@ -60,16 +60,7 @@
                                 <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="{Binding User.ProfilePicture.MediumURL}" Tap="ViewUserDetail_Tap" />
                                 <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
                                 <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                <Image Margin="0,44,0,0" Source="{Binding MediumURL}" Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap">
-                                    <toolkit:ContextMenuService.ContextMenu>
-                                        <toolkit:ContextMenu>
-                                            <!-- You can suppress tilt on indivudal menu items with TiltEffect.SuppressTilt="True" -->
-                                            <toolkit:MenuItem Header="share" />
-                                            <toolkit:MenuItem Header="flag for review" />
-                                            <toolkit:MenuItem Header="cancel" />
-                                        </toolkit:ContextMenu>
-                                    </toolkit:ContextMenuService.ContextMenu>
-                                </Image>
+                                <Image Margin="0,44,0,0" Source="{Binding MediumURL}" Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" Loaded="Image_Loaded" />
                                 <TextBlock VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,484,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
                             </Grid>
                         </DataTemplate>

@@ -39,9 +39,7 @@ namespace MetrocamPan
 
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
-        public static double lng = 0;
-
-        //RecentViewModel recentViewModel;
+        public static double lng = 0;                         
 
         // Constructor
         public MainPage()
@@ -53,9 +51,77 @@ namespace MetrocamPan
 
             SetUpLocation();
 
-            //recentViewModel = new RecentViewModel();
-
             DataContext = new RecentViewModel();
+        }
+
+        private ContextMenu PopulateMyPictureMenuItems()
+        {
+            MenuItem ProfilePicture = new MenuItem();
+            ProfilePicture.Header = "make profile picture";
+            ProfilePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(ProfilePicture_Tap);
+
+            MenuItem DeletePicture = new MenuItem();
+            DeletePicture.Header = "delete";
+            DeletePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(DeletePicture_Tap);
+
+            MenuItem Cancel = new MenuItem();
+            Cancel.Header = "cancel";
+            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
+
+            ContextMenu CM = new ContextMenu();
+            CM.Items.Add(ProfilePicture);
+            CM.Items.Add(DeletePicture);
+            CM.Items.Add(Cancel);
+
+            return CM;
+        }
+
+        private ContextMenu PopulateNotMyPictureMenuItems()
+        {
+            ContextMenu CM = new ContextMenu();
+
+            MenuItem Favorite = new MenuItem();
+            Favorite.Header = "favorite";
+            Favorite.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Favorite_Tap);
+
+            MenuItem Flag = new MenuItem();
+            Flag.Header = "flag";
+            Flag.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Flag_Tap);
+
+            MenuItem Cancel = new MenuItem();
+            Cancel.Header = "cancel";
+            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
+
+            CM.Items.Add(Favorite);
+            CM.Items.Add(Flag);
+            CM.Items.Add(Cancel);
+
+            return CM;
+        }
+
+        void Cancel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void Flag_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            
+        }
+
+        void Favorite_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void ProfilePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            
         }
 
         // Load data for the ViewModel Items
@@ -631,5 +697,22 @@ namespace MetrocamPan
         }
 
         #endregion
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image image = sender as Image;
+            PictureInfo info = image.DataContext as PictureInfo;
+
+            if (info.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                ContextMenu CM = PopulateMyPictureMenuItems();
+                ContextMenuService.SetContextMenu(image, CM);
+            }
+            else
+            {
+                ContextMenu CM = PopulateNotMyPictureMenuItems();
+                ContextMenuService.SetContextMenu(image, CM);
+            }
+        }
     }
 }
