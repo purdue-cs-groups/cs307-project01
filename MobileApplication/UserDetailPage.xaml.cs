@@ -76,9 +76,6 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;            
 
-            // email
-            emailTextBlock.Text = SelectedPicture.User.EmailAddress;
-
             // date
             DateTime activeSince = SelectedPicture.User.FriendlyCreatedDate;
             activeSinceTextBlock.Text = activeSince.ToString();
@@ -116,9 +113,6 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = u.Biography;
 
-            // email
-            emailTextBlock.Text = u.EmailAddress;
-
             // date
             DateTime activeSince = u.FriendlyCreatedDate;
             activeSinceTextBlock.Text = activeSince.ToString();
@@ -139,14 +133,6 @@ namespace MetrocamPan
                 Dispatcher.BeginInvoke(() =>
                     UserPictures.DataContext = userPictures.GetRange(0, 24));
             }
-        }
-
-        private void SendEmail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            EmailComposeTask em = new EmailComposeTask();
-            em.To = emailTextBlock.Text;
-
-            em.Show();
         }
 
         private void UpdateAppBar()

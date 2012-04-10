@@ -99,17 +99,6 @@
                                     </StackPanel>
                                 </Grid>
 
-                                <Grid x:Name="emailGrid" Grid.Row="2">
-                                    <StackPanel>
-                                        <TextBlock Text="email" Margin="0,12,0,0"
-                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="emailTextBlock" Text="{Binding EmailAddress}"
-                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
-                                                   Foreground="{StaticResource PhoneAccentBrush}" Tap="SendEmail_Tap">
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Grid>
-
                                 <Grid x:Name="activeSinceGrid" Grid.Row="3">
                                     <StackPanel>
                                         <TextBlock Text="active since" Margin="0,12,0,0"

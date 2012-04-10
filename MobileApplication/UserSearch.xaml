@@ -35,7 +35,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="search by username or email address" Margin="12,0,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+            <TextBlock Grid.Row="0" Text="search by username or name" Margin="12,0,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
             <toolkit:PhoneTextBox Grid.Row="1" x:Name="searchterms" AcceptsReturn="False" Hint="Search" ActualHintVisibility="Visible"  Margin="0,0,0,0" Foreground="Black" GotFocus="searchterms_GotFocus" />
           <!--Grid.Row="1"-->
             <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="searchbutton_Click" />   
