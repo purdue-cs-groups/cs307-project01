@@ -35,17 +35,19 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="search by username or email address" Margin="12,0,0,0" />
-            <TextBox Grid.Row="1" x:Name="usernameInput" AcceptsReturn="False" Text="" Margin="0,0,0,0" />
-            <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="SearchButton_Click" />
-
+            <TextBlock Grid.Row="0" Text="search by username or email address" Margin="12,0,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+            <toolkit:PhoneTextBox Grid.Row="1" x:Name="searchterms" AcceptsReturn="False" Hint="Search" ActualHintVisibility="Visible"  Margin="0,0,0,0" Foreground="Black" GotFocus="searchterms_GotFocus" />
+          <!--Grid.Row="1"-->
+            <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="searchbutton_Click" />   
+            <TextBlock Grid.Row="3" x:Name="noresults" Text="No results found." Margin="12,0,0,0" Visibility="Collapsed"/> 
+            
             <ListBox Height="500"  Grid.Row="3" Name="searchResults" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Image Margin="12,5,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/MetrocamPan;component/Images/smallJoe.png"/>
-                            <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" />
-                            <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" />
+                            <Image Margin="12,5,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="/Images/smallJoe.png"/>
+                            <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailFromUsername_Tap" />
+                            <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
