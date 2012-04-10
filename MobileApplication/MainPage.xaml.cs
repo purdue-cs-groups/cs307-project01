@@ -54,76 +54,6 @@ namespace MetrocamPan
             DataContext = new RecentViewModel();
         }
 
-        private ContextMenu PopulateMyPictureMenuItems()
-        {
-            MenuItem ProfilePicture = new MenuItem();
-            ProfilePicture.Header = "make profile picture";
-            ProfilePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(ProfilePicture_Tap);
-
-            MenuItem DeletePicture = new MenuItem();
-            DeletePicture.Header = "delete";
-            DeletePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(DeletePicture_Tap);
-
-            MenuItem Cancel = new MenuItem();
-            Cancel.Header = "cancel";
-            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
-
-            ContextMenu CM = new ContextMenu();
-            CM.Items.Add(ProfilePicture);
-            CM.Items.Add(DeletePicture);
-            CM.Items.Add(Cancel);
-
-            return CM;
-        }
-
-        private ContextMenu PopulateNotMyPictureMenuItems()
-        {
-            ContextMenu CM = new ContextMenu();
-
-            MenuItem Favorite = new MenuItem();
-            Favorite.Header = "favorite";
-            Favorite.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Favorite_Tap);
-
-            MenuItem Flag = new MenuItem();
-            Flag.Header = "flag";
-            Flag.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Flag_Tap);
-
-            MenuItem Cancel = new MenuItem();
-            Cancel.Header = "cancel";
-            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
-
-            CM.Items.Add(Favorite);
-            CM.Items.Add(Flag);
-            CM.Items.Add(Cancel);
-
-            return CM;
-        }
-
-        void Cancel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
-        }
-
-        void Flag_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            
-        }
-
-        void Favorite_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
-        }
-
-        void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
-        }
-
-        void ProfilePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            
-        }
-
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -698,6 +628,7 @@ namespace MetrocamPan
 
         #endregion
 
+        #region ContextMenu
         private void Image_Loaded(object sender, RoutedEventArgs e)
         {
             Image image = sender as Image;
@@ -714,5 +645,105 @@ namespace MetrocamPan
                 ContextMenuService.SetContextMenu(image, CM);
             }
         }
+
+        private ContextMenu PopulateMyPictureMenuItems()
+        {
+            MenuItem ProfilePicture = new MenuItem();
+            ProfilePicture.Header = "make profile picture";
+            ProfilePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(ProfilePicture_Tap);
+
+            MenuItem DeletePicture = new MenuItem();
+            DeletePicture.Header = "delete";
+            DeletePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(DeletePicture_Tap);
+
+            MenuItem Cancel = new MenuItem();
+            Cancel.Header = "cancel";
+            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
+
+            ContextMenu CM = new ContextMenu();
+            CM.Items.Add(ProfilePicture);
+            CM.Items.Add(DeletePicture);
+            CM.Items.Add(Cancel);
+
+            return CM;
+        }
+
+        private ContextMenu PopulateNotMyPictureMenuItems()
+        {
+            ContextMenu CM = new ContextMenu();
+
+            MenuItem Favorite = new MenuItem();
+            Favorite.Header = "favorite";
+            Favorite.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Favorite_Tap);
+
+            MenuItem Flag = new MenuItem();
+            Flag.Header = "flag";
+            Flag.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Flag_Tap);
+
+            MenuItem Cancel = new MenuItem();
+            Cancel.Header = "cancel";
+            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
+
+            CM.Items.Add(Favorite);
+            CM.Items.Add(Flag);
+            CM.Items.Add(Cancel);
+
+            return CM;
+        }
+
+        void Cancel_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void Flag_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void Favorite_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+
+        }
+
+        void ProfilePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            MenuItem cm = sender as MenuItem;
+            PictureInfo info = cm.DataContext as PictureInfo;
+
+            User updatedData = new User();
+            UserInfo u = App.MetrocamService.CurrentUser;
+
+            updatedData.Biography = u.Biography;
+            updatedData.CreatedDate = u.CreatedDate;
+            updatedData.EmailAddress = u.EmailAddress;
+            updatedData.FriendlyCreatedDate = u.FriendlyCreatedDate;
+            updatedData.ID = u.ID;
+            updatedData.Location = u.Location;
+            updatedData.Name = u.Name;
+            updatedData.Password = App.MetrocamService.HashPassword(Settings.password.Value);
+            updatedData.Username = u.Username;
+
+            // update ProfilePicture
+            updatedData.ProfilePictureID = info.ID;
+
+            App.MetrocamService.UpdateUserCompleted += new RequestCompletedEventHandler(MetrocamService_UpdateUserCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.UpdateUser(updatedData);
+        }
+
+        void MetrocamService_UpdateUserCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
+            GlobalLoading.Instance.IsLoading = false;
+            MessageBox.Show("Your profile picture has been updated!");
+        }
+
+        #endregion
     }
 }
