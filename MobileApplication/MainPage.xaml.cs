@@ -189,6 +189,12 @@ namespace MetrocamPan
             {
                 GlobalLoading.Instance.IsLoading = false;
                 LoadingMessage.Visibility = Visibility.Collapsed;
+
+                Dispatcher.BeginInvoke(() =>
+                {
+                    foreach (PictureInfo p in App.ContinuedPopularPictures)
+                        App.PopularPictures.Add(p);
+                });
             }
         }
 
@@ -536,10 +542,11 @@ namespace MetrocamPan
             App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
             App.PopularPictures.Clear();
 
+            int count = 0;
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
-                if (App.PopularPictures.Count == 24)
-                    continue;
+                if (count == 24)
+                    break;
 
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
@@ -550,7 +557,16 @@ namespace MetrocamPan
                     p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
                 }
 
-                App.PopularPictures.Add(p);
+                if (App.PopularPictures.Count < 3)
+                {
+                    App.PopularPictures.Add(p);
+                }
+                else
+                {
+                    App.ContinuedPopularPictures.Add(p);
+                }
+
+                count++;
             }
         }
 

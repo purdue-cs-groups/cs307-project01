@@ -29,6 +29,8 @@ namespace MetrocamPan
         public static WebServiceClient MetrocamService = null;
 
         public static ObservableCollection<PictureInfo> PopularPictures = new ObservableCollection<PictureInfo>();
+        public static ObservableCollection<PictureInfo> ContinuedPopularPictures = new ObservableCollection<PictureInfo>();
+
         public static ObservableCollection<PictureInfo> RecentPictures = new ObservableCollection<PictureInfo>();
         public static ObservableCollection<PictureInfo> ContinuedRecentPictures = new ObservableCollection<PictureInfo>();
 
