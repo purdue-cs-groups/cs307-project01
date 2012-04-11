@@ -12,25 +12,30 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 
 using MetrocamPan.Models;
-
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Shell;
 using MobileClientLibrary.Models;
 using System.Windows.Media.Imaging;
 using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
+using System.Collections;
+using System.Collections.ObjectModel;
+using MetrocamPan.ScrollLoaders;
 
 namespace MetrocamPan
 {
     public partial class UserDetailPage : PhoneApplicationPage
     {
         public static bool isFollowing = true;
-        public User user;
+        public UserInfo userInfo;
+        public static ObservableCollection<PictureInfo> ContinuedUserPictures = new ObservableCollection<PictureInfo>();
 
         public UserDetailPage()
         {
             InitializeComponent();
             UpdateAppBar();
+
+            DataContext = new RecentViewModel();
 
             Loaded += new RoutedEventHandler(UserDetailPage_Loaded);
         }
@@ -38,7 +43,7 @@ namespace MetrocamPan
         PictureInfo SelectedPicture = null;
         void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (UserPictures.ItemsSource != null)
+            if (this.UserPictures.ItemsSource != null)
                 return;
 
             if (NavigationContext.QueryString["type"].Equals("popular"))
@@ -56,8 +61,11 @@ namespace MetrocamPan
                 return;
             }
 
+            // save into userInfo object
+            this.userInfo = SelectedPicture.User;
+
             // pivot name
-            pivot.Title = SelectedPicture.User.Name;
+            this.PivotRoot.Title = SelectedPicture.User.Name;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(SelectedPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute))); 
@@ -81,49 +89,40 @@ namespace MetrocamPan
                 biographyTextBlock.Text = SelectedPicture.User.Biography;            
 
             // date
-            DateTime activeSince = SelectedPicture.User.FriendlyCreatedDate;
-            activeSinceTextBlock.Text = activeSince.ToString();
-
-            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
-            GlobalLoading.Instance.IsLoading = true;
-            App.MetrocamService.FetchUserPictures(SelectedPicture.User.ID);
+            activeSinceTextBlock.Text = SelectedPicture.User.FriendlyCreatedDate.ToShortDateString();
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            UserInfo u = e.Data as UserInfo;
+            userInfo = e.Data as UserInfo;
 
             // pivot name
-            pivot.Title = u.Name;
+            this.PivotRoot.Title = userInfo.Name;
 
             // profile pic
-            profilePicture.Source = (new BitmapImage(new Uri(u.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
+            profilePicture.Source = (new BitmapImage(new Uri(userInfo.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
 
             // name
-            fullName.Text = u.Name;
+            fullName.Text = userInfo.Name;
 
             // location
-            if (u.Location == null)
+            if (userInfo.Location == null)
                 hometown.Text = "Earth";
             else
-                hometown.Text = u.Location;
+                hometown.Text = userInfo.Location;
 
             // username
-            usernameTextBlock.Text = u.Username;
+            usernameTextBlock.Text = userInfo.Username;
 
             // bio
-            if (u.Biography == null)
+            if (userInfo.Biography == null)
                 biographyTextBlock.Text = "Just another Metrocammer!";
             else
-                biographyTextBlock.Text = u.Biography;
+                biographyTextBlock.Text = userInfo.Biography;
 
             // date
-            DateTime activeSince = u.FriendlyCreatedDate;
+            DateTime activeSince = userInfo.FriendlyCreatedDate;
             activeSinceTextBlock.Text = activeSince.ToString();
-
-            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
-            GlobalLoading.Instance.IsLoading = true;
-            App.MetrocamService.FetchUserPictures(u.ID);
         }
 
         List<PictureInfo> userPictures = null;
@@ -133,22 +132,32 @@ namespace MetrocamPan
             userPictures.Reverse();
             App.UserPictures.Clear();
 
+            if (UserPictures.ItemsSource == null)
+            {
+                this.UserPictures.DataContext = App.UserPictures;
+            }
+
             foreach (PictureInfo p in userPictures)
             {
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-                if (p.User.ProfilePicture == null)
+
+                if (App.UserPictures.Count < 24)
                 {
-                    p.User.ProfilePicture = new Picture();
-                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                    // Put only 24 PictureInfo objects into App.UserPictures collection
+                    if (p.User.ProfilePicture == null)
+                    {
+                        p.User.ProfilePicture = new Picture();
+                        // Set default picture
+                        p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
+                    }
+
+                    App.UserPictures.Add(p);
                 }
-
-                App.UserPictures.Add(p);
-            }
-
-            if (UserPictures.ItemsSource == null)
-            {
-                Dispatcher.BeginInvoke(() =>
-                    UserPictures.DataContext = userPictures.GetRange(0, 24));
+                else
+                {
+                    // Put the rest into this.ContinuedUserPictures collection
+                    ContinuedUserPictures.Add(p);
+                }
             }
         }
 
@@ -192,7 +201,7 @@ namespace MetrocamPan
             UpdateAppBar();
         }
 
-        private void HubTile_Loaded(object sender, RoutedEventArgs e)
+        private void PictureTile_Loaded(object sender, RoutedEventArgs e)
         {
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
@@ -206,12 +215,23 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = false;
         }
 
-        private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void PictureTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=user", UriKind.Relative));
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PivotRoot.SelectedIndex == 1)
+            {
+                // Pictures pivot is selected, we fetch user pictures using user ID
+                App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+                GlobalLoading.Instance.IsLoading = true;
+                App.MetrocamService.FetchUserPictures(userInfo.ID);
+            }
         }
     }
 }

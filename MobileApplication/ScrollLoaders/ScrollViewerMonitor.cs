@@ -56,21 +56,52 @@ namespace MetrocamPan.ScrollLoaders
             listener.Changed
                 += delegate
                 {
+                    // This bool denotes first load when an xaml element is loaded with no elements
+                    bool firstLoad = (Math.Round(scrollViewer.VerticalOffset) == 0) 
+                        && (Math.Round(scrollViewer.ScrollableHeight) == 0);
+
                     bool atBottom = Math.Round(scrollViewer.VerticalOffset)
                                         >= Math.Round(scrollViewer.ScrollableHeight);
 
-                    if (atBottom)
+                    if (atBottom && !firstLoad)
                     {
                         //GlobalLoading.Instance.IsLoading = true;
 
-                        foreach (PictureInfo p in App.ContinuedRecentPictures)
+                        if (element.Name.Equals("recentPictures"))
                         {
-                            App.RecentPictures.Add(p);
+                            foreach (PictureInfo p in App.ContinuedRecentPictures)
+                            {
+                                App.RecentPictures.Add(p);
+                            }
+
+                            App.ContinuedRecentPictures.Clear();
                         }
+                        else if (element.Name.Equals("UserPictures"))
+                        {
+                            int count = 0;
+                            int numberOfPicturesPerLoad = 24;
+                            foreach (PictureInfo p in UserDetailPage.ContinuedUserPictures)
+                            {
+                                // Only load 24 PictureInfo objects at a time
+                                if (count < numberOfPicturesPerLoad)
+                                {
+                                    App.UserPictures.Add(p);
+                                    count++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
 
-                        App.ContinuedRecentPictures.Clear();
-
-                        //GlobalLoading.Instance.IsLoading = false;
+                            // Now we delete those PictureInfo objects that were added
+                            for (int i = 0; i < numberOfPicturesPerLoad; i++)
+                            {
+                                if (UserDetailPage.ContinuedUserPictures.Count == 0)
+                                    break;
+                                UserDetailPage.ContinuedUserPictures.RemoveAt(0);
+                            }
+                        }
 
                         /*
                         var atEnd = GetAtEndCommand(element);

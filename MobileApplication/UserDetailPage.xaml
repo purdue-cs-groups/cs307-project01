@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:loaders="clr-namespace:MetrocamPan.ScrollLoaders"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,7 +17,7 @@
     shell:SystemTray.IsVisible="True" >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="USER" Name="pivot">
+        <controls:Pivot Title="USER" x:Name="PivotRoot" SelectionChanged="Pivot_SelectionChanged">
             <!--PROFILE pivot item-->
             <controls:PivotItem x:Name="profilePivot" Header="profile">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
@@ -117,14 +118,14 @@
 
             <!--PICTURES pivot item-->
             <controls:PivotItem Header="pictures">
-                <ListBox x:Name="UserPictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="12,0,0,0" ItemsSource="{Binding}">
+                <ListBox x:Name="UserPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="12,0,0,0" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Image 
                                         Width="144"
                                         Height="144"
                                         Margin="4,4,0,0"
-                                        Source="{Binding MediumURL}" Tap="HubTile_Tap" Loaded="HubTile_Loaded" />
+                                        Source="{Binding MediumURL}" Tap="PictureTile_Tap" Loaded="PictureTile_Loaded" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>
