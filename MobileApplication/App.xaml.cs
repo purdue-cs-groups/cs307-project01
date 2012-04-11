@@ -122,7 +122,7 @@ namespace MetrocamPan
 
             if (e.ExceptionObject is WebException)
             {
-                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
+                //MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
                 e.Handled = true;
                 return;
             }
