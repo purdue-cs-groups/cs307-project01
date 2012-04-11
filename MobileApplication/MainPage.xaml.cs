@@ -680,20 +680,20 @@ namespace MetrocamPan
             ProfilePicture.Header = "make profile picture";
             ProfilePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(ProfilePicture_Tap);
 
+            MenuItem Favorite = new MenuItem();
+            Favorite.Header = "favorite";
+            Favorite.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Favorite_Tap);
+
             MenuItem DeletePicture = new MenuItem();
             DeletePicture.Header = "delete";
             DeletePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(DeletePicture_Tap);
 
-            MenuItem Cancel = new MenuItem();
-            Cancel.Header = "cancel";
-            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
-
             ContextMenu CM = new ContextMenu();
 
+            CM.Items.Add(Favorite);
             if (!info.ID.Equals(App.MetrocamService.CurrentUser.ProfilePicture.ID))
                 CM.Items.Add(ProfilePicture);
             CM.Items.Add(DeletePicture);
-            CM.Items.Add(Cancel);
 
             return CM;
         }
@@ -710,13 +710,8 @@ namespace MetrocamPan
             Flag.Header = "flag";
             Flag.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Flag_Tap);
 
-            MenuItem Cancel = new MenuItem();
-            Cancel.Header = "cancel";
-            Cancel.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Cancel_Tap);
-
             CM.Items.Add(Favorite);
             CM.Items.Add(Flag);
-            CM.Items.Add(Cancel);
 
             return CM;
         }
