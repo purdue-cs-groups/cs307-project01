@@ -60,6 +60,13 @@ namespace MetrocamPan
                 return;
             }
 
+<<<<<<< HEAD
+            // save into userInfo object
+            this.userInfo = SelectedPicture.User;
+
+            // pivot name
+            this.PivotRoot.Title = SelectedPicture.User.Name;
+=======
             if (SelectedPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
             {
                 FollowButton.Visibility = Visibility.Collapsed;
@@ -67,6 +74,7 @@ namespace MetrocamPan
 
             // pivot name
             pivot.Title = SelectedPicture.User.Username;
+>>>>>>> 7f78627146e3e0fdb8e4215bfca098087df19daa
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(SelectedPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute))); 
@@ -89,7 +97,14 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;            
 
+<<<<<<< HEAD
+            // date
             activeSinceTextBlock.Text = SelectedPicture.User.FriendlyCreatedDate.ToShortDateString();
+=======
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(SelectedPicture.User.ID);
+>>>>>>> 7f78627146e3e0fdb8e4215bfca098087df19daa
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -97,7 +112,11 @@ namespace MetrocamPan
             userInfo = e.Data as UserInfo;
 
             // pivot name
+<<<<<<< HEAD
+            this.PivotRoot.Title = userInfo.Name;
+=======
             pivot.Title = u.Username;
+>>>>>>> 7f78627146e3e0fdb8e4215bfca098087df19daa
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(userInfo.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
@@ -120,7 +139,15 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
+<<<<<<< HEAD
+            // date
             DateTime activeSince = userInfo.FriendlyCreatedDate;
+            activeSinceTextBlock.Text = activeSince.ToString();
+=======
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(u.ID);
+>>>>>>> 7f78627146e3e0fdb8e4215bfca098087df19daa
         }
 
         List<PictureInfo> userPictures = null;
@@ -152,16 +179,71 @@ namespace MetrocamPan
                     App.UserPictures.Add(p);
                 }
                 else
-            PictureLabel.Text = userPictures.Count.ToString();
-
                 {
                     // Put the rest into this.ContinuedUserPictures collection
                     ContinuedUserPictures.Add(p);
                 }
+<<<<<<< HEAD
+            }
+        }
+
+        private void UpdateAppBar()
+        {
+            ApplicationBar.Buttons.Clear();
+
+            if (isFollowing)
+            {
+                followingStatus.Text = "Following";
+                followingStatus.Margin = new Thickness(60, 17, 0, 0);
+                followingRec.Fill = new SolidColorBrush(Colors.Green);
+
+                ApplicationBarIconButton unfollow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.down.png", UriKind.Relative));
+                unfollow.Text = "unfollow";
+                unfollow.Click += new EventHandler(Unfollow);
+                ApplicationBar.Buttons.Add(unfollow);
+            }
+            else
+            {
+                followingStatus.Text = "Not Following";
+                followingStatus.Margin = new Thickness(44, 17, 0, 0);
+                followingRec.Fill = new SolidColorBrush(Colors.Red);
+
+                ApplicationBarIconButton follow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.up.png", UriKind.Relative));
+                follow.Text = "follow";
+                follow.Click += new EventHandler(Follow);
+                ApplicationBar.Buttons.Add(follow);
+            }
+        }
+
+        private void Follow(object sender, EventArgs e)
+        {
+            isFollowing = true;
+            UpdateAppBar();
+        }
+
+        private void Unfollow(object sender, EventArgs e)
+        {
+            isFollowing = false;
+            UpdateAppBar();
+        }
+
+        private void PictureTile_Loaded(object sender, RoutedEventArgs e)
+=======
+
+                App.UserPictures.Add(p);
+            }
+
+            PictureLabel.Text = userPictures.Count.ToString();
+
+            if (UserPictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                    UserPictures.DataContext = userPictures.GetRange(0, 24));
             }
         }
       
-        private void PictureTile_Loaded(object sender, RoutedEventArgs e)
+        private void HubTile_Loaded(object sender, RoutedEventArgs e)
+>>>>>>> 7f78627146e3e0fdb8e4215bfca098087df19daa
         {
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
