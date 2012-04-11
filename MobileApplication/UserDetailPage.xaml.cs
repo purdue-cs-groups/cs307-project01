@@ -138,7 +138,9 @@ namespace MetrocamPan
         List<PictureInfo> userPictures = null;
         void MetrocamService_FetchUserPicturesCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            userPictures = e.Data as List<PictureInfo>;
+            App.MetrocamService.FetchUserPicturesCompleted -= MetrocamService_FetchUserPicturesCompleted;
+
+            userPictures = e.Data as List<PictureInfo>;          
             userPictures.Reverse();
             App.UserPictures.Clear();
 
