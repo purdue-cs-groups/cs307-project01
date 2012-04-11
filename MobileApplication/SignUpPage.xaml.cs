@@ -129,7 +129,7 @@ namespace MetrocamPan
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
 
             // Calls Authenticate to obtain UserInfo object
-            App.MetrocamService.Authenticate(currentUser.Username, currentUser.Password);
+            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
         }
 
         void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)

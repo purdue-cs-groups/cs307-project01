@@ -86,6 +86,7 @@ namespace MetrocamPan
             {
                 // Not logged in, navigate to landing page
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
+                return;
             }
 
             // User is logged in previously, check how this app got to main page
@@ -94,12 +95,14 @@ namespace MetrocamPan
                 // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                return;
             }
             else if (App.isFromAppActivate)
             {
                 // App is activated from tombstone. We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                return;
             }
             else if (App.isFromLandingPage)
             {
@@ -115,6 +118,7 @@ namespace MetrocamPan
                 FetchPopularPictures();
                 FetchRecentPictures();
                 FetchFavoritedPictures();
+                return;
             }
             else if (App.isFromUploadPage)
             {
@@ -133,10 +137,12 @@ namespace MetrocamPan
                 // We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                return;
             }
             else
             {
                 // MainPage is navigated here from a page in the forward stack, so do nothing
+                return;
             }
         }
 
