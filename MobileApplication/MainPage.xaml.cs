@@ -37,8 +37,6 @@ namespace MetrocamPan
         public static double lat = 0;
         public static double lng = 0;
 
-        public static ObservableCollection<PictureInfo> FavoritedUserPictures = new ObservableCollection<PictureInfo>();
-
         // Constructor
         public MainPage()
         {
@@ -540,7 +538,7 @@ namespace MetrocamPan
             }
             else if (MainContent.SelectedIndex == 2)
             {
-                if (FavoritedUserPictures.Count != 0)
+                if (App.FavoritedUserPictures.Count != 0)
                 {
                     FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
                 }
@@ -548,7 +546,7 @@ namespace MetrocamPan
                 // If Favorites pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
-                    FavoritePictures.DataContext = FavoritedUserPictures);
+                    FavoritePictures.DataContext = App.FavoritedUserPictures);
                 GlobalLoading.Instance.IsLoading = false;
             }
         }
@@ -665,19 +663,27 @@ namespace MetrocamPan
         void MetrocamService_FetchUserFavoritedPicturesCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
-            FavoritedUserPictures.Clear();
+            App.FavoritedUserPictures.Clear();
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
-                FavoritedUserPictures.Add(p);
+                App.FavoritedUserPictures.Add(p);
             }
 
-            if (FavoritedUserPictures.Count == 0)
+            if (App.FavoritedUserPictures.Count == 0)
                 // Set loading message to visible if there are not favorited pictures
                 this.FavoritesLoadingMessage.Visibility = Visibility.Visible;
             else
                 this.FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
 
+        }
+
+        private void FavoritedPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Image tile = sender as Image;
+            PictureInfo info = tile.DataContext as PictureInfo;
+
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=favorite", UriKind.Relative));
         }
 
         #endregion
@@ -785,7 +791,7 @@ namespace MetrocamPan
             data.PictureID = info.ID;
             data.UserID    = App.MetrocamService.CurrentUser.ID;
 
-            FavoritedUserPictures.Add(info);
+            App.FavoritedUserPictures.Add(info);
 
             App.MetrocamService.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFavoritedPictureCompleted);
             App.MetrocamService.CreateFavoritedPicture(data);

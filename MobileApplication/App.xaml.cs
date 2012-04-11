@@ -35,6 +35,7 @@ namespace MetrocamPan
         public static ObservableCollection<PictureInfo> ContinuedRecentPictures = new ObservableCollection<PictureInfo>();
 
         public static ObservableCollection<PictureInfo> UserPictures = new ObservableCollection<PictureInfo>();
+        public static ObservableCollection<PictureInfo> FavoritedUserPictures = new ObservableCollection<PictureInfo>();
 
         public static bool isFromLandingPage = false;
         public static bool isFromAppLaunch = false;

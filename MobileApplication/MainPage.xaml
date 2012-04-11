@@ -84,7 +84,7 @@
                                         Height="144"
                                         Margin="4,4,0,0"
                                         Source="{Binding MediumURL}"
-                                        Tap="PopularPicture_Tap"
+                                        Tap="FavoritedPicture_Tap"
                                         Loaded="PopularPicture_Loaded" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>

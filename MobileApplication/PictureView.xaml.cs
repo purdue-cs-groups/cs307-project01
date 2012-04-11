@@ -29,7 +29,6 @@ namespace MetrocamPan
     public partial class PictureView : PhoneApplicationPage
     {
         PictureInfo CurrentPicture = null;
-        Boolean AddedAppBarButton = false;
 
         public PictureView()
         {
@@ -50,6 +49,10 @@ namespace MetrocamPan
             {
                 CurrentPicture = (from pic in App.UserPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
             }
+            else if (NavigationContext.QueryString["type"].Equals("favorite"))
+            {
+                CurrentPicture = (from pic in App.FavoritedUserPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
+            }
 
             if (CurrentPicture.User.ProfilePicture != null)
             {
@@ -62,26 +65,20 @@ namespace MetrocamPan
             pictureCaption.Text = CurrentPicture.Caption;
             pictureTakenTime.Text = FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
 
-            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID) && !AddedAppBarButton)
+            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
             {
-                AddedAppBarButton = true;
-
                 ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
                 profilePic.Text = "make profile picture";
                 profilePic.Click += new EventHandler(MakeProfilePicture);
 
                 ApplicationBar.MenuItems.Add(profilePic);
             }
-            else if (!AddedAppBarButton)
-            {
-                AddedAppBarButton = true;
 
-                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
-                favorite.Text = "favorite";
-                favorite.Click += new EventHandler(Favorite);
+            ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+            favorite.Text = "favorite";
+            favorite.Click += new EventHandler(Favorite_Click);
 
-                ApplicationBar.Buttons.Add(favorite);
-            }
+            ApplicationBar.Buttons.Add(favorite);
         }
 
         private void MakeProfilePicture (object sender, EventArgs e)
@@ -114,9 +111,23 @@ namespace MetrocamPan
             MessageBox.Show("Your profile picture has been updated!");
         }
 
-        private void Favorite (object sender, EventArgs e)
+        void Favorite_Click(object sender, EventArgs e)
         {
+            FavoritedPicture data = new FavoritedPicture();
+            data.PictureID = CurrentPicture.ID;
+            data.UserID = App.MetrocamService.CurrentUser.ID;
 
+            App.FavoritedUserPictures.Add(CurrentPicture);
+
+            GlobalLoading.Instance.IsLoading = true;
+
+            App.MetrocamService.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFavoritedPictureCompleted);
+            App.MetrocamService.CreateFavoritedPicture(data);
+        }
+
+        void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            GlobalLoading.Instance.IsLoading = false;
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
