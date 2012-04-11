@@ -22,21 +22,22 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid Background="Transparent" Margin="0">
-        <!--Panorama control-->
+        <!--Root Pivot Control-->
         <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0,0,0,0" SelectionChanged="MainContent_SelectionChanged">
-            <!--Panorama item one-->
+            
+            <!--Popular Pivot Item-->
             <controls:PivotItem Header="popular" IsTabStop="False" Margin="24,12,0,0">
-                <Grid Margin="0,0">
-                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="0,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
-                    <ListBox x:Name="popularHubTiles" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0" ItemsSource="{Binding}">
+                <Grid Margin="0">
+                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
+                    <ListBox x:Name="PopularPictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Image 
+                                <Image
                                         Width="144"
                                         Height="144"
                                         Margin="4,4,0,0"
                                         Source="{Binding MediumURL}"
-                                        Tap="popularPicture_Tap" 
+                                        Tap="PopularPicture_Tap" 
                                         Loaded="PopularPicture_Loaded" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -49,11 +50,9 @@
                 </Grid>
             </controls:PivotItem>
 
-
-
-            <!--RECENT -->
+            <!--Recent Pivot Item -->
             <controls:PivotItem Header="recent" Width="Auto" Margin="24,12,0,0">
-                <ListBox x:Name="recentPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0" HorizontalAlignment="Left" ItemsSource="{Binding}">
+                <ListBox x:Name="recentPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" HorizontalAlignment="Left" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -73,70 +72,30 @@
                 </ListBox>
             </controls:PivotItem>
 
-
-
-            <controls:PivotItem Header="profile" Margin="0,12,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <!--Double line list with image placeholder and text wrapping-->
-                    <Grid Margin="0,0,0,75">
-                        <Grid HorizontalAlignment="Left" Width="Auto">
-                            <Image Height="130" HorizontalAlignment="Left" Margin="28,9,0,0" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="130" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <TextBlock Height="45" HorizontalAlignment="Left" Margin="172,0,0,0" Name="textBlock1" Text="Joe M." VerticalAlignment="Top" Width="146" FontSize="36" Foreground="{StaticResource PhoneAccentBrush}" />
-                            <TextBlock Height="40" HorizontalAlignment="Left" Margin="170,42,0,0" Name="textBlock2" Text="West Lafayette, IN" VerticalAlignment="Top" Width="178" Foreground="#FFBABABA" />
-                            <Rectangle Height="65" HorizontalAlignment="Right" Margin="0,73,160,0" Name="rectangle1" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" Fill="{StaticResource PhoneAccentBrush}" />
-                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,80,0" Name="rectangle2" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                            <Rectangle Fill="{StaticResource PhoneAccentBrush}" Height="65" HorizontalAlignment="Right" Margin="0,73,0,0" Name="rectangle3" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="75" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="185,113,0,0" Name="textBlock3" Text="photos" VerticalAlignment="Top" Width="57" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Right" Margin="0,113,83,0" Name="textBlock4" Text="followers" VerticalAlignment="Top" Width="67" FontSize="16" />
-                            <TextBlock Height="29" HorizontalAlignment="Left" Margin="337,113,0,0" Name="textBlock5" Text="following" VerticalAlignment="Top" Width="70" FontSize="16" />
-                            <TextBlock Height="43" HorizontalAlignment="Right" Margin="0,73,170,0" Name="textBlock6" Text="52" VerticalAlignment="Top" Width="54" FontSize="32" TextAlignment="Center" />
-                            <TextBlock FontSize="32" Height="43" HorizontalAlignment="Left" Margin="261,73,0,0" Name="textBlock7" Text="15" TextAlignment="Center" VerticalAlignment="Top" Width="54" />
-                            <TextBlock FontSize="32" HorizontalAlignment="Left" Margin="341,73,0,841" Name="textBlock8" Text="5" TextAlignment="Center" Width="54" />
-                        </Grid>
-                        <Grid Width="Auto" HorizontalAlignment="Left"  Margin="17,150,0,20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- set Tag equal to index of UserPicture colleciton -->
-                            <Image Grid.Row="0" Grid.Column="0" Name="i1" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="0" Grid.Column="1" Name="i2" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="0" Grid.Column="2" Name="i3" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-
-                            <Image Grid.Row="1" Grid.Column="0" Name="i4" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="1" Grid.Column="1" Name="i5" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="1" Grid.Column="2" Name="i6" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-
-                            <Image Grid.Row="2" Grid.Column="0" Name="i7" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="2" Grid.Column="1" Name="i8" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="2" Grid.Column="2" Name="i9" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-
-                            <Image Grid.Row="3" Grid.Column="0" Name="i10" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="3" Grid.Column="1" Name="i11" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="3" Grid.Column="2" Name="i12"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-
-                            <Image Grid.Row="4" Grid.Column="0" Name="i13"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="4" Grid.Column="1" Name="i14" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="4" Grid.Column="2" Name="i15" Width="120" Height="120"  Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-
-                            <Image Grid.Row="5" Grid.Column="0" Name="i16" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-                            <Image Grid.Row="5" Grid.Column="1" Name="i17" Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png" />
-                            <Image Grid.Row="5" Grid.Column="2" Name="i18"  Width="120" Height="120" Margin="12,12,0,0" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-
-                        </Grid>
-                    </Grid>
-                </ScrollViewer>
+            <!--Favorites Pivot Item-->
+            <controls:PivotItem Header="favorites" IsTabStop="False" Margin="24,12,0,0">
+                <Grid Margin="0">
+                    <ListBox x:Name="FavoritePictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" ItemsSource="{Binding}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image
+                                        Width="144"
+                                        Height="144"
+                                        Margin="4,4,0,0"
+                                        Source="{Binding MediumURL}"
+                                        Tap="PopularPicture_Tap"
+                                        Loaded="PopularPicture_Loaded" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
             </controls:PivotItem>
+            
         </controls:Pivot>
     </Grid>
 

@@ -15,19 +15,15 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-
 using MetrocamPan.Models;
 using Microsoft.Phone.Tasks;
-
 using System.IO;
 using ExifLib;
-
 using System.Device;
 using System.Device.Location;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using JeffWilcox.FourthAndMayor;
-
 using MetrocamPan.ScrollLoaders;
 
 namespace MetrocamPan
@@ -39,29 +35,30 @@ namespace MetrocamPan
 
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
-        public static double lng = 0;                         
+        public static double lng = 0;
 
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
+            SetUpLocation();
+
             // Calls MainPage_Loaded when this page is constructed
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
-            SetUpLocation();
-
+            // This is for dynamic loading of RecentPictures
             DataContext = new RecentViewModel();
         }
 
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (popularHubTiles.ItemsSource == null)
+            if (PopularPictures.ItemsSource == null)
             {
                 GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
-                    popularHubTiles.DataContext = App.PopularPictures);
+                    PopularPictures.DataContext = App.PopularPictures);
             }
         }
 
@@ -172,8 +169,7 @@ namespace MetrocamPan
 
         #region Popular Pivot Codebehind
 
-        public static HubTile selectedPicture;
-        private void popularPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void PopularPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //HubTileService.FreezeGroup("PopularTiles");
 
@@ -523,12 +519,21 @@ namespace MetrocamPan
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
+            {
+                // If Recent pivot item is selected
+                GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
-                {
-                    GlobalLoading.Instance.IsLoading = true;
-                    recentPictures.DataContext = App.RecentPictures;
-                    GlobalLoading.Instance.IsLoading = false;
-                });
+                    recentPictures.DataContext = App.RecentPictures);
+                GlobalLoading.Instance.IsLoading = false;
+            }
+            else if (MainContent.SelectedIndex == 2 && this.FavoritePictures.ItemsSource == null)
+            {
+                // If Favorites pivot item is selected
+                GlobalLoading.Instance.IsLoading = true;
+                Dispatcher.BeginInvoke(() =>
+                    FavoritePictures.DataContext = App.PopularPictures);
+                GlobalLoading.Instance.IsLoading = false;
+            }
         }
         #endregion
 
@@ -649,7 +654,7 @@ namespace MetrocamPan
                 if (uca.AccountName.Equals("Twitter"))
                 {
                     TwitterSecret = uca.ClientSecret;
-                    TwitterToken  = uca.ClientToken;
+                    TwitterToken = uca.ClientToken;
                 }
             }
         }
@@ -771,12 +776,11 @@ namespace MetrocamPan
 
         #endregion
 
-
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
-            if (GlobalLoading.Instance.IsLoading) 
+            if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
         }
     }
