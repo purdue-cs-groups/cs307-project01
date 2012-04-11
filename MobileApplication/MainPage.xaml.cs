@@ -538,8 +538,13 @@ namespace MetrocamPan
                     recentPictures.DataContext = App.RecentPictures);
                 GlobalLoading.Instance.IsLoading = false;
             }
-            else if (MainContent.SelectedIndex == 2 && this.FavoritePictures.ItemsSource == null)
+            else if (MainContent.SelectedIndex == 2)
             {
+                if (FavoritedUserPictures.Count != 0)
+                {
+                    FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
+                }
+
                 // If Favorites pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
@@ -773,7 +778,21 @@ namespace MetrocamPan
 
         void Favorite_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            MenuItem item = sender as MenuItem;
+            PictureInfo info = item.DataContext as PictureInfo;
 
+            FavoritedPicture data = new FavoritedPicture();
+            data.PictureID = info.ID;
+            data.UserID    = App.MetrocamService.CurrentUser.ID;
+
+            FavoritedUserPictures.Add(info);
+
+            App.MetrocamService.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFavoritedPictureCompleted);
+            App.MetrocamService.CreateFavoritedPicture(data);
+        }
+
+        void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
         }
 
         void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
