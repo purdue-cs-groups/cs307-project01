@@ -65,8 +65,11 @@ namespace MetrocamPan
                 FollowButton.Visibility = Visibility.Collapsed;
             }
 
+            // Save into userInfo object
+            this.userInfo = SelectedPicture.User;
+
             // pivot name
-            pivot.Title = SelectedPicture.User.Username;
+            this.PivotRoot.Title = SelectedPicture.User.Username;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(SelectedPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute))); 
@@ -89,7 +92,12 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;            
 
-            activeSinceTextBlock.Text = SelectedPicture.User.FriendlyCreatedDate.ToShortDateString();
+            // date
+            //activeSinceTextBlock.Text = SelectedPicture.User.FriendlyCreatedDate.ToShortDateString();
+
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(userInfo.ID);
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -97,7 +105,7 @@ namespace MetrocamPan
             userInfo = e.Data as UserInfo;
 
             // pivot name
-            pivot.Title = u.Username;
+            this.PivotRoot.Title = this.userInfo.Username;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(userInfo.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
@@ -120,7 +128,11 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
-            DateTime activeSince = userInfo.FriendlyCreatedDate;
+            // date
+            //DateTime activeSince = userInfo.FriendlyCreatedDate;
+            App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.FetchUserPictures(userInfo.ID);
         }
 
         List<PictureInfo> userPictures = null;
@@ -129,6 +141,13 @@ namespace MetrocamPan
             userPictures = e.Data as List<PictureInfo>;
             userPictures.Reverse();
             App.UserPictures.Clear();
+
+            // Set picture taken count
+            PictureLabel.Text = userPictures.Count.ToString();
+
+            // If user is still on profilePivot, set loading to false since we have loaded PictureLabel
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
 
             if (UserPictures.ItemsSource == null)
             {
@@ -152,10 +171,8 @@ namespace MetrocamPan
                     App.UserPictures.Add(p);
                 }
                 else
-            PictureLabel.Text = userPictures.Count.ToString();
-
                 {
-                    // Put the rest into this.ContinuedUserPictures collection
+                    // Put the rest into ContinuedUserPictures collection
                     ContinuedUserPictures.Add(p);
                 }
             }
@@ -183,6 +200,7 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=user", UriKind.Relative));
         }
 
+        /*
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PivotRoot.SelectedIndex == 1)
@@ -192,6 +210,6 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = true;
                 App.MetrocamService.FetchUserPictures(userInfo.ID);
             }
-        }
+        }*/
     }
 }
