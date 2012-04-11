@@ -80,7 +80,7 @@ namespace MobileClientLibrary
 
                     CurrentUser = jsonData.User;
 
-                    AuthenticateCompleted(sender, new RequestCompletedEventArgs(null));
+                    AuthenticateCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -185,7 +185,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
 
-                    CreateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -227,7 +227,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
 
-                    UpdateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdateFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -349,7 +349,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<FlaggedPicture>(stringData);
 
-                    CreateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -391,7 +391,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<FlaggedPicture>(stringData);
 
-                    UpdateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdateFlaggedPictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -799,7 +799,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<Picture>(stringData);
 
-                    UpdatePictureCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdatePictureCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -967,7 +967,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
 
-                    CreateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreateRelationshipCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -1009,7 +1009,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
 
-                    UpdateRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdateRelationshipCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -1215,7 +1215,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<User>(stringData);
 
-                    CreateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreateUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -1260,7 +1260,7 @@ namespace MobileClientLibrary
                     if (jsonData.ID == CurrentUser.ID)
                         FetchUser(CurrentUser.ID);
 
-                    UpdateUserCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdateUserCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -1422,7 +1422,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<UserConnectedAccount>(stringData);
 
-                    CreateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
+                    CreateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
@@ -1464,7 +1464,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<UserConnectedAccount>(stringData);
 
-                    UpdateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(null));
+                    UpdateUserConnectedAccountCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {
