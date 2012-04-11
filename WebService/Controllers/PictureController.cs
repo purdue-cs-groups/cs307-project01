@@ -99,6 +99,25 @@ namespace WebService.Controllers
             return list;
         }
 
+        public static List<PictureInfo> FetchUserFavoritedPictures(string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<FavoritedPicture> favoritedPictures = database.GetCollection<FavoritedPicture>("FavoritedPictures");
+            var query = new QueryDocument("UserID", userId);
+
+            List<PictureInfo> list = new List<PictureInfo>();
+            foreach (FavoritedPicture p in favoritedPictures.Find(query))
+            {
+                PictureInfo picture = PictureController.FetchInfo(p.PictureID);
+
+                list.Add(picture);
+            }
+
+            return list;
+        }
+
         public static Picture Create(Picture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
