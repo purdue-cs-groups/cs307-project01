@@ -42,8 +42,23 @@ namespace MetrocamPan
         PictureInfo SelectedPicture = null;
         void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (this.UserPictures.ItemsSource != null)
+            if (NavigationContext.QueryString["userid"].Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                SetCurrentUserProfile();
+
+                if (this.UserPictures.ItemsSource == null)
+                {
+                    App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+                    GlobalLoading.Instance.IsLoading = true;
+                    App.MetrocamService.FetchUserPictures(App.MetrocamService.CurrentUser.ID);
+                }
+
                 return;
+            }
+            else if (this.UserPictures.ItemsSource != null)
+            {
+                return;
+            }
 
             if (NavigationContext.QueryString["type"].Equals("popular"))
             {
@@ -58,11 +73,6 @@ namespace MetrocamPan
                 App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
                 App.MetrocamService.FetchUser(NavigationContext.QueryString["id"]);
                 return;
-            }
-
-            if (SelectedPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
-            {
-                FollowButton.Visibility = Visibility.Collapsed;
             }
 
             // Save into userInfo object
@@ -104,6 +114,12 @@ namespace MetrocamPan
         {
             userInfo = e.Data as UserInfo;
 
+            if (userInfo.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                ApplicationBar.IsVisible = true;
+                FollowButton.Visibility = Visibility.Collapsed;
+            }
+
             // pivot name
             this.PivotRoot.Title = this.userInfo.Username;
 
@@ -133,6 +149,36 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
+        }
+
+        private void SetCurrentUserProfile()
+        {
+            ApplicationBar.IsVisible = true;
+            FollowButton.Visibility = Visibility.Collapsed;
+
+            // pivot name
+            this.PivotRoot.Title = App.MetrocamService.CurrentUser.Name;
+
+            // profile pic
+            profilePicture.Source = (new BitmapImage(new Uri(App.MetrocamService.CurrentUser.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
+
+            // name
+            fullName.Text = App.MetrocamService.CurrentUser.Name;
+
+            // location
+            if (App.MetrocamService.CurrentUser.Location == null)
+                hometown.Text = "Earth";
+            else
+                hometown.Text = App.MetrocamService.CurrentUser.Location;
+
+            // username
+            usernameTextBlock.Text = App.MetrocamService.CurrentUser.Username;
+
+            // bio
+            if (App.MetrocamService.CurrentUser.Biography == null)
+                biographyTextBlock.Text = "Just another Metrocammer!";
+            else
+                biographyTextBlock.Text = App.MetrocamService.CurrentUser.Biography;
         }
 
         List<PictureInfo> userPictures = null;
@@ -202,16 +248,9 @@ namespace MetrocamPan
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=user", UriKind.Relative));
         }
 
-        /*
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
         {
-            if (PivotRoot.SelectedIndex == 1)
-            {
-                // Pictures pivot is selected, we fetch user pictures using user ID
-                App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
-                GlobalLoading.Instance.IsLoading = true;
-                App.MetrocamService.FetchUserPictures(userInfo.ID);
-            }
-        }*/
+            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+        }
     }
 }

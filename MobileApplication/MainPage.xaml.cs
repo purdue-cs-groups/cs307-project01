@@ -203,7 +203,7 @@ namespace MetrocamPan
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=recent&userid=" + info.User.ID, UriKind.Relative));
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -211,7 +211,7 @@ namespace MetrocamPan
             Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent&userid=" + info.User.ID, UriKind.Relative));
         }
 
         private void ViewUserDetailFromUsername_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -219,7 +219,7 @@ namespace MetrocamPan
             TextBlock username = sender as TextBlock;
             PictureInfo info = username.DataContext as PictureInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=recent&userid=" + info.User.ID, UriKind.Relative));
         }
 
         #endregion News Feed Codebehind
@@ -454,7 +454,7 @@ namespace MetrocamPan
 
         private void EditProfile_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?userid=" + App.MetrocamService.CurrentUser.ID + "&type=current&id=blah", UriKind.Relative));
         }
 
         private void About_Click(object sender, EventArgs e)

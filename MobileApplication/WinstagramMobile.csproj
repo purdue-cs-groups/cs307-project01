@@ -240,6 +240,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.heart.png" />
     <Content Include="Images\appbar.user.png" />
     <Content Include="Images\dunsmore.png" />

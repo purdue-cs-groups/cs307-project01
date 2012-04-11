@@ -124,6 +124,12 @@
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="False" IsMenuEnabled="True" Opacity="1">
+            <shell:ApplicationBarIconButton IconUri="Images/appbar.edit.rest.png" Text="edit profile" Click="EditButton_Click" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>

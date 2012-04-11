@@ -106,7 +106,7 @@
             <shell:ApplicationBarIconButton IconUri="Images/appbar.refresh.rest.png" Text="refresh" Click="Refresh_Click" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
-                <shell:ApplicationBarMenuItem Text="edit profile" Click="EditProfile_Click" />
+                <shell:ApplicationBarMenuItem Text="profile" Click="EditProfile_Click" />
                 <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
                 <shell:ApplicationBarMenuItem Text="find friends" Click="UserSearch_Click" />
                 <shell:ApplicationBarMenuItem Text="sign out" Click="SignoutBarIconButton_Click" />

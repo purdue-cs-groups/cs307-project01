@@ -123,7 +123,7 @@ namespace MetrocamPan
         {
             if (!NavigationContext.QueryString["type"].Equals("user"))
             {
-                NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.ID + "&type=" + NavigationContext.QueryString["type"], UriKind.Relative));
+                NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + CurrentPicture.ID + "&type=" + NavigationContext.QueryString["type"] + "&userid=" + CurrentPicture.User.ID, UriKind.Relative));
             }
         }
 
