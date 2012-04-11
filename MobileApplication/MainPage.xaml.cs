@@ -666,6 +666,13 @@ namespace MetrocamPan
             {
                 FavoritedUserPictures.Add(p);
             }
+
+            if (FavoritedUserPictures.Count == 0)
+                // Set loading message to visible if there are not favorited pictures
+                this.FavoritesLoadingMessage.Visibility = Visibility.Visible;
+            else
+                this.FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
+
         }
 
         #endregion

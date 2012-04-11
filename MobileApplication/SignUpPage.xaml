@@ -29,23 +29,29 @@
             <StackPanel Margin="12,0,12,0">
                 <!-- Username -->
                 <TextBlock Text="username" />
-                <TextBox InputScope="PersonalFullName" Name="usernameInput" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" />
+                <TextBox x:Name="usernameInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp">
+                    <TextBox.InputScope>
+                        <InputScope>
+                            <InputScopeName NameValue="LogOnName" />
+                        </InputScope>
+                    </TextBox.InputScope>
+                </TextBox>
 
                 <!-- Full Name -->
                 <TextBlock Text="full name" />
-                <TextBox InputScope="PersonalFullName" Name="fullnameInput" Margin="-12,0,0,0" KeyUp="fullnameInput_KeyUp" />
+                <TextBox x:Name="fullnameInput" InputScope="PersonalFullName" MaxLength="40" Margin="-12,0,0,0" KeyUp="fullnameInput_KeyUp" />
 
                 <!-- Password -->
                 <TextBlock Text="password" />
-                <PasswordBox x:Name="passwordInput" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" />
+                <PasswordBox x:Name="passwordInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" />
 
                 <!-- Confirm Password -->
                 <TextBlock Text="confirm password" />
-                <PasswordBox x:Name="confirmPasswordInput" Margin="-12,0,0,0" KeyUp="confirmPasswordInput_KeyUp" />
+                <PasswordBox x:Name="confirmPasswordInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="confirmPasswordInput_KeyUp" />
 
                 <!-- Email -->
                 <TextBlock Text="email" />
-                <TextBox InputScope="EmailNameOrAddress" Name="emailInput" Margin="-12,0,0,0" KeyUp="emailInput_KeyUp" />
+                <TextBox x:Name="emailInput" InputScope="EmailNameOrAddress" MaxLength="40" Margin="-12,0,0,0" KeyUp="emailInput_KeyUp" />
             </StackPanel>
         </Grid>
     </Grid>
