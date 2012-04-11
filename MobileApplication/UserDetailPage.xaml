@@ -1,4 +1,4 @@
-﻿<phone:PhoneApplicationPage 
+﻿<phone:PhoneApplicationPage
     x:Class="MetrocamPan.UserDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -16,18 +16,26 @@
     shell:SystemTray.IsVisible="True" >
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="USER" Name="pivot">
+        <controls:Pivot Name="pivot">
             <!--PROFILE pivot item-->
             <controls:PivotItem x:Name="profilePivot" Header="profile">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
                     <Grid x:Name="ProfilePanelLevel1">
                         <Grid.RowDefinitions>
+                            <!-- For ProPic level -->
                             <RowDefinition Height="140"/>
-                            <RowDefinition Height="auto"/>
+                            
+                            <!-- For Numerical Stats -->
+                            <RowDefinition Height="Auto"/>
+                            
+                            <!-- For Bio -->
+                            <RowDefinition Height="Auto" />
+                            
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="140" />
-                            <ColumnDefinition Width="300" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <!--Left Column for profile picture-->
@@ -38,79 +46,59 @@
                         <!--Right Column for fullname, hometown and rectangles-->
                         <Grid x:Name="ProfilePanelLevel2" Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="40"/>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="65"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <TextBlock x:Name="fullName" Grid.Row="0"
+                            <TextBlock x:Name="usernameTextBlock" Grid.Row="0"
                                        Margin="12,0,0,0"
-                                       Text="{Binding Name}"
-                                       FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                            <TextBlock x:Name="hometown" Grid.Row="1"
-                                       Margin="12,2,0,0"
-                                       Text="{Binding Location}"
+                                       Text=""
+                                       FontSize="{StaticResource PhoneFontSizeExtraLarge}"   
+                                       VerticalAlignment="Stretch" Foreground="{StaticResource PhoneAccentBrush}" />
+                            <TextBlock x:Name="fullName" Grid.Row="1" Margin="12,0,0,0"
+                                       Text=""
+                                       FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneBorderBrush}" />
+                            <TextBlock x:Name="hometown" Grid.Row="2"
+                                       Margin="12,0,0,0"
+                                       Text=""
                                        Foreground="{StaticResource PhoneSubtleBrush}"
-                                       FontSize="{StaticResource PhoneFontSizeSmall}"/>
-
-                            <!--Grid for the 3 rectangles-->
-                            <Grid x:Name="RectanglesPanel" Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Height="53" HorizontalAlignment="Left" Margin="13,7,0,0" Name="followingRec" Stroke="Black" StrokeThickness="1" VerticalAlignment="Top" Width="179" Fill="Green" />
-                                <TextBlock Height="49" HorizontalAlignment="Left" Margin="60,17,0,0" Name="followingStatus" Text="Following" VerticalAlignment="Top" Width="Auto" />
-                            </Grid>
+                                       FontSize="{StaticResource PhoneFontSizeSmall}" VerticalAlignment="Bottom" />
                         </Grid>
 
-                        <!--Rest of the data: username, bio, etc-->
-                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <!--Row for username-->
-                                    <RowDefinition/>
-                                    <!--Row for biography-->
-                                    <RowDefinition/>
-                                    <!--Row for email-->
-                                    <RowDefinition/>
-                                    <!--Row for active since-->
-                                </Grid.RowDefinitions>
+                        <!-- for numerical statistics -->
+                        <Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="0,24,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
 
-                                <Grid x:Name="usernameGrid" Grid.Row="0">
-                                    <StackPanel>
-                                        <TextBlock Text="username" Margin="0,12,0,0"
-                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="usernameTextBlock" Text="{Binding Username}"
-                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
-                                                   Foreground="{StaticResource PhoneSubtleBrush}"/>
-                                    </StackPanel>
-                                </Grid>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="pictures" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneBorderBrush}" />
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="followers" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneBorderBrush}" />
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="following" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                                <Grid x:Name="bioGrid" Grid.Row="1">
-                                    <StackPanel>
-                                        <TextBlock Text="biography" Margin="0,12,0,0"
-                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                            <TextBlock Name="PictureLabel" Grid.Row="1" Grid.Column="0" Text="0" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" />
+                            <TextBlock Name="FollowerLabel" Grid.Row="1" Grid.Column="1" Text="0" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" />
+                            <TextBlock Name="FollowingLabel" Grid.Row="1" Grid.Column="2" Text="0" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" />
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0,36,0,0" Height="Auto" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Name="biographyTextBlock" Grid.Row="0"
+                                       Text="" TextWrapping="Wrap" />
+                        </Grid>
 
-                                        <TextBlock x:Name="biographyTextBlock" TextWrapping="Wrap"
-                                                   Text="{Binding Biography}"
-                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
-                                                   Foreground="{StaticResource PhoneSubtleBrush}" />
-                                    </StackPanel>
-                                </Grid>
-
-                                <Grid x:Name="activeSinceGrid" Grid.Row="3">
-                                    <StackPanel>
-                                        <TextBlock Text="active since" Margin="0,12,0,0"
-                                                   FontSize="{StaticResource PhoneFontSizeLarge}"/>
-                                        <TextBlock x:Name="activeSinceTextBlock" Text="{Binding CreatedDate, StringFormat='MM/dd/yyyy'}"
-                                                   FontSize="{StaticResource PhoneFontSizeSmall}"
-                                                   Foreground="{StaticResource PhoneSubtleBrush}">
-                                        </TextBlock>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
-                        </StackPanel>
+                        <Button Name="FollowButton" Grid.Row="3" Grid.ColumnSpan="3" Content="follow" VerticalAlignment="Bottom" />
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
@@ -136,11 +124,6 @@
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
-
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="UserDetailAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="1">
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>

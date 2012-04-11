@@ -30,7 +30,6 @@ namespace MetrocamPan
         public UserDetailPage()
         {
             InitializeComponent();
-            UpdateAppBar();
 
             Loaded += new RoutedEventHandler(UserDetailPage_Loaded);
         }
@@ -56,8 +55,13 @@ namespace MetrocamPan
                 return;
             }
 
+            if (SelectedPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                FollowButton.Visibility = Visibility.Collapsed;
+            }
+
             // pivot name
-            pivot.Title = SelectedPicture.User.Name;
+            pivot.Title = SelectedPicture.User.Username;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(SelectedPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute))); 
@@ -80,10 +84,6 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;            
 
-            // date
-            DateTime activeSince = SelectedPicture.User.FriendlyCreatedDate;
-            activeSinceTextBlock.Text = activeSince.ToString();
-
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(SelectedPicture.User.ID);
@@ -94,7 +94,7 @@ namespace MetrocamPan
             UserInfo u = e.Data as UserInfo;
 
             // pivot name
-            pivot.Title = u.Name;
+            pivot.Title = u.Username;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(u.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
@@ -116,10 +116,6 @@ namespace MetrocamPan
                 biographyTextBlock.Text = "Just another Metrocammer!";
             else
                 biographyTextBlock.Text = u.Biography;
-
-            // date
-            DateTime activeSince = u.FriendlyCreatedDate;
-            activeSinceTextBlock.Text = activeSince.ToString();
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
@@ -145,53 +141,15 @@ namespace MetrocamPan
                 App.UserPictures.Add(p);
             }
 
+            PictureLabel.Text = userPictures.Count.ToString();
+
             if (UserPictures.ItemsSource == null)
             {
                 Dispatcher.BeginInvoke(() =>
                     UserPictures.DataContext = userPictures.GetRange(0, 24));
             }
         }
-
-        private void UpdateAppBar()
-        {
-            ApplicationBar.Buttons.Clear();
-
-            if (isFollowing)
-            {
-                followingStatus.Text = "Following";
-                followingStatus.Margin = new Thickness(60, 17, 0, 0);
-                followingRec.Fill = new SolidColorBrush(Colors.Green);
-
-                ApplicationBarIconButton unfollow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.down.png", UriKind.Relative));
-                unfollow.Text = "unfollow";
-                unfollow.Click += new EventHandler(Unfollow);
-                ApplicationBar.Buttons.Add(unfollow);
-            }
-            else
-            {
-                followingStatus.Text = "Not Following";
-                followingStatus.Margin = new Thickness(44, 17, 0, 0);
-                followingRec.Fill = new SolidColorBrush(Colors.Red);
-
-                ApplicationBarIconButton follow = new ApplicationBarIconButton(new Uri("Images/appbar.arrow.up.png", UriKind.Relative));
-                follow.Text = "follow";
-                follow.Click += new EventHandler(Follow);
-                ApplicationBar.Buttons.Add(follow);
-            }
-        }
-
-        private void Follow(object sender, EventArgs e)
-        {
-            isFollowing = true;
-            UpdateAppBar();
-        }
-
-        private void Unfollow(object sender, EventArgs e)
-        {
-            isFollowing = false;
-            UpdateAppBar();
-        }
-
+      
         private void HubTile_Loaded(object sender, RoutedEventArgs e)
         {
             if (GlobalLoading.Instance.IsLoading)
