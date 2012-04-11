@@ -37,6 +37,8 @@ namespace MetrocamPan
         public static double lat = 0;
         public static double lng = 0;
 
+        public static ObservableCollection<PictureInfo> FavoritedUserPictures = new ObservableCollection<PictureInfo>();
+
         // Constructor
         public MainPage()
         {
@@ -112,6 +114,7 @@ namespace MetrocamPan
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
                 FetchRecentPictures();
+                FetchFavoritedPictures();
             }
             else if (App.isFromUploadPage)
             {
@@ -148,15 +151,18 @@ namespace MetrocamPan
             if (App.isFromAppLaunch)
             {
                 FetchPopularPictures();
+                FetchFavoritedPictures();
                 GetUserConnectedAccounts();
             }
             if (App.isFromAppLaunch || App.isFromAppActivate)
             {
                 FetchRecentPictures();
+                FetchFavoritedPictures();
             }
             if (isRefreshingRecent)
             {
                 FetchRecentPictures();
+                FetchFavoritedPictures();
             }
 
             // Reset back to false
@@ -531,7 +537,7 @@ namespace MetrocamPan
                 // If Favorites pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
                 Dispatcher.BeginInvoke(() =>
-                    FavoritePictures.DataContext = App.PopularPictures);
+                    FavoritePictures.DataContext = FavoritedUserPictures);
                 GlobalLoading.Instance.IsLoading = false;
             }
         }
@@ -633,6 +639,27 @@ namespace MetrocamPan
 
             // Scroll to top of scrollviewer
             this.recentPictures.ScrollIntoView(firstPicture);
+        }
+
+        #endregion
+
+        #region FetchFavorites
+
+        public void FetchFavoritedPictures()
+        {
+            App.MetrocamService.FetchUserFavoritedPicturesCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserFavoritedPicturesCompleted);
+            App.MetrocamService.FetchUserFavoritedPictures(App.MetrocamService.CurrentUser.ID);
+        }
+
+        void MetrocamService_FetchUserFavoritedPicturesCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
+            FavoritedUserPictures.Clear();
+
+            foreach (PictureInfo p in e.Data as List<PictureInfo>)
+            {
+                FavoritedUserPictures.Add(p);
+            }
         }
 
         #endregion
