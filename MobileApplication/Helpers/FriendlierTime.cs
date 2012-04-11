@@ -40,6 +40,11 @@ namespace MetrocamPan.Helpers
             }
             if (delta < 86400) // 24 * 60 * 60
             {
+                if (ts.Hours == 1)
+                {
+                    return "shared two hours ago";
+                }
+
                 return "shared " + ts.Hours + " hours ago";
             }
             if (delta < 172800) // 48 * 60 * 60
@@ -48,6 +53,11 @@ namespace MetrocamPan.Helpers
             }
             if (delta < 2592000) // 30 * 24 * 60 * 60
             {
+                if (ts.Days == 1)
+                {
+                    return "shared yesterday";
+                }
+
                 return "shared " + ts.Days + " days ago";
             }
             if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
@@ -88,6 +98,11 @@ namespace MetrocamPan.Helpers
             }
             if (delta < 86400) // 24 * 60 * 60
             {
+                if (ts.Hours == 1)
+                {
+                    return "shared two hours ago";
+                }
+
                 return "shared " + ts.Hours + " hours ago";
             }
             if (delta < 172800) // 48 * 60 * 60
@@ -96,6 +111,11 @@ namespace MetrocamPan.Helpers
             }
             if (delta < 2592000) // 30 * 24 * 60 * 60
             {
+                if (ts.Days == 1)
+                {
+                    return "shared yesterday";
+                }
+
                 return "shared " + ts.Days + " days ago";
             }
             if (delta < 31104000) // 12 * 30 * 24 * 60 * 60
