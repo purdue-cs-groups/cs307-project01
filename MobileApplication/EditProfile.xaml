@@ -31,13 +31,13 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="name" />
-                <TextBox x:Name="UsernameInput" Text="{Binding Name}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="UsernameInput_KeyDown" />
+                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="40" Text="{Binding Name}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="UsernameInput_KeyDown" />
                 <TextBlock Text="email" />
-                <TextBox x:Name="EmailInput" Text="{Binding EmailAddress}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="EmailInput_KeyDown" />
+                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="40" Text="{Binding EmailAddress}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="EmailInput_KeyDown" /> 
                 <TextBlock Text="location" />
-                <TextBox x:Name="LocationInput" Text="{Binding Location}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="LocationInput_KeyDown" />
+                <toolkit:PhoneTextBox x:Name="LocationInput" MaxLength="40" Text="{Binding Location}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="LocationInput_KeyDown" />
                 <TextBlock Text="bio" />
-                <TextBox x:Name="BiographyInput" Text="{Binding Biography}" InputScope="PersonalFullName" Margin="-12,0,0,0" TextWrapping="Wrap" Height="160" Width="Auto" KeyDown="BiographyInput_KeyDown" />
+                <toolkit:PhoneTextBox x:Name="BiographyInput" MaxLength="150" DisplayedMaxLength="150" LengthIndicatorVisible="True" LengthIndicatorThreshold="5" Text="{Binding Biography}" InputScope="PersonalFullName" Margin="-12,0,0,0" TextWrapping="Wrap" Height="160" Width="Auto" KeyDown="BiographyInput_KeyDown" />
             </StackPanel>
         </Grid>
     </Grid>
