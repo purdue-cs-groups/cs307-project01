@@ -91,7 +91,7 @@ namespace MetrocamPan
             TextBlock username = sender as TextBlock;
             UserInfo info = username.DataContext as UserInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search&userid=" + info.ID, UriKind.Relative));
         }
 
         private void ViewUserDetailFromPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
