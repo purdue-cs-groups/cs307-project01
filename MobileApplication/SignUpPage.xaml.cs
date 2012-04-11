@@ -171,7 +171,8 @@ namespace MetrocamPan
         {
             base.OnNavigatedFrom(e);
 
-            GlobalLoading.Instance.IsLoading = false;
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
         }
     }
 }

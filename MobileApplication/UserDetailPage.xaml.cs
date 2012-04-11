@@ -202,12 +202,13 @@ namespace MetrocamPan
         {
             base.OnNavigatedFrom(e);
 
-            GlobalLoading.Instance.IsLoading = false;
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
         }
 
         private void HubTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            HubTile image = sender as HubTile;
+            Image image = sender as Image;
             PictureInfo info = image.DataContext as PictureInfo;
 
             NavigationService.Navigate(new Uri("/PictureView.xaml?id=" + info.ID + "&type=user", UriKind.Relative));
