@@ -117,6 +117,11 @@ namespace MetrocamPan
             data.PictureID = CurrentPicture.ID;
             data.UserID = App.MetrocamService.CurrentUser.ID;
 
+            if ((from pic in App.FavoritedUserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault() != null)
+            {
+                return;
+            }
+
             App.FavoritedUserPictures.Add(CurrentPicture);
 
             GlobalLoading.Instance.IsLoading = true;

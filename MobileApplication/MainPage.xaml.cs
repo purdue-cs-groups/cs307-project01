@@ -791,6 +791,11 @@ namespace MetrocamPan
             data.PictureID = info.ID;
             data.UserID    = App.MetrocamService.CurrentUser.ID;
 
+            if ((from pic in App.FavoritedUserPictures where pic.ID.Equals(info.ID) select pic).SingleOrDefault() != null)
+            {
+                return;
+            }
+
             App.FavoritedUserPictures.Add(info);
 
             App.MetrocamService.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFavoritedPictureCompleted);
