@@ -178,9 +178,15 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
-            var query = new QueryDocument("_id", data.ID);
+            MongoCollection<Picture> pics = database.GetCollection<Picture>("Pictures");
 
-            users.FindAndRemove(query, new SortByDocument());
+            var query = new QueryDocument("UserID", data.ID);
+
+            pics.Remove(query);
+
+            query = new QueryDocument("_id", data.ID);
+
+            users.Remove(query);
         }
     }
 }
