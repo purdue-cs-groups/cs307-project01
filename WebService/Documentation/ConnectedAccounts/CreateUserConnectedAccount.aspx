@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateRelationship.aspx.cs" Inherits="WebService.Documentation.Relationships.CreateRelationship" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateUserConnectedAccount.aspx.cs" Inherits="WebService.Documentation.ConnectedAccounts.CreateUserConnectedAccount" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Metrocam - /v1/relationships/create?id={id}</title>
+    <title>Metrocam - /v1/users/connections/create</title>
     <link rel="Stylesheet" href="/Stylesheet.css" />
 </head>
 <body>
@@ -18,15 +18,16 @@
         </p>
         <br />
         <div class="endpoint">
-            GET /v1/relationships/create?id={id}<br />
+            POST /v1/users/connections/create<br />
             <br />
             <br />
             <div class="code">
                 <i>Request: </i>
                 <pre>
 {
-  "UserID": "4f74b2285ad9850a14ae04ac",
-  "FollowingUserID": "4f84e925d47cd406d46faf6c"
+  "AccountName": "Twitter",
+  "ClientToken": "87jlg8P0ZzJFHcttssByQ",
+  "ClientSecret": "FK4BTFno0778ToOs03KFKI7FqVZyo3S1QFdznqL4"
 }</pre>
             </div>
             <div class="code">
@@ -35,7 +36,9 @@
 {
   "ID": "4f5665ca5ad98505b850909c",
   "UserID": "4f74b2285ad9850a14ae04ac",
-  "FollowingUserID": "4f84e925d47cd406d46faf6c",
+  "AccountName": "Twitter",
+  "ClientToken": "87jlg8P0ZzJFHcttssByQ",
+  "ClientSecret": "FK4BTFno0778ToOs03KFKI7FqVZyo3S1QFdznqL4",
   "CreatedDate": 0
 }</pre>
             </div>

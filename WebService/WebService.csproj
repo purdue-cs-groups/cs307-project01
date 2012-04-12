@@ -66,6 +66,11 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Documentation\Authentication\Authenticate.aspx" />
+    <Content Include="Documentation\ConnectedAccounts\CreateUserConnectedAccount.aspx" />
+    <Content Include="Documentation\ConnectedAccounts\DeleteUserConnectedAccount.aspx" />
+    <Content Include="Documentation\ConnectedAccounts\FetchUserConnectedAccount.aspx" />
+    <Content Include="Documentation\ConnectedAccounts\FetchUserConnectedAccountsByUserID.aspx" />
+    <Content Include="Documentation\ConnectedAccounts\UpdateUserConnectedAccount.aspx" />
     <Content Include="Documentation\Default.aspx" />
     <Content Include="Documentation\Favorites\CreateFavoritedPicture.aspx" />
     <Content Include="Documentation\Favorites\DeleteFavoritedPicture.aspx" />
@@ -136,6 +141,41 @@
     </Compile>
     <Compile Include="Documentation\Authentication\Authenticate.aspx.designer.cs">
       <DependentUpon>Authenticate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\CreateUserConnectedAccount.aspx.cs">
+      <DependentUpon>CreateUserConnectedAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\CreateUserConnectedAccount.aspx.designer.cs">
+      <DependentUpon>CreateUserConnectedAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\DeleteUserConnectedAccount.aspx.cs">
+      <DependentUpon>DeleteUserConnectedAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\DeleteUserConnectedAccount.aspx.designer.cs">
+      <DependentUpon>DeleteUserConnectedAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\FetchUserConnectedAccount.aspx.cs">
+      <DependentUpon>FetchUserConnectedAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\FetchUserConnectedAccount.aspx.designer.cs">
+      <DependentUpon>FetchUserConnectedAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\FetchUserConnectedAccountsByUserID.aspx.cs">
+      <DependentUpon>FetchUserConnectedAccountsByUserID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\FetchUserConnectedAccountsByUserID.aspx.designer.cs">
+      <DependentUpon>FetchUserConnectedAccountsByUserID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\UpdateUserConnectedAccount.aspx.cs">
+      <DependentUpon>UpdateUserConnectedAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\ConnectedAccounts\UpdateUserConnectedAccount.aspx.designer.cs">
+      <DependentUpon>UpdateUserConnectedAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentation\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -332,7 +372,6 @@
     <Compile Include="Controllers\UserConnectedAccountController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Documentation\ConnectedAccounts\" />
     <Folder Include="Documentation\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
