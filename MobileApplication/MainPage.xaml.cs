@@ -40,6 +40,8 @@ namespace MetrocamPan
         // Constructor
         public MainPage()
         {
+            LittleWatson.CheckForPreviousException();
+
             InitializeComponent();
 
             SetUpLocation();
