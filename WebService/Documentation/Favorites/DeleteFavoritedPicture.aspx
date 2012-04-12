@@ -4,64 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Metrocam - /v1/favorites/delete?id={id}</title>
-    <style type="text/css">
-        body
-        {
-            margin: 0px;
-            padding: 50px;
-            font-family: "Segoe WPC" , "Segoe UI" , Helvetica, Arial, "Arial Unicode MS" , Sans-Serif;
-        }
-        
-        a
-        {
-            color: #1BA1E2;
-        }
-        
-        .layout
-        {
-            width: 600px;
-            margin: 0px auto;
-        }
-        
-        .title
-        {
-            font-size: 32px;
-            margin: 0px;
-        }
-        
-        .description
-        {
-            color: #999999;
-            line-height: 1.5em;
-        }
-        
-        .tagline
-        {
-            color: #999999;
-            line-height: 1.5em;
-            font-size: 14px;
-            font-style: italic;
-        }
-        
-        pre
-        {
-            padding: 10px;
-            background-color: #eeeeee;
-            overflow: hidden;
-        }
-        
-        
-        .footer
-        {
-            line-height: 1.5em;
-            font-size: 14px;
-        }
-        
-        .navigation a
-        {
-            color: #aaaaaa; 
-        }
-    </style>
+    <link rel="Stylesheet" href="/Stylesheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">

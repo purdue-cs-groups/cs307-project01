@@ -4,62 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Metrocam - Documentation</title>
-    <style type="text/css">
-        body
-        {
-            margin: 0px;
-            padding: 50px;
-            font-family: "Segoe WPC" , "Segoe UI" , Helvetica, Arial, "Arial Unicode MS" , Sans-Serif;
-        }
-        
-        a
-        {
-            color: #1BA1E2;
-        }
-        
-        .layout
-        {
-            width: 600px;
-            margin: 0px auto;
-        }
-        
-        .title
-        {
-            font-size: 32px;
-            margin: 0px;
-        }
-        
-        .description
-        {
-            color: #999999;
-            line-height: 1.5em;
-        }
-        
-        .tagline
-        {
-            color: #999999;
-            line-height: 1.5em;
-            font-size: 14px;
-            font-style: italic;
-        }
-        
-        .endpoint
-        {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .footer
-        {
-            line-height: 1.5em;
-            font-size: 14px;
-        }
-        
-        .navigation a
-        {
-            color: #aaaaaa; 
-        }
-    </style>
+    <link rel="Stylesheet" href="/Stylesheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -120,7 +65,7 @@
                 <a href="Pictures/FetchUserFavoritedPictures.aspx">/v1/pictures/user/favorites/fetch?userid={userId}</a>
             </div>
             <div class="endpoint">
-                <a href="Pictures/CreatedPicture.aspx">/v1/pictures/create</a>
+                <a href="Pictures/CreatePicture.aspx">/v1/pictures/create</a>
             </div>
             <div class="endpoint">
                 <a href="Pictures/UploadPicture.aspx">/v1/pictures/upload</a>
