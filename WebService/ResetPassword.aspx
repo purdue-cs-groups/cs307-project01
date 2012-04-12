@@ -43,23 +43,6 @@
             font-style: italic;
         }
         
-        .tile
-        {
-            display: inline-block;
-            margin-right: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .tile a
-        {
-        }
-        
-        .tile a img
-        {
-            width: 100px;
-            height: 100px;
-        }
-        
         .footer
         {
             line-height: 1.5em;

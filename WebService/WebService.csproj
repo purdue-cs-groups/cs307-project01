@@ -65,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Documentation\Authentication\Authenticate.aspx" />
+    <Content Include="Documentation\Default.aspx" />
+    <Content Include="Documentation\Favorites\FetchFavoritedPicture.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
@@ -106,6 +109,27 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\Authentication\Authenticate.aspx.cs">
+      <DependentUpon>Authenticate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Authentication\Authenticate.aspx.designer.cs">
+      <DependentUpon>Authenticate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.cs">
+      <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,6 +169,13 @@
     <Compile Include="Models\UserConnectedAccount.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\UserConnectedAccountController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\ConnectedAccounts\" />
+    <Folder Include="Documentation\Flags\" />
+    <Folder Include="Documentation\Pictures\" />
+    <Folder Include="Documentation\Relationships\" />
+    <Folder Include="Documentation\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

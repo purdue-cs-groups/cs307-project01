@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebService.Register" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FetchFavoritedPicture.aspx.cs" Inherits="WebService.Documentation.Favorites.FetchFavoritedPicture" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>Metrocam - API Key Registration</title>
+    <title>Metrocam - /v1/favorites/fetch?id={id}</title>
     <style type="text/css">
         body
         {
@@ -43,6 +43,14 @@
             font-style: italic;
         }
         
+        pre
+        {
+            padding: 10px;
+            background-color: #eeeeee;
+            overflow: hidden;
+        }
+        
+        
         .footer
         {
             line-height: 1.5em;
@@ -61,24 +69,24 @@
             the shot into a memory to keep around forever.
         </p>
         <br />
-        <div>
-            <p>
-                Use the form below to register your application for an API key. The API key will
-                be sent to the email address that you provide.</p>
+        <div class="endpoint">
+            GET /v1/favorites/fetch?id={id}<br />
             <br />
-            <table>
-                <tr>
-                    <td>Application Name: </td>
-                    <td><asp:TextBox ID="txtApplicationName" runat="server" /></td>
-                </tr>
-                <tr>
-                    <td>Email Address: </td>
-                    <td><asp:TextBox ID="txtEmailAddress" runat="server" /></td>
-                </tr>
-            </table>
             <br />
-            <asp:Button ID="btnSubmit" runat="server" UseSubmitBehavior="true" Text="Register"
-                OnClick="btnSubmit_Click" />
+            <div class="code">
+                <i>Request: </i>
+                <pre></pre>
+            </div>
+            <div class="code">
+                <i>Response: </i>
+                <pre>
+{
+  "ID": "4f5665ca5ad98505b850909c",
+  "UserID": "4f74b2285ad9850a14ae04ac",
+  "PictureID": "4f84e925d47cd406d46faf6c",
+  "CreatedDate": 0
+}</pre>
+            </div>
         </div>
         <br />
         <br />
