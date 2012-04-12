@@ -4,19 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Metrocam - View Picture</title>
+    <link rel="Stylesheet" href="/Stylesheet.css" />
     <style type="text/css">
-        body
-        {
-            margin: 0px;
-            padding: 50px;
-            font-family: "Segoe WPC" , "Segoe UI" , Helvetica, Arial, "Arial Unicode MS" , Sans-Serif;
-        }
-        
-        a
-        {
-            color: #1BA1E2;
-        }
-        
         .layout
         {
             width: 1000px;
@@ -41,20 +30,6 @@
         {
             font-size: 24px;
             margin: 0px;
-        }
-        
-        .description
-        {
-            color: #999999;
-            line-height: 1.5em;
-        }
-        
-        .tagline
-        {
-            color: #999999;
-            line-height: 1.5em;
-            font-size: 14px;
-            font-style: italic;
         }
     </style>
 </head>

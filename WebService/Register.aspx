@@ -4,68 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Metrocam - API Key Registration</title>
-    <style type="text/css">
-        body
-        {
-            margin: 0px;
-            padding: 50px;
-            font-family: "Segoe WPC" , "Segoe UI" , Helvetica, Arial, "Arial Unicode MS" , Sans-Serif;
-        }
-        
-        a
-        {
-            color: #1BA1E2;
-        }
-        
-        .layout
-        {
-            width: 600px;
-            margin: 0px auto;
-        }
-        
-        .title
-        {
-            font-size: 32px;
-            margin: 0px;
-        }
-        
-        .description
-        {
-            color: #999999;
-            line-height: 1.5em;
-        }
-        
-        .tagline
-        {
-            color: #999999;
-            line-height: 1.5em;
-            font-size: 14px;
-            font-style: italic;
-        }
-        
-        .tile
-        {
-            display: inline-block;
-            margin-right: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .tile a
-        {
-        }
-        
-        .tile a img
-        {
-            width: 100px;
-            height: 100px;
-        }
-        
-        .footer
-        {
-            line-height: 1.5em;
-            font-size: 14px;
-        }
-    </style>
+    <link rel="Stylesheet" href="/Stylesheet.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -100,6 +39,11 @@
         <br />
         <br />
         <div class="footer">
+            <div class="navigation">
+                <a href="/default.aspx">Home</a> | <a href="/documentation/default.aspx">API Documentation</a>
+                | <a href="/register.aspx">API Key Registration</a> | <a href="/resetpassword.aspx">
+                    Forgot Password</a>
+            </div>
             Copyright &copy; 2012 Metrocam. All rights reserved.
         </div>
     </div>

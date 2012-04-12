@@ -102,6 +102,11 @@ namespace MetrocamPan
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+
+            //pass exception and message to little watson for bug reporting
+            String exmesg = e.Exception.Message;
+            LittleWatson.ReportException(e.Exception, exmesg);
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
@@ -112,6 +117,13 @@ namespace MetrocamPan
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+
+            //pass exception and message to little watson for bug reporting
+            Exception ex = (Exception)e.ExceptionObject;
+            String exmesg = ex.Message;
+
+            LittleWatson.ReportException(ex, exmesg);
+
             // Catches this error
             if (e.ExceptionObject is UnauthorizedAccessException)
             {
@@ -122,7 +134,7 @@ namespace MetrocamPan
 
             if (e.ExceptionObject is WebException)
             {
-                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
+                //MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
                 e.Handled = true;
                 return;
             }

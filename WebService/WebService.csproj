@@ -65,11 +65,35 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Documentation\Authentication\Authenticate.aspx" />
+    <Content Include="Documentation\Default.aspx" />
+    <Content Include="Documentation\Favorites\CreateFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\DeleteFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\FetchFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\UpdateFavoritedPicture.aspx" />
+    <Content Include="Documentation\Flags\CreateFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\DeleteFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\FetchFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\UpdateFlaggedPicture.aspx" />
+    <Content Include="Documentation\Pictures\CreatePicture.aspx" />
+    <Content Include="Documentation\Pictures\DeletePicture.aspx" />
+    <Content Include="Documentation\Pictures\FetchNewsFeed.aspx" />
+    <Content Include="Documentation\Pictures\FetchPopularNewsFeed.aspx" />
+    <Content Include="Documentation\Pictures\FetchUserFavoritedPictures.aspx" />
+    <Content Include="Documentation\Pictures\FetchUserPictures.aspx" />
+    <Content Include="Documentation\Pictures\FlagPicture.aspx" />
+    <Content Include="Documentation\Pictures\UpdatePicture.aspx" />
+    <Content Include="Documentation\Pictures\UploadPicture.aspx" />
+    <Content Include="Documentation\Relationships\CreateRelationship.aspx" />
+    <Content Include="Documentation\Relationships\DeleteRelationship.aspx" />
+    <Content Include="Documentation\Relationships\FetchRelationship.aspx" />
+    <Content Include="Documentation\Relationships\UpdateRelationship.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
     <Content Include="Register.aspx" />
     <Content Include="ResetPassword.aspx" />
+    <Content Include="Stylesheet.css" />
     <Content Include="ViewPicture.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -105,6 +129,167 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Authentication\Authenticate.aspx.cs">
+      <DependentUpon>Authenticate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Authentication\Authenticate.aspx.designer.cs">
+      <DependentUpon>Authenticate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\CreateFavoritedPicture.aspx.cs">
+      <DependentUpon>CreateFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\CreateFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>CreateFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPicture.aspx.cs">
+      <DependentUpon>DeleteFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>DeleteFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.cs">
+      <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\UpdateFavoritedPicture.aspx.cs">
+      <DependentUpon>UpdateFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\UpdateFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>UpdateFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\CreateFlaggedPicture.aspx.cs">
+      <DependentUpon>CreateFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\CreateFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>CreateFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\DeleteFlaggedPicture.aspx.cs">
+      <DependentUpon>DeleteFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\DeleteFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>DeleteFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\FetchFlaggedPicture.aspx.cs">
+      <DependentUpon>FetchFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\FetchFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>FetchFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\UpdateFlaggedPicture.aspx.cs">
+      <DependentUpon>UpdateFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\UpdateFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>UpdateFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\CreatePicture.aspx.cs">
+      <DependentUpon>CreatePicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\CreatePicture.aspx.designer.cs">
+      <DependentUpon>CreatePicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\DeletePicture.aspx.cs">
+      <DependentUpon>DeletePicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\DeletePicture.aspx.designer.cs">
+      <DependentUpon>DeletePicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchNewsFeed.aspx.cs">
+      <DependentUpon>FetchNewsFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchNewsFeed.aspx.designer.cs">
+      <DependentUpon>FetchNewsFeed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchPopularNewsFeed.aspx.cs">
+      <DependentUpon>FetchPopularNewsFeed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchPopularNewsFeed.aspx.designer.cs">
+      <DependentUpon>FetchPopularNewsFeed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchUserFavoritedPictures.aspx.cs">
+      <DependentUpon>FetchUserFavoritedPictures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchUserFavoritedPictures.aspx.designer.cs">
+      <DependentUpon>FetchUserFavoritedPictures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchUserPictures.aspx.cs">
+      <DependentUpon>FetchUserPictures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchUserPictures.aspx.designer.cs">
+      <DependentUpon>FetchUserPictures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FlagPicture.aspx.cs">
+      <DependentUpon>FlagPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FlagPicture.aspx.designer.cs">
+      <DependentUpon>FlagPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\UpdatePicture.aspx.cs">
+      <DependentUpon>UpdatePicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\UpdatePicture.aspx.designer.cs">
+      <DependentUpon>UpdatePicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\UploadPicture.aspx.cs">
+      <DependentUpon>UploadPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\UploadPicture.aspx.designer.cs">
+      <DependentUpon>UploadPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\CreateRelationship.aspx.cs">
+      <DependentUpon>CreateRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\CreateRelationship.aspx.designer.cs">
+      <DependentUpon>CreateRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationship.aspx.cs">
+      <DependentUpon>DeleteRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationship.aspx.designer.cs">
+      <DependentUpon>DeleteRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\FetchRelationship.aspx.cs">
+      <DependentUpon>FetchRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\FetchRelationship.aspx.designer.cs">
+      <DependentUpon>FetchRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.cs">
+      <DependentUpon>UpdateRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.designer.cs">
+      <DependentUpon>UpdateRelationship.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -145,6 +330,10 @@
     <Compile Include="Models\UserConnectedAccount.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\UserConnectedAccountController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\ConnectedAccounts\" />
+    <Folder Include="Documentation\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

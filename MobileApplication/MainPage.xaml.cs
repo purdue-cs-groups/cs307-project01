@@ -40,6 +40,8 @@ namespace MetrocamPan
         // Constructor
         public MainPage()
         {
+            LittleWatson.CheckForPreviousException();
+
             InitializeComponent();
 
             SetUpLocation();
@@ -790,6 +792,11 @@ namespace MetrocamPan
             FavoritedPicture data = new FavoritedPicture();
             data.PictureID = info.ID;
             data.UserID    = App.MetrocamService.CurrentUser.ID;
+
+            if ((from pic in App.FavoritedUserPictures where pic.ID.Equals(info.ID) select pic).SingleOrDefault() != null)
+            {
+                return;
+            }
 
             App.FavoritedUserPictures.Add(info);
 
