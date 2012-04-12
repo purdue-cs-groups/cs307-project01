@@ -5,6 +5,8 @@ using System.Web;
 using WebService.Models;
 using MongoDB.Driver;
 using WebService.Common;
+using MongoDB.Driver.Builders;
+using MongoDB.Bson;
 
 namespace WebService.Controllers
 {
@@ -174,18 +176,41 @@ namespace WebService.Controllers
 
         public static void Delete(UserInfo data)
         {
+            //Set up the server/database connection.
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
+            //Get all the collections that need to be updated.
             MongoCollection<User> users = database.GetCollection<User>("Users");
             MongoCollection<Picture> pics = database.GetCollection<Picture>("Pictures");
+            MongoCollection<UserConnectedAccount> connAcct = database.GetCollection<UserConnectedAccount>("ConnectedAccounts");
+            MongoCollection<Relationship> relate = database.GetCollection<Relationship>("Relationship");
+            MongoCollection<FavoritedPicture> fave = database.GetCollection<FavoritedPicture>("FavoritedPictures");
+            MongoCollection<FlaggedPicture> flag = database.GetCollection<FlaggedPicture>("FlaggedPictures");
+            
+            //Build the update for the Relationship collection.
+            //I'm not sure if this is right.  If there are bugs when deleting, look here first.
+            UpdateBuilder update = new UpdateBuilder();
+            BsonValue[] val = { data.ID };
+            update.PullAll("FollowingUserID", val);
 
+            //Create the query to delete the user from the system.
             var query = new QueryDocument("UserID", data.ID);
 
+            //Remove the user's documents from the collections.
             pics.Remove(query);
+            connAcct.Remove(query);
+            relate.Remove(query);
+            fave.Remove(query);
+            flag.Remove(query);
 
+            //Remove the user from the following lists.
+            relate.Update(query, update, UpdateFlags.Multi);
+
+            //Change the query in order to delete the document from the Users collection.
             query = new QueryDocument("_id", data.ID);
 
+            //Finally delete the user from the Users collection.
             users.Remove(query);
         }
     }
