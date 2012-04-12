@@ -84,6 +84,10 @@
     <Content Include="Documentation\Pictures\FlagPicture.aspx" />
     <Content Include="Documentation\Pictures\UpdatePicture.aspx" />
     <Content Include="Documentation\Pictures\UploadPicture.aspx" />
+    <Content Include="Documentation\Relationships\CreateRelationship.aspx" />
+    <Content Include="Documentation\Relationships\DeleteRelationship.aspx" />
+    <Content Include="Documentation\Relationships\FetchRelationship.aspx" />
+    <Content Include="Documentation\Relationships\UpdateRelationship.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
@@ -259,6 +263,34 @@
     <Compile Include="Documentation\Pictures\UploadPicture.aspx.designer.cs">
       <DependentUpon>UploadPicture.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\Relationships\CreateRelationship.aspx.cs">
+      <DependentUpon>CreateRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\CreateRelationship.aspx.designer.cs">
+      <DependentUpon>CreateRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationship.aspx.cs">
+      <DependentUpon>DeleteRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationship.aspx.designer.cs">
+      <DependentUpon>DeleteRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\FetchRelationship.aspx.cs">
+      <DependentUpon>FetchRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\FetchRelationship.aspx.designer.cs">
+      <DependentUpon>FetchRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.cs">
+      <DependentUpon>UpdateRelationship.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.designer.cs">
+      <DependentUpon>UpdateRelationship.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,7 +333,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\ConnectedAccounts\" />
-    <Folder Include="Documentation\Relationships\" />
     <Folder Include="Documentation\Users\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
