@@ -67,7 +67,14 @@
     <Content Include="Default.aspx" />
     <Content Include="Documentation\Authentication\Authenticate.aspx" />
     <Content Include="Documentation\Default.aspx" />
+    <Content Include="Documentation\Favorites\CreateFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\DeleteFavoritedPicture.aspx" />
     <Content Include="Documentation\Favorites\FetchFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\UpdateFavoritedPicture.aspx" />
+    <Content Include="Documentation\Flags\CreateFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\DeleteFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\FetchFlaggedPicture.aspx" />
+    <Content Include="Documentation\Flags\UpdateFlaggedPicture.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
@@ -123,12 +130,61 @@
     <Compile Include="Documentation\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\Favorites\CreateFavoritedPicture.aspx.cs">
+      <DependentUpon>CreateFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\CreateFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>CreateFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPicture.aspx.cs">
+      <DependentUpon>DeleteFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>DeleteFavoritedPicture.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.cs">
       <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.designer.cs">
       <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\UpdateFavoritedPicture.aspx.cs">
+      <DependentUpon>UpdateFavoritedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\UpdateFavoritedPicture.aspx.designer.cs">
+      <DependentUpon>UpdateFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\CreateFlaggedPicture.aspx.cs">
+      <DependentUpon>CreateFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\CreateFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>CreateFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\DeleteFlaggedPicture.aspx.cs">
+      <DependentUpon>DeleteFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\DeleteFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>DeleteFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\FetchFlaggedPicture.aspx.cs">
+      <DependentUpon>FetchFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\FetchFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>FetchFlaggedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Flags\UpdateFlaggedPicture.aspx.cs">
+      <DependentUpon>UpdateFlaggedPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Flags\UpdateFlaggedPicture.aspx.designer.cs">
+      <DependentUpon>UpdateFlaggedPicture.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -172,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Documentation\ConnectedAccounts\" />
-    <Folder Include="Documentation\Flags\" />
     <Folder Include="Documentation\Pictures\" />
     <Folder Include="Documentation\Relationships\" />
     <Folder Include="Documentation\Users\" />

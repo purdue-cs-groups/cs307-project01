@@ -65,6 +65,11 @@
             line-height: 1.5em;
             font-size: 14px;
         }
+        
+        .navigation a
+        {
+            color: #aaaaaa; 
+        }
     </style>
 </head>
 <body>
@@ -83,6 +88,11 @@
         </div>
         <br />
         <div class="footer">
+            <div class="navigation">
+                <a href="/default.aspx">Home</a> | <a href="/documentation/default.aspx">API Documentation</a>
+                | <a href="/register.aspx">API Key Registration</a> | <a href="/resetpassword.aspx">
+                    Forgot Password</a>
+            </div>
             Copyright &copy; 2012 Metrocam. All rights reserved.
         </div>
     </div>
