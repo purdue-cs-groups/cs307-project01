@@ -118,16 +118,10 @@ namespace WebService.Controllers
 
             List<UserInfo> list = new List<UserInfo>();
 
-            foreach (User u in users.Find(new QueryDocument("Name", query)).ToList<User>())
-            {
-                Picture p = PictureController.Fetch(u.ProfilePictureID);
-                UserInfo i = new UserInfo(u, p);
+            //User Regex to find all results with the query string in it.
+            string regexQuery = "*" + query + "*";
 
-                if (list.Contains(i) == false)
-                    list.Add(i);
-            } 
-            
-            foreach (User u in users.Find(new QueryDocument("Username", query)).ToList<User>())
+            foreach (User u in users.Find(new QueryDocument("Name", regexQuery)).ToList<User>())
             {
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
@@ -136,7 +130,16 @@ namespace WebService.Controllers
                     list.Add(i);
             }
 
-            foreach (User u in users.Find(new QueryDocument("EmailAddress", query)).ToList<User>())
+            foreach (User u in users.Find(new QueryDocument("Username", regexQuery)).ToList<User>())
+            {
+                Picture p = PictureController.Fetch(u.ProfilePictureID);
+                UserInfo i = new UserInfo(u, p);
+
+                if (list.Contains(i) == false)
+                    list.Add(i);
+            }
+
+            foreach (User u in users.Find(new QueryDocument("EmailAddress", regexQuery)).ToList<User>())
             {
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
