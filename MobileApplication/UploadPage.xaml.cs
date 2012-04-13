@@ -27,6 +27,8 @@ using System.Text;
 using JeffWilcox.FourthAndMayor;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
+using Hammock.Silverlight.Compat;
+using TweetSharp;
 
 namespace MetrocamPan
 {
@@ -177,39 +179,49 @@ namespace MetrocamPan
 
             if (twitterSwitch.IsChecked == true)
             {
-                var credentials = new OAuthCredentials
+                TwitterService t = new TwitterService(TwitterSettings.ConsumerKey, TwitterSettings.ConsumerKeySecret, MainPage.TwitterToken, MainPage.TwitterSecret);
+                t.SendTweet(data.Caption + " " + "http://metrocam.cloudapp.net/p/" + data.ID, (status, response) =>
                 {
-                    Type = OAuthType.ProtectedResource,
-                    SignatureMethod = OAuthSignatureMethod.HmacSha1,
-                    ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
-                    ConsumerKey = TwitterSettings.ConsumerKey,
-                    ConsumerSecret = TwitterSettings.ConsumerKeySecret,
-                    Token = MainPage.TwitterToken,
-                    TokenSecret = MainPage.TwitterSecret,
-                    Version = "1.0"
-                };
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        // YAY
+                    }
+                });
+                //var credentials = new OAuthCredentials
+                //{
+                //    Type = OAuthType.ProtectedResource,
+                //    SignatureMethod = OAuthSignatureMethod.HmacSha1,
+                //    ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
+                //    ConsumerKey = TwitterSettings.ConsumerKey,
+                //    ConsumerSecret = TwitterSettings.ConsumerKeySecret,
+                //    Token = MainPage.TwitterToken,
+                //    TokenSecret = MainPage.TwitterSecret,
+                //    Version = "1.0"
+                //};
 
-                var restClient = new RestClient
-                {
-                    Authority = TwitterSettings.StatusUpdateUrl,
-                    HasElevatedPermissions = true,
-                    Credentials = credentials,
-                    Method = WebMethod.Post
-                };
+                //var restClient = new RestClient
+                //{
+                //    Authority = TwitterSettings.StatusUpdateUrl,
+                //    HasElevatedPermissions = true,
+                //    Credentials = credentials,
+                //    Method = WebMethod.Post,
+                //    SilverlightAcceptEncodingHeader = "GZip",
+                //    DecompressionMethods = DecompressionMethods.GZip
+                //};
 
-                restClient.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                //restClient.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                String Message = data.Caption + " " + "http://metrocam.cloudapp.net/p/" + data.ID;
+                //String Message = data.Caption + " " + "http://metrocam.cloudapp.net/p/" + data.ID;
 
-                // Create a Rest Request and fire it
-                var restRequest = new RestRequest
-                {
-                    Path = "1/statuses/update.json?status=" + Message,
-                };
+                //// Create a Rest Request and fire it
+                //var restRequest = new RestRequest
+                //{
+                //    Path = "1/statuses/update.json?status=" + Message,
+                //};
 
-                var ByteData = Encoding.UTF8.GetBytes(Message);
-                restRequest.AddPostContent(ByteData);
-                restClient.BeginRequest(restRequest, new RestCallback(PostTweetRequestCallback));
+                //var ByteData = Encoding.UTF8.GetBytes(Message);
+                //restRequest.AddPostContent(ByteData);
+                //restClient.BeginRequest(restRequest);
             }
 
             Dispatcher.BeginInvoke(() =>

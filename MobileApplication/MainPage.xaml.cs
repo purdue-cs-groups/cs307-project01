@@ -711,7 +711,7 @@ namespace MetrocamPan
                     TwitterToken = uca.ClientToken;
 
                     TwitterService twitter = new TwitterService(TwitterSettings.ConsumerKey, TwitterSettings.ConsumerKeySecret);
-                    twitter.AuthenticateWith(TwitterSecret, TwitterToken);
+                    twitter.AuthenticateWith(TwitterToken, TwitterSecret);
                     twitter.VerifyCredentials((user, response) =>
                     {
                         if (response.StatusCode == HttpStatusCode.OK)
