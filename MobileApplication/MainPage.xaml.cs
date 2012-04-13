@@ -38,8 +38,6 @@ namespace MetrocamPan
         public static double lat = 0;
         public static double lng = 0;
 
-        public int isInitializing = 0;
-
         // Constructor
         public MainPage()
         {
@@ -184,8 +182,7 @@ namespace MetrocamPan
         private void PopularPicture_Loaded(object sender, RoutedEventArgs e)
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
-            {
-                GlobalLoading.Instance.IsLoading = false;
+            {                
                 LoadingMessage.Visibility = Visibility.Collapsed;
 
                 Dispatcher.BeginInvoke(() =>
@@ -232,7 +229,7 @@ namespace MetrocamPan
 
         private void CameraButton_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             CameraCaptureTask cam = new CameraCaptureTask();
@@ -373,7 +370,7 @@ namespace MetrocamPan
         #region ChoosePicture Button
         private void ChoosePicture_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             PhotoChooserTask picker = new PhotoChooserTask();
@@ -430,7 +427,7 @@ namespace MetrocamPan
         public bool isRefreshingRecent = false;
         private void Refresh_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             if (MainContent.SelectedIndex == 0)
@@ -455,7 +452,7 @@ namespace MetrocamPan
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
@@ -463,7 +460,7 @@ namespace MetrocamPan
 
         private void UserSearch_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
@@ -471,7 +468,7 @@ namespace MetrocamPan
 
         private void EditProfile_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml?userid=" + App.MetrocamService.CurrentUser.ID + "&type=current&id=blah", UriKind.Relative));
@@ -479,7 +476,7 @@ namespace MetrocamPan
 
         private void About_Click(object sender, EventArgs e)
         {
-            if (isInitializing < 4)
+            if (GlobalLoading.Instance.IsLoading)
                 return;
 
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
@@ -575,8 +572,6 @@ namespace MetrocamPan
         Boolean isRefreshingPopular = false;
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            isInitializing++;
-
             App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
             App.PopularPictures.Clear();
 
@@ -629,8 +624,6 @@ namespace MetrocamPan
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
         {
-            isInitializing++;
-
             App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.RecentPictures.Clear();
             App.ContinuedRecentPictures.Clear();
@@ -679,8 +672,6 @@ namespace MetrocamPan
 
         void MetrocamService_FetchUserFavoritedPicturesCompleted(object sender, RequestCompletedEventArgs e)
         {
-            isInitializing++;
-
             App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
             App.FavoritedUserPictures.Clear();
 
@@ -717,8 +708,6 @@ namespace MetrocamPan
 
         void MetrocamService_FetchUserConnectedAccountsByUserIDCompleted(object sender, RequestCompletedEventArgs e)
         {
-            isInitializing++;
-
             List<UserConnectedAccount> UCAs = e.Data as List<UserConnectedAccount>;
 
             foreach (UserConnectedAccount uca in UCAs)
@@ -749,6 +738,8 @@ namespace MetrocamPan
                     });
                 }
             }
+
+            GlobalLoading.Instance.IsLoading = false;
         }
 
         void MetrocamService_DeleteUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
