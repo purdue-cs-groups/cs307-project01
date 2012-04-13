@@ -842,6 +842,8 @@ namespace MetrocamPan
 
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            App.MetrocamService.CreateFavoritedPictureCompleted -= MetrocamService_CreateFavoritedPictureCompleted;
+            MessageBox.Show("Picture successfully favorited."); 
         }
 
         void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
