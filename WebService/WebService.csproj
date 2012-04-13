@@ -94,6 +94,9 @@
     <Content Include="Documentation\Relationships\DeleteRelationship.aspx" />
     <Content Include="Documentation\Relationships\FetchRelationship.aspx" />
     <Content Include="Documentation\Relationships\UpdateRelationship.aspx" />
+    <Content Include="Documentation\Users\FetchAllUsers.aspx" />
+    <Content Include="Documentation\Users\FetchUser.aspx" />
+    <Content Include="Documentation\Users\SearchUsers.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
@@ -339,6 +342,27 @@
     <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.designer.cs">
       <DependentUpon>UpdateRelationship.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\Users\FetchAllUsers.aspx.cs">
+      <DependentUpon>FetchAllUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\FetchAllUsers.aspx.designer.cs">
+      <DependentUpon>FetchAllUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Users\FetchUser.aspx.cs">
+      <DependentUpon>FetchUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\FetchUser.aspx.designer.cs">
+      <DependentUpon>FetchUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Users\SearchUsers.aspx.cs">
+      <DependentUpon>SearchUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\SearchUsers.aspx.designer.cs">
+      <DependentUpon>SearchUsers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -379,9 +403,7 @@
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\UserConnectedAccountController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Documentation\Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
