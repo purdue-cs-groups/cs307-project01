@@ -190,6 +190,8 @@ namespace MetrocamPan
                     foreach (PictureInfo p in App.ContinuedPopularPictures)
                         App.PopularPictures.Add(p);
                 });
+
+                GlobalLoading.Instance.IsLoading = false;
             }
         }
 
@@ -706,6 +708,7 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserConnectedAccountsByUserID(App.MetrocamService.CurrentUser.ID);
         }
 
+        private Boolean UcaHasCompleted = false;
         void MetrocamService_FetchUserConnectedAccountsByUserIDCompleted(object sender, RequestCompletedEventArgs e)
         {
             List<UserConnectedAccount> UCAs = e.Data as List<UserConnectedAccount>;
@@ -738,8 +741,6 @@ namespace MetrocamPan
                     });
                 }
             }
-
-            GlobalLoading.Instance.IsLoading = false;
         }
 
         void MetrocamService_DeleteUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
