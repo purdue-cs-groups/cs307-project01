@@ -25,22 +25,35 @@
             <TextBlock x:Name="PageTitle" Text="sign up" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnName" />
+        <ScrollViewer x:Name="ContentPanel" Grid.Row="1">
+            <StackPanel Margin="12,0,12,0">
+                <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" />
+                
+                <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" KeyUp="FullnameInput_KeyUp" />
 
-            <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBox x:Name="fullnameInput" InputScope="PersonalFullName" KeyUp="fullnameInput_KeyUp" />
+                <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+                <PasswordBox x:Name="PasswordInput" KeyUp="PasswordInput_KeyUp" />
 
-            <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox x:Name="passwordInput" KeyUp="passwordInput_KeyUp" />
+                <TextBlock Text="Confirm Password" Style="{StaticResource PhoneTextNormalStyle}" />
+                <PasswordBox x:Name="ConfirmPasswordInput" KeyUp="ConfirmPasswordInput_KeyUp" />
 
-            <TextBlock Text="Confirm Password" Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox x:Name="confirmPasswordInput" KeyUp="confirmPasswordInput_KeyUp" />
+                <TextBlock Text="Email" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="20" InputScope="EmailNameOrAddress" KeyUp="EmailInput_KeyUp" />
 
-            <TextBlock Text="Email" Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBox x:Name="emailInput" InputScope="EmailNameOrAddress" KeyUp="emailInput_KeyUp" />
-        </StackPanel>
+                <TextBlock Text="Location" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="LocationInput" MaxLength="20" InputScope="PersonalFullName" KeyUp="LocationInput_KeyUp" />
+
+                <TextBlock Text="Biography" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="BiographyInput" MaxLength="150" 
+                                      DisplayedMaxLength="150" 
+                                      LengthIndicatorVisible="True" 
+                                      LengthIndicatorThreshold="0" InputScope="PersonalFullName" TextWrapping="Wrap" Height="Auto" Width="Auto" KeyUp="BiographyInput_KeyUp" />
+            </StackPanel>
+        </ScrollViewer>
+
+        
 
     </Grid>
 

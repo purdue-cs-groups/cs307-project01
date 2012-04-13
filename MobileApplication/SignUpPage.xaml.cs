@@ -31,53 +31,76 @@ namespace MetrocamPan
             base.OnNavigatedTo(e);
 
             App.isFromLandingPage = true;
+
+            this.LocationInput.Hint = "optional";
+            this.BiographyInput.Hint = "optional";
         }
 
-        private void usernameInput_KeyUp(object sender, KeyEventArgs e)
+        private void UsernameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                // Switch focus to next input field
+                // Switch focus to the whole frame
                 Dispatcher.BeginInvoke(() =>
-                    fullnameInput.Focus());
+                    this.Focus());
             }
         }
 
-        private void fullnameInput_KeyUp(object sender, KeyEventArgs e)
+        private void FullnameInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                // Switch focus to next input field
+                // Switch focus to the whole frame
                 Dispatcher.BeginInvoke(() =>
-                    passwordInput.Focus());
+                    this.Focus());
             }
         }
 
-        private void passwordInput_KeyUp(object sender, KeyEventArgs e)
+        private void PasswordInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                // Switch focus to next input field
+                // Switch focus to the whole frame
                 Dispatcher.BeginInvoke(() =>
-                    confirmPasswordInput.Focus());
+                    this.Focus());
             }
         }
 
-        private void confirmPasswordInput_KeyUp(object sender, KeyEventArgs e)
+        private void ConfirmPasswordInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                // Switch focus to next input field
+                // Switch focus to the whole frame
                 Dispatcher.BeginInvoke(() =>
-                    emailInput.Focus());
+                    this.Focus());
             }
         }
 
-        private void emailInput_KeyUp(object sender, KeyEventArgs e)
+        private void EmailInput_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                // Lose Focus on the keyboard
+                // Switch focus to the whole frame
+                Dispatcher.BeginInvoke(() =>
+                    this.Focus());
+            }
+        }
+
+        private void LocationInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Switch focus to the whole frame
+                Dispatcher.BeginInvoke(() =>
+                    this.Focus());
+            }
+        }
+
+        private void BiographyInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // Switch focus to the whole frame
                 Dispatcher.BeginInvoke(() =>
                     this.Focus());
             }
@@ -91,25 +114,40 @@ namespace MetrocamPan
             //      Then checks password similar?
             //      Then checks password strong?
             //      Then checks email valid?
-            if (!InputValidator.isValidUsername(this.usernameInput.Text) ||
-                !InputValidator.isNonEmpty(this.fullnameInput.Text, "full name") ||
-                !InputValidator.isPasswordSame(this.passwordInput.Password, this.confirmPasswordInput.Password) ||
-                !InputValidator.isStrongPassword(this.passwordInput.Password) ||
-                !InputValidator.isValidEmail(this.emailInput.Text))
+            if (!InputValidator.isValidUsername(this.UsernameInput.Text) ||
+                !InputValidator.isNonEmpty(this.FullnameInput.Text, "full name") ||
+                !InputValidator.isPasswordSame(this.PasswordInput.Password, this.ConfirmPasswordInput.Password) ||
+                !InputValidator.isStrongPassword(this.PasswordInput.Password) ||
+                !InputValidator.isValidEmail(this.EmailInput.Text))
             {
                 // Do nothing
                 return;
             }
 
             currentUser = new User();
-            currentUser.Username = this.usernameInput.Text;
-            currentUser.Name = this.fullnameInput.Text;
-            currentUser.Password = this.passwordInput.Password;
-            currentUser.EmailAddress = this.emailInput.Text;
+            currentUser.Username = this.UsernameInput.Text;
+            currentUser.Name = this.FullnameInput.Text;
+            currentUser.Password = this.PasswordInput.Password;
+            currentUser.EmailAddress = this.EmailInput.Text;
 
-            // Set default values for fields
-            currentUser.Biography = "Just another Metrocammer!";
-            currentUser.Location = "Metrocam City";
+            // Set default values for optional fields if empty
+            if (this.LocationInput.Text.Length == 0)
+            {
+                currentUser.Location = "Metrocam City";
+            }
+            else
+            {
+                currentUser.Location = this.LocationInput.Text;
+            }
+
+            if (this.BiographyInput.Text.Length == 0)
+            {
+                currentUser.Biography = "Metrocam for life!";
+            }
+            else
+            {
+                currentUser.Biography = this.BiographyInput.Text;
+            }
 
             // Subscribe event to CreateUserCompleted
             App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
@@ -129,7 +167,7 @@ namespace MetrocamPan
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
 
             // Calls Authenticate to obtain UserInfo object
-            App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+            App.MetrocamService.Authenticate(this.UsernameInput.Text, this.PasswordInput.Password);
         }
 
         void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
@@ -147,7 +185,7 @@ namespace MetrocamPan
             // Store into isolated storage
             Settings.isLoggedIn.Value = true;
             Settings.username.Value = currentUser.Username;
-            Settings.password.Value = this.passwordInput.Password;      // As of now, currentUser.Password returns a hashed password.
+            Settings.password.Value = this.PasswordInput.Password;      // As of now, currentUser.Password returns a hashed password.
 
             App.isFromLandingPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
@@ -155,10 +193,6 @@ namespace MetrocamPan
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            // Show MessageBox only if something has been entered into at least one input field
-            MessageBox.Show("Your information has been discarded.");
-
-            // GoBack() Automatically clears everything on this PortraitPage
             NavigationService.GoBack();
         }
 
