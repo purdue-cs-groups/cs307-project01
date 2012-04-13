@@ -36,48 +36,43 @@ namespace MetrocamPan
 
             this.lToggle.IsChecked = Settings.locationService.Value;
             this.oToggle.IsChecked = Settings.saveOriginal.Value;
-            this.eToggle.IsChecked = Settings.saveEdited.Value;
         }
 
         private void tweetCheck(object sender, RoutedEventArgs e)
         {
             Settings.twitterDefault.Value = true;
+            tweetToggle.Content = "on";
         }
 
         private void tweetUncheck(object sender, RoutedEventArgs e)
         {
             Settings.twitterDefault.Value = false;
+            tweetToggle.Content = "off";
         }
 
         private void originalCheck(object sender, RoutedEventArgs e)
         {
             Settings.saveOriginal.Value = true;
+            oToggle.Content = "on";
         }
 
         private void originalUncheck(object sender, RoutedEventArgs e)
         {
             Settings.saveOriginal.Value = false;
-        }
-
-        private void editedCheck(object sender, RoutedEventArgs e)
-        {
-            Settings.saveEdited.Value = true;
-        }
-
-        private void editedUncheck(object sender, RoutedEventArgs e)
-        {
-            Settings.saveEdited.Value = false;
+            oToggle.Content = "off";
         }
 
         private void locCheck(object sender, RoutedEventArgs e)
         {
             Settings.locationService.Value = true;
+            lToggle.Content = "on";
             MainPage.watcher.Start();
         }
 
         private void locUncheck(object sender, RoutedEventArgs e)
         {
             Settings.locationService.Value = false;
+            lToggle.Content = "off";
             MainPage.lat = 0;
             MainPage.lng = 0;
             MainPage.watcher.Stop();
