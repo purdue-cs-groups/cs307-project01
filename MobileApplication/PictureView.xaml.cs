@@ -29,6 +29,8 @@ namespace MetrocamPan
     public partial class PictureView : PhoneApplicationPage
     {
         PictureInfo CurrentPicture = null;
+        Boolean alreadyAddedButton = false;
+        Boolean alreadyAddedMenuItem = false;
 
         public PictureView()
         {
@@ -67,18 +69,27 @@ namespace MetrocamPan
 
             if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
             {
-                ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
-                profilePic.Text = "make profile picture";
-                profilePic.Click += new EventHandler(MakeProfilePicture);
+                if (!alreadyAddedMenuItem)
+                {
+                    ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
+                    profilePic.Text = "make profile picture";
+                    profilePic.Click += new EventHandler(MakeProfilePicture);
 
-                ApplicationBar.MenuItems.Add(profilePic);
+                    ApplicationBar.MenuItems.Add(profilePic);
+
+                    alreadyAddedMenuItem = true;
+                }
             }
 
-            ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
-            favorite.Text = "favorite";
-            favorite.Click += new EventHandler(Favorite_Click);
+            if (!alreadyAddedButton)
+            {
+                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                favorite.Text = "favorite";
+                favorite.Click += new EventHandler(Favorite_Click);
 
-            ApplicationBar.Buttons.Add(favorite);
+                ApplicationBar.Buttons.Add(favorite);
+                alreadyAddedButton = true;
+            }
         }
 
         private void MakeProfilePicture (object sender, EventArgs e)
