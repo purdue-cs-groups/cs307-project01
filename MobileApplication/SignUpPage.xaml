@@ -27,7 +27,7 @@
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnMode" />
+            <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnName" />
 
             <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
             <TextBox x:Name="fullnameInput" InputScope="PersonalFullName" KeyUp="fullnameInput_KeyUp" />
