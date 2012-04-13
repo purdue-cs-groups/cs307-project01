@@ -124,9 +124,6 @@ namespace MetrocamPan
 
                 // Clears back stack so user cannot go back to LandingPage(s)
                 NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
 
                 // Flag to refresh Recent
                 isRefreshingRecent = true;
