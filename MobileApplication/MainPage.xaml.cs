@@ -41,8 +41,6 @@ namespace MetrocamPan
         // Constructor
         public MainPage()
         {
-            LittleWatson.CheckForPreviousException();
-
             InitializeComponent();
 
             SetUpLocation();
@@ -57,6 +55,8 @@ namespace MetrocamPan
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            LittleWatson.CheckForPreviousException(true);
+
             if (PopularPictures.ItemsSource == null)
             {
                 GlobalLoading.Instance.IsLoading = true;

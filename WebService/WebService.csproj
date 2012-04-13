@@ -94,9 +94,12 @@
     <Content Include="Documentation\Relationships\DeleteRelationship.aspx" />
     <Content Include="Documentation\Relationships\FetchRelationship.aspx" />
     <Content Include="Documentation\Relationships\UpdateRelationship.aspx" />
+    <Content Include="Documentation\Users\CreateUser.aspx" />
+    <Content Include="Documentation\Users\DeleteUser.aspx" />
     <Content Include="Documentation\Users\FetchAllUsers.aspx" />
     <Content Include="Documentation\Users\FetchUser.aspx" />
     <Content Include="Documentation\Users\SearchUsers.aspx" />
+    <Content Include="Documentation\Users\UpdateUser.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Libraries\MongoDB.Bson.dll" />
     <Content Include="Libraries\MongoDB.Driver.dll" />
@@ -342,6 +345,20 @@
     <Compile Include="Documentation\Relationships\UpdateRelationship.aspx.designer.cs">
       <DependentUpon>UpdateRelationship.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Documentation\Users\CreateUser.aspx.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\CreateUser.aspx.designer.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Users\DeleteUser.aspx.cs">
+      <DependentUpon>DeleteUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\DeleteUser.aspx.designer.cs">
+      <DependentUpon>DeleteUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Documentation\Users\FetchAllUsers.aspx.cs">
       <DependentUpon>FetchAllUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -362,6 +379,13 @@
     </Compile>
     <Compile Include="Documentation\Users\SearchUsers.aspx.designer.cs">
       <DependentUpon>SearchUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Users\UpdateUser.aspx.cs">
+      <DependentUpon>UpdateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Users\UpdateUser.aspx.designer.cs">
+      <DependentUpon>UpdateUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
