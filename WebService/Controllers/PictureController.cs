@@ -13,6 +13,8 @@ namespace WebService.Controllers
     {
         public static Picture Fetch(string id)
         {
+            if (id.Length == 0) return null;
+
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
@@ -24,6 +26,8 @@ namespace WebService.Controllers
 
         public static PictureInfo FetchInfo(string id)
         {
+            if (id.Length == 0) return null;
+
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 

@@ -14,6 +14,8 @@ namespace WebService.Controllers
     {
         public static User Fetch(string id)
         {
+            if (id.Length == 0) return null;
+
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
