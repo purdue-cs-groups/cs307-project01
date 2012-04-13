@@ -37,7 +37,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="/WinstagramPan;component/Images/scenic.jpg" VerticalAlignment="Top" Width="90" Height="90" />
+                            <Image Grid.Row="0" Source="{Binding IconURI}" VerticalAlignment="Top" Width="90" Height="90" />
                             <TextBlock Grid.Row="0" Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Bottom" />
                         </Grid>
                     </DataTemplate>

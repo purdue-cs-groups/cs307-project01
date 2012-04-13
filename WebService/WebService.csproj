@@ -133,7 +133,6 @@
     <Compile Include="Controllers\APIConsumerController.cs" />
     <Compile Include="Controllers\FavoritedPictureController.cs" />
     <Compile Include="Controllers\FlaggedPictureController.cs" />
-    <Compile Include="Controllers\InputValidator.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Default.aspx.cs">

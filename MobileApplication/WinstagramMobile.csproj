@@ -246,6 +246,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Antique.jpg" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.heart.png" />
     <Content Include="Images\appbar.user.png" />
@@ -270,7 +271,17 @@
     <Content Include="Images\appbar.refresh.rest.png" />
     <Content Include="Images\appbar.share.rest.png" />
     <Content Include="Images\appbar.upload.rest.png" />
+    <Content Include="Images\B &amp; W.jpg" />
+    <Content Include="Images\Shruti.jpg" />
     <Resource Include="Images\camera.png" />
+    <Content Include="Images\Cyan.jpg" />
+    <Content Include="Images\Dawn.jpg" />
+    <Content Include="Images\GoGoGaGa.jpg" />
+    <Content Include="Images\Grunge.jpg" />
+    <Content Include="Images\Original.jpg" />
+    <Content Include="Images\Polaroid.jpg" />
+    <Content Include="Images\Pop.jpg" />
+    <Content Include="Images\Buster.jpg" />
     <Resource Include="Images\smallJames.jpg" />
     <Resource Include="Images\smallJeremiah.jpg" />
     <Resource Include="Images\smallMatt.jpg" />
@@ -284,7 +295,6 @@
     <Content Include="Images\matt.jpg" />
     <Content Include="Images\microsoft.jpg" />
     <Content Include="Images\seattle.jpg" />
-    <Content Include="Images\shruti.jpg" />
     <Resource Include="Images\smallJoe.png" />
     <Resource Include="Images\smallJosh.png" />
     <Content Include="Images\test.png" />
@@ -293,6 +303,10 @@
     <Content Include="Images\appbar.camera.png" />
     <Content Include="Images\appbar.image.png" />
     <Content Include="Images\purdue.jpg" />
+    <Content Include="Images\Storm.jpg" />
+    <Content Include="Images\Tilt Shift.jpg" />
+    <Content Include="Images\Wasabi.jpg" />
+    <Content Include="Images\Yoshimoto.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

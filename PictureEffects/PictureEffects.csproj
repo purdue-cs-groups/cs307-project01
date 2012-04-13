@@ -75,7 +75,7 @@
     </Compile>
     <Compile Include="Common\WriteableBitmapMediaLibraryExtensions.cs" />
     <Compile Include="CompositeEffects\AntiqueEffect.cs" />
-    <Compile Include="CompositeEffects\BettyEffect.cs" />
+    <Compile Include="CompositeEffects\ShrutiEffect.cs" />
     <Compile Include="CompositeEffects\BlackWhiteEffect.cs" />
     <Compile Include="CompositeEffects\CyanEffect.cs" />
     <Compile Include="CompositeEffects\DawnEffect.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="CompositeEffects\OriginalEffect.cs" />
     <Compile Include="CompositeEffects\PolaroidEffect.cs" />
     <Compile Include="CompositeEffects\PopEffect.cs" />
-    <Compile Include="CompositeEffects\RusticEffect.cs" />
+    <Compile Include="CompositeEffects\BusterEffect.cs" />
     <Compile Include="CompositeEffects\StormEffect.cs" />
     <Compile Include="CompositeEffects\TiltShiftEffect.cs" />
     <Compile Include="CompositeEffects\WasabiEffect.cs" />

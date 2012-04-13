@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace PictureEffects.CompositeEffects
 {
-    public class RusticEffect : IEffect
+    public class BusterEffect : IEffect
     {
         private BlackWhiteEffect zebraEffect;
         private PolaroidEffect polaroidEffect;
@@ -13,11 +13,11 @@ namespace PictureEffects.CompositeEffects
         {
             get
             {
-                return "Rustic";
+                return "Buster";
             }
         }
 
-        public RusticEffect()
+        public BusterEffect()
         {
             this.zebraEffect = new BlackWhiteEffect();
             this.polaroidEffect = new PolaroidEffect();

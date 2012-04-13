@@ -120,7 +120,7 @@ namespace PictureEffects.CompositeEffects
 
         public int[] Process(int[] inputPixels, int width, int height)
         {
-            IEffect betty = new BettyEffect();
+            IEffect betty = new ShrutiEffect();
             inputPixels = betty.Process(inputPixels, width, height);
 
             int[] numArray1 = this.blurFx.Process(inputPixels, width, height);

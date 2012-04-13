@@ -23,15 +23,15 @@ namespace MetrocamPan.Models
             // Concurrently sorted alphabetically
             Add(new Models.EffectItem(new OriginalEffect()));
             Add(new Models.EffectItem(new AntiqueEffect()));
-            Add(new Models.EffectItem(new BettyEffect()));
             Add(new Models.EffectItem(new BlackWhiteEffect()));
+            Add(new Models.EffectItem(new BusterEffect()));
             Add(new Models.EffectItem(new CyanEffect()));
             Add(new Models.EffectItem(new DawnEffect()));
             Add(new Models.EffectItem(new GoGoGaGaEffect()));
             Add(new Models.EffectItem(new GrungeEffect()));
             Add(new Models.EffectItem(new PolaroidEffect()));
             Add(new Models.EffectItem(new PopEffect()));
-            Add(new Models.EffectItem(new RusticEffect()));
+            Add(new Models.EffectItem(new ShrutiEffect()));
             Add(new Models.EffectItem(new StormEffect()));
             Add(new Models.EffectItem(new TiltShiftEffect()));
             Add(new Models.EffectItem(new WasabiEffect()));

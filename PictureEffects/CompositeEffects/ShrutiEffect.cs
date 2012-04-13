@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace PictureEffects.CompositeEffects
 {
-    public class BettyEffect : IEffect
+    public class ShrutiEffect : IEffect
     {
         private readonly BrightnessContrastEffect contrastFx;
 
@@ -38,7 +38,7 @@ namespace PictureEffects.CompositeEffects
         {
             get
             {
-                return "Betty";
+                return "Shruti";
             }
         }
 
@@ -54,7 +54,7 @@ namespace PictureEffects.CompositeEffects
             }
         }
 
-        public BettyEffect()
+        public ShrutiEffect()
         {
             SaturateEffect saturateEffect = new SaturateEffect();
             saturateEffect.LightnessFactor = (float)0;

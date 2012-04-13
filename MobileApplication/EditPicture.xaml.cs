@@ -16,6 +16,8 @@ using PictureEffects.CompositeEffects;
 using PictureEffects.Effects;
 using MetrocamPan.Models;
 using System.Windows.Media.Imaging;
+using System.IO.IsolatedStorage;
+using Microsoft.Xna.Framework.Media;
 
 namespace MetrocamPan
 {
