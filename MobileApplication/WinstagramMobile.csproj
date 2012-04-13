@@ -290,7 +290,6 @@
     <Content Include="Images\test.png" />
     <Content Include="References\ExifLib.dll" />
     <Content Include="References\Microsoft.Phone.Controls.Toolkit.dll" />
-    <Resource Include="PanoramaBackground.png" />
     <Content Include="Images\appbar.camera.png" />
     <Content Include="Images\appbar.image.png" />
     <Content Include="Images\purdue.jpg" />
