@@ -46,21 +46,26 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
-            var query = Query.GT("CreatedDate", Utilities.ConvertToUnixTime(DateTime.UtcNow.AddDays(-7)));
-
-            // TODO: query the pictures properly
+            MongoCollection<Relationship> relationships = database.GetCollection<Relationship>("Relationships");
+            var query1 = new QueryDocument("UserID", data.ID);
 
             List<PictureInfo> list = new List<PictureInfo>();
-            foreach (Picture p in pictures.Find(query).SetSortOrder(SortBy.Descending("ViewCount")).SetSortOrder(SortBy.Descending("CreatedDate")).SetLimit(25).ToList<Picture>())
+            foreach (Relationship r in relationships.Find(query1))
             {
-                UserInfo u = UserController.FetchInfo(p.UserID);
-                PictureInfo i = new PictureInfo(p, u);
+                UserInfo u = UserController.FetchInfo(r.FollowingUserID);
+                
+                MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
+                var query2 = new QueryDocument("UserID", u.ID);
 
-                list.Add(i);
+                foreach (Picture p in pictures.Find(query2).SetSortOrder(SortBy.Descending("CreatedDate")).SetLimit(25).ToList<Picture>())
+                {
+                    PictureInfo i = new PictureInfo(p, u);
+
+                    list.Add(i);
+                }
             }
 
-            return list;
+            return list.OrderByDescending(p => p.FriendlyCreatedDate).Take(25).ToList<PictureInfo>();
         }
 
         public static List<PictureInfo> FetchPopularNewsFeed()
