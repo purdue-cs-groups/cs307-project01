@@ -83,6 +83,7 @@
     <Content Include="Documentation\Pictures\CreatePicture.aspx" />
     <Content Include="Documentation\Pictures\DeletePicture.aspx" />
     <Content Include="Documentation\Pictures\FetchNewsFeed.aspx" />
+    <Content Include="Documentation\Pictures\FetchPicture.aspx" />
     <Content Include="Documentation\Pictures\FetchPopularNewsFeed.aspx" />
     <Content Include="Documentation\Pictures\FetchUserFavoritedPictures.aspx" />
     <Content Include="Documentation\Pictures\FetchUserPictures.aspx" />
@@ -260,6 +261,13 @@
     </Compile>
     <Compile Include="Documentation\Pictures\FetchNewsFeed.aspx.designer.cs">
       <DependentUpon>FetchNewsFeed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchPicture.aspx.cs">
+      <DependentUpon>FetchPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Pictures\FetchPicture.aspx.designer.cs">
+      <DependentUpon>FetchPicture.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentation\Pictures\FetchPopularNewsFeed.aspx.cs">
       <DependentUpon>FetchPopularNewsFeed.aspx</DependentUpon>

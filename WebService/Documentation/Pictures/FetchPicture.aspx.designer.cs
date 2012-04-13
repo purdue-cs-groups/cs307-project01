@@ -10,7 +10,7 @@
 namespace WebService.Documentation.Pictures {
     
     
-    public partial class FetchUserPictures {
+    public partial class FetchPicture {
         
         /// <summary>
         /// Head1 control.
