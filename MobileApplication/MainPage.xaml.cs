@@ -157,6 +157,8 @@ namespace MetrocamPan
 
             if (App.isFromAppLaunch)
             {
+                App.isFromLandingPage = false; 
+
                 FetchPopularPictures();
                 FetchFavoritedPictures();
                 GetUserConnectedAccounts();
