@@ -26,6 +26,8 @@ using MobileClientLibrary;
 using JeffWilcox.FourthAndMayor;
 using MetrocamPan.ScrollLoaders;
 using TweetSharp;
+using System.IO.IsolatedStorage;
+using Microsoft.Xna.Framework.Media;
 
 namespace MetrocamPan
 {
@@ -594,7 +596,7 @@ namespace MetrocamPan
 
                 if (p.User.ProfilePicture == null)
                 {
-                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture = new MobileClientLibrary.Models.Picture();
                     p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
                 }
 
@@ -644,7 +646,7 @@ namespace MetrocamPan
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
                 if (p.User.ProfilePicture == null)
                 {
-                    p.User.ProfilePicture = new Picture();
+                    p.User.ProfilePicture = new MobileClientLibrary.Models.Picture();
                     p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
                 }
 
@@ -784,6 +786,10 @@ namespace MetrocamPan
             Favorite.Header = "favorite";
             Favorite.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Favorite_Tap);
 
+            MenuItem Save = new MenuItem();
+            Save.Header = "save";
+            Save.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Save_Tap);
+
             MenuItem DeletePicture = new MenuItem();
             DeletePicture.Header = "delete";
             DeletePicture.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(DeletePicture_Tap);
@@ -791,11 +797,38 @@ namespace MetrocamPan
             ContextMenu CM = new ContextMenu();
 
             CM.Items.Add(Favorite);
+            CM.Items.Add(Save);
             if (!info.ID.Equals(App.MetrocamService.CurrentUser.ProfilePicture.ID))
                 CM.Items.Add(ProfilePicture);
             CM.Items.Add(DeletePicture);
 
             return CM;
+        }
+
+        void Save_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            PictureInfo info = item.DataContext as PictureInfo;
+
+            String file = info.User.Username + info.ID + ".jpg";
+
+            var myStore = IsolatedStorageFile.GetUserStoreForApplication();
+            IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
+
+            BitmapImage b = new BitmapImage(new Uri(info.MediumURL, UriKind.RelativeOrAbsolute));
+            Image i = new Image();
+            i.Source = b;
+            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) i.Source);
+
+            bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
+            myFileStream.Close();
+
+            myFileStream = myStore.OpenFile(file, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+            var lib = new MediaLibrary();
+            lib.SavePicture(file, myFileStream);
+
+            MessageBox.Show("Picture successfully saved.");
         }
 
         private ContextMenu PopulateNotMyPictureMenuItems()
@@ -810,7 +843,12 @@ namespace MetrocamPan
             Flag.Header = "flag";
             Flag.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Flag_Tap);
 
+            MenuItem Save = new MenuItem();
+            Save.Header = "save";
+            Save.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Save_Tap);
+
             CM.Items.Add(Favorite);
+            CM.Items.Add(Save);
             CM.Items.Add(Flag);
 
             return CM;

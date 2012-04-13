@@ -23,6 +23,8 @@ using MetrocamPan.Helpers;
 using Microsoft.Phone.Shell;
 using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
+using System.IO.IsolatedStorage;
+using Microsoft.Xna.Framework.Media;
 
 namespace MetrocamPan
 {
@@ -88,11 +90,40 @@ namespace MetrocamPan
                 favorite.Click += new EventHandler(Favorite_Click);
 
                 ApplicationBar.Buttons.Add(favorite);
+
+                ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
+                Save.Text = "save";
+                Save.Click += new EventHandler(Save_Click);
+
+                ApplicationBar.MenuItems.Add(Save);
+
                 alreadyAddedButton = true;
             }
         }
 
-        private void MakeProfilePicture (object sender, EventArgs e)
+        void Save_Click(object sender, EventArgs e)
+        {
+            PictureInfo info = CurrentPicture;
+
+            String file = info.User.Username + info.ID + ".jpg";
+
+            var myStore = IsolatedStorageFile.GetUserStoreForApplication();
+            IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
+
+            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource)pictureView.Source);
+
+            bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
+            myFileStream.Close();
+
+            myFileStream = myStore.OpenFile(file, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+            var lib = new MediaLibrary();
+            lib.SavePicture(file, myFileStream);
+
+            MessageBox.Show("Picture successfully saved.");
+        }
+
+        private void MakeProfilePicture(object sender, EventArgs e)
         {
             User updatedData = new User();
             UserInfo u = App.MetrocamService.CurrentUser;
