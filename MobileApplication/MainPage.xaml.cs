@@ -25,6 +25,7 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using JeffWilcox.FourthAndMayor;
 using MetrocamPan.ScrollLoaders;
+using TweetSharp;
 
 namespace MetrocamPan
 {
@@ -708,8 +709,32 @@ namespace MetrocamPan
                 {
                     TwitterSecret = uca.ClientSecret;
                     TwitterToken = uca.ClientToken;
+
+                    TwitterService twitter = new TwitterService(TwitterSettings.ConsumerKey, TwitterSettings.ConsumerKeySecret);
+                    twitter.AuthenticateWith(TwitterSecret, TwitterToken);
+                    twitter.VerifyCredentials((user, response) =>
+                    {
+                        if (response.StatusCode == HttpStatusCode.OK)
+                        {
+                            // yay! user hasn't revoked our access
+                        }
+                        else
+                        {
+                            Settings.twitterAuth.Value = false;
+                            Settings.twitterDefault.Value = false;
+
+                            // Delete this UCA since it's no longer valid
+                            //App.MetrocamService.DeleteUserConnectedAccountCompleted += new RequestCompletedEventHandler(MetrocamService_DeleteUserConnectedAccountCompleted);
+                            //App.MetrocamService.DeleteUserConnectedAccount();
+                        }
+                    });
                 }
             }
+        }
+
+        void MetrocamService_DeleteUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

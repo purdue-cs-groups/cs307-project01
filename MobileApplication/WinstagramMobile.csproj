@@ -64,13 +64,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExifLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="Hammock.WindowsPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Hammock.WindowsPhone.Mango">
+      <HintPath>..\packages\TweetSharp.2.1.4\lib\sl4-wp71\Hammock.WindowsPhone.Mango.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib.WindowsPhone">
+      <HintPath>..\packages\TweetSharp.2.1.4\lib\sl4-wp71\ICSharpCode.SharpZipLib.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\TweetSharp.2.1.4\lib\sl4-wp71\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Device" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -78,6 +85,9 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="TweetSharp.WindowsPhone.Mango">
+      <HintPath>..\packages\TweetSharp.2.1.4\lib\sl4-wp71\TweetSharp.WindowsPhone.Mango.dll</HintPath>
+    </Reference>
     <Reference Include="Twitt, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +245,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -245,8 +256,6 @@
     <Content Include="Images\appbar.heart.png" />
     <Content Include="Images\appbar.user.png" />
     <Content Include="Images\dunsmore.png" />
-    <Content Include="References\Hammock.WindowsPhone.dll" />
-    <Content Include="References\Newtonsoft.Json.dll" />
     <Content Include="References\Twitt.dll" />
     <Resource Include="ApplicationIcon.png" />
     <Content Include="Background.png">
