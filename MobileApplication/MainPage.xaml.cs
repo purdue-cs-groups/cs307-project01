@@ -736,7 +736,6 @@ namespace MetrocamPan
                         {
                             // yay! user hasn't revoked our access
                             Settings.twitterAuth.Value = true;
-                            Settings.twitterDefault.Value = false;
                         }
                         else
                         {
