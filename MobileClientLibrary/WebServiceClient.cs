@@ -1485,13 +1485,13 @@ namespace MobileClientLibrary
 
         public event RequestCompletedEventHandler DeleteUserConnectedAccountCompleted;
 
-        public void DeleteUserConnectedAccount()
+        public void DeleteUserConnectedAccount(string id)
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUserConnectedAccount_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
         }
 
         private void DeleteUserConnectedAccount_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
