@@ -20,24 +20,17 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-
-            NavigationService.RemoveBackEntry();
-        }
-
-        private void logInTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void LogIn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/LogInPage.xaml", UriKind.Relative));
         }
 
-        private void signUpTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void SignUp_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/SignUpPage.xaml", UriKind.Relative));
         }
 
-        private void browseTile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Browse_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/BrowsePage.xaml", UriKind.Relative));
         }
