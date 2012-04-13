@@ -14,15 +14,18 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <!--Welcome Screen-->
-    <Grid x:Name="WelcomeScreen" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,24,12,0" Width="370">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="welcome" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -32,16 +35,16 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="logInTile_Tap" Margin="0,0,12,0">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Log In" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+            <Grid Grid.Row="0" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
+                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
             </Grid>
 
-            <Grid Grid.Row="0" Grid.Column="1" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="signUpTile_Tap">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Sign Up" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+            <Grid Grid.Row="0" Grid.Column="1" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="SignUp_Tap" Margin="12,12,0,0">
+                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Sign Up" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
             </Grid>
 
-            <Grid Grid.Row="1" Grid.Column="0" Height="170" Width="170" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="0,12,0,0" Tap="browseTile_Tap">
-                <TextBlock Height="54" HorizontalAlignment="Left" Margin="6,0,0,0" Text="Browse" VerticalAlignment="Bottom" FontSize="32" Width="142" />
+            <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="12,12,0,0" Tap="Browse_Tap">
+                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Browse" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
             </Grid>
         </Grid>
     </Grid>
@@ -49,12 +52,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1">
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about" Click="About_Click"/>
+                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
-    <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>

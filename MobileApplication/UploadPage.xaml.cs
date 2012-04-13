@@ -27,6 +27,8 @@ using System.Text;
 using JeffWilcox.FourthAndMayor;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
+using Hammock.Silverlight.Compat;
+using TweetSharp;
 
 namespace MetrocamPan
 {
@@ -35,6 +37,11 @@ namespace MetrocamPan
         public UploadPage()
         {
             InitializeComponent();
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                NavigationService.RemoveBackEntry();
+            });
 
             if (Settings.twitterAuth.Value)
             {
@@ -70,18 +77,19 @@ namespace MetrocamPan
             App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
         }
 
+        MemoryStream ms = null;
         private void client_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
         {
             // unregister previous event handler
             App.MetrocamService.AuthenticateCompleted -= client_AuthenticateCompleted;
 
-            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) EditPicture.editedPicture.Source);
+            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource)EditPicture.editedPicture.Source);
 
-            var width = bitmap.PixelWidth*2;
-            var height = bitmap.PixelHeight*2;
+            var width = bitmap.PixelWidth * 2;
+            var height = bitmap.PixelHeight * 2;
             //var resultPixels = effect.Process(bitmap.Pixels, width, height);
 
-            MemoryStream ms = new MemoryStream();
+            ms = new MemoryStream();
             bitmap.SaveJpeg(ms, width, height, 0, 100);
             ms.Seek(0, SeekOrigin.Begin);
 
@@ -91,7 +99,7 @@ namespace MetrocamPan
              * 
              */
             long timestamp = DateTime.Now.ToFileTime();
-            String editedFilename = "MetrocamEdited_" + timestamp.ToString() +".jpg";
+            String editedFilename = "MetrocamEdited_" + timestamp.ToString() + ".jpg";
             String originalFilename = "MetrocamOriginal_" + timestamp.ToString() + ".jpg";
 
             var myStore = IsolatedStorageFile.GetUserStoreForApplication();
@@ -99,7 +107,7 @@ namespace MetrocamPan
 
             bitmap.SaveJpeg(myFileStream, width, height, 0, 100);
             myFileStream.Close();
-     
+
             myFileStream = myStore.OpenFile(editedFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
 
             var lib = new MediaLibrary();
@@ -146,7 +154,7 @@ namespace MetrocamPan
                 }
                 else
                 {
-                    data.Latitude  = Convert.ToDecimal(0.00);
+                    data.Latitude = Convert.ToDecimal(0.00);
                     data.Longitude = Convert.ToDecimal(0.00);
                 }
 
@@ -177,39 +185,44 @@ namespace MetrocamPan
 
             if (twitterSwitch.IsChecked == true)
             {
-                var credentials = new OAuthCredentials
+                TwitterService t = new TwitterService(TwitterSettings.ConsumerKey, TwitterSettings.ConsumerKeySecret, MainPage.TwitterToken, MainPage.TwitterSecret);
+                t.SendTweet(data.Caption + " " + "http://metrocam.cloudapp.net/p/" + data.ID, (status, response) =>
                 {
-                    Type = OAuthType.ProtectedResource,
-                    SignatureMethod = OAuthSignatureMethod.HmacSha1,
-                    ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
-                    ConsumerKey = TwitterSettings.ConsumerKey,
-                    ConsumerSecret = TwitterSettings.ConsumerKeySecret,
-                    Token = MainPage.TwitterToken,
-                    TokenSecret = MainPage.TwitterSecret,
-                    Version = "1.0"
-                };
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                         // YAY
+                    }
+                });
 
-                var restClient = new RestClient
-                {
-                    Authority = TwitterSettings.StatusUpdateUrl,
-                    HasElevatedPermissions = true,
-                    Credentials = credentials,
-                    Method = WebMethod.Post
-                };
+            //    var _credentials = new OAuthCredentials
+            //    {
+            //        Type = OAuthType.AccessToken,
+            //        SignatureMethod = OAuthSignatureMethod.HmacSha1,
+            //        ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
+            //        ConsumerKey = TwitterSettings.ConsumerKey,
+            //        ConsumerSecret = TwitterSettings.ConsumerKeySecret,
+            //        Token = MainPage.TwitterToken,
+            //        TokenSecret = MainPage.TwitterSecret,
+            //        Version = TwitterSettings.OAuthVersion,
+            //    };
 
-                restClient.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            //    var client = new RestClient
+            //    {
+            //        Authority = "https://upload.twitter.com",
+            //        HasElevatedPermissions = true
+            //    };
 
-                String Message = data.Caption + " " + "http://metrocam.cloudapp.net/p/" + data.ID;
+            //    var requestPath = "/1/statuses/update_with_media.xml";
+            //    var request = new RestRequest
+            //    {
+            //        Credentials = _credentials,
+            //        Path = requestPath,
+            //        Method = WebMethod.Post
+            //    };
 
-                // Create a Rest Request and fire it
-                var restRequest = new RestRequest
-                {
-                    Path = "1/statuses/update.json?status=" + Message,
-                };
-
-                var ByteData = Encoding.UTF8.GetBytes(Message);
-                restRequest.AddPostContent(ByteData);
-                restClient.BeginRequest(restRequest, new RestCallback(PostTweetRequestCallback));
+            //    request.AddParameter("status", data.Caption);
+            //    request.AddFile("media[]", "TweetPhoto.jpg", ms, "image/jpeg");
+            //    client.BeginRequest(request, new RestCallback(PhotoTweetCompleted));
             }
 
             Dispatcher.BeginInvoke(() =>
@@ -222,13 +235,14 @@ namespace MetrocamPan
             });
         }
 
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            App.isFromUploadPage = true;
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-        }
+        //private void PhotoTweetCompleted(RestRequest request, RestResponse response, object userstate)
+        //{
+        //    if (response.StatusCode == HttpStatusCode.OK)
+        //    {
+        //    }
+        //}
 
-        private void PhoneApplicationPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Cancel_Click(object sender, EventArgs e)
         {
             App.isFromUploadPage = true;
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

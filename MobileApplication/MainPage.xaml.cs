@@ -25,6 +25,7 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using JeffWilcox.FourthAndMayor;
 using MetrocamPan.ScrollLoaders;
+using TweetSharp;
 
 namespace MetrocamPan
 {
@@ -40,8 +41,6 @@ namespace MetrocamPan
         // Constructor
         public MainPage()
         {
-            LittleWatson.CheckForPreviousException();
-
             InitializeComponent();
 
             SetUpLocation();
@@ -56,6 +55,8 @@ namespace MetrocamPan
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            LittleWatson.CheckForPreviousException(true);
+
             if (PopularPictures.ItemsSource == null)
             {
                 GlobalLoading.Instance.IsLoading = true;
@@ -86,23 +87,14 @@ namespace MetrocamPan
             {
                 // Not logged in, navigate to landing page
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
-                return;
             }
 
             // User is logged in previously, check how this app got to main page
-            if (App.isFromAppLaunch)
+            if (App.isFromAppLaunch || App.isFromAppActivate)
             {
                 // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                return;
-            }
-            else if (App.isFromAppActivate)
-            {
-                // App is activated from tombstone. We need to authenticate, then populate Recent
-                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                return;
             }
             else if (App.isFromLandingPage)
             {
@@ -118,7 +110,6 @@ namespace MetrocamPan
                 FetchPopularPictures();
                 FetchRecentPictures();
                 FetchFavoritedPictures();
-                return;
             }
             else if (App.isFromUploadPage)
             {
@@ -127,9 +118,6 @@ namespace MetrocamPan
 
                 // Clears back stack so user cannot go back to LandingPage(s)
                 NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
-                NavigationService.RemoveBackEntry();
 
                 // Flag to refresh Recent
                 isRefreshingRecent = true;
@@ -137,7 +125,6 @@ namespace MetrocamPan
                 // We need to authenticate, then populate Recent
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-                return;
             }
             else
             {
@@ -156,8 +143,9 @@ namespace MetrocamPan
 
             if (App.isFromAppLaunch)
             {
+                App.isFromLandingPage = false; 
+
                 FetchPopularPictures();
-                FetchFavoritedPictures();
                 GetUserConnectedAccounts();
             }
             if (App.isFromAppLaunch || App.isFromAppActivate)
@@ -194,8 +182,7 @@ namespace MetrocamPan
         private void PopularPicture_Loaded(object sender, RoutedEventArgs e)
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
-            {
-                GlobalLoading.Instance.IsLoading = false;
+            {                
                 LoadingMessage.Visibility = Visibility.Collapsed;
 
                 Dispatcher.BeginInvoke(() =>
@@ -203,6 +190,8 @@ namespace MetrocamPan
                     foreach (PictureInfo p in App.ContinuedPopularPictures)
                         App.PopularPictures.Add(p);
                 });
+
+                GlobalLoading.Instance.IsLoading = false;
             }
         }
 
@@ -242,6 +231,9 @@ namespace MetrocamPan
 
         private void CameraButton_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             CameraCaptureTask cam = new CameraCaptureTask();
             cam.Completed += new EventHandler<PhotoResult>(cameraCaptureTask_Completed);
 
@@ -380,6 +372,9 @@ namespace MetrocamPan
         #region ChoosePicture Button
         private void ChoosePicture_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             PhotoChooserTask picker = new PhotoChooserTask();
             picker.ShowCamera = false;
             picker.Completed += new EventHandler<PhotoResult>(picker_Completed);
@@ -434,6 +429,9 @@ namespace MetrocamPan
         public bool isRefreshingRecent = false;
         private void Refresh_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             if (MainContent.SelectedIndex == 0)
             {
                 isRefreshingPopular = true;
@@ -456,21 +454,33 @@ namespace MetrocamPan
 
         private void Settings_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
         private void UserSearch_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             NavigationService.Navigate(new Uri("/UserSearch.xaml", UriKind.Relative));
         }
 
         private void EditProfile_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             NavigationService.Navigate(new Uri("/UserDetailPage.xaml?userid=" + App.MetrocamService.CurrentUser.ID + "&type=current&id=blah", UriKind.Relative));
         }
 
         private void About_Click(object sender, EventArgs e)
         {
+            if (GlobalLoading.Instance.IsLoading)
+                return;
+
             NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
 
@@ -698,6 +708,7 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserConnectedAccountsByUserID(App.MetrocamService.CurrentUser.ID);
         }
 
+        private Boolean UcaHasCompleted = false;
         void MetrocamService_FetchUserConnectedAccountsByUserIDCompleted(object sender, RequestCompletedEventArgs e)
         {
             List<UserConnectedAccount> UCAs = e.Data as List<UserConnectedAccount>;
@@ -708,8 +719,33 @@ namespace MetrocamPan
                 {
                     TwitterSecret = uca.ClientSecret;
                     TwitterToken = uca.ClientToken;
+
+                    TwitterService twitter = new TwitterService(TwitterSettings.ConsumerKey, TwitterSettings.ConsumerKeySecret);
+                    twitter.AuthenticateWith(TwitterToken, TwitterSecret);
+                    twitter.VerifyCredentials((user, response) =>
+                    {
+                        if (response.StatusCode == HttpStatusCode.OK)
+                        {
+                            // yay! user hasn't revoked our access
+                            Settings.twitterAuth.Value = true;
+                        }
+                        else
+                        {
+                            Settings.twitterAuth.Value = false;
+                            Settings.twitterDefault.Value = false;
+
+                            // Delete this UCA since it's no longer valid
+                            //App.MetrocamService.DeleteUserConnectedAccountCompleted += new RequestCompletedEventHandler(MetrocamService_DeleteUserConnectedAccountCompleted);
+                            //App.MetrocamService.DeleteUserConnectedAccount();
+                        }
+                    });
                 }
             }
+        }
+
+        void MetrocamService_DeleteUserConnectedAccountCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -806,6 +842,8 @@ namespace MetrocamPan
 
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            App.MetrocamService.CreateFavoritedPictureCompleted -= MetrocamService_CreateFavoritedPictureCompleted;
+            MessageBox.Show("Picture successfully favorited."); 
         }
 
         void DeletePicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)

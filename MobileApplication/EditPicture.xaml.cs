@@ -53,6 +53,8 @@ namespace MetrocamPan
 
         private void capturedImage_Loaded(object sender, RoutedEventArgs e)
         {
+            NavigationService.RemoveBackEntry();
+
             if (!MainPage.isLandscape)
             {
                 capturedSource = CropPage.cropped.Source;

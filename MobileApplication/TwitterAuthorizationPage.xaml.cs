@@ -13,11 +13,12 @@ using Microsoft.Phone.Controls;
 
 using Twitt;
 using Twitt.Common;
-using Hammock;
-using Hammock.Authentication.OAuth;
+using Hammock; 
 using System.Windows.Navigation;
 using MobileClientLibrary.Models;
 using MobileClientLibrary;
+using Hammock.Authentication.OAuth;
+using Hammock.Silverlight.Compat;
 
 namespace MetrocamPan
 {
@@ -142,7 +143,9 @@ namespace MetrocamPan
             {
                 Authority = "https://api.twitter.com/oauth",
                 Credentials = credentials,
-                HasElevatedPermissions = true
+                HasElevatedPermissions = true,
+                SilverlightAcceptEncodingHeader = "GZip",
+                DecompressionMethods = DecompressionMethods.GZip
             };
 
             var request = new RestRequest

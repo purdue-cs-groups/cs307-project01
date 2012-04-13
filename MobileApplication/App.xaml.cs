@@ -117,27 +117,26 @@ namespace MetrocamPan
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-
-            //pass exception and message to little watson for bug reporting
-            Exception ex = (Exception)e.ExceptionObject;
-            String exmesg = ex.Message;
-
-            LittleWatson.ReportException(ex, exmesg);
-
-            // Catches this error
-            if (e.ExceptionObject is UnauthorizedAccessException)
-            {
-                MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
-                e.Handled = true;
-                return;
-            }
-
             if (e.ExceptionObject is WebException)
             {
-                //MessageBox.Show(e.ExceptionObject.Message, "Error", MessageBoxButton.OK);
-                e.Handled = true;
-                return;
+                WebException ex = e.ExceptionObject as WebException;
+
+                RootFrame.Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show(ex.Message + "\n\nAre you connected to the network?", "Error Contacting Server", MessageBoxButton.OK);
+                });
             }
+            else
+            {
+                LittleWatson.ReportException(e.ExceptionObject, "Application_UnhandledException()");
+
+                RootFrame.Dispatcher.BeginInvoke(() =>
+                {
+                    LittleWatson.CheckForPreviousException(false);
+                });
+            }
+
+            e.Handled = true;
 
             if (System.Diagnostics.Debugger.IsAttached)
             {

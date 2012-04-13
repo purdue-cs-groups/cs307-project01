@@ -53,6 +53,9 @@
             <br />
             Pictures
             <div class="endpoint">
+                <a href="Pictures/FetchPicture.aspx">/v1/pictures/fetch?id={id}</a>
+            </div>
+            <div class="endpoint">
                 <a href="Pictures/FetchNewsFeed.aspx">/v1/pictures/fetch</a>
             </div>
             <div class="endpoint">

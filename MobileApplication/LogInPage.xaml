@@ -21,25 +21,16 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="log in" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="log in" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="userInputFields" Grid.Row="1" Margin="12,0,12,0">
-            <!-- StackPanel for user input fields -->
-            <StackPanel Margin="12,0,12,0">
-                <TextBlock Text="username"/>
-                <TextBox x:Name="usernameInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp" Text="martellaj">
-                    <TextBox.InputScope>
-                        <InputScope>
-                            <InputScopeName NameValue="LogOnName" />
-                        </InputScope>
-                    </TextBox.InputScope>
-                </TextBox>
-                <TextBlock Text="password" />
-                <PasswordBox x:Name="passwordInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" Password="password" />
-            </StackPanel>
-        </Grid>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnName" />
+            <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+            <PasswordBox x:Name="passwordInput" KeyUp="passwordInput_KeyUp" />
+        </StackPanel>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
@@ -52,8 +43,7 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-    
-    <!-- sexy transitions -->
+
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>

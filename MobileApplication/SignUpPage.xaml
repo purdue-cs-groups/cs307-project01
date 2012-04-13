@@ -2,8 +2,8 @@
     x:Class="MetrocamPan.SignUpPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -21,41 +21,28 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="sign up" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="sign up" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel Margin="12,0,12,0">
-                <!-- Username -->
-                <TextBlock Text="username" />
-                <TextBox x:Name="usernameInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="usernameInput_KeyUp">
-                    <TextBox.InputScope>
-                        <InputScope>
-                            <InputScopeName NameValue="LogOnName" />
-                        </InputScope>
-                    </TextBox.InputScope>
-                </TextBox>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnName" />
 
-                <!-- Full Name -->
-                <TextBlock Text="full name" />
-                <TextBox x:Name="fullnameInput" InputScope="PersonalFullName" MaxLength="40" Margin="-12,0,0,0" KeyUp="fullnameInput_KeyUp" />
+            <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBox x:Name="fullnameInput" InputScope="PersonalFullName" KeyUp="fullnameInput_KeyUp" />
 
-                <!-- Password -->
-                <TextBlock Text="password" />
-                <PasswordBox x:Name="passwordInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="passwordInput_KeyUp" />
+            <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
+            <PasswordBox x:Name="passwordInput" KeyUp="passwordInput_KeyUp" />
 
-                <!-- Confirm Password -->
-                <TextBlock Text="confirm password" />
-                <PasswordBox x:Name="confirmPasswordInput" MaxLength="40" Margin="-12,0,0,0" KeyUp="confirmPasswordInput_KeyUp" />
+            <TextBlock Text="Confirm Password" Style="{StaticResource PhoneTextNormalStyle}" />
+            <PasswordBox x:Name="confirmPasswordInput" KeyUp="confirmPasswordInput_KeyUp" />
 
-                <!-- Email -->
-                <TextBlock Text="email" />
-                <TextBox x:Name="emailInput" InputScope="EmailNameOrAddress" MaxLength="40" Margin="-12,0,0,0" KeyUp="emailInput_KeyUp" />
-            </StackPanel>
-        </Grid>
+            <TextBlock Text="Email" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBox x:Name="emailInput" InputScope="EmailNameOrAddress" KeyUp="emailInput_KeyUp" />
+        </StackPanel>
+
     </Grid>
-
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Opacity="1">
@@ -67,7 +54,6 @@
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
-    <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>

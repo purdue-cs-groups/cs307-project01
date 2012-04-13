@@ -103,5 +103,13 @@ namespace MetrocamPan
             else
                 current = temp;
         }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }
