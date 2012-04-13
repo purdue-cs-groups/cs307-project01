@@ -86,6 +86,7 @@ namespace MetrocamPan
             if (!Settings.isLoggedIn.Value || Settings.isLoggedIn == null)
             {
                 // Not logged in, navigate to landing page
+                NavigationService.RemoveBackEntry();
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
             }
 
@@ -365,6 +366,11 @@ namespace MetrocamPan
             this.DataContext = null;
 
             // Navigate to landing page
+            while (NavigationService.CanGoBack)
+            {
+                NavigationService.RemoveBackEntry();
+            }
+
             NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
         }
         #endregion
