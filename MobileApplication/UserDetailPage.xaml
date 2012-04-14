@@ -97,7 +97,6 @@
                             <TextBlock Name="biographyTextBlock" Grid.Row="0"
                                        Text="" TextWrapping="Wrap" />
                         </Grid>
-
                        
                     </Grid>
                 </ScrollViewer>

@@ -124,7 +124,6 @@ namespace MetrocamPan
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
-                FetchRecentPictures();
                 FetchFavoritedPictures();
             }
             else if (App.isFromUploadPage)
@@ -184,15 +183,10 @@ namespace MetrocamPan
                 FetchPopularPictures();
                 GetUserConnectedAccounts();
             }
-            if (App.isFromAppLaunch || App.isFromAppActivate)
-            {
-                FetchRecentPictures();
-                FetchFavoritedPictures();
-            }
+
             if (isRefreshingRecent)
             {
                 FetchRecentPictures();
-                FetchFavoritedPictures();
             }
 
             // Reset back to false
@@ -585,9 +579,7 @@ namespace MetrocamPan
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
-                Dispatcher.BeginInvoke(() =>
-                    recentPictures.DataContext = App.RecentPictures);
-                GlobalLoading.Instance.IsLoading = false;
+                FetchRecentPictures();
             }
             else if (MainContent.SelectedIndex == 2)
             {
@@ -698,6 +690,15 @@ namespace MetrocamPan
                     App.ContinuedRecentPictures.Add(p);
                 }
             }
+
+            if (recentPictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                        recentPictures.DataContext = App.RecentPictures);
+            }
+
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
 
             // Scroll to top of scrollviewer
             this.recentPictures.ScrollIntoView(firstPicture);
@@ -849,8 +850,11 @@ namespace MetrocamPan
             IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
 
             BitmapImage b = new BitmapImage(new Uri(info.MediumURL, UriKind.Absolute));
+            b.CreateOptions = BitmapCreateOptions.None;
+
             Image i = new Image();
             i.Source = b;
+
             WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) i.Source);
 
             bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);

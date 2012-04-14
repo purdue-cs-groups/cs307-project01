@@ -36,9 +36,9 @@
                 <toolkit:ToggleSwitch Header="tweet by default" Content="on" IsChecked="false" IsEnabled="True" Checked="tweetCheck" Unchecked="tweetUncheck" x:Name="tweetToggle" Visibility="Collapsed"/>
 
                 <TextBlock Text="media library"  Style="{StaticResource PhoneTextTitle2Style}" Margin="12,0,12,0" Foreground="{StaticResource PhoneAccentBrush}" />
-                <toolkit:ToggleSwitch Content="on" IsChecked="false" IsEnabled="True" Checked="originalCheck" Unchecked="originalUncheck" Name="oToggle" Header="save pictures taken with camera"/>
+                <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="originalCheck" Unchecked="originalUncheck" Name="oToggle" Header="save pictures taken with camera"/>
                 <TextBlock Text="location services"  Style="{StaticResource PhoneTextTitle2Style}" Margin="12,0,12,0" Foreground="{StaticResource PhoneAccentBrush}" />
-                <toolkit:ToggleSwitch Content="on" IsChecked="false" IsEnabled="True" Checked="locCheck" Unchecked="locUncheck" Name="lToggle" Header="add location to pictures" />
+                <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="locCheck" Unchecked="locUncheck" Name="lToggle" Header="add location to pictures" />
             </StackPanel>
         </Grid>
 
