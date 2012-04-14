@@ -22,9 +22,9 @@ namespace MetrocamPan
             + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
 
         public static int usernameLowerBoundary = 4;
-        public static int usernameUpperBoundary = 12;
+        public static int usernameUpperBoundary = 25;
         public static int passwordLowerBoundary = 6;
-        public static int passwordUpperBoundary = 12;
+        public static int passwordUpperBoundary = 20;
 
         /*
          * Validates that the String is between the range specified

@@ -28,19 +28,19 @@
         <ScrollViewer x:Name="ContentPanel" Grid.Row="1">
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
-                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" GotFocus="UsernameInput_GotFocus" LostFocus="UsernameInput_LostFocus" />
+                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="25" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" GotFocus="UsernameInput_GotFocus" LostFocus="UsernameInput_LostFocus" />
                 
                 <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
-                <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" KeyUp="FullnameInput_KeyUp" GotFocus="FullnameInput_GotFocus" LostFocus="FullnameInput_LostFocus" />
+                <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <PasswordBox x:Name="PasswordInput" KeyUp="PasswordInput_KeyUp" GotFocus="PasswordInput_GotFocus" LostFocus="PasswordInput_LostFocus" />
+                <PasswordBox x:Name="PasswordInput" MaxLength="20" KeyUp="PasswordInput_KeyUp" GotFocus="PasswordInput_GotFocus" LostFocus="PasswordInput_LostFocus" />
 
                 <TextBlock Text="Confirm Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <PasswordBox x:Name="ConfirmPasswordInput" KeyUp="ConfirmPasswordInput_KeyUp" GotFocus="PasswordInput_GotFocus" LostFocus="PasswordInput_LostFocus" />
+                <PasswordBox x:Name="ConfirmPasswordInput" MaxLength="20" KeyUp="ConfirmPasswordInput_KeyUp" />
 
                 <TextBlock Text="Email" Style="{StaticResource PhoneTextNormalStyle}" />
-                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="20" InputScope="EmailNameOrAddress" KeyUp="EmailInput_KeyUp" GotFocus="EmailInput_GotFocus" LostFocus="EmailInput_LostFocus" />
+                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="50" InputScope="EmailNameOrAddress" KeyUp="EmailInput_KeyUp" />
 
                 <TextBlock Text="Location" Style="{StaticResource PhoneTextNormalStyle}" />
                 <toolkit:PhoneTextBox x:Name="LocationInput" MaxLength="20" InputScope="PersonalFullName" KeyUp="LocationInput_KeyUp" />

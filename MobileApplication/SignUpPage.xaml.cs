@@ -224,8 +224,8 @@ namespace MetrocamPan
         private void UsernameInput_GotFocus(object sender, RoutedEventArgs e)
         {
             // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Valid usernames:");
-            toastDisplay.Message = "Between 4-12 characters.\nNo special characters.\nNo spaces.";
+            toastDisplay = GetBasicToast("Username Rules");
+            toastDisplay.Message = "Must be between 4 and 25 characters.\nNo special characters.\nNo spaces.";
             toastDisplay.MillisecondsUntilHidden = 10000;
             toastDisplay.TextWrapping = TextWrapping.Wrap;
             
@@ -240,8 +240,8 @@ namespace MetrocamPan
         private void PasswordInput_GotFocus(object sender, RoutedEventArgs e)
         {
             // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Valid passwords:");
-            toastDisplay.Message = "Between 6-12 characters.\nNo special characters.\nNo spaces\nAt least one capital letter.\nAt least one number.";
+            toastDisplay = GetBasicToast("Password Rules");
+            toastDisplay.Message = "Must between 6 and 20 characters.\nAt least one capital letter.\nAt least one number.\nNo special characters.\nNo spaces.";
             toastDisplay.MillisecondsUntilHidden = 10000;
             toastDisplay.TextWrapping = TextWrapping.Wrap;
             
@@ -249,38 +249,6 @@ namespace MetrocamPan
         }
 
         private void PasswordInput_LostFocus(object sender, RoutedEventArgs e)
-        {
-            toastDisplay.Hide();
-        }
-
-        private void FullnameInput_GotFocus(object sender, RoutedEventArgs e)
-        {
-            // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Full Name:");
-            toastDisplay.Message = "You will not be able to change this later.";
-            toastDisplay.MillisecondsUntilHidden = 10000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
-
-            toastDisplay.Show();
-        }
-
-        private void FullnameInput_LostFocus(object sender, RoutedEventArgs e)
-        {
-            toastDisplay.Hide();
-        }
-
-        private void EmailInput_GotFocus(object sender, RoutedEventArgs e)
-        {
-            // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Email:");
-            toastDisplay.Message = "We will use this email address to verify you.";
-            toastDisplay.MillisecondsUntilHidden = 10000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
-
-            toastDisplay.Show();
-        }
-
-        private void EmailInput_LostFocus(object sender, RoutedEventArgs e)
         {
             toastDisplay.Hide();
         }
