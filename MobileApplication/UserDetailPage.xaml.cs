@@ -278,7 +278,7 @@ namespace MetrocamPan
             {
                 ApplicationBarIconButton Edit = new ApplicationBarIconButton();
                 Edit.Text = "edit profile";
-                Edit.IconUri = new Uri("Images/appbar.edit.rest.png");
+                Edit.IconUri = new Uri("Images/appbar.edit.rest.png", UriKind.RelativeOrAbsolute);
                 Edit.Click += EditButton_Click; 
                 ApplicationBar.Buttons.Add(Edit);
             }
