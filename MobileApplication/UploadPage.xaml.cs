@@ -106,35 +106,25 @@ namespace MetrocamPan
 
             /******
              * 
-             *  save photos to phone
+             *  save original photo to phone
              * 
              */
             long timestamp = DateTime.Now.ToFileTime();
-            String editedFilename = "MetrocamEdited_" + timestamp.ToString() + ".jpg";
             String originalFilename = "MetrocamOriginal_" + timestamp.ToString() + ".jpg";
 
             var myStore = IsolatedStorageFile.GetUserStoreForApplication();
-            IsolatedStorageFileStream myFileStream = myStore.CreateFile(editedFilename);
-
-            bitmap.SaveJpeg(myFileStream, width, height, 0, 100);
-            myFileStream.Close();
-
-            myFileStream = myStore.OpenFile(editedFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
 
             var lib = new MediaLibrary();
 
-            if (Settings.saveEdited.Value)
-                lib.SavePicture(editedFilename, myFileStream);
-
             if (Settings.saveOriginal.Value && MainPage.tookPhoto)
             {
-                IsolatedStorageFileStream myFileStream2 = myStore.CreateFile(originalFilename);
+                IsolatedStorageFileStream myFileStream = myStore.CreateFile(originalFilename);
                 WriteableBitmap w = new WriteableBitmap((BitmapSource)MainPage.bmp);
-                w.SaveJpeg(myFileStream2, w.PixelWidth, w.PixelHeight, 0, 100);
-                myFileStream2.Close();
+                w.SaveJpeg(myFileStream, w.PixelWidth, w.PixelHeight, 0, 100);
+                myFileStream.Close();
 
-                myFileStream2 = myStore.OpenFile(originalFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-                lib.SavePictureToCameraRoll(originalFilename, myFileStream2);
+                myFileStream = myStore.OpenFile(originalFilename, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                lib.SavePictureToCameraRoll(originalFilename, myFileStream);
             }
 
 

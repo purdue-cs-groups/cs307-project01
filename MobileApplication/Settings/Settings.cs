@@ -13,7 +13,6 @@ namespace MetrocamPan
         public static readonly Setting<string> password = new Setting<string>("Password", "");
 
         public static Setting<bool> saveOriginal;
-        public static Setting<bool> saveEdited;
         public static Setting<bool> locationService;
 
         public static Setting<bool> twitterAuth;
@@ -26,8 +25,7 @@ namespace MetrocamPan
             // check to see if this user exists
             if (!iso.Contains(currentUser + "SaveOriginal"))
             {
-                saveOriginal = new Setting<bool>(currentUser + "SaveOriginal", false);
-                saveEdited = new Setting<bool>(currentUser + "SaveEdited", false);
+                saveOriginal = new Setting<bool>(currentUser + "SaveOriginal", true);
                 locationService = new Setting<bool>(currentUser + "LocationService", true);
                 
                 twitterAuth = new Setting<bool>(currentUser + "TwitterAuth", false);
@@ -37,8 +35,6 @@ namespace MetrocamPan
             {
                 saveOriginal = new Setting<bool>(currentUser + 
                     "SaveOriginal", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveOriginal"]));
-                saveEdited = new Setting<bool>(currentUser + 
-                    "SaveEdited", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "SaveEdited"]));
                 locationService = new Setting<bool>(currentUser + 
                     "LocationService", Convert.ToBoolean(IsolatedStorageSettings.ApplicationSettings[currentUser + "LocationService"]));
                 
