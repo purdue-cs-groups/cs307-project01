@@ -29,6 +29,7 @@ using TweetSharp;
 using System.IO.IsolatedStorage;
 using Microsoft.Xna.Framework.Media;
 using Coding4Fun.Phone.Controls;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -39,7 +40,9 @@ namespace MetrocamPan
 
         public static GeoCoordinateWatcher watcher;
         public static double lat = 0;
-        public static double lng = 0;  
+        public static double lng = 0;
+
+        private ToastPrompt toastDisplay;
 
         // Constructor
         public MainPage()
@@ -87,10 +90,10 @@ namespace MetrocamPan
 
             if (App.isFromUploadPage)
             {
-                toastDisplay = GetBasicToast("Success!");
-                toastDisplay.Message = "Your picture has been uploaded.";
-                toastDisplay.MillisecondsUntilHidden = 3000;
-                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                    "Success!",
+                    "Your picture has been uploaded.");
+
                 toastDisplay.Show();
 
                 App.isFromUploadPage = false;
@@ -870,10 +873,10 @@ namespace MetrocamPan
             var lib = new MediaLibrary();
             lib.SavePicture(file, myFileStream);
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Picture has been saved to your media library.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been saved to your media library.");
+
             toastDisplay.Show();
         }
 
@@ -934,10 +937,10 @@ namespace MetrocamPan
         {
             App.MetrocamService.CreateFavoritedPictureCompleted -= MetrocamService_CreateFavoritedPictureCompleted;
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Picture has been added to your favorites.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been added to your favorites.");
+
             toastDisplay.Show();
         }
 
@@ -977,24 +980,14 @@ namespace MetrocamPan
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
             GlobalLoading.Instance.IsLoading = false;
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Your profile picture has been updated.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Your profile picture has been updated.");
+
             toastDisplay.Show();
         }
 
         #endregion
-
-        private ToastPrompt toastDisplay;
-        private static ToastPrompt GetBasicToast(string title = "Basic")
-        {
-            return new ToastPrompt
-            {
-                Title = title,
-                Message = "Please enter text here"
-            };
-        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

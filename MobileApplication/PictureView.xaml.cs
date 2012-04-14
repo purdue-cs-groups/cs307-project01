@@ -36,14 +36,6 @@ namespace MetrocamPan
         Boolean alreadyAddedMenuItem = false;
 
         private ToastPrompt toastDisplay;
-        private static ToastPrompt GetBasicToast(string title = "Basic")
-        {
-            return new ToastPrompt
-            {
-                Title = title,
-                Message = "Please enter text here"
-            };
-        }
 
         public PictureView()
         {
@@ -156,10 +148,10 @@ namespace MetrocamPan
             var lib = new MediaLibrary();
             lib.SavePicture(file, myFileStream);
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Picture has been saved to your media library.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been saved to your media library.");
+
             toastDisplay.Show();
         }
 
@@ -191,10 +183,10 @@ namespace MetrocamPan
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
             GlobalLoading.Instance.IsLoading = false;
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Your profile picture has been updated.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Your profile picture has been updated.");
+
             toastDisplay.Show();
         }
 
@@ -221,10 +213,10 @@ namespace MetrocamPan
         {
             GlobalLoading.Instance.IsLoading = false;
 
-            toastDisplay = GetBasicToast("Success!");
-            toastDisplay.Message = "Picture has been added to your favorites.";
-            toastDisplay.MillisecondsUntilHidden = 2000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been added to your favorites.");
+
             toastDisplay.Show();
         }
 

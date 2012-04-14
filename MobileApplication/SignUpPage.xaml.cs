@@ -15,6 +15,7 @@ using MobileClientLibrary;
 using System.Windows.Navigation;
 using JeffWilcox.FourthAndMayor;
 using Coding4Fun.Phone.Controls;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -107,15 +108,6 @@ namespace MetrocamPan
                 Dispatcher.BeginInvoke(() =>
                     this.Focus());
             }
-        }
-
-        private static ToastPrompt GetBasicToast(string title = "Basic")
-        {
-            return new ToastPrompt
-            {
-                Title = title,
-                Message = "Please enter text here"
-            };
         }
 
         private void Accept_Click(object sender, EventArgs e)
@@ -224,10 +216,9 @@ namespace MetrocamPan
         private void UsernameInput_GotFocus(object sender, RoutedEventArgs e)
         {
             // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Username Rules");
-            toastDisplay.Message = "Must be between 4 and 25 characters.\nNo special characters.\nNo spaces.";
-            toastDisplay.MillisecondsUntilHidden = 10000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt("Username Rules",
+                "Must be between 4 and 25 characters.\nNo special characters.\nNo spaces.",
+                10000);
             
             toastDisplay.Show();
         }
@@ -240,11 +231,10 @@ namespace MetrocamPan
         private void PasswordInput_GotFocus(object sender, RoutedEventArgs e)
         {
             // Set properties of ToastPrompt
-            toastDisplay = GetBasicToast("Password Rules");
-            toastDisplay.Message = "Must between 6 and 20 characters.\nAt least one capital letter.\nAt least one number.\nNo special characters.\nNo spaces.";
-            toastDisplay.MillisecondsUntilHidden = 10000;
-            toastDisplay.TextWrapping = TextWrapping.Wrap;
-            
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt("Password Rules",
+                "Must between 6 and 20 characters.\nAt least one capital letter.\nAt least one number.\nNo special characters.\nNo spaces.",
+                10000);
+
             toastDisplay.Show();
         }
 

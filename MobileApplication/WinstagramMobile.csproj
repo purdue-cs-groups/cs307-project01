@@ -106,6 +106,7 @@
     <Compile Include="BrowsePage.xaml.cs">
       <DependentUpon>BrowsePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GlobalToastPrompt.cs" />
     <Compile Include="Helpers\LittleWatson.cs" />
     <Compile Include="CropPage.xaml.cs">
       <DependentUpon>CropPage.xaml</DependentUpon>

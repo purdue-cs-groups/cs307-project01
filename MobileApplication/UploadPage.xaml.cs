@@ -36,14 +36,6 @@ namespace MetrocamPan
     public partial class UploadPage : PhoneApplicationPage
     {
         private ToastPrompt toastDisplay;
-        private static ToastPrompt GetBasicToast(string title = "Basic")
-        {
-            return new ToastPrompt
-            {
-                Title = title,
-                Message = "Please enter text here"
-            };
-        }
 
         public UploadPage()
         {
