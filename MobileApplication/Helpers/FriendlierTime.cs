@@ -22,6 +22,10 @@ namespace MetrocamPan.Helpers
             var ts = new TimeSpan(DateTime.Now.Ticks - friendly.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
+            if (delta < 30)
+            {
+                return "shared just now";
+            }
             if (delta < 60)
             {
                 return ts.Seconds == 1 ? "shared a second ago" : "shared " + ts.Seconds + " seconds ago";
@@ -80,6 +84,10 @@ namespace MetrocamPan.Helpers
             var ts = new TimeSpan(DateTime.Now.Ticks - friendly.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
+            if (delta < 30)
+            {
+                return "shared just now";
+            }
             if (delta < 60)
             {
                 return ts.Seconds == 1 ? "shared a second ago" : "shared " + ts.Seconds + " seconds ago";
