@@ -904,6 +904,53 @@ namespace MobileClientLibrary
 
         #region Relationship Methods
 
+        public event RequestCompletedEventHandler FetchRelationshipByIDsCompleted;
+
+        public void FetchRelationshipByIDs(string userId, string followingId)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchRelationshipByIDs_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/user/fetch?key={0}&token={1}&userid={2}&followingid={3}", _APIKey, _Token, userId, followingId)));
+        }
+
+        private void FetchRelationshipByIDs_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchRelationshipByIDsCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
+
+                    //if (jsonData == null)
+                    //{
+                    //    FetchRelationshipByIDsCompleted(sender, null);
+                    //}
+                    //else
+                    //{
+                        FetchRelationshipByIDsCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                    //}
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
         public event RequestCompletedEventHandler FetchRelationshipCompleted;
 
         public void FetchRelationship(string id)

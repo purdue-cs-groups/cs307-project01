@@ -448,6 +448,13 @@ namespace WebService
         }
 
         [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/user/fetch?userid={userId}&followingid={followingId}")]
+        public Relationship FetchRelationshipByUserID(string userId, string followingId)
+        {
+            return RelationshipController.FetchUserRelationshipByIDs(userId, followingId); 
+        }
+
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/create")]
         public Relationship CreateRelationship(Stream data)
         {

@@ -100,10 +100,10 @@ namespace MetrocamPan
             if (SelectedPicture.User.Biography == null)
                 biographyTextBlock.Text = "Just another Metrocammer!";
             else
-                biographyTextBlock.Text = SelectedPicture.User.Biography;            
+                biographyTextBlock.Text = SelectedPicture.User.Biography;
 
-            // date
-            //activeSinceTextBlock.Text = SelectedPicture.User.FriendlyCreatedDate.ToShortDateString();
+            App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
+            App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
@@ -116,8 +116,13 @@ namespace MetrocamPan
 
             if (userInfo.ID.Equals(App.MetrocamService.CurrentUser.ID))
             {
-                ApplicationBar.IsVisible = true;
-                FollowButton.Visibility = Visibility.Collapsed;
+                ConstructAppBar(true, true);
+            }
+            else
+            {
+                // fetch relationship to see if following
+                App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
+                App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
             }
 
             // pivot name
@@ -151,10 +156,24 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPictures(userInfo.ID);
         }
 
+        void MetrocamService_FetchRelationshipByIDsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchRelationshipByIDsCompleted -= MetrocamService_FetchRelationshipByIDsCompleted; 
+            Relationship r = e.Data as Relationship;
+
+            if (r == null)
+            {
+                ConstructAppBar(false, false);
+            }
+            else
+            {
+                ConstructAppBar(false, true);
+            }
+        }
+
         private void SetCurrentUserProfile()
         {
-            ApplicationBar.IsVisible = true;
-            FollowButton.Visibility = Visibility.Collapsed;
+            ConstructAppBar(true, true);
 
             // pivot name
             this.PivotRoot.Title = App.MetrocamService.CurrentUser.Name;
@@ -251,6 +270,35 @@ namespace MetrocamPan
         private void EditButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/EditProfile.xaml", UriKind.Relative));
+        }
+
+        private void ConstructAppBar(Boolean isForUser, Boolean isFollowing)
+        {
+            if (isForUser)
+            {
+                ApplicationBarIconButton Edit = new ApplicationBarIconButton();
+                Edit.Text = "edit profile";
+                Edit.IconUri = new Uri("Images/appbar.edit.rest.png");
+                Edit.Click += EditButton_Click; 
+                ApplicationBar.Buttons.Add(Edit);
+            }
+            else
+            {
+                if (isFollowing)
+                {
+                    ApplicationBarIconButton Unfollow = new ApplicationBarIconButton();
+                    Unfollow.Text = "unfollow";
+                    Unfollow.IconUri = new Uri("Images/appbar.user.minus.png", UriKind.RelativeOrAbsolute);
+                    ApplicationBar.Buttons.Add(Unfollow);
+                }
+                else
+                {
+                    ApplicationBarIconButton Follow = new ApplicationBarIconButton();
+                    Follow.Text = "follow";
+                    Follow.IconUri = new Uri("Images/appbar.user.add.png", UriKind.RelativeOrAbsolute);
+                    ApplicationBar.Buttons.Add(Follow);
+                }
+            }
         }
     }
 }

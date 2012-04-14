@@ -13,7 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
+    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <controls:Pivot Title="USER" x:Name="PivotRoot">
@@ -98,7 +98,7 @@
                                        Text="" TextWrapping="Wrap" />
                         </Grid>
 
-                        <Button Name="FollowButton" Grid.Row="3" Grid.ColumnSpan="3" Content="follow" VerticalAlignment="Bottom" />
+                       
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
@@ -126,8 +126,7 @@
     </Grid>
     
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="False" IsMenuEnabled="True" Opacity="1">
-            <shell:ApplicationBarIconButton IconUri="Images/appbar.edit.rest.png" Text="edit profile" Click="EditButton_Click" />
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="1">
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

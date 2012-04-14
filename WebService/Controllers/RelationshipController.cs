@@ -22,6 +22,25 @@ namespace WebService.Controllers
             return relationships.FindOne(query);
         }
 
+        public static Relationship FetchUserRelationshipByIDs(string userId, string followingId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<Relationship> relationships = database.GetCollection<Relationship>("Relationships");
+            var query = new QueryDocument("UserID", userId);
+
+            List<Relationship> UserRelationships = new List<Relationship>();
+
+            foreach (Relationship r in relationships.Find(query))
+            {
+                if (r.FollowingUserID.Equals(followingId))
+                    return r;
+            }
+
+            return null;
+        }
+
         public static Relationship Create(Relationship data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

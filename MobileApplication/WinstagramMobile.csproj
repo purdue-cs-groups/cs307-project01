@@ -248,6 +248,8 @@
     <Content Include="Images\Antique.jpg" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.heart.png" />
+    <Content Include="Images\appbar.user.add.png" />
+    <Content Include="Images\appbar.user.minus.png" />
     <Content Include="Images\appbar.user.png" />
     <Content Include="Images\dunsmore.png" />
     <Content Include="References\Twitt.dll" />
