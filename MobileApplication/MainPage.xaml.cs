@@ -93,7 +93,7 @@ namespace MetrocamPan
                 toastDisplay.TextWrapping = TextWrapping.Wrap;
                 toastDisplay.Show();
 
-                App.isFromUploadPage = false; 
+                App.isFromUploadPage = false;
             }
 
             // Checks if user is already logged in previously
@@ -142,9 +142,29 @@ namespace MetrocamPan
                 App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
+            else if (App.pictureIsDeleted)
+            {
+                // User is navigated here after deleting a page
+                if (MainContent.SelectedIndex == 0)
+                {
+                    // Refresh popular
+                    FetchPopularPictures();
+                    App.pictureIsDeleted = false;
+                }
+                else if (MainContent.SelectedIndex == 1)
+                {
+                    // Refresh recent
+                    FetchRecentPictures();
+                    App.pictureIsDeleted = false;
+                }
+                else
+                {
+                    // Refresh favourites
+                }
+            }
             else
             {
-                // MainPage is navigated here from a page in the forward stack, so do nothing
+                // User is navigated here from a page in the forward stack, so do nothing
                 return;
             }
         }

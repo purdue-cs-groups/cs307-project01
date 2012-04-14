@@ -35,12 +35,10 @@ namespace MetrocamPan
             InitializeComponent();
 
             DataContext = new RecentViewModel();
-
-            Loaded += new RoutedEventHandler(UserDetailPage_Loaded);
         }
 
         PictureInfo SelectedPicture = null;
-        void UserDetailPage_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (NavigationContext.QueryString["userid"].Equals(App.MetrocamService.CurrentUser.ID))
             {

@@ -119,7 +119,22 @@ namespace MetrocamPan
 
         void Delete_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (CurrentPicture == null)
+                return;
+
+            App.MetrocamService.DeletePictureCompleted += new RequestCompletedEventHandler(MetrocamService_DeletePictureCompleted);
+            GlobalLoading.Instance.IsLoading = true;
+            App.MetrocamService.DeletePicture(CurrentPicture.ID);
+        }
+
+        void MetrocamService_DeletePictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            GlobalLoading.Instance.IsLoading = false;
+
+            App.pictureIsDeleted = true;
+
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
         }
 
         void Save_Click(object sender, EventArgs e)
