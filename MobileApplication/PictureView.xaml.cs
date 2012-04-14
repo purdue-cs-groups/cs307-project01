@@ -69,20 +69,6 @@ namespace MetrocamPan
             pictureCaption.Text = CurrentPicture.Caption;
             pictureTakenTime.Text = FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
 
-            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
-            {
-                if (!alreadyAddedMenuItem)
-                {
-                    ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
-                    profilePic.Text = "make profile picture";
-                    profilePic.Click += new EventHandler(MakeProfilePicture);
-
-                    ApplicationBar.MenuItems.Add(profilePic);
-
-                    alreadyAddedMenuItem = true;
-                }
-            }
-
             if (!alreadyAddedButton)
             {
                 ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
@@ -99,6 +85,20 @@ namespace MetrocamPan
 
                 alreadyAddedButton = true;
             }
+
+            if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
+            {
+                if (!alreadyAddedMenuItem)
+                {
+                    ApplicationBarMenuItem profilePic = new ApplicationBarMenuItem();
+                    profilePic.Text = "make profile picture";
+                    profilePic.Click += new EventHandler(MakeProfilePicture);
+
+                    ApplicationBar.MenuItems.Add(profilePic);
+
+                    alreadyAddedMenuItem = true;
+                }
+            }            
         }
 
         void Save_Click(object sender, EventArgs e)

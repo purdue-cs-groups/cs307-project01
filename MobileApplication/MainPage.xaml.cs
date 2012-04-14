@@ -800,7 +800,7 @@ namespace MetrocamPan
             CM.Items.Add(Save);
             if (!info.ID.Equals(App.MetrocamService.CurrentUser.ProfilePicture.ID))
                 CM.Items.Add(ProfilePicture);
-            CM.Items.Add(DeletePicture);
+            //CM.Items.Add(DeletePicture);
 
             return CM;
         }
@@ -887,6 +887,7 @@ namespace MetrocamPan
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.CreateFavoritedPictureCompleted -= MetrocamService_CreateFavoritedPictureCompleted;
+
             MessageBox.Show("Picture successfully favorited."); 
         }
 
