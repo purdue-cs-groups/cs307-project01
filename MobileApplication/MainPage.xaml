@@ -76,7 +76,7 @@
             <controls:PivotItem Header="favorites" IsTabStop="False" Margin="24,12,0,0">
                 <Grid Margin="0">
                     <TextBlock x:Name="FavoritesLoadingMessage" Text="You have no favorite pictures, have a look around!" TextWrapping="Wrap" Margin="0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Visibility="Collapsed" />
-                    <ListBox x:Name="FavoritePictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" ItemsSource="{Binding}">
+                    <ListBox x:Name="FavoritePictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Image
@@ -84,8 +84,7 @@
                                         Height="144"
                                         Margin="4,4,0,0"
                                         Source="{Binding MediumURL}"
-                                        Tap="FavoritedPicture_Tap"
-                                        Loaded="PopularPicture_Loaded" />
+                                        Tap="FavoritedPicture_Tap" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemsPanel>

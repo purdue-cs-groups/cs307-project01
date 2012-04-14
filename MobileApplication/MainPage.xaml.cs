@@ -53,6 +53,8 @@ namespace MetrocamPan
 
             // This is for dynamic loading of RecentPictures
             DataContext = new RecentViewModel();
+         
+            this.FavoritePictures.ItemsSource = App.FavoritedUserPictures; 
         }
 
         // Load data for the ViewModel Items
@@ -575,7 +577,7 @@ namespace MetrocamPan
 
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MainContent.SelectedIndex == 1 && recentPictures.ItemsSource == null)
+            if (MainContent.SelectedIndex == 1)
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
@@ -616,12 +618,6 @@ namespace MetrocamPan
 
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-
-                if (p.User.ProfilePicture == null)
-                {
-                    p.User.ProfilePicture = new MobileClientLibrary.Models.Picture();
-                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
-                }
 
                 if (!isRefreshingPopular)
                 {
@@ -667,11 +663,6 @@ namespace MetrocamPan
             {
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
-                if (p.User.ProfilePicture == null)
-                {
-                    p.User.ProfilePicture = new MobileClientLibrary.Models.Picture();
-                    p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
-                }
 
                 if (App.RecentPictures.Count < 10)
                 {
@@ -699,7 +690,7 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = false;
 
             // Scroll to top of scrollviewer
-            this.recentPictures.ScrollIntoView(firstPicture);
+            // this.recentPictures.ScrollIntoView(firstPicture);
         }
 
         #endregion
@@ -717,6 +708,9 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
             App.FavoritedUserPictures.Clear();
 
+            /*Dispatcher.BeginInvoke(() =>
+                        FavoritePictures.DataContext = App.FavoritedUserPictures);*/
+
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
                 App.FavoritedUserPictures.Add(p);
@@ -728,9 +722,6 @@ namespace MetrocamPan
             else
             {
                 this.FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
-
-                Dispatcher.BeginInvoke(() =>
-                        FavoritePictures.DataContext = App.FavoritedUserPictures);
             }
 
             if (GlobalLoading.Instance.IsLoading)
