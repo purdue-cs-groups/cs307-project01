@@ -253,6 +253,7 @@
     <Content Include="Images\appbar.user.add.png" />
     <Content Include="Images\appbar.user.minus.png" />
     <Content Include="Images\appbar.user.png" />
+    <Resource Include="Images\belltower.jpeg" />
     <Content Include="Images\dunsmore.png" />
     <Content Include="References\Coding4Fun.Phone.Controls.dll" />
     <Content Include="References\Coding4Fun.Phone.Controls.Toolkit.dll" />

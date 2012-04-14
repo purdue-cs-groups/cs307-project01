@@ -7,50 +7,71 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:fancytile="clr-namespace:Coding4Fun.Phone.Controls;assembly=Coding4Fun.Phone.Controls"
+    xmlns:fancytilebinding="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard 
+            x:Name="imageStoryboard" 
+            AutoReverse="True" 
+            RepeatBehavior="Forever"  >
+            <DoubleAnimationUsingKeyFrames 
+				Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+				Storyboard.TargetName="Image">
+                <SplineDoubleKeyFrame KeyTime="0:0:1"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:36" Value="-307"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:37" Value="-307" />
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <StackPanel>
+            <fancytile:Tile Height="768" Width="480" HorizontalAlignment="Left" Margin="0"
+                            fancytilebinding:FrameworkElementBinding.ClipToBounds="True">
+                <Grid>
+                    <Canvas>
+                        <Image x:Name="Image" Source="Images/belltower.jpeg" Stretch="None">
+                            <Image.RenderTransform>
+                                <CompositeTransform />
+                            </Image.RenderTransform>
+                        </Image>
+                    </Canvas>
+                    <Grid x:Name="ContentPanel">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
-            <TextBlock x:Name="PageTitle" Text="welcome" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+                        <Grid Grid.Row="0" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
+                            <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
+                        </Grid>
+
+                        <Grid Grid.Row="0" Grid.Column="1" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="SignUp_Tap" Margin="12,12,0,0">
+                            <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Sign Up" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="12,12,0,0" Tap="Browse_Tap">
+                            <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Browse" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </fancytile:Tile>
         </StackPanel>
-
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
-                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
-            </Grid>
-
-            <Grid Grid.Row="0" Grid.Column="1" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="SignUp_Tap" Margin="12,12,0,0">
-                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Sign Up" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
-            </Grid>
-
-            <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Margin="12,12,0,0" Tap="Browse_Tap">
-                <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Browse" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
-            </Grid>
-        </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="1">
+        <shell:ApplicationBar  IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.7">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
             </shell:ApplicationBar.MenuItems>

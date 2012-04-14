@@ -25,6 +25,17 @@ namespace MetrocamPan
             base.OnNavigatedTo(e);
 
             NavigationService.RemoveBackEntry();
+
+            // This is needed to start the ken burns effect
+            imageStoryboard.Begin();
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            // Stop the ken burns effect
+            imageStoryboard.Stop();
         }
 
         private void LogIn_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -55,7 +66,7 @@ namespace MetrocamPan
             }
             else
             {
-                ;
+                // Do nothing
             }
         }
     }
