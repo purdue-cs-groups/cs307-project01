@@ -63,6 +63,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Phone.Controls, Version=1.5.5.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Coding4Fun.Phone.Controls.Toolkit, Version=1.5.5.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="ExifLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Hammock.WindowsPhone.Mango">
       <HintPath>..\packages\TweetSharp.2.1.4\lib\sl4-wp71\Hammock.WindowsPhone.Mango.dll</HintPath>

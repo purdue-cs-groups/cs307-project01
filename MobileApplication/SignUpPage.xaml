@@ -28,13 +28,13 @@
         <ScrollViewer x:Name="ContentPanel" Grid.Row="1">
             <StackPanel Margin="12,0,12,0">
                 <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
-                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" />
+                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" GotFocus="UsernameInput_GotFocus" LostFocus="UsernameInput_LostFocus" />
                 
                 <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
                 <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" KeyUp="FullnameInput_KeyUp" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-                <PasswordBox x:Name="PasswordInput" KeyUp="PasswordInput_KeyUp" />
+                <PasswordBox x:Name="PasswordInput" KeyUp="PasswordInput_KeyUp" GotFocus="PasswordInput_GotFocus" LostFocus="PasswordInput_LostFocus" />
 
                 <TextBlock Text="Confirm Password" Style="{StaticResource PhoneTextNormalStyle}" />
                 <PasswordBox x:Name="ConfirmPasswordInput" KeyUp="ConfirmPasswordInput_KeyUp" />

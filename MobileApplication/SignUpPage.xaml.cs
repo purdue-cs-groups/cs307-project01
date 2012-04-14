@@ -14,12 +14,17 @@ using MobileClientLibrary.Models;
 using MobileClientLibrary;
 using System.Windows.Navigation;
 using JeffWilcox.FourthAndMayor;
+using Coding4Fun.Phone.Controls;
 
 namespace MetrocamPan
 {
     public partial class SignUpPage : PhoneApplicationPage
     {
         private User currentUser;
+
+
+        const string usernameMessage = "Between 6-12 characters\nNo special characters";
+        const string passwordMessage = "Between 6-12 characters\nAt least one capital letter\nAt least one number";
 
         public SignUpPage()
         {
@@ -106,6 +111,15 @@ namespace MetrocamPan
             }
         }
 
+        private static ToastPrompt GetBasicToast(string title = "Basic")
+        {
+            return new ToastPrompt
+            {
+                Title = title,
+                Message = usernameMessage
+            };
+        }
+
         private void Accept_Click(object sender, EventArgs e)
         {
             // Validate Input
@@ -121,6 +135,10 @@ namespace MetrocamPan
                 !InputValidator.isValidEmail(this.EmailInput.Text))
             {
                 // Do nothing
+                var toast = GetBasicToast();
+                toast.MillisecondsUntilHidden = 4000;
+                toast.TextWrapping = TextWrapping.Wrap;
+                toast.Show();
                 return;
             }
 
@@ -207,6 +225,33 @@ namespace MetrocamPan
 
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
+        }
+
+        ToastPrompt tempToast;
+        private void UsernameInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tempToast = GetBasicToast("Valid usernames:");
+            tempToast.MillisecondsUntilHidden = 4000;
+            tempToast.TextWrapping = TextWrapping.Wrap;
+            tempToast.Show();
+        }
+
+        private void UsernameInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            tempToast.Hide();
+        }
+
+        private void PasswordInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tempToast = GetBasicToast("Valid passwords:");
+            tempToast.MillisecondsUntilHidden = 4000;
+            tempToast.TextWrapping = TextWrapping.Wrap;
+            tempToast.Show();
+        }
+
+        private void PasswordInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            tempToast.Hide();
         }
     }
 }
