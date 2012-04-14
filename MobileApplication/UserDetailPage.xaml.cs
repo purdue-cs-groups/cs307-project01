@@ -289,6 +289,7 @@ namespace MetrocamPan
                     ApplicationBarIconButton Unfollow = new ApplicationBarIconButton();
                     Unfollow.Text = "unfollow";
                     Unfollow.IconUri = new Uri("Images/appbar.user.minus.png", UriKind.RelativeOrAbsolute);
+                    Unfollow.Click += new EventHandler(Unfollow_Click);
                     ApplicationBar.Buttons.Add(Unfollow);
                 }
                 else
@@ -296,9 +297,30 @@ namespace MetrocamPan
                     ApplicationBarIconButton Follow = new ApplicationBarIconButton();
                     Follow.Text = "follow";
                     Follow.IconUri = new Uri("Images/appbar.user.add.png", UriKind.RelativeOrAbsolute);
+                    Follow.Click += new EventHandler(Follow_Click);
                     ApplicationBar.Buttons.Add(Follow);
                 }
             }
+        }
+
+        void Follow_Click(object sender, EventArgs e)
+        {
+            Relationship data = new Relationship();
+            data.UserID = App.MetrocamService.CurrentUser.ID;
+            data.FollowingUserID = userInfo.ID;
+
+            App.MetrocamService.CreateRelationshipCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateRelationshipCompleted);
+            App.MetrocamService.CreateRelationship(data);
+        }
+
+        void MetrocamService_CreateRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            
+        }
+
+        void Unfollow_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
