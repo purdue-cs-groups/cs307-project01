@@ -590,9 +590,7 @@ namespace MetrocamPan
 
                 // If Favorites pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
-                Dispatcher.BeginInvoke(() =>
-                    FavoritePictures.DataContext = App.FavoritedUserPictures);
-                GlobalLoading.Instance.IsLoading = false;
+                FetchFavoritedPictures();
             }
         }
         #endregion
@@ -728,8 +726,15 @@ namespace MetrocamPan
                 // Set loading message to visible if there are not favorited pictures
                 this.FavoritesLoadingMessage.Visibility = Visibility.Visible;
             else
+            {
                 this.FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
 
+                Dispatcher.BeginInvoke(() =>
+                        FavoritePictures.DataContext = App.FavoritedUserPictures);
+            }
+
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
         }
 
         private void FavoritedPicture_Tap(object sender, System.Windows.Input.GestureEventArgs e)
