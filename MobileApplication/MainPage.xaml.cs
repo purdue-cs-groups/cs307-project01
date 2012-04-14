@@ -829,8 +829,11 @@ namespace MetrocamPan
             IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
 
             BitmapImage b = new BitmapImage(new Uri(info.MediumURL, UriKind.Absolute));
+            b.CreateOptions = BitmapCreateOptions.None;
+
             Image i = new Image();
             i.Source = b;
+
             WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) i.Source);
 
             bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
