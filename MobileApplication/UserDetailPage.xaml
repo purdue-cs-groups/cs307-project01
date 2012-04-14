@@ -97,8 +97,6 @@
                             <TextBlock Name="biographyTextBlock" Grid.Row="0"
                                        Text="" TextWrapping="Wrap" />
                         </Grid>
-
-                        <TextBlock Grid.Row="3" Style="{StaticResource PhoneFontSizeNormal}" />
                        
                     </Grid>
                 </ScrollViewer>

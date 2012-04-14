@@ -26,7 +26,7 @@ namespace MetrocamPan
 {
     public partial class UserDetailPage : PhoneApplicationPage
     {
-        public static bool isFollowing = true;
+        public Boolean AppBarSet = false;
         public UserInfo userInfo;
         public static ObservableCollection<PictureInfo> ContinuedUserPictures = new ObservableCollection<PictureInfo>();
 
@@ -149,8 +149,9 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
-            // date
-            //DateTime activeSince = userInfo.FriendlyCreatedDate;
+            App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
+            App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
+
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
@@ -274,6 +275,9 @@ namespace MetrocamPan
 
         private void ConstructAppBar(Boolean isForUser, Boolean isFollowing)
         {
+            if (AppBarSet)
+                return;
+
             if (isForUser)
             {
                 ApplicationBarIconButton Edit = new ApplicationBarIconButton();
@@ -301,6 +305,8 @@ namespace MetrocamPan
                     ApplicationBar.Buttons.Add(Follow);
                 }
             }
+
+            AppBarSet = true;
         }
 
         void Follow_Click(object sender, EventArgs e)
