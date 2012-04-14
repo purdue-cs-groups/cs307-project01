@@ -39,6 +39,8 @@ namespace MobileClientLibrary
         private UserCredentials _Credentials = null;
         private string _Token = null;
 
+        private const string defaultProfilePictureID = "4f89bfd1d47cd40ac4721f6d";
+
         public WebServiceClient(string APIkey)
         {
             _APIKey = APIkey;
@@ -1245,6 +1247,7 @@ namespace MobileClientLibrary
         {
             // force password hashing
             data.Password = this.HashPassword(data.Password);
+            data.ProfilePictureID = defaultProfilePictureID;
 
             var jsonData = JsonConvert.SerializeObject(data);
 
