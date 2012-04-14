@@ -657,7 +657,7 @@ namespace MobileClientLibrary
         {
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserPictures_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/user/fetch?key={0}&userid={1}", _APIKey, userId)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/user/fetch?key={0}&userid={1}&ticks={2}", _APIKey, userId, DateTime.Now.Ticks)));
         }
 
         private void FetchUserPictures_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -699,7 +699,7 @@ namespace MobileClientLibrary
         {
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserFavoritedPictures_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/user/favorites/fetch?key={0}&userid={1}", _APIKey, userId)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/user/favorites/fetch?key={0}&userid={1}&ticks={2}", _APIKey, userId, DateTime.Now.Ticks)));
         }
 
         private void FetchUserFavoritedPictures_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
