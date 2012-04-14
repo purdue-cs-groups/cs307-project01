@@ -100,5 +100,17 @@ namespace MetrocamPan
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
         }
+
+        private void LoadingMessage_Loaded(object sender, RoutedEventArgs e)
+        {
+            int currentHour = DateTime.Now.Hour;
+
+            if (currentHour < 12 && currentHour > 4)
+                LoadingMessage.Text = "Good morning!";
+            else if (currentHour < 17 && currentHour >= 12)
+                LoadingMessage.Text = "Good afternoon!";
+            else
+                LoadingMessage.Text = "Good evening!";
+        }
     }
 }

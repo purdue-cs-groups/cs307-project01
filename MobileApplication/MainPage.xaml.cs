@@ -4,13 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
@@ -56,8 +50,8 @@ namespace MetrocamPan
 
             // This is for dynamic loading of RecentPictures
             DataContext = new RecentViewModel();
-         
-            this.FavoritePictures.ItemsSource = App.FavoritedUserPictures; 
+
+            this.FavoritePictures.ItemsSource = App.FavoritedUserPictures;
         }
 
         // Load data for the ViewModel Items
@@ -183,7 +177,7 @@ namespace MetrocamPan
 
             if (App.isFromAppLaunch)
             {
-                App.isFromLandingPage = false; 
+                App.isFromLandingPage = false;
 
                 FetchPopularPictures();
                 GetUserConnectedAccounts();
@@ -217,7 +211,7 @@ namespace MetrocamPan
         private void PopularPicture_Loaded(object sender, RoutedEventArgs e)
         {
             if (LoadingMessage.Visibility == Visibility.Visible)
-            {                
+            {
                 LoadingMessage.Visibility = Visibility.Collapsed;
 
                 Dispatcher.BeginInvoke(() =>
@@ -854,7 +848,7 @@ namespace MetrocamPan
             Image i = new Image();
             i.Source = b;
 
-            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) i.Source);
+            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource)i.Source);
 
             bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
             myFileStream.Close();
@@ -911,7 +905,7 @@ namespace MetrocamPan
 
             FavoritedPicture data = new FavoritedPicture();
             data.PictureID = info.ID;
-            data.UserID    = App.MetrocamService.CurrentUser.ID;
+            data.UserID = App.MetrocamService.CurrentUser.ID;
 
             if ((from pic in App.FavoritedUserPictures where pic.ID.Equals(info.ID) select pic).SingleOrDefault() != null)
             {

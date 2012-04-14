@@ -27,7 +27,7 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
             <StackPanel>
-                <TextBlock x:Name="LoadingMessage" Text="Good morning!" Margin="24,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" />
+                <TextBlock x:Name="LoadingMessage" Text="Good morning!" Margin="24,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
                 <ListBox x:Name="PopularHubTiles" Margin="12,0,0,75" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
