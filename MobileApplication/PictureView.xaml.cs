@@ -25,6 +25,7 @@ using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
 using System.IO.IsolatedStorage;
 using Microsoft.Xna.Framework.Media;
+using Coding4Fun.Phone.Controls;
 
 namespace MetrocamPan
 {
@@ -33,6 +34,16 @@ namespace MetrocamPan
         PictureInfo CurrentPicture = null;
         Boolean alreadyAddedButton = false;
         Boolean alreadyAddedMenuItem = false;
+
+        private ToastPrompt toastDisplay;
+        private static ToastPrompt GetBasicToast(string title = "Basic")
+        {
+            return new ToastPrompt
+            {
+                Title = title,
+                Message = "Please enter text here"
+            };
+        }
 
         public PictureView()
         {
@@ -120,7 +131,11 @@ namespace MetrocamPan
             var lib = new MediaLibrary();
             lib.SavePicture(file, myFileStream);
 
-            MessageBox.Show("Picture successfully saved.");
+            toastDisplay = GetBasicToast("Success!");
+            toastDisplay.Message = "Picture has been saved to your media library.";
+            toastDisplay.MillisecondsUntilHidden = 2000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay.Show();
         }
 
         private void MakeProfilePicture(object sender, EventArgs e)
@@ -150,7 +165,12 @@ namespace MetrocamPan
         {
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
             GlobalLoading.Instance.IsLoading = false;
-            MessageBox.Show("Your profile picture has been updated!");
+
+            toastDisplay = GetBasicToast("Success!");
+            toastDisplay.Message = "Your profile picture has been updated.";
+            toastDisplay.MillisecondsUntilHidden = 2000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay.Show();
         }
 
         void Favorite_Click(object sender, EventArgs e)
@@ -175,6 +195,12 @@ namespace MetrocamPan
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
         {
             GlobalLoading.Instance.IsLoading = false;
+
+            toastDisplay = GetBasicToast("Success!");
+            toastDisplay.Message = "Picture has been added to your favorites.";
+            toastDisplay.MillisecondsUntilHidden = 2000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            toastDisplay.Show();
         }
 
         private void ViewUserDetail_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -29,11 +29,22 @@ using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
 using Hammock.Silverlight.Compat;
 using TweetSharp;
+using Coding4Fun.Phone.Controls;
 
 namespace MetrocamPan
 {
     public partial class UploadPage : PhoneApplicationPage
     {
+        private ToastPrompt toastDisplay;
+        private static ToastPrompt GetBasicToast(string title = "Basic")
+        {
+            return new ToastPrompt
+            {
+                Title = title,
+                Message = "Please enter text here"
+            };
+        }
+
         public UploadPage()
         {
             InitializeComponent();
@@ -228,10 +239,9 @@ namespace MetrocamPan
             Dispatcher.BeginInvoke(() =>
             {
                 // This flag is needed for MainPage to clear back stack
-                App.isFromUploadPage = true;
+                App.isFromUploadPage = true; 
 
-                MessageBox.Show("Your picture was uploaded successfully!");
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/MainPage.xaml?from=upload", UriKind.Relative));
             });
         }
 
