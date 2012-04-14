@@ -828,7 +828,7 @@ namespace MetrocamPan
             var myStore = IsolatedStorageFile.GetUserStoreForApplication();
             IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
 
-            BitmapImage b = new BitmapImage(new Uri(info.MediumURL, UriKind.RelativeOrAbsolute));
+            BitmapImage b = new BitmapImage(new Uri(info.MediumURL, UriKind.Absolute));
             Image i = new Image();
             i.Source = b;
             WriteableBitmap bitmap = new WriteableBitmap((BitmapSource) i.Source);

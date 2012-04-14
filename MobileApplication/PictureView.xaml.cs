@@ -105,11 +105,21 @@ namespace MetrocamPan
                     profilePic.Text = "make profile picture";
                     profilePic.Click += new EventHandler(MakeProfilePicture);
 
-                    ApplicationBar.MenuItems.Add(profilePic);
+                    ApplicationBarMenuItem Delete = new ApplicationBarMenuItem();
+                    Delete.Text = "delete";
+                    Delete.Click += new EventHandler(Delete_Click);
 
+                    ApplicationBar.MenuItems.Add(Delete);
+                    ApplicationBar.MenuItems.Add(profilePic);
+                    
                     alreadyAddedMenuItem = true;
                 }
             }            
+        }
+
+        void Delete_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         void Save_Click(object sender, EventArgs e)
