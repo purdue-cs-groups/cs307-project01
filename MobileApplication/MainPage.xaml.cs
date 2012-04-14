@@ -51,8 +51,6 @@ namespace MetrocamPan
 
             // This is for dynamic loading of RecentPictures
             DataContext = new RecentViewModel();
-
-            this.FavoritePictures.ItemsSource = App.FavoritedUserPictures;
         }
 
         // Load data
@@ -577,7 +575,14 @@ namespace MetrocamPan
 
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MainContent.SelectedIndex == 1)
+            if (MainContent.SelectedIndex == 0)
+            {
+                // If Recent pivot item is selected
+                GlobalLoading.Instance.IsLoading = true;
+                isRefreshingPopular = true;
+                FetchPopularPictures();
+            }
+            else if (MainContent.SelectedIndex == 1)
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
@@ -639,6 +644,9 @@ namespace MetrocamPan
             }
 
             isRefreshingPopular = false;
+
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
         }
 
         #endregion
@@ -688,9 +696,6 @@ namespace MetrocamPan
 
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
-
-            // Scroll to top of scrollviewer
-            // this.recentPictures.ScrollIntoView(firstPicture);
         }
 
         #endregion
@@ -708,8 +713,8 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
             App.FavoritedUserPictures.Clear();
 
-            /*Dispatcher.BeginInvoke(() =>
-                        FavoritePictures.DataContext = App.FavoritedUserPictures);*/
+            Dispatcher.BeginInvoke(() =>
+                        FavoritePictures.DataContext = App.FavoritedUserPictures);
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
