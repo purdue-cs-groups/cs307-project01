@@ -25,6 +25,9 @@ namespace MetrocamPan
 
         private ToastPrompt toastDisplay;
 
+        private const string DefaultLocation = "Metrocam City";
+        private const string DefaultBiography = "A proud Metrocammer!";
+
         public SignUpPage()
         {
             InitializeComponent();
@@ -110,24 +113,68 @@ namespace MetrocamPan
             }
         }
 
+        // Begin validation sequence
+        private string CheckAllInputs()
+        {
+            // Checks if any of the required fields are empty
+            if (!InputValidator.isNotEmpty(this.UsernameInput.Text) ||
+                !InputValidator.isNotEmpty(this.FullnameInput.Text) ||
+                !InputValidator.isNotEmpty(this.PasswordInput.Password) ||
+                !InputValidator.isNotEmpty(this.ConfirmPasswordInput.Password) ||
+                !InputValidator.isNotEmpty(this.EmailInput.Text))
+            {
+                return "Please check that you have entered all required fields.";
+            }
+
+            // Checks if username is valid
+            if (!InputValidator.isValidUsername(this.UsernameInput.Text))
+            {
+                return "Please check that your username is valid.";
+            }
+
+            // Checks if both passwords are similar
+            if (!InputValidator.isPasswordSame(this.PasswordInput.Password, this.ConfirmPasswordInput.Password))
+            {
+                return "Please check that both passwords match.";
+            }
+
+            // Checks if password is valid
+            if (!InputValidator.isStrongPassword(this.PasswordInput.Password))
+            {
+                return "Please check that your password is valid.";
+            }
+
+            // Checks if email is valid
+            if (!InputValidator.isValidEmail(this.EmailInput.Text))
+            {
+                return "Please check that your email is valid.";
+            }
+
+            // Input validation passed
+            return "Valid";
+        }
+
         private void Accept_Click(object sender, EventArgs e)
         {
-            // Validate Input
-            //      First checks username valid?
-            //      Then checks name empty?
-            //      Then checks password similar?
-            //      Then checks password strong?
-            //      Then checks email valid?
-            if (!InputValidator.isValidUsername(this.UsernameInput.Text) ||
-                !InputValidator.isNonEmpty(this.FullnameInput.Text, "full name") ||
-                !InputValidator.isPasswordSame(this.PasswordInput.Password, this.ConfirmPasswordInput.Password) ||
-                !InputValidator.isStrongPassword(this.PasswordInput.Password) ||
-                !InputValidator.isValidEmail(this.EmailInput.Text))
+            string inputValidationMessage = CheckAllInputs();
+
+            if (!inputValidationMessage.Equals("Valid"))
             {
-                // Do nothing
+                // Input validation failed
+                if (toastDisplay != null)
+                    toastDisplay.Hide();
+
+                // Set properties of ToastPrompt
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt("Invalid Credentials",
+                    inputValidationMessage,
+                    5000);
+
+                toastDisplay.Show();
+
                 return;
             }
 
+            // Input validation passed, proceed with registration
             currentUser = new User();
             currentUser.Username = this.UsernameInput.Text;
             currentUser.Name = this.FullnameInput.Text;
@@ -136,22 +183,14 @@ namespace MetrocamPan
 
             // Set default values for optional fields if empty
             if (this.LocationInput.Text.Length == 0)
-            {
-                currentUser.Location = "Metrocam City";
-            }
+                currentUser.Location = DefaultLocation;
             else
-            {
                 currentUser.Location = this.LocationInput.Text;
-            }
 
             if (this.BiographyInput.Text.Length == 0)
-            {
-                currentUser.Biography = "Metrocam for life!";
-            }
+                currentUser.Biography = DefaultBiography;
             else
-            {
                 currentUser.Biography = this.BiographyInput.Text;
-            }
 
             // Subscribe event to CreateUserCompleted
             App.MetrocamService.CreateUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
@@ -181,6 +220,7 @@ namespace MetrocamPan
 
             GlobalLoading.Instance.IsLoading = false;
 
+            // Save UserInfo object from WebClient
             UserInfo obtainedUser = App.MetrocamService.CurrentUser;
 
             // Load user specific settings
@@ -215,6 +255,9 @@ namespace MetrocamPan
 
         private void UsernameInput_GotFocus(object sender, RoutedEventArgs e)
         {
+            if (toastDisplay != null)
+                toastDisplay.Hide();
+
             // Set properties of ToastPrompt
             toastDisplay = GlobalToastPrompt.CreateToastPrompt("Username Rules",
                 "Must be between 4 and 25 characters.\nNo special characters.\nNo spaces.",
@@ -230,6 +273,9 @@ namespace MetrocamPan
 
         private void PasswordInput_GotFocus(object sender, RoutedEventArgs e)
         {
+            if (toastDisplay != null)
+                toastDisplay.Hide();
+
             // Set properties of ToastPrompt
             toastDisplay = GlobalToastPrompt.CreateToastPrompt("Password Rules",
                 "Must between 6 and 20 characters.\nAt least one capital letter.\nAt least one number.\nNo special characters.\nNo spaces.",

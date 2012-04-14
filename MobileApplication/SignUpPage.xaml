@@ -31,7 +31,7 @@
                 <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="25" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" GotFocus="UsernameInput_GotFocus" LostFocus="UsernameInput_LostFocus" />
                 
                 <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
-                <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" />
+                <toolkit:PhoneTextBox x:Name="FullnameInput" MaxLength="40" InputScope="PersonalFullName" KeyUp="FullnameInput_KeyUp" />
 
                 <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
                 <PasswordBox x:Name="PasswordInput" MaxLength="20" KeyUp="PasswordInput_KeyUp" GotFocus="PasswordInput_GotFocus" LostFocus="PasswordInput_LostFocus" />
