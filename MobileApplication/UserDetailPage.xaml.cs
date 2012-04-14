@@ -42,10 +42,19 @@ namespace MetrocamPan
         {
             if (NavigationContext.QueryString["userid"].Equals(App.MetrocamService.CurrentUser.ID))
             {
+                // User navigates to his own profile
                 SetCurrentUserProfile();
 
                 if (this.UserPictures.ItemsSource == null)
                 {
+                    App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
+                    GlobalLoading.Instance.IsLoading = true;
+                    App.MetrocamService.FetchUserPictures(App.MetrocamService.CurrentUser.ID);
+                }
+                else if (App.pictureIsDeleted == true)
+                {
+                    // User has deleted a picture and is navigated back to this page
+                    App.pictureIsDeleted = false;
                     App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
                     GlobalLoading.Instance.IsLoading = true;
                     App.MetrocamService.FetchUserPictures(App.MetrocamService.CurrentUser.ID);
@@ -60,14 +69,17 @@ namespace MetrocamPan
 
             if (NavigationContext.QueryString["type"].Equals("popular"))
             {
+                // User navigated here from Popular Pivot
                 SelectedPicture = (from pic in App.PopularPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
             }
             else if (NavigationContext.QueryString["type"].Equals("recent"))
             {
+                // User navigated here from Recent Pivot
                 SelectedPicture = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).First<PictureInfo>();
             }
             else if (NavigationContext.QueryString["type"].Equals("search"))
             {
+                // User navigated here from Search Menu
                 App.MetrocamService.FetchUserCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserCompleted);
                 App.MetrocamService.FetchUser(NavigationContext.QueryString["id"]);
                 return;
