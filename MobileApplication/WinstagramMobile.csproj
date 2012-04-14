@@ -254,6 +254,8 @@
     <Content Include="Images\appbar.user.minus.png" />
     <Content Include="Images\appbar.user.png" />
     <Content Include="Images\dunsmore.png" />
+    <Content Include="References\Coding4Fun.Phone.Controls.dll" />
+    <Content Include="References\Coding4Fun.Phone.Controls.Toolkit.dll" />
     <Content Include="References\Twitt.dll" />
     <Resource Include="ApplicationIcon.png" />
     <Content Include="Background.png">

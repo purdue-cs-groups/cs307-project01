@@ -22,9 +22,7 @@ namespace MetrocamPan
     {
         private User currentUser;
 
-
-        const string usernameMessage = "Between 6-12 characters\nNo special characters";
-        const string passwordMessage = "Between 6-12 characters\nAt least one capital letter\nAt least one number";
+        private ToastPrompt toastDisplay;
 
         public SignUpPage()
         {
@@ -116,7 +114,7 @@ namespace MetrocamPan
             return new ToastPrompt
             {
                 Title = title,
-                Message = usernameMessage
+                Message = "Please enter text here"
             };
         }
 
@@ -135,10 +133,6 @@ namespace MetrocamPan
                 !InputValidator.isValidEmail(this.EmailInput.Text))
             {
                 // Do nothing
-                var toast = GetBasicToast();
-                toast.MillisecondsUntilHidden = 4000;
-                toast.TextWrapping = TextWrapping.Wrap;
-                toast.Show();
                 return;
             }
 
@@ -227,31 +221,68 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = false;
         }
 
-        ToastPrompt tempToast;
         private void UsernameInput_GotFocus(object sender, RoutedEventArgs e)
         {
-            tempToast = GetBasicToast("Valid usernames:");
-            tempToast.MillisecondsUntilHidden = 4000;
-            tempToast.TextWrapping = TextWrapping.Wrap;
-            tempToast.Show();
+            // Set properties of ToastPrompt
+            toastDisplay = GetBasicToast("Valid usernames:");
+            toastDisplay.Message = "Between 4-12 characters.\nNo special characters.\nNo spaces.";
+            toastDisplay.MillisecondsUntilHidden = 10000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            
+            toastDisplay.Show();
         }
 
         private void UsernameInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            tempToast.Hide();
+            toastDisplay.Hide();
         }
 
         private void PasswordInput_GotFocus(object sender, RoutedEventArgs e)
         {
-            tempToast = GetBasicToast("Valid passwords:");
-            tempToast.MillisecondsUntilHidden = 4000;
-            tempToast.TextWrapping = TextWrapping.Wrap;
-            tempToast.Show();
+            // Set properties of ToastPrompt
+            toastDisplay = GetBasicToast("Valid passwords:");
+            toastDisplay.Message = "Between 6-12 characters.\nNo special characters.\nNo spaces\nAt least one capital letter.\nAt least one number.";
+            toastDisplay.MillisecondsUntilHidden = 10000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+            
+            toastDisplay.Show();
         }
 
         private void PasswordInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            tempToast.Hide();
+            toastDisplay.Hide();
+        }
+
+        private void FullnameInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            // Set properties of ToastPrompt
+            toastDisplay = GetBasicToast("Full Name:");
+            toastDisplay.Message = "You will not be able to change this later.";
+            toastDisplay.MillisecondsUntilHidden = 10000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+
+            toastDisplay.Show();
+        }
+
+        private void FullnameInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            toastDisplay.Hide();
+        }
+
+        private void EmailInput_GotFocus(object sender, RoutedEventArgs e)
+        {
+            // Set properties of ToastPrompt
+            toastDisplay = GetBasicToast("Email:");
+            toastDisplay.Message = "We will use this email address to verify you.";
+            toastDisplay.MillisecondsUntilHidden = 10000;
+            toastDisplay.TextWrapping = TextWrapping.Wrap;
+
+            toastDisplay.Show();
+        }
+
+        private void EmailInput_LostFocus(object sender, RoutedEventArgs e)
+        {
+            toastDisplay.Hide();
         }
     }
 }
