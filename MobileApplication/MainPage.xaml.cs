@@ -102,6 +102,7 @@ namespace MetrocamPan
                 // Not logged in, navigate to landing page
                 NavigationService.RemoveBackEntry();
                 NavigationService.Navigate(new Uri("/LandingPage.xaml", UriKind.Relative));
+                return;
             }
 
             // User is logged in previously, check how this app got to main page

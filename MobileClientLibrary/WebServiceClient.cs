@@ -89,7 +89,8 @@ namespace MobileClientLibrary
 
                     if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
-                        throw new UnauthorizedAccessException("The User credentials provided were not valid.");
+                        AuthenticateCompleted(sender, new RequestCompletedEventArgs(new UnauthorizedAccessException()));
+                        //throw new UnauthorizedAccessException("The User credentials provided were not valid.");
                     }
                 }
             }

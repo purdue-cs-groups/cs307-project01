@@ -14,11 +14,22 @@ using MobileClientLibrary;
 using MobileClientLibrary.Models;
 using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
+using Coding4Fun.Phone.Controls;
 
 namespace MetrocamPan
 {
     public partial class LoginScreen : PhoneApplicationPage
     {
+        private ToastPrompt toastDisplay;
+        private static ToastPrompt GetBasicToast(string title = "Basic")
+        {
+            return new ToastPrompt
+            {
+                Title = title,
+                Message = "Please enter text here"
+            };
+        }
+
         public LoginScreen()
         {
             InitializeComponent();
@@ -40,17 +51,29 @@ namespace MetrocamPan
                 return;
             }
 
-            App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+            App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted_Login);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
         }
 
         #region Authenticate
 
-        private void MetrocamService_AuthenticateCompleted(object sender, RequestCompletedEventArgs e)
+        private void MetrocamService_AuthenticateCompleted_Login(object sender, RequestCompletedEventArgs e)
         {
-            App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted;
+            App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
             GlobalLoading.Instance.IsLoading = false;
+
+            UnauthorizedAccessException err = e.Data as UnauthorizedAccessException;
+
+            if (err != null)
+            {
+                toastDisplay = GetBasicToast("Oops!");
+                toastDisplay.Message = "The credentials you provided are invalid.";
+                toastDisplay.MillisecondsUntilHidden = 3000;
+                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay.Show();
+                return;
+            }
 
             FetchRecentPictures();
 
