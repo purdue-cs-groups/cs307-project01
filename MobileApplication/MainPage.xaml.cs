@@ -124,7 +124,6 @@ namespace MetrocamPan
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
-                //FetchRecentPictures();
                 FetchFavoritedPictures();
             }
             else if (App.isFromUploadPage)
@@ -164,15 +163,10 @@ namespace MetrocamPan
                 FetchPopularPictures();
                 GetUserConnectedAccounts();
             }
-            if (App.isFromAppLaunch || App.isFromAppActivate)
-            {
-                //FetchRecentPictures();
-                //FetchFavoritedPictures();
-            }
+
             if (isRefreshingRecent)
             {
                 FetchRecentPictures();
-                FetchFavoritedPictures();
             }
 
             // Reset back to false
@@ -677,8 +671,11 @@ namespace MetrocamPan
                 }
             }
 
-            Dispatcher.BeginInvoke(() =>
-                    recentPictures.DataContext = App.RecentPictures);
+            if (recentPictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                        recentPictures.DataContext = App.RecentPictures);
+            }
 
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
