@@ -9,7 +9,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -17,13 +16,14 @@
     xmlns:loaders="clr-namespace:MetrocamPan.ScrollLoaders"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Opacity="1">
+    
     <phone:PhoneApplicationPage.Resources>
         <helpers:FriendlierTime x:Key="FriendlierTime" />
     </phone:PhoneApplicationPage.Resources>
 
     <Grid Background="Transparent" Margin="0">
         <!--Root Pivot Control-->
-        <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0,0,0,0" SelectionChanged="MainContent_SelectionChanged">
+        <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0" SelectionChanged="MainContent_SelectionChanged">
             
             <!--Popular Pivot Item-->
             <controls:PivotItem Header="popular" IsTabStop="False" Margin="24,12,0,0">

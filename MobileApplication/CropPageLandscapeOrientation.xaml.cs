@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-
 using System.Windows.Media.Imaging;
 using System.Reflection;
 using System.Windows.Resources;
@@ -50,11 +49,13 @@ namespace MetrocamPan
             else if (ratio < 3.00 / 4.00)
             {
                 originalPhoto.Height = Convert.ToInt32((height * originalPhoto.Width) / width);
-                cropArea.Height      = originalPhoto.Height;
-                cropArea.Width       = originalPhoto.Height;
+                cropArea.Height = originalPhoto.Height;
+                cropArea.Width = originalPhoto.Height;
             }
             else
-                ;
+            {
+                // Do nothing
+            }
 
             this.originalPhoto.Source = MainPage.captured.Source;
 

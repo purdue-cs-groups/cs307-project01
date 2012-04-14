@@ -51,11 +51,13 @@ namespace MetrocamPan
             else if (ratio > 4.00 / 3.00)
             {
                 originalPhoto.Width = Convert.ToInt32((width * originalPhoto.Height) / height);
-                cropArea.Height     = originalPhoto.Width;
-                cropArea.Width      = originalPhoto.Width;
+                cropArea.Height = originalPhoto.Width;
+                cropArea.Width = originalPhoto.Width;
             }
             else
-                ;
+            {
+                // Do nothing
+            }
 
             originalPhoto.Source = MainPage.captured.Source;
 

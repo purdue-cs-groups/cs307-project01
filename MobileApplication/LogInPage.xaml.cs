@@ -33,6 +33,13 @@ namespace MetrocamPan
         public LoginScreen()
         {
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler(LoginScreen_Loaded);
+        }
+
+        void LoginScreen_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.usernameInput.Focus();
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

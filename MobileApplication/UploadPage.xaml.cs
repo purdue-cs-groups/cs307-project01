@@ -35,8 +35,6 @@ namespace MetrocamPan
 {
     public partial class UploadPage : PhoneApplicationPage
     {
-        private ToastPrompt toastDisplay;
-
         public UploadPage()
         {
             InitializeComponent();

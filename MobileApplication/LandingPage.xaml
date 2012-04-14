@@ -55,7 +55,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
+                        <TextBlock Grid.Row="0" x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
                         
                         <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
                             <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />

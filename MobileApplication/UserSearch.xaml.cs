@@ -32,7 +32,7 @@ namespace MetrocamPan
             InitializeComponent();
         }
 
-        protected virtual void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             noresults.Visibility = System.Windows.Visibility.Collapsed;
             searchResults.Visibility = System.Windows.Visibility.Collapsed;

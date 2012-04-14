@@ -36,6 +36,7 @@ namespace MetrocamPan
         public static double lat = 0;
         public static double lng = 0;
 
+        // ToastPrompt for message display
         private ToastPrompt toastDisplay;
 
         // Constructor
@@ -45,7 +46,7 @@ namespace MetrocamPan
 
             SetUpLocation();
 
-            // Calls MainPage_Loaded when this page is constructed
+            // Calls MainPage_Loaded when this page is loaded
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
 
             // This is for dynamic loading of RecentPictures
@@ -54,9 +55,10 @@ namespace MetrocamPan
             this.FavoritePictures.ItemsSource = App.FavoritedUserPictures;
         }
 
-        // Load data for the ViewModel Items
+        // Load data
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            // Checks if there was an exception during previous run
             LittleWatson.CheckForPreviousException(true);
 
             if (PopularPictures.ItemsSource == null)
@@ -67,6 +69,7 @@ namespace MetrocamPan
             }
         }
 
+        // Display the loading message dynamically based on time
         private void LoadingMessage_Loaded(object sender, RoutedEventArgs e)
         {
             int currentHour = DateTime.Now.Hour;
@@ -79,7 +82,7 @@ namespace MetrocamPan
                 LoadingMessage.Text = "Good evening, " + Settings.username.Value + "!";
         }
 
-        // When this page becomes active page in a frame
+        // When this page becomes the active page in the app
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
