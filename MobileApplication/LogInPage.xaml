@@ -29,7 +29,7 @@
             <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
             <TextBox x:Name="usernameInput" KeyUp="usernameInput_KeyUp" InputScope="LogOnName" />
             <TextBlock Text="Password" Style="{StaticResource PhoneTextNormalStyle}" />
-            <PasswordBox x:Name="passwordInput" KeyUp="passwordInput_KeyUp" />
+            <PasswordBox x:Name="passwordInput" KeyUp="passwordInput_KeyUp" MaxLength="25" />
         </StackPanel>
     </Grid>
 

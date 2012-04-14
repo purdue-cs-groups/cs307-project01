@@ -44,13 +44,6 @@ namespace MetrocamPan
 
         private void Login_Click(object sender, EventArgs e)
         {
-            // Validate input, prevent buffer overflows
-            if (!InputValidator.isValidLength(this.usernameInput.Text, "username", InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary) ||
-                !InputValidator.isValidLength(this.passwordInput.Password, "password", InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary))
-            {
-                return;
-            }
-
             App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted_Login);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
