@@ -124,7 +124,7 @@ namespace MetrocamPan
 
                 // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
                 FetchPopularPictures();
-                FetchRecentPictures();
+                //FetchRecentPictures();
                 FetchFavoritedPictures();
             }
             else if (App.isFromUploadPage)
@@ -166,8 +166,8 @@ namespace MetrocamPan
             }
             if (App.isFromAppLaunch || App.isFromAppActivate)
             {
-                FetchRecentPictures();
-                FetchFavoritedPictures();
+                //FetchRecentPictures();
+                //FetchFavoritedPictures();
             }
             if (isRefreshingRecent)
             {
@@ -565,9 +565,7 @@ namespace MetrocamPan
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
-                Dispatcher.BeginInvoke(() =>
-                    recentPictures.DataContext = App.RecentPictures);
-                GlobalLoading.Instance.IsLoading = false;
+                FetchRecentPictures();
             }
             else if (MainContent.SelectedIndex == 2)
             {
@@ -678,6 +676,12 @@ namespace MetrocamPan
                     App.ContinuedRecentPictures.Add(p);
                 }
             }
+
+            Dispatcher.BeginInvoke(() =>
+                    recentPictures.DataContext = App.RecentPictures);
+
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
 
             // Scroll to top of scrollviewer
             this.recentPictures.ScrollIntoView(firstPicture);
