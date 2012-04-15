@@ -587,7 +587,6 @@ namespace MetrocamPan
             if (MainContent.SelectedIndex == 0)
             {
                 // If Recent pivot item is selected
-                GlobalLoading.Instance.IsLoading = true;
                 isRefreshingPopular = true;
                 FetchPopularPictures();
             }
@@ -615,6 +614,10 @@ namespace MetrocamPan
         public void FetchPopularPictures()
         {
             App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+
+            if (GlobalLoading.Instance.IsLoading == false)
+                GlobalLoading.Instance.IsLoading = true;
+            
             App.MetrocamService.FetchPopularNewsFeed();
         }
 
@@ -665,6 +668,10 @@ namespace MetrocamPan
         public void FetchRecentPictures()
         {
             App.MetrocamService.FetchNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchNewsFeedCompleted);
+
+            if (GlobalLoading.Instance.IsLoading == false) 
+                GlobalLoading.Instance.IsLoading = true;
+
             App.MetrocamService.FetchNewsFeed();
         }
 
@@ -703,7 +710,7 @@ namespace MetrocamPan
                         recentPictures.DataContext = App.RecentPictures);
             }
 
-            if (GlobalLoading.Instance.IsLoading)
+            if (GlobalLoading.Instance.IsLoading == true)
                 GlobalLoading.Instance.IsLoading = false;
         }
 
@@ -714,6 +721,10 @@ namespace MetrocamPan
         public void FetchFavoritedPictures()
         {
             App.MetrocamService.FetchUserFavoritedPicturesCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserFavoritedPicturesCompleted);
+
+            if (GlobalLoading.Instance.IsLoading == false)
+                GlobalLoading.Instance.IsLoading = true; 
+            
             App.MetrocamService.FetchUserFavoritedPictures(App.MetrocamService.CurrentUser.ID);
         }
 
@@ -738,7 +749,7 @@ namespace MetrocamPan
                 this.FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
             }
 
-            if (GlobalLoading.Instance.IsLoading)
+            if (GlobalLoading.Instance.IsLoading == true)
                 GlobalLoading.Instance.IsLoading = false;
         }
 
@@ -973,14 +984,19 @@ namespace MetrocamPan
             updatedData.ProfilePictureID = info.ID;
 
             App.MetrocamService.UpdateUserCompleted += new RequestCompletedEventHandler(MetrocamService_UpdateUserCompleted);
-            GlobalLoading.Instance.IsLoading = true;
+
+            if (GlobalLoading.Instance.IsLoading == false) 
+                GlobalLoading.Instance.IsLoading = true;
+
             App.MetrocamService.UpdateUser(updatedData);
         }
 
         void MetrocamService_UpdateUserCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
-            GlobalLoading.Instance.IsLoading = false;
+
+            if (GlobalLoading.Instance.IsLoading == true)
+                GlobalLoading.Instance.IsLoading = false;
 
             toastDisplay = GlobalToastPrompt.CreateToastPrompt(
                 "Success!",
