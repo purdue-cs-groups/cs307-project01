@@ -22,6 +22,25 @@ namespace WebService.Controllers
             return flaggedPictures.FindOne(query);
         }
 
+        public static FlaggedPicture FetchByPictureID(string pictureId, string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<FlaggedPicture> flaggedPictures = database.GetCollection<FlaggedPicture>("FlaggedPictures");
+            var query = new QueryDocument("UserID", userId);
+
+            foreach (FlaggedPicture f in flaggedPictures.Find(query))
+            {
+                if (f.PictureID.Equals(pictureId))
+                {
+                    return f;
+                }
+            }
+
+            return null;
+        }
+
         public static FlaggedPicture Create(FlaggedPicture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

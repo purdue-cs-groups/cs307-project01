@@ -339,7 +339,17 @@ namespace WebService
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/fetch?id={id}")]
         public PictureInfo FetchPicture(string id)
         {
-            return PictureController.FetchInfo(id);
+            PictureInfo data = PictureController.FetchInfo(id);
+            
+            if (AuthenticationManager.ParseUniqueIdentifider(OperationContext.Current) != null)
+            {
+                var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+                data.IsFavorited = FavoritedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
+                data.IsFlagged = FlaggedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
+            }
+
+            return data;
         }
 
         [OperationContract]
@@ -348,28 +358,83 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return PictureController.FetchNewsFeed(token.Identity);
+            List<PictureInfo> list = PictureController.FetchNewsFeed(token.Identity);
+            foreach (PictureInfo item in list)
+            {
+                item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+            }
+
+            return list;
         }
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/popular/fetch")]
         public List<PictureInfo> FetchPopularNewsFeed()
         {
-            return PictureController.FetchPopularNewsFeed();
+            if (AuthenticationManager.ParseUniqueIdentifider(OperationContext.Current) != null)
+            {
+                var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+                List<PictureInfo> list = PictureController.FetchPopularNewsFeed();
+                foreach (PictureInfo item in list)
+                {
+                    item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                    item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                }
+
+                return list;
+            }
+            else
+            {
+                return PictureController.FetchPopularNewsFeed();
+            }
         }
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/user/fetch?userid={userId}")]
         public List<PictureInfo> FetchUserPictures(string userId)
         {
-            return PictureController.FetchUserPictures(userId);
+            if (AuthenticationManager.ParseUniqueIdentifider(OperationContext.Current) != null)
+            {
+                var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+                List<PictureInfo> list = PictureController.FetchUserPictures(userId);
+                foreach (PictureInfo item in list)
+                {
+                    item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                    item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                }
+
+                return list;
+            }
+            else
+            {
+                return PictureController.FetchUserPictures(userId);
+            }
         }
 
         [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/user/favorites/fetch?userid={userId}")]
         public List<PictureInfo> FetchUserFavoritedPictures(string userId)
         {
-            return PictureController.FetchUserFavoritedPictures(userId);
+            if (AuthenticationManager.ParseUniqueIdentifider(OperationContext.Current) != null)
+            {
+                var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+                List<PictureInfo> list = PictureController.FetchUserFavoritedPictures(userId);
+                foreach (PictureInfo item in list)
+                {
+                    item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                    item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+                }
+
+                return list;
+            }
+            else
+            {
+                return PictureController.FetchUserFavoritedPictures(userId);
+            }
         }
 
         [OperationContract]

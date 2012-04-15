@@ -92,6 +92,20 @@ namespace WebService.Models
         }
 
         [DataMember(Order = 9)]
+        public bool IsFavorited
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 10)]
+        public bool IsFlagged
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 11)]
         public int CreatedDate
         {
             get;

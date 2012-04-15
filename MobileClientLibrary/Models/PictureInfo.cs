@@ -61,6 +61,18 @@ namespace MobileClientLibrary.Models
             set;
         }
 
+        public bool IsFavorited
+        {
+            get;
+            set;
+        }
+
+        public bool IsFlagged
+        {
+            get;
+            set;
+        }
+
         public int CreatedDate
         {
             get;
