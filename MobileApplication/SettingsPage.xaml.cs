@@ -32,6 +32,15 @@ namespace MetrocamPan
                 tweetToggle.Visibility = Visibility.Visible;
 
                 this.tweetToggle.IsChecked = Settings.twitterDefault.Value;
+
+                if (tweetToggle.IsChecked == true)
+                {
+                    tweetToggle.Content = "on";
+                }
+                else
+                {
+                    tweetToggle.Content = "off";
+                }
             }
 
             this.lToggle.IsChecked = Settings.locationService.Value;
