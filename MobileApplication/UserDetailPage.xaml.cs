@@ -28,6 +28,8 @@ namespace MetrocamPan
     {
         public Boolean AppBarSet = false;
         public UserInfo userInfo;
+        public Relationship r = null;
+
         public static ObservableCollection<PictureInfo> ContinuedUserPictures = new ObservableCollection<PictureInfo>();
 
         public UserDetailPage()
@@ -170,7 +172,7 @@ namespace MetrocamPan
         void MetrocamService_FetchRelationshipByIDsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.FetchRelationshipByIDsCompleted -= MetrocamService_FetchRelationshipByIDsCompleted; 
-            Relationship r = e.Data as Relationship;
+            r = e.Data as Relationship;
 
             if (r == null)
             {
@@ -341,6 +343,8 @@ namespace MetrocamPan
         void MetrocamService_CreateRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.CreateRelationshipCompleted -= MetrocamService_CreateRelationshipCompleted;
+            r = e.Data as Relationship;
+
             doingWork = false;
             AppBarSet = false;
             FollowingStatus.Text = "You are following " + userInfo.Username + "."; 
@@ -352,7 +356,19 @@ namespace MetrocamPan
             if (doingWork)
                 return;
 
-            App.MetrocamService.DeleteRelationship();
+            App.MetrocamService.DeleteRelationshipCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_DeleteRelationshipCompleted);
+            doingWork = true;
+            App.MetrocamService.DeleteRelationship(r);
+        }
+
+        void MetrocamService_DeleteRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.DeleteRelationshipCompleted -= MetrocamService_DeleteRelationshipCompleted;
+
+            doingWork = false;
+            AppBarSet = false;
+            FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
+            ConstructAppBar(false, false); 
         }
     }
 }

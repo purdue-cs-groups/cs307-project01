@@ -1080,13 +1080,13 @@ namespace MobileClientLibrary
 
         public event RequestCompletedEventHandler DeleteRelationshipCompleted;
 
-        public void DeleteRelationship()
+        public void DeleteRelationship(Relationship data)
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteRelationship_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)), data.ID);
         }
 
         private void DeleteRelationship_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
