@@ -923,7 +923,11 @@ namespace MetrocamPan
 
         void Flag_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been flagged for review.");
 
+            toastDisplay.Show();
         }
 
         void Favorite_Tap(object sender, System.Windows.Input.GestureEventArgs e)

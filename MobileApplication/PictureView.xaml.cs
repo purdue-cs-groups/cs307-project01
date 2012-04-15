@@ -321,5 +321,14 @@ namespace MetrocamPan
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
         }
+
+        private void Flag_Click(object sender, EventArgs e)
+        {
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been flagged for review.");
+
+            toastDisplay.Show();
+        }
     }
 }
