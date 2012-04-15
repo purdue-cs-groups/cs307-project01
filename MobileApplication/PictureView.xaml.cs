@@ -75,8 +75,25 @@ namespace MetrocamPan
 
             if (!alreadyAddedButton)
             {
-                App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
-                App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
+                if (!CurrentPicture.IsFavorited)
+                {
+                    ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                    favorite.Text = "favorite";
+                    favorite.Click += new EventHandler(Favorite_Click);
+
+                    ApplicationBar.Buttons.Add(favorite);
+
+                    App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted +=new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
+                    App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
+                }
+                else
+                {
+                    ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
+                    unfavorite.Text = "unfavorite";
+                    unfavorite.Click += new EventHandler(Unfavorite_Click);
+
+                    ApplicationBar.Buttons.Add(unfavorite);
+                }
             }
 
             if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
@@ -97,38 +114,30 @@ namespace MetrocamPan
 
                     ApplicationBar.MenuItems.Add(Delete);
                     ApplicationBar.MenuItems.Add(Save);
-                    ApplicationBar.MenuItems.Add(profilePic);                  
-                    
+                    ApplicationBar.MenuItems.Add(profilePic);
+
                     alreadyAddedMenuItem = true;
                 }
-            }            
+            }
+            else
+            {
+                if (!alreadyAddedMenuItem)
+                {
+                    ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
+                    Save.Text = "save";
+                    Save.Click += new EventHandler(Save_Click);
+
+                    ApplicationBar.MenuItems.Add(Save);
+                    alreadyAddedMenuItem = true;
+                }
+            }
         }
 
         FavoritedPicture f = null;
         void MetrocamService_FetchFavoritedPictureByPictureIDCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted -= MetrocamService_FetchFavoritedPictureByPictureIDCompleted;
-
             f = e.Data as FavoritedPicture;
-
-            if (f == null)
-            {
-                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
-                favorite.Text = "favorite";
-                favorite.Click += new EventHandler(Favorite_Click);
-
-                ApplicationBar.Buttons.Add(favorite);
-            }
-            else
-            {
-                ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
-                unfavorite.Text = "unfavorite";
-                unfavorite.Click += new EventHandler(Unfavorite_Click); 
-
-                ApplicationBar.Buttons.Add(unfavorite);
-            }
-
-            alreadyAddedButton = true;
         }
 
         void Delete_Click(object sender, EventArgs e)
