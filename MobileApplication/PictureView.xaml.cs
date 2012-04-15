@@ -34,6 +34,7 @@ namespace MetrocamPan
         PictureInfo CurrentPicture = null;
         Boolean alreadyAddedButton = false;
         Boolean alreadyAddedMenuItem = false;
+        Boolean doingWork = false;
 
         private ToastPrompt toastDisplay;
 
@@ -98,11 +99,12 @@ namespace MetrocamPan
             }            
         }
 
+        FavoritedPicture f = null;
         void MetrocamService_FetchFavoritedPictureByPictureIDCompleted(object sender, RequestCompletedEventArgs e)
         {
             App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted -= MetrocamService_FetchFavoritedPictureByPictureIDCompleted;
 
-            FavoritedPicture f = e.Data as FavoritedPicture;
+            f = e.Data as FavoritedPicture;
 
             if (f == null)
             {
@@ -213,6 +215,9 @@ namespace MetrocamPan
 
         void Favorite_Click(object sender, EventArgs e)
         {
+            if (doingWork)
+                return;
+
             FavoritedPicture data = new FavoritedPicture();
             data.PictureID = CurrentPicture.ID;
             data.UserID = App.MetrocamService.CurrentUser.ID;
@@ -232,11 +237,49 @@ namespace MetrocamPan
 
         void Unfavorite_Click(object sender, EventArgs e)
         {
+            if (doingWork)
+                return;
+
+            GlobalLoading.Instance.IsLoading = true;
+
+            App.FavoritedUserPictures.Remove(CurrentPicture);
+            App.MetrocamService.DeleteFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_DeleteFavoritedPictureCompleted);
+            App.MetrocamService.DeleteFavoritedPicture(f);
+        }
+
+        void MetrocamService_DeleteFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            doingWork = false;
+            GlobalLoading.Instance.IsLoading = false;
+
+            toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Picture has been removed from your favorites.");
+            toastDisplay.Show();
+
+            ApplicationBar.Buttons.RemoveAt(2);
+            ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+            favorite.Text = "favorite";
+            favorite.Click += new EventHandler(Favorite_Click);
+            ApplicationBar.Buttons.Add(favorite);
+                
+
+            App.MetrocamService.DeleteFavoritedPictureCompleted -= MetrocamService_DeleteFavoritedPictureCompleted;
         }
 
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            f = e.Data as FavoritedPicture;
+
+            doingWork = false;
+            App.MetrocamService.CreateFavoritedPictureCompleted -= MetrocamService_CreateFavoritedPictureCompleted;
             GlobalLoading.Instance.IsLoading = false;
+
+            ApplicationBar.Buttons.RemoveAt(2);
+            ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
+            unfavorite.Text = "unfavorite";
+            unfavorite.Click += new EventHandler(Unfavorite_Click);
+            ApplicationBar.Buttons.Add(unfavorite);
 
             toastDisplay = GlobalToastPrompt.CreateToastPrompt(
                 "Success!",

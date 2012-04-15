@@ -133,7 +133,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchFavoritedPictureByPictureID_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/pictures/fetch?key={0}&token={1}&pictureid={2}&userid={3}", _APIKey, _Token, pictureId, userId)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/pictures/fetch?key={0}&token={1}&pictureid={2}&userid={3}&ticks={4}", _APIKey, _Token, pictureId, userId, DateTime.Now.Ticks)));
         }
 
         private void FetchFavoritedPictureByPictureID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -173,7 +173,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchFavoritedPicture_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/fetch?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/fetch?key={0}&token={1}&id={2}&ticks={3}", _APIKey, _Token, id, DateTime.Now.Ticks)));
         }
 
         private void FetchFavoritedPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
@@ -291,13 +291,13 @@ namespace MobileClientLibrary
 
         public event RequestCompletedEventHandler DeleteFavoritedPictureCompleted;
 
-        public void DeleteFavoritedPicture()
+        public void DeleteFavoritedPicture(FavoritedPicture data)
         {
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
             client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteFavoritedPicture_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)), data.ID);
         }
 
         private void DeleteFavoritedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
