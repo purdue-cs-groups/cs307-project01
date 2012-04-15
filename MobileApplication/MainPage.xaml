@@ -16,26 +16,25 @@
     xmlns:loaders="clr-namespace:MetrocamPan.ScrollLoaders"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Opacity="1">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <helpers:FriendlierTime x:Key="FriendlierTime" />
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid Background="Transparent" Margin="0">
+    <Grid Background="Transparent">
         <!--Root Pivot Control-->
-        <controls:Pivot x:Name="MainContent" Title="METROCAM" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" Margin="0" SelectionChanged="MainContent_SelectionChanged">
-            
+        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="-12,-12,0,0" Background="{StaticResource PhoneBackgroundBrush}" SelectionChanged="MainContent_SelectionChanged">
+
             <!--Popular Pivot Item-->
-            <controls:PivotItem Header="popular" IsTabStop="False" Margin="24,12,0,0">
-                <Grid Margin="0">
-                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
-                    <ListBox x:Name="PopularPictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" ItemsSource="{Binding}">
+            <controls:PivotItem Header="popular" IsTabStop="False" FontWeight="Normal">
+                <Grid>
+                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="12,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Loaded="LoadingMessage_Loaded" />
+                    <ListBox x:Name="PopularPictures" Margin="6,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Image
-                                        Width="144"
+                                <Image  Width="144"
                                         Height="144"
-                                        Margin="4,4,0,0"
+                                        Margin="6"
                                         Source="{Binding MediumURL}"
                                         Tap="PopularPicture_Tap" 
                                         Loaded="PopularPicture_Loaded" />
@@ -51,16 +50,70 @@
             </controls:PivotItem>
 
             <!--Recent Pivot Item -->
-            <controls:PivotItem Header="recent" Width="Auto" Margin="24,12,0,0">
-                <ListBox x:Name="recentPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" HorizontalAlignment="Left" ItemsSource="{Binding}">
+            <controls:PivotItem Header="recent" FontWeight="Normal">
+                <ListBox x:Name="recentPictures" Margin="12,0,-12,0" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" IsEnabled="True" IsHitTestVisible="True" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <Image Margin="0,0,0,0" Height="40" HorizontalAlignment="Left" Name="recentPictureOwner" Stretch="UniformToFill" VerticalAlignment="Top" Width="40" Source="{Binding User.ProfilePicture.MediumURL}" Tap="ViewUserDetail_Tap" />
-                                <TextBlock Margin="50,10,0,0" Text="{Binding User.Username}"  Height="38" Name="recentPictureUsername" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
-                                <TextBlock Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" Margin="0,16,0,0"  Height="38" Name="recentPictureTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                                <Image Margin="0,44,0,0" Source="{Binding MediumURL}" Height="440" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" Tag="{Binding PictureID}" Tap="recentPicture_Tap" Loaded="Image_Loaded" />
-                                <TextBlock VerticalAlignment="Top" Text="{Binding Caption}" Height="80" HorizontalAlignment="Left" Name="recentPictureCaption" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,484,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image x:Name="recentPictureOwner" 
+                                           Grid.Column="0"
+                                           Height="40"
+                                           Width="40"
+                                           HorizontalAlignment="Left" 
+                                           VerticalAlignment="Top" 
+                                           Stretch="UniformToFill"
+                                           Source="{Binding User.ProfilePicture.MediumURL}" 
+                                           Tap="ViewUserDetail_Tap" />
+                                    <TextBlock x:Name="recentPictureUsername"
+                                               Grid.Column="1"
+                                               Margin="6,0,0,0" 
+                                               Text="{Binding User.Username}" 
+                                               Height="40"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Top" 
+                                               FontSize="{StaticResource PhoneFontSizeMediumLarge}" 
+                                               Foreground="{StaticResource PhoneAccentBrush}" 
+                                               Tap="ViewUserDetailFromUsername_Tap" />
+                                    <TextBlock x:Name="recentPictureTime"
+                                               Grid.Column="2"
+                                               Text="{Binding FriendlyCreatedDate, Converter={StaticResource FriendlierTime}}" 
+                                               Height="Auto" 
+                                               Padding="0,6,0,0"
+                                               VerticalAlignment="Top" 
+                                               HorizontalAlignment="Right" 
+                                               FontSize="{StaticResource PhoneFontSizeSmall}" 
+                                               Foreground="{StaticResource PhoneBorderBrush}" />
+                                </Grid>
+                                <Image Grid.Row="1"
+                                       Source="{Binding MediumURL}" 
+                                       Height="456"
+                                       Width="456"
+                                       Stretch="UniformToFill" 
+                                       Tag="{Binding PictureID}" 
+                                       Tap="recentPicture_Tap" 
+                                       Loaded="Image_Loaded" />
+                                <TextBlock x:Name="recentPictureCaption"
+                                           Grid.Row="2"
+                                           Margin="0,0,0,48"
+                                           VerticalAlignment="Top" 
+                                           HorizontalAlignment="Left" 
+                                           Text="{Binding Caption}" 
+                                           FontSize="{StaticResource PhoneFontSizeSmall}" 
+                                           TextAlignment="Left"
+                                           Foreground="{StaticResource PhoneBorderBrush}"
+                                           TextWrapping="Wrap" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -73,16 +126,16 @@
             </controls:PivotItem>
 
             <!--Favorites Pivot Item-->
-            <controls:PivotItem Header="favorites" IsTabStop="False" Margin="24,12,0,0">
-                <Grid Margin="0">
-                    <TextBlock x:Name="FavoritesLoadingMessage" Text="You have no favorite pictures, have a look around!" TextWrapping="Wrap" Margin="0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Visibility="Collapsed" />
-                    <ListBox x:Name="FavoritePictures" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0" ItemsSource="{Binding}">
+            <controls:PivotItem Header="favorites" IsTabStop="False" FontWeight="Normal">
+                <Grid>
+                    <TextBlock x:Name="FavoritesLoadingMessage" Margin="12,0" Text="You have no favorite pictures, have a look around!" TextWrapping="Wrap" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Visibility="Collapsed" />
+                    <ListBox x:Name="FavoritePictures" Margin="6,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Image
                                         Width="144"
                                         Height="144"
-                                        Margin="4,4,0,0"
+                                        Margin="6"
                                         Source="{Binding MediumURL}"
                                         Tap="FavoritedPicture_Tap" />
                             </DataTemplate>
@@ -95,7 +148,7 @@
                     </ListBox>
                 </Grid>
             </controls:PivotItem>
-            
+
         </controls:Pivot>
     </Grid>
 

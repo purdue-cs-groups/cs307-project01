@@ -31,7 +31,6 @@
                 <ListBox x:Name="PopularHubTiles" Margin="6,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <!-- Title will be replaced with Username when Web Service is updated -->
                             <toolkit:HubTile 
                                     Style="{StaticResource SmallHubTile}"
                                     Margin="6"
