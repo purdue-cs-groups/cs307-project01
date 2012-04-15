@@ -20,21 +20,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
-            <TextBlock x:Name="PageTitle" Text="popular" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="popular" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <StackPanel>
-                <TextBlock x:Name="LoadingMessage" Text="Good morning!" Margin="24,0,0,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="30" Loaded="LoadingMessage_Loaded" />
-                <ListBox x:Name="PopularHubTiles" Margin="12,0,0,75" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
+                <TextBlock x:Name="LoadingMessage" Text="Good morning!" Margin="12,0" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneAccentBrush}" Loaded="LoadingMessage_Loaded" />
+                <ListBox x:Name="PopularHubTiles" Margin="6,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <!-- Title will be replaced with Username when Web Service is updated -->
                             <toolkit:HubTile 
                                     Style="{StaticResource SmallHubTile}"
-                                    Margin="12,12,0,0"
+                                    Margin="6"
                                     DisplayNotification="True" 
                                     Source="{Binding MediumURL}" 
                                     Notification="{Binding Caption}" 

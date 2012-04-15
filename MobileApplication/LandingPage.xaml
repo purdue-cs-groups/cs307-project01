@@ -33,7 +33,7 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <StackPanel>
-            <fancytile:Tile Height="768" Width="480" HorizontalAlignment="Left" Margin="0"
+            <fancytile:Tile Height="768" Width="480" HorizontalAlignment="Left"
                             fancytilebinding:FrameworkElementBinding.ClipToBounds="True">
                 <Grid>
                     <Canvas>
@@ -55,7 +55,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+                        <TextBlock Grid.Row="0" x:Name="ApplicationTitle" Text="METROCAM" Margin="12,12,0,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
                         
                         <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
                             <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
