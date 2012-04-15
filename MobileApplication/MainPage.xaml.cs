@@ -93,6 +93,13 @@ namespace MetrocamPan
 
                 toastDisplay.Show();
 
+                /**
+                 * One to remove the Share page, one to remove the MainPage it came from. If you don't
+                 * have the second one and hit Back, you'll load the same page and it looks weird.
+                 */
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+
                 App.isFromUploadPage = false;
             }
 
