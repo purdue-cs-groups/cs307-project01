@@ -74,19 +74,8 @@ namespace MetrocamPan
 
             if (!alreadyAddedButton)
             {
-                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
-                favorite.Text = "favorite";
-                favorite.Click += new EventHandler(Favorite_Click);
-
-                ApplicationBar.Buttons.Add(favorite);
-
-                ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
-                Save.Text = "save";
-                Save.Click += new EventHandler(Save_Click);
-
-                ApplicationBar.MenuItems.Add(Save);
-
-                alreadyAddedButton = true;
+                App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
+                App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
             }
 
             if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))
@@ -107,6 +96,38 @@ namespace MetrocamPan
                     alreadyAddedMenuItem = true;
                 }
             }            
+        }
+
+        void MetrocamService_FetchFavoritedPictureByPictureIDCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted -= MetrocamService_FetchFavoritedPictureByPictureIDCompleted;
+
+            FavoritedPicture f = e.Data as FavoritedPicture;
+
+            if (f == null)
+            {
+                ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                favorite.Text = "favorite";
+                favorite.Click += new EventHandler(Favorite_Click);
+
+                ApplicationBar.Buttons.Add(favorite);
+            }
+            else
+            {
+                ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
+                unfavorite.Text = "unfavorite";
+                unfavorite.Click += new EventHandler(Unfavorite_Click); 
+
+                ApplicationBar.Buttons.Add(unfavorite);
+            }
+
+            ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
+            Save.Text = "save";
+            Save.Click += new EventHandler(Save_Click);
+
+            ApplicationBar.MenuItems.Add(Save);
+
+            alreadyAddedButton = true;
         }
 
         void Delete_Click(object sender, EventArgs e)
@@ -207,6 +228,10 @@ namespace MetrocamPan
 
             App.MetrocamService.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFavoritedPictureCompleted);
             App.MetrocamService.CreateFavoritedPicture(data);
+        }
+
+        void Unfavorite_Click(object sender, EventArgs e)
+        {
         }
 
         void MetrocamService_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)

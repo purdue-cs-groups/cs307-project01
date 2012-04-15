@@ -125,6 +125,46 @@ namespace MobileClientLibrary
 
         #region Favorited Picture Methods
 
+        public event RequestCompletedEventHandler FetchFavoritedPictureByPictureIDCompleted;
+
+        public void FetchFavoritedPictureByPictureID(string pictureId, string userId)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchFavoritedPictureByPictureID_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/pictures/fetch?key={0}&token={1}&pictureid={2}&userid={3}", _APIKey, _Token, pictureId, userId)));
+        }
+
+        private void FetchFavoritedPictureByPictureID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchFavoritedPictureByPictureIDCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<FavoritedPicture>(stringData);
+
+                    FetchFavoritedPictureByPictureIDCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
         public event RequestCompletedEventHandler FetchFavoritedPictureCompleted;
 
         public void FetchFavoritedPicture(string id)
@@ -928,14 +968,7 @@ namespace MobileClientLibrary
 
                     var jsonData = JsonConvert.DeserializeObject<Relationship>(stringData);
 
-                    //if (jsonData == null)
-                    //{
-                    //    FetchRelationshipByIDsCompleted(sender, null);
-                    //}
-                    //else
-                    //{
-                        FetchRelationshipByIDsCompleted(sender, new RequestCompletedEventArgs(jsonData));
-                    //}
+                    FetchRelationshipByIDsCompleted(sender, new RequestCompletedEventArgs(jsonData));
                 }
                 else
                 {

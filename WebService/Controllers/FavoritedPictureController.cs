@@ -22,6 +22,25 @@ namespace WebService.Controllers
             return favoritedPictures.FindOne(query);
         }
 
+        public static FavoritedPicture FetchByPictureID(string pictureId, string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<FavoritedPicture> favoritedPictures = database.GetCollection<FavoritedPicture>("FavoritedPictures");
+            var query = new QueryDocument("UserID", userId);
+
+            foreach (FavoritedPicture f in favoritedPictures.Find(query))
+            {
+                if (f.PictureID.Equals(pictureId))
+                {
+                    return f;
+                }
+            }
+
+            return null;
+        }
+
         public static FavoritedPicture Create(FavoritedPicture data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

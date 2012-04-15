@@ -70,6 +70,13 @@ namespace WebService
         }
 
         [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/pictures/fetch?pictureid={pictureId}&userid={userId}")]
+        public FavoritedPicture FetchByPictureID(string pictureId, string userId)
+        {
+            return FavoritedPictureController.FetchByPictureID(pictureId, userId); 
+        }
+
+        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/create")]
         public FavoritedPicture CreateFavoritedPicture(Stream data)
         {
