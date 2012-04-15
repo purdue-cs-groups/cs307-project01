@@ -591,13 +591,13 @@ namespace MetrocamPan
                 isRefreshingPopular = true;
                 FetchPopularPictures();
             }
-            else if (MainContent.SelectedIndex == 1)
+            else if (MainContent.SelectedIndex == 1 && App.MetrocamService.CurrentUser != null)
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
                 FetchRecentPictures();
             }
-            else if (MainContent.SelectedIndex == 2)
+            else if (MainContent.SelectedIndex == 2 && App.MetrocamService.CurrentUser != null)
             {
                 if (App.FavoritedUserPictures.Count != 0)
                 {
