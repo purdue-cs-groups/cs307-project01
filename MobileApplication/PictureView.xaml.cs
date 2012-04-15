@@ -91,8 +91,13 @@ namespace MetrocamPan
                     Delete.Text = "delete";
                     Delete.Click += new EventHandler(Delete_Click);
 
+                    ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
+                    Save.Text = "save";
+                    Save.Click += new EventHandler(Save_Click);
+
                     ApplicationBar.MenuItems.Add(Delete);
-                    ApplicationBar.MenuItems.Add(profilePic);
+                    ApplicationBar.MenuItems.Add(Save);
+                    ApplicationBar.MenuItems.Add(profilePic);                  
                     
                     alreadyAddedMenuItem = true;
                 }
@@ -122,12 +127,6 @@ namespace MetrocamPan
 
                 ApplicationBar.Buttons.Add(unfavorite);
             }
-
-            ApplicationBarMenuItem Save = new ApplicationBarMenuItem();
-            Save.Text = "save";
-            Save.Click += new EventHandler(Save_Click);
-
-            ApplicationBar.MenuItems.Add(Save);
 
             alreadyAddedButton = true;
         }
