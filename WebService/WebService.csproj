@@ -397,6 +397,7 @@
     <Compile Include="Models\FlaggedPicture.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\PictureInfo.cs" />
+    <Compile Include="Models\UserStats.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -47,6 +47,9 @@ namespace MetrocamPan
                 // User navigates to his own profile
                 SetCurrentUserProfile();
 
+                App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
+                App.MetrocamService.FetchUserStats(App.MetrocamService.CurrentUser.ID);
+
                 if (this.UserPictures.ItemsSource == null)
                 {
                     App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
@@ -120,6 +123,19 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
+
+            App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
+            App.MetrocamService.FetchUserStats(userInfo.ID);
+        }
+
+        void MetrocamService_FetchUserRelationshipStatsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.FetchUserStatsCompleted -= MetrocamService_FetchUserRelationshipStatsCompleted;
+
+            UserStats data = e.Data as UserStats;
+            FollowerLabel.Text = data.Followers.ToString();
+            FollowingLabel.Text = data.Following.ToString();
+            PictureLabel.Text = data.Pictures.ToString();
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -167,6 +183,9 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
+
+            App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
+            App.MetrocamService.FetchUserStats(userInfo.ID);
         }
 
         void MetrocamService_FetchRelationshipByIDsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -223,9 +242,6 @@ namespace MetrocamPan
             userPictures = e.Data as List<PictureInfo>;          
             userPictures.Reverse();
             App.UserPictures.Clear();
-
-            // Set picture taken count
-            PictureLabel.Text = userPictures.Count.ToString();
 
             // If user is still on profilePivot, set loading to false since we have loaded PictureLabel
             if (GlobalLoading.Instance.IsLoading)

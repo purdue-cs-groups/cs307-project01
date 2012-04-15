@@ -527,6 +527,13 @@ namespace WebService
         }
 
         [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/stats/fetch?userId={userId}")]
+        public UserStats FetchUserStats(string userId)
+        {
+            return UserController.FetchUserStats(userId);
+        }
+
+        [OperationContract]
         [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/fetch")]
         public List<UserInfo> FetchAllUsers()
         {

@@ -77,6 +77,35 @@ namespace WebService.Controllers
             return new UserInfo(u, p);
         }
 
+        public static UserStats FetchUserStats(string userId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<Relationship> relationships = database.GetCollection<Relationship>("Relationships");
+            MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
+
+            var query = Query.EQ("UserID", userId);
+            var query2 = Query.EQ("FollowingUserID", userId);
+            var query3 = Query.EQ("UserID", userId);
+
+            UserStats stats = new UserStats();
+            stats.Following = 0;
+            stats.Followers = 0;
+            stats.Pictures = 0;
+
+            var following = relationships.Find(query);
+            stats.Following = Convert.ToInt16(following.Count());
+
+            var followers = relationships.Find(query2);
+            stats.Followers = Convert.ToInt16(followers.Count());
+
+            var pictureCount = pictures.Find(query3);
+            stats.Pictures = Convert.ToInt16(pictureCount.Count());
+
+            return stats;
+        }
+
         public static UserInfo FetchInfoByEmailAddress(string emailAddress)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);

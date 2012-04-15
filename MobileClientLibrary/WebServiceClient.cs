@@ -954,6 +954,44 @@ namespace MobileClientLibrary
             }
         }
 
+        public event RequestCompletedEventHandler FetchUserStatsCompleted;
+
+        public void FetchUserStats(string userId)
+        {
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchUserStats_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "user/stats/fetch?key={0}&token={1}&userId={2}&ticks={3}", _APIKey, _Token, userId, DateTime.Now.Ticks)));
+        }
+
+        private void FetchUserStats_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (FetchUserStatsCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    string stringData = e.Result;
+
+                    var jsonData = JsonConvert.DeserializeObject<UserStats>(stringData);
+
+                    FetchUserStatsCompleted(sender, new RequestCompletedEventArgs(jsonData));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
         public event RequestCompletedEventHandler FetchRelationshipCompleted;
 
         public void FetchRelationship(string id)
