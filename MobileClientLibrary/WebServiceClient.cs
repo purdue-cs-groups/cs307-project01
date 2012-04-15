@@ -915,7 +915,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(FetchRelationshipByIDs_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/user/fetch?key={0}&token={1}&userid={2}&followingid={3}", _APIKey, _Token, userId, followingId)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/user/fetch?key={0}&token={1}&userid={2}&followingid={3}&ticks={4}", _APIKey, _Token, userId, followingId, DateTime.Now.Ticks)));
         }
 
         private void FetchRelationshipByIDs_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)

@@ -174,10 +174,12 @@ namespace MetrocamPan
 
             if (r == null)
             {
+                FollowingStatus.Text = "You are not following " + userInfo.Username + "."; 
                 ConstructAppBar(false, false);
             }
             else
             {
+                FollowingStatus.Text = "You are following " + userInfo.Username + "."; 
                 ConstructAppBar(false, true);
             }
         }
@@ -288,6 +290,8 @@ namespace MetrocamPan
             if (AppBarSet)
                 return;
 
+            ApplicationBar.Buttons.Clear();
+
             if (isForUser)
             {
                 ApplicationBarIconButton Edit = new ApplicationBarIconButton();
@@ -319,24 +323,36 @@ namespace MetrocamPan
             AppBarSet = true;
         }
 
+        Boolean doingWork = false; 
         void Follow_Click(object sender, EventArgs e)
         {
+            if (doingWork)
+                return;
+
             Relationship data = new Relationship();
             data.UserID = App.MetrocamService.CurrentUser.ID;
             data.FollowingUserID = userInfo.ID;
 
             App.MetrocamService.CreateRelationshipCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateRelationshipCompleted);
+            doingWork = true;
             App.MetrocamService.CreateRelationship(data);
         }
 
         void MetrocamService_CreateRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            
+            App.MetrocamService.CreateRelationshipCompleted -= MetrocamService_CreateRelationshipCompleted;
+            doingWork = false;
+            AppBarSet = false;
+            FollowingStatus.Text = "You are following " + userInfo.Username + "."; 
+            ConstructAppBar(false, true); 
         }
 
         void Unfollow_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (doingWork)
+                return;
+
+            App.MetrocamService.DeleteRelationship();
         }
     }
 }

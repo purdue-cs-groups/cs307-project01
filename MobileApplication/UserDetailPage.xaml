@@ -97,7 +97,9 @@
                             <TextBlock Name="biographyTextBlock" Grid.Row="0"
                                        Text="" TextWrapping="Wrap" />
                         </Grid>
-                       
+
+                        <TextBlock x:Name="FollowingStatus" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,24,0,0" />
+                        
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
