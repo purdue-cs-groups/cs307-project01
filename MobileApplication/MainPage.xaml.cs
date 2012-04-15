@@ -128,10 +128,6 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
-
-                // App is from LandingPage (login or signup). We need to populate Popular, then populate Recent
-                FetchPopularPictures();
-                FetchFavoritedPictures();
             }
             else if (App.isFromUploadPage)
             {
