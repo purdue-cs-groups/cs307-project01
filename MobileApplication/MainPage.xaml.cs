@@ -389,6 +389,12 @@ namespace MetrocamPan
         // Sign out
         private void SignoutBarIconButton_Click(object sender, EventArgs e)
         {
+            // Display a confirmation message
+            if (MessageBox.Show("Are you sure that you would like to sign out?", "Confirm", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+            
             // Reset all isolate storage Setting objects to default values
             Settings.logoutUser();
 
