@@ -88,8 +88,8 @@ namespace MetrocamPan
 
             if (bitmap == null) return;
 
-            var width = bitmap.PixelWidth;
-            var height = bitmap.PixelHeight;
+            var width = bitmap.PixelWidth * 4;
+            var height = bitmap.PixelHeight * 4;
             var resultPixels = effect.Process(bitmap.Pixels, width, height);
 
             WriteableBitmap newBitmap = resultPixels.ToWriteableBitmap(width, height);
