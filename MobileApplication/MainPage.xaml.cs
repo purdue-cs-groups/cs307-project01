@@ -738,6 +738,9 @@ namespace MetrocamPan
 
             foreach (PictureInfo p in e.Data as List<PictureInfo>)
             {
+                // changes to local time
+                p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
+
                 App.FavoritedUserPictures.Add(p);
             }
 
