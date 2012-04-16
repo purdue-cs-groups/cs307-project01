@@ -16,41 +16,38 @@
     Loaded="PhoneApplicationPage_Loaded" 
     BackKeyPress="PhoneApplicationPage_BackKeyPress">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="pic details" Margin="9,-7,0,28" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,-12,12,0">
-            <Grid>
-                <Image Height="440" HorizontalAlignment="Left" Margin="12,56,0,0" Name="pictureView" Stretch="UniformToFill" VerticalAlignment="Top" Width="440" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,12,12,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <!-- Get owner picture from ownerID -->
-                <Image Height="40" HorizontalAlignment="Left" Margin="12,12,0,0" Name="pictureOwnerPicture" Stretch="Fill" VerticalAlignment="Top" Width="40" Source="/Images/dunsmore.png" Tap="ViewUserDetail_Tap" />
-                <TextBlock Margin="62,22,0,0" Height="38" Name="pictureOwnerName" Text="Picture owner name" VerticalAlignment="Top" FontSize="22" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetail_Tap" />
-                <TextBlock Text="3 hours ago" Margin="0,28,5,0"  Height="38" Name="pictureTakenTime" VerticalAlignment="Top" FontSize="16"  HorizontalAlignment="Right" Foreground="{StaticResource PhoneBorderBrush}" />
-                <Grid Margin="12,492,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto"  />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Name="pictureCaption" Text="" HorizontalAlignment="Left" Height="80" Width="Auto" FontSize="16" TextAlignment="Left" Margin="0,5,0,0" Foreground="{StaticResource PhoneBorderBrush}" TextWrapping="Wrap" />
-                </Grid>
-            </Grid>
+            <Image Name="imgPicture" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Width="456" Height="456" Stretch="UniformToFill" Margin="0,0,0,12" />
+            
+            <Image Name="imgProfilePicture" Grid.Row="1" Grid.Column="0" Height="40" Width="40" Stretch="Fill" Source="/Images/dunsmore.png" Tap="ViewUserDetail_Tap" />
+            <TextBlock Name="txtUsername" Grid.Row="1" Grid.Column="1" Text="Picture owner name" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}" Tap="ViewUserDetail_Tap" Margin="6,6,0,0," />
+            <TextBlock Name="txtCreatedDate" Grid.Row="1" Grid.Column="2" Text="3 hours ago" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0,6,0,0" />
+
+            <TextBlock Name="txtCaption" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle3Style}" />
         </Grid>
     </Grid>
-
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar x:Name="MainPageAppBar" IsVisible="True" IsMenuEnabled="True" Opacity="1">
@@ -59,7 +56,6 @@
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
-    <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>

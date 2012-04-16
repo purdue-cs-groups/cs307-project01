@@ -65,13 +65,13 @@ namespace MetrocamPan
             if (CurrentPicture.User.ProfilePicture != null)
             {
                 BitmapImage b = new BitmapImage(new Uri(CurrentPicture.User.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute));
-                pictureOwnerPicture.Source = b;
+                this.imgProfilePicture.Source = b;
             }
 
-            pictureView.Source = new BitmapImage(new Uri(CurrentPicture.MediumURL));
-            pictureOwnerName.Text = CurrentPicture.User.Username;
-            pictureCaption.Text = CurrentPicture.Caption;
-            pictureTakenTime.Text = FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
+            this.imgPicture.Source = new BitmapImage(new Uri(CurrentPicture.MediumURL));
+            this.txtUsername.Text = CurrentPicture.User.Username;
+            this.txtCaption.Text = CurrentPicture.Caption;
+            this.txtCreatedDate.Text = FriendlierTime.Convert(CurrentPicture.FriendlyCreatedDate);
 
             if (!alreadyAddedButton)
             {
@@ -169,7 +169,7 @@ namespace MetrocamPan
             var myStore = IsolatedStorageFile.GetUserStoreForApplication();
             IsolatedStorageFileStream myFileStream = myStore.CreateFile(file);
 
-            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource)pictureView.Source);
+            WriteableBitmap bitmap = new WriteableBitmap((BitmapSource)this.imgPicture.Source);
 
             bitmap.SaveJpeg(myFileStream, bitmap.PixelWidth, bitmap.PixelHeight, 0, 100);
             myFileStream.Close();
@@ -312,7 +312,7 @@ namespace MetrocamPan
 
             // replace with Web Application URL
             shareLinkTask.LinkUri = new Uri("http://metrocam.cloudapp.net/p/" + CurrentPicture.ID, UriKind.Absolute);
-            shareLinkTask.Message = pictureCaption.Text;
+            shareLinkTask.Message = CurrentPicture.Caption;
 
             shareLinkTask.Show();
         }
