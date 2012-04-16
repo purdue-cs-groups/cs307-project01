@@ -21,23 +21,25 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="apply a filter" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="apply a filter" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
         <!--ContentPanel contains image and filters-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image x:Name="CapturedImage" Source="{Binding CapturedSource}" Height="440" Margin="12,20,0,0" Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" Width="440" HorizontalAlignment="Left" />
-            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,465,0,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <Image x:Name="CapturedImage" Source="{Binding CapturedSource}" 
+                   Height="456" Width="456" Margin="12,0,0,0"
+                   Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" HorizontalAlignment="Left" />
+            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,465,12,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="10 0">
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="{Binding IconURI}" VerticalAlignment="Top" Width="90" Height="90" />
+                            <Image Grid.Row="0" Source="{Binding IconURI}" Margin="6,0" VerticalAlignment="Top" Width="90" Height="90" />
                             <TextBlock Grid.Row="0" Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Bottom" />
                         </Grid>
                     </DataTemplate>
