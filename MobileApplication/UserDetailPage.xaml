@@ -16,10 +16,10 @@
     shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="USER" x:Name="PivotRoot" FontWeight="Bold" Margin="-12,-12,-12,0" Background="{StaticResource PhoneBackgroundBrush}">
+        <controls:Pivot Title="USER" x:Name="PivotRoot" FontWeight="Bold" Margin="-12,-12,0,0" Background="{StaticResource PhoneBackgroundBrush}">
             <!--PROFILE pivot item-->
             <controls:PivotItem x:Name="profilePivot" Header="profile" FontWeight="Normal">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="12,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="12,0,0,0">
                     <Grid x:Name="ProfilePanelLevel1">
                         <Grid.RowDefinitions>
                             <!-- For ProPic level -->
@@ -106,13 +106,13 @@
 
             <!--PICTURES pivot item-->
             <controls:PivotItem Header="pictures" FontWeight="Normal">
-                <ListBox x:Name="UserPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="12,0,0,0" ItemsSource="{Binding}">
+                <ListBox x:Name="UserPictures" Margin="6,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Image 
                                         Width="144"
                                         Height="144"
-                                        Margin="4,4,0,0"
+                                        Margin="6"
                                         Source="{Binding MediumURL}" Tap="PictureTile_Tap" Loaded="PictureTile_Loaded" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
