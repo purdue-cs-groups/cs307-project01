@@ -16,21 +16,21 @@
     shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <controls:Pivot Title="USER" x:Name="PivotRoot">
+        <controls:Pivot Title="USER" x:Name="PivotRoot" FontWeight="Bold" Margin="-12,-12,-12,0" Background="{StaticResource PhoneBackgroundBrush}">
             <!--PROFILE pivot item-->
-            <controls:PivotItem x:Name="profilePivot" Header="profile">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="12,0,12,0">
+            <controls:PivotItem x:Name="profilePivot" Header="profile" FontWeight="Normal">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="12,0">
                     <Grid x:Name="ProfilePanelLevel1">
                         <Grid.RowDefinitions>
                             <!-- For ProPic level -->
                             <RowDefinition Height="140"/>
-                            
+
                             <!-- For Numerical Stats -->
                             <RowDefinition Height="Auto"/>
-                            
+
                             <!-- For Bio -->
                             <RowDefinition Height="Auto" />
-                            
+
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -73,7 +73,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
@@ -87,25 +87,25 @@
                             <TextBlock Name="FollowerLabel" Grid.Row="1" Grid.Column="1" Text="0" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" />
                             <TextBlock Name="FollowingLabel" Grid.Row="1" Grid.Column="2" Text="0" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" />
                         </Grid>
-                        
+
                         <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0,36,0,0" Height="Auto" VerticalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            
+
                             <TextBlock Name="biographyTextBlock" Grid.Row="0"
                                        Text="" TextWrapping="Wrap" />
                         </Grid>
 
                         <TextBlock x:Name="FollowingStatus" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,24,0,0" />
-                        
+
                     </Grid>
                 </ScrollViewer>
             </controls:PivotItem>
 
             <!--PICTURES pivot item-->
-            <controls:PivotItem Header="pictures">
+            <controls:PivotItem Header="pictures" FontWeight="Normal">
                 <ListBox x:Name="UserPictures" loaders:ScrollViewerMonitor.AtEndCommand="{Binding FetchMoreDataCommand}" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="12,0,0,0" ItemsSource="{Binding}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -125,7 +125,7 @@
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
-    
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="1">
         </shell:ApplicationBar>
