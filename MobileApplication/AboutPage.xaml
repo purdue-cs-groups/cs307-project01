@@ -53,7 +53,7 @@
             </controls:PivotItem>
 
             <!--Pivot item two-->
-            <controls:PivotItem x:Name="privacy" Header="privacy">
+            <controls:PivotItem x:Name="terms" Header="terms">
                 <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="0,0">
                         <ScrollViewer VerticalScrollBarVisibility="Hidden">
                             <TextBlock x:Name="displaybox" TextWrapping="Wrap"
