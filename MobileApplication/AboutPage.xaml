@@ -18,7 +18,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--Pivot Control-->
-        <controls:Pivot x:Name="AboutPivot" Title="METROCAM">
+        <controls:Pivot x:Name="AboutPivot" Title="METROCAM" FontWeight="Bold" Margin="-12,-12,-12,0" Background="{StaticResource PhoneBackgroundBrush}">
             <!--Pivot item one-->
             <controls:PivotItem x:Name="about" Header="about">
                 <Grid>
@@ -34,17 +34,17 @@
                     <TextBlock Margin="95,270,11,0" Text="@mbmccormick"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="95,246,9,0" Text="Matt McCormick"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="240,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJoe.png"/>
-                    <TextBlock Margin="323,270,11,0" Text="@martellaj"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
-                    <TextBlock Margin="323,246,9,0" Text="Joe Martella"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
+                    <Image Margin="256,240,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJoe.png"/>
+                    <TextBlock Margin="339,270,-5,0" Text="@martellaj"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
+                    <TextBlock Margin="339,246,-7,0" Text="Joe Martella"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
                     <Image Margin="12,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJames.jpg"/>
                     <TextBlock Margin="95,380,11,0" Text="@jamesmajunyan"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
                     <TextBlock Margin="95,356,9,0" Text="James Ma"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
-                    <Image Margin="240,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJosh.png"/>
-                    <TextBlock Margin="323,380,11,0" Text="@jdlwilliams"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
-                    <TextBlock Margin="323,356,9,0" Text="Josh Williams"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
+                    <Image Margin="256,350,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJosh.png"/>
+                    <TextBlock Margin="339,380,-5,0" Text="@jdlwilliams"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
+                    <TextBlock Margin="339,356,-7,0" Text="Josh Williams"  Height="28" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneBorderBrush}" />
 
                     <Image Margin="12,460,0,0" Height="75" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="75" Source="/WinstagramPan;component/Images/smallJeremiah.jpg"/>
                     <TextBlock Margin="95,490,11,0" Text="@J_Ar_Thur"  Height="38" VerticalAlignment="Top" FontSize="18" Foreground="{StaticResource PhoneAccentBrush}" />
