@@ -82,9 +82,6 @@ namespace MetrocamPan
                     favorite.Click += new EventHandler(Favorite_Click);
 
                     ApplicationBar.Buttons.Add(favorite);
-
-                    App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted +=new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
-                    App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
                 }
                 else
                 {
@@ -93,6 +90,10 @@ namespace MetrocamPan
                     unfavorite.Click += new EventHandler(Unfavorite_Click);
 
                     ApplicationBar.Buttons.Add(unfavorite);
+
+                    App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
+                    doingWork = true;
+                    App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
                 }
             }
 
@@ -136,6 +137,7 @@ namespace MetrocamPan
         FavoritedPicture f = null;
         void MetrocamService_FetchFavoritedPictureByPictureIDCompleted(object sender, RequestCompletedEventArgs e)
         {
+            doingWork = false;
             App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted -= MetrocamService_FetchFavoritedPictureByPictureIDCompleted;
             f = e.Data as FavoritedPicture;
         }
