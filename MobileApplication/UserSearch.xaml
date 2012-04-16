@@ -14,20 +14,18 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" Height="Auto">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="find friends" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="find friends" Margin="9,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-
-        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top" Margin="12,0,0,0">
+        <Grid x:Name="content" Grid.Row="1" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -35,9 +33,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="search by username or name" Margin="12,0,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
+            <TextBlock Grid.Row="0" Text="Search by username or name" Margin="12,0,0,0" Foreground="{StaticResource PhoneBorderBrush}" />
             <toolkit:PhoneTextBox Grid.Row="1" x:Name="searchterms" AcceptsReturn="False" Hint="Search" ActualHintVisibility="Visible"  Margin="0,0,0,0" Foreground="Black" GotFocus="searchterms_GotFocus" />
-          <!--Grid.Row="1"-->
+            
             <Button Grid.Row="2" x:Name="searchbutton" Content="search" Margin="0,0,12,0" MinWidth="220" HorizontalAlignment="Left" Click="searchbutton_Click" />   
             <TextBlock Grid.Row="3" x:Name="noresults" Text="No results found." Margin="12,0,0,0" Visibility="Collapsed"/> 
             
@@ -54,17 +52,6 @@
             </ListBox>
         </Grid>
     </Grid>
-
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar x:Name="MainPageAppBar" Mode="Minimized" IsVisible="True" IsMenuEnabled="True" Opacity="0.75">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="about" Click="About_Click" />
-                <shell:ApplicationBarMenuItem Text="edit profile" Click="Edit_Click" />
-                <shell:ApplicationBarMenuItem Text="settings" Click="Settings_Click" />
-                <shell:ApplicationBarMenuItem Text="sign out" Click="SignOut_Click" />
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
 
     <!-- sexy transitions -->
     <toolkit:TransitionService.NavigationInTransition>
