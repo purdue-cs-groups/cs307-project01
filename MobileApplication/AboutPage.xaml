@@ -53,7 +53,7 @@
             </controls:PivotItem>
 
             <!--Pivot item two-->
-            <controls:PivotItem x:Name="privacy" Header="privacy">
+            <controls:PivotItem x:Name="terms" Header="terms">
                 <Grid x:Name="ContentPanel" Background="Transparent" Grid.Row="1" Margin="0,0">
                         <ScrollViewer VerticalScrollBarVisibility="Hidden">
                             <TextBlock x:Name="displaybox" TextWrapping="Wrap"
@@ -62,7 +62,47 @@
                                        VerticalAlignment="Top"
                                        Style="{StaticResource PhoneTextTitle2Style}">
                                 <Run>
-                                    Metrocam agrees not to share any of your shit with anyone (password, email, etc) but accepts no responsibility for information and photographs you freely share as a part of your profile.  Metrocam will not store your Twitter credentials, but might steal some snacks from you, if you have some.  Cheez its are always good.  Bacon ipsum dolor sit amet ground round fatback salami bacon pork chop flank, filet mignon boudin. Flank strip steak ribeye, tenderloin corned beef ham short loin ball tip capicola. Short ribs boudin spare ribs, flank fatback andouille t-bone pork chop shoulder meatloaf salami brisket strip steak filet mignon. Ham hock drumstick chicken, pastrami shankle short ribs hamburger spare ribs t-bone kielbasa pork jerky turducken. Beef ribs pork loin ball tip capicola, shank brisket hamburger bacon pig jowl ground round chicken leberkas flank sausage. Jowl tri-tip sirloin short ribs, ball tip tongue biltong corned beef ribeye. Pastrami tongue jerky, biltong short ribs tenderloin pork belly. Leberkas chicken flank, sausage jerky ham ball tip t-bone short ribs shoulder pork chop tri-tip bacon. Corned beef prosciutto t-bone jowl rump leberkas, ham sausage ground round meatloaf turducken bacon bresaola jerky brisket. Meatball pork loin sausage t-bone kielbasa, biltong pancetta capicola leberkas tenderloin. Tongue shoulder tri-tip swine, filet mignon hamburger spare ribs jerky salami pork chop fatback biltong. (c) Metrocam 2012
+                                    Metrocam Terms
+By using the metrocam.cloudapp.net website, the Metrocam mobile phone application, Metrocam Open API, and Metrocam service you are agreeing to be bound by the following terms and conditions ("Terms of Use").
+
+Notices
+
+    Location services are by default used to attach your general location to your photos.  You may turn this off in settings.
+    Any authentication shared as a result of integration with existing social networking services will not be stored or shared.
+
+Basic Terms
+
+    You may not post nude or partially nude photos.
+    You are responsible for any activity that occurs under your screen name.
+    You are responsible for keeping your password secure.
+    You must not abuse, harass, threaten, impersonate or intimidate other Metrocam users.
+    You may not use the Metrocam service for any illegal or unauthorized purpose. International users agree to comply with all local laws regarding online conduct and acceptable content.
+    You are solely responsible for your conduct and any data, text, information, screen names, graphics, photos, profiles, audio and video clips, links (here forward known as “Content”) that you submit, post, and display on the Metrocam service.
+    You must not modify, adapt or hack Metrocam or modify another website so as to falsely imply that it is associated with Metrocam.
+    You must not access Metrocam's private API by any other means other than the Metrocam application itself.  You may access public API with the successful registration of an API key.
+    You must not transmit any worms or viruses or any code of a destructive nature.
+    You must not, in the use of Metrocam, violate any laws in your jurisdiction (including but not limited to copyright laws).
+    Violation of any of these agreements will result in the termination of your Metrocam account. While Metrocam prohibits such conduct and Content on its site, you understand and agree that Metrocam cannot be responsible for the content posted on its web site and you nonetheless may be exposed to such materials and that you use the Metrocam service at your own risk.
+
+General Conditions
+
+    We reserve the right to modify or terminate the Metrocam service for any reason, without notice at any time.
+    We reserve the right to alter these Terms of Use at any time. If the alterations constitute a material change to the Terms of Use, we will notify you via your designated email account. What constitutes a "material change" will be determined at our sole discretion, in good faith and using common sense and reasonable judgement.
+    We reserve the right to refuse service to anyone for any reason at any time.
+    We reserve the right to force forfeiture of any username that becomes inactive, violates trademark, or may mislead other users.
+    We may, but have no obligation to, remove Content and accounts containing Content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, obscene or otherwise objectionable or violates any party's intellectual property or these Terms of Use.
+    We reserve the right to reclaim usernames on behalf of businesses or individuals that hold legal claim or trademark on those usernames.
+
+Proprietary Rights in Content on Metrocam
+
+    Metrocam does NOT claim ANY ownership rights in the text, files, images, photos, video, sounds, musical works, works of authorship, applications, or any other materials (collectively, "Content") that you post on or through the Metrocam Services. By displaying or publishing ("posting") any Content on or through the Metrocam Services, you hereby grant to Metrocam a non-exclusive, fully paid and royalty-free, worldwide, limited license to use, modify, delete from, add to, publicly perform, publicly display, reproduce and translate such Content, including without limitation distributing part or all of the Site in any media formats through any media channels, except Content not shared publicly ("private") will not be distributed outside the Metrocam Services.
+    Some of the Metrocam Services may be supported by advertising revenue and may display advertisements and promotions, and you hereby agree that Metrocam may place such advertising and promotions on the MetrocamServices or on, about, or in conjunction with your Content. The manner, mode and extent of such advertising and promotions are subject to change without specific notice to you.
+    You represent and warrant that: (i) you own the Content posted by you on or through the Metrocam Services or otherwise have the right to grant the license set forth in this section, (ii) the posting and use of your Content on or through the Metrocam Services does not violate the privacy rights, publicity rights, copyrights, contract rights, intellectual property rights or any other rights of any person, and (iii) the posting of your Content on the Site does not result in a breach of contract between you and a third party. You agree to pay for all royalties, fees, and any other monies owing any person by reason of Content you post on or through the Metrocam Services.
+    The Metrocam Services contain Content of Users and other Metrocam licensors. Except as provided within this Agreement, you may not copy, modify, translate, publish, broadcast, transmit, distribute, perform, display, or sell any Content appearing on or through the Metrocam Services.
+    Metrocam performs technical functions necessary to offer the Metrocam Services, including but not limited to transcoding and/or reformatting Content to allow its use throughout the Metrocam Services.
+    Although the Site and other Metrocam Services are normally available, there will be occasions when the Site or other Metrocam Services will be interrupted for scheduled maintenance or upgrades, for emergency repairs, or due to failure of telecommunications links and equipment that are beyond the control of Metrocam. Also, although Metrocam will normally only delete Content that violates this Agreement, Metrocam reserves the right to delete any Content for any reason, without prior notice. Deleted content may be stored by Metrocam in order to comply with certain legal obligations and is not retrievable without a valid court order. Consequently, Metrocam encourages you to maintain your own backup of your Content. In other words, Metrocam is not a backup service. Metrocam will not be liable to you for any modification, suspension, or discontinuation of the Metrocam Services, or the loss of any Content.
+
+
                                 </Run>
                             </TextBlock>
                         </ScrollViewer>
