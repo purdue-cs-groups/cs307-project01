@@ -14,6 +14,7 @@ using MobileClientLibrary;
 using MobileClientLibrary.Models;
 using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -67,13 +68,14 @@ namespace MetrocamPan
         {
             App.MetrocamService.UpdateUserCompleted -= MetrocamService_UpdateUserCompleted;
             GlobalLoading.Instance.IsLoading = false;
-            MessageBox.Show("Your profile has been updated.");
+
+            App.isFromEditProfile = true;
+
             NavigationService.GoBack();
         }
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Your changes have been discarded.");
             NavigationService.GoBack();
         }
 

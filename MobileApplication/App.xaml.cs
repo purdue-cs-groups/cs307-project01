@@ -42,6 +42,7 @@ namespace MetrocamPan
         public static bool isFromAppActivate = false;
         public static bool isFromUploadPage = false;
         public static bool pictureIsDeleted = false;
+        public static bool isFromEditProfile = false; 
         
         public PhoneApplicationFrame RootFrame { get; private set; }
 

@@ -95,6 +95,8 @@ namespace MetrocamPan
                     doingWork = true;
                     App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
                 }
+
+                alreadyAddedButton = true;
             }
 
             if (CurrentPicture.User.ID.Equals(App.MetrocamService.CurrentUser.ID))

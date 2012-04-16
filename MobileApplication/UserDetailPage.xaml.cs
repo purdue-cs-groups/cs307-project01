@@ -21,6 +21,8 @@ using System.Windows.Navigation;
 using System.Collections;
 using System.Collections.ObjectModel;
 using MetrocamPan.ScrollLoaders;
+using MetrocamPan.Helpers;
+using Coding4Fun.Phone.Controls;
 
 namespace MetrocamPan
 {
@@ -29,6 +31,9 @@ namespace MetrocamPan
         public Boolean AppBarSet = false;
         public UserInfo userInfo;
         public Relationship r = null;
+
+        // ToastPrompt for message display
+        private ToastPrompt toastDisplay;
 
         public static ObservableCollection<PictureInfo> ContinuedUserPictures = new ObservableCollection<PictureInfo>();
 
@@ -42,6 +47,17 @@ namespace MetrocamPan
         PictureInfo SelectedPicture = null;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (App.isFromEditProfile)
+            {
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Your profile has been updated.");
+
+                toastDisplay.Show();
+
+                App.isFromEditProfile = false;
+            }
+
             if (NavigationContext.QueryString["userid"].Equals(App.MetrocamService.CurrentUser.ID))
             {
                 // User navigates to his own profile
@@ -140,6 +156,7 @@ namespace MetrocamPan
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
+            App.MetrocamService.FetchUserCompleted -= MetrocamService_FetchUserCompleted;
             userInfo = e.Data as UserInfo;
 
             if (userInfo.ID.Equals(App.MetrocamService.CurrentUser.ID))

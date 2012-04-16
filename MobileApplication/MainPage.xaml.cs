@@ -102,6 +102,16 @@ namespace MetrocamPan
 
                 App.isFromUploadPage = false;
             }
+            else if (App.isFromEditProfile)
+            {
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Success!",
+                "Your profile has been updated.");
+
+                toastDisplay.Show();
+
+                App.isFromEditProfile = false; 
+            }
 
             // Checks if user is already logged in previously
             if (!Settings.isLoggedIn.Value || Settings.isLoggedIn == null)
@@ -854,7 +864,7 @@ namespace MetrocamPan
 
             ContextMenu CM = new ContextMenu();
 
-            CM.Items.Add(Favorite);
+            //CM.Items.Add(Favorite);
             CM.Items.Add(Save);
             if (!info.ID.Equals(App.MetrocamService.CurrentUser.ProfilePicture.ID))
                 CM.Items.Add(ProfilePicture);
@@ -912,9 +922,9 @@ namespace MetrocamPan
             Save.Header = "save";
             Save.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(Save_Tap);
 
-            CM.Items.Add(Favorite);
+            //CM.Items.Add(Favorite);
             CM.Items.Add(Save);
-            CM.Items.Add(Flag);
+            //CM.Items.Add(Flag);
 
             return CM;
         }
