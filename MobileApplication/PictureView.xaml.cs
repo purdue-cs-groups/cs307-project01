@@ -232,10 +232,24 @@ namespace MetrocamPan
             data.PictureID = CurrentPicture.ID;
             data.UserID = App.MetrocamService.CurrentUser.ID;
 
-            if ((from pic in App.FavoritedUserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault() != null)
-            {
-                return;
-            }
+            /**
+             * update local copy of picture
+             */
+            PictureInfo favoritePic = (from pic in App.FavoritedUserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = true;
+
+            favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = true;
+
+            favoritePic = (from pic in App.RecentPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = true;
+
+            favoritePic = (from pic in App.UserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = true;
 
             App.FavoritedUserPictures.Add(CurrentPicture);
 
@@ -251,6 +265,26 @@ namespace MetrocamPan
                 return;
 
             GlobalLoading.Instance.IsLoading = true;
+            PictureInfo data = CurrentPicture; 
+
+            /**
+             * update local copy of picture
+             */
+            PictureInfo favoritePic = (from pic in App.FavoritedUserPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = false;
+
+            favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = false;
+
+            favoritePic = (from pic in App.RecentPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = false;
+
+            favoritePic = (from pic in App.UserPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
+            if (favoritePic != null)
+                favoritePic.IsFavorited = false;
 
             App.FavoritedUserPictures.Remove(CurrentPicture);
             App.MetrocamService.DeleteFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_DeleteFavoritedPictureCompleted);
