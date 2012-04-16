@@ -30,7 +30,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,20,12,0">
             <Image  Height="533" HorizontalAlignment="Left" Margin="12,0,0,0" Name="originalPhoto" Stretch="UniformToFill" VerticalAlignment="Top" Width="400" />
-            <Image  Height="400" HorizontalAlignment="Left" Margin="12,0,0,0" Name="cropArea" Stretch="UniformToFill" VerticalAlignment="Top" Width="400" Source="/WinstagramPan;component/Images/crop.png" Opacity="0.5" ManipulationDelta="cropArea_ManipulationDelta" />
+            <Rectangle x:Name="upperBound" Height="0" Width="400" Margin="12,0,0,0" Fill="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" HorizontalAlignment="Left" Opacity="0.3"></Rectangle>
+            <Image  Height="400" HorizontalAlignment="Left" Margin="12,0,0,0" Name="cropArea" Stretch="UniformToFill" VerticalAlignment="Top" Width="400" Source="/WinstagramPan;component/Images/crop.png" Opacity="0" ManipulationDelta="cropArea_ManipulationDelta" />
+            <Rectangle x:Name="lowerBound" Height="0" Width="400" Margin="12,0,0,10" Fill="{StaticResource PhoneAccentBrush}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Opacity="0.3"></Rectangle>
         </Grid>
     </Grid>
  

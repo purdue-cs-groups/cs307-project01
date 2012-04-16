@@ -64,6 +64,11 @@ namespace MetrocamPan
             current = (int)cropArea.Margin.Top;
             min     = (int)cropArea.Margin.Top;
             max     = (int)originalPhoto.Height - (int)cropArea.Height;
+
+            lowerBound.Height  = max;
+
+            upperBound.Width = cropArea.Width;
+            lowerBound.Width = cropArea.Width;
         }
 
         private void CropPhoto()
@@ -98,17 +103,35 @@ namespace MetrocamPan
 
             drag.Y += e.DeltaManipulation.Translation.Y;
             if (drag.Y < 0)
+            {
+                //lowerBound.Height = originalPhoto.Height - cropArea.Height;
                 drag.Y = 0;
+            }
             if (drag.Y > max)
+            {
+                lowerBound.Height = originalPhoto.Height - cropArea.Height;
                 drag.Y = max;
+            }
 
             int temp = current + (int)e.DeltaManipulation.Translation.Y;
             if (temp < min)
+            {
+                lowerBound.Height = originalPhoto.Height - cropArea.Height;
+                upperBound.Height = 0;
                 current = min;
+            }
             else if (temp > max)
+            {
+                upperBound.Height = originalPhoto.Height - cropArea.Height;
+                lowerBound.Height = 0;
                 current = max;
+            }
             else
+            {
+                upperBound.Height = temp;
+                lowerBound.Height = max - temp;
                 current = temp;
+            }
 
         }
 

@@ -61,6 +61,11 @@ namespace MetrocamPan
 
             min = (int)cropArea.Margin.Right;
             max = (int)originalPhoto.Width - (int)cropArea.Width;
+
+            rightBound.Width = max;
+
+            leftBound.Height = cropArea.Height;
+            rightBound.Height = cropArea.Height;
         }
 
         private void CropPhoto()
@@ -98,11 +103,21 @@ namespace MetrocamPan
 
             int temp = current + (int)e.DeltaManipulation.Translation.X;
             if (temp < min)
+            {
+                rightBound.Width = originalPhoto.Width - cropArea.Width;
                 current = min;
+            }
             else if (temp > max)
+            {
+                leftBound.Width = originalPhoto.Width - cropArea.Width; 
                 current = max;
+            }
             else
+            {
+                leftBound.Width = temp;
+                rightBound.Width = max - temp;
                 current = temp;
+            }
         }
 
         private void Cancel_Click(object sender, EventArgs e)
