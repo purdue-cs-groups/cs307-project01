@@ -190,12 +190,10 @@ namespace MetrocamPan
             App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
             Settings.getUserSpecificSettings(App.MetrocamService.CurrentUser.ID);
 
-            if (App.isFromAppLaunch)
+            if (App.isFromAppLaunch && App.MetrocamService.CurrentUser != null)
             {
-                App.isFromLandingPage = false;
-
-                FetchPopularPictures();
                 GetUserConnectedAccounts();
+                FetchPopularPictures();
             }
 
             if (isRefreshingRecent)
@@ -595,7 +593,7 @@ namespace MetrocamPan
 
         private void MainContent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MainContent.SelectedIndex == 0)
+            if (MainContent.SelectedIndex == 0 && App.MetrocamService.CurrentUser != null)
             {
                 // If Recent pivot item is selected
                 isRefreshingPopular = true;
