@@ -122,14 +122,7 @@ namespace MetrocamPan
                 return;
             }
 
-            // User is logged in previously, check how this app got to main page
-            if (App.isFromAppLaunch || App.isFromAppActivate)
-            {
-                // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
-                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
-            }
-            else if (App.isFromLandingPage)
+            if (App.isFromLandingPage)
             {
                 // Reset back to false
                 App.isFromLandingPage = false;
@@ -138,6 +131,14 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
+            }
+
+            // User is logged in previously, check how this app got to main page
+            if (App.isFromAppLaunch || App.isFromAppActivate)
+            {
+                // App is launched from start. We need to authenticate, then populate Popular, then populate Recent
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
             else if (App.isFromUploadPage)
             {
