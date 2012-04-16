@@ -27,7 +27,7 @@
             <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,12,12,12">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -40,7 +40,6 @@
             </Grid.RowDefinitions>
 
             <Image Name="imgPicture" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Width="456" Height="456" Stretch="UniformToFill" Margin="0,0,0,12" />
-            
             <Image Name="imgProfilePicture" Grid.Row="1" Grid.Column="0" Height="40" Width="40" Stretch="Fill" Source="/Images/dunsmore.png" Tap="ViewUserDetail_Tap" />
             <TextBlock Name="txtUsername" Grid.Row="1" Grid.Column="1" Text="Picture owner name" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}" Tap="ViewUserDetail_Tap" Margin="6,6,0,0" />
             <TextBlock Name="txtCreatedDate" Grid.Row="1" Grid.Column="2" Text="3 hours ago" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0,6,0,0" />

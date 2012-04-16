@@ -14,35 +14,31 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="edit profile" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="edit profile" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel Margin="12,0,12,0">
-                <TextBlock Text="name" />
-                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" Text="{Binding Name}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="UsernameInput_KeyDown" />
-                <TextBlock Text="email" />
-                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="20" Text="{Binding EmailAddress}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="EmailInput_KeyDown" /> 
-                <TextBlock Text="location" />
-                <toolkit:PhoneTextBox x:Name="LocationInput" MaxLength="20" Text="{Binding Location}" InputScope="PersonalFullName" Margin="-12,0,0,0" KeyDown="LocationInput_KeyDown" />
-                <TextBlock Text="bio" />
-                <toolkit:PhoneTextBox x:Name="BiographyInput" MaxLength="150" DisplayedMaxLength="150" LengthIndicatorVisible="True" LengthIndicatorThreshold="0" Text="{Binding Biography}" InputScope="PersonalFullName" Margin="-12,0,0,0" TextWrapping="Wrap" Height="160" Width="Auto" KeyDown="BiographyInput_KeyDown" />
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Full Name" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="20" Text="{Binding Name}" InputScope="PersonalFullName" KeyDown="UsernameInput_KeyDown" />
+                <TextBlock Text="Email" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="EmailInput" MaxLength="20" Text="{Binding EmailAddress}" InputScope="PersonalFullName" KeyDown="EmailInput_KeyDown" />
+                <TextBlock Text="Location" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="LocationInput" MaxLength="20" Text="{Binding Location}" InputScope="PersonalFullName" KeyDown="LocationInput_KeyDown" />
+                <TextBlock Text="Biography" Style="{StaticResource PhoneTextNormalStyle}" />
+                <toolkit:PhoneTextBox x:Name="BiographyInput" MaxLength="150" DisplayedMaxLength="150" LengthIndicatorVisible="True" LengthIndicatorThreshold="0" Text="{Binding Biography}" InputScope="PersonalFullName" TextWrapping="Wrap" Height="160" Width="Auto" KeyDown="BiographyInput_KeyDown" />
             </StackPanel>
         </Grid>
     </Grid>
  
-    <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="1">
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="accept" Click="Accept_Click" />
