@@ -8,41 +8,36 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" Opacity="1">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
+            <TextBlock x:Name="PageTitle" Text="settings" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
-        
-            <Grid x:Name="settingsOptions" Grid.Row="1" Margin="0,0,12,0">
-            <!-- StackPanel for user input fields -->
-            <StackPanel Margin="12,0,12,0">
+
+        <Grid x:Name="settingsOptions" Grid.Row="1">
+            <StackPanel>
                 <TextBlock x:Name="socialitems" Text="social networks" Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <Button x:Name="connectaccounts" Click="ConnectToTwitter_Click">Connect to Twitter</Button>
                 <toolkit:ToggleSwitch Header="tweet by default" Content="on" IsChecked="false" IsEnabled="True" Checked="tweetCheck" Unchecked="tweetUncheck" x:Name="tweetToggle" Visibility="Collapsed"/>
 
-                <TextBlock Text="media library"  Style="{StaticResource PhoneTextTitle2Style}" Margin="12,0,12,0" Foreground="{StaticResource PhoneAccentBrush}" />
+                <TextBlock Text="media library"  Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="originalCheck" Unchecked="originalUncheck" Name="oToggle" Header="save pictures taken with camera"/>
-                <TextBlock Text="location services"  Style="{StaticResource PhoneTextTitle2Style}" Margin="12,0,12,0" Foreground="{StaticResource PhoneAccentBrush}" />
+                <TextBlock Text="location services"  Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="locCheck" Unchecked="locUncheck" Name="lToggle" Header="add location to pictures" />
             </StackPanel>
         </Grid>
-
-
     </Grid>
 
     <!-- sexy transitions -->
