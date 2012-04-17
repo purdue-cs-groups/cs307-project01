@@ -40,7 +40,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{Binding IconURI}" Margin="6,0" VerticalAlignment="Top" Width="90" Height="90" />
-                            <TextBlock Grid.Row="0" Foreground="{StaticResource PhoneBackgroundBrush}" Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Bottom" />
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" TextAlignment="Center" VerticalAlignment="Bottom" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

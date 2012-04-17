@@ -71,7 +71,8 @@ namespace MetrocamPan
 
             captionBox.IsReadOnly = true;
 
-            GlobalLoading.Instance.IsLoading = true;
+            if (GlobalLoading.Instance.IsLoading == false) 
+                GlobalLoading.Instance.IsLoading = true;
 
             // authenticate with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
@@ -166,7 +167,9 @@ namespace MetrocamPan
 
         private void client_CreatePictureCompleted(object sender, RequestCompletedEventArgs e)
         {
-            GlobalLoading.Instance.IsLoading = false;
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
+            
             isUploading = false;
 
             MobileClientLibrary.Models.Picture data = e.Data as MobileClientLibrary.Models.Picture;
