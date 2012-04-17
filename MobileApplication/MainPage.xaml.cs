@@ -173,6 +173,7 @@ namespace MetrocamPan
                 else
                 {
                     // Refresh favourites
+                    FetchFavoritedPictures();
                 }
             }
             else
@@ -599,13 +600,13 @@ namespace MetrocamPan
                 // isRefreshingPopular = true;
                 // FetchPopularPictures();
             }
-            else if (MainContent.SelectedIndex == 1 && App.MetrocamService.CurrentUser != null)
+            else if (MainContent.SelectedIndex == 1 && App.MetrocamService.CurrentUser != null && App.RecentPictures.Count == 0)
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
                 FetchRecentPictures();
             }
-            else if (MainContent.SelectedIndex == 2 && App.MetrocamService.CurrentUser != null)
+            else if (MainContent.SelectedIndex == 2 && App.MetrocamService.CurrentUser != null && App.FavoritedUserPictures.Count == 0)
             {
                 if (App.FavoritedUserPictures.Count != 0)
                 {
