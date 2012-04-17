@@ -23,7 +23,7 @@
 
     <Grid Background="Transparent">
         <!--Root Pivot Control-->
-        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="-12,-12,0,0" Background="{StaticResource PhoneBackgroundBrush}" SelectionChanged="MainContent_SelectionChanged">
+        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="-12,0,0,0" Background="{StaticResource PhoneBackgroundBrush}" SelectionChanged="MainContent_SelectionChanged">
 
             <!--Popular Pivot Item-->
             <controls:PivotItem Header="popular" IsTabStop="False" FontWeight="Normal">
