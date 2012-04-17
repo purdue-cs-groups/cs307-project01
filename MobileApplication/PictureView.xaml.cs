@@ -75,25 +75,51 @@ namespace MetrocamPan
 
             if (!alreadyAddedButton)
             {
-                if (!CurrentPicture.IsFavorited)
+                if (App.ChangedFavoritedStatus.ContainsKey(CurrentPicture.ID))
                 {
-                    ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
-                    favorite.Text = "favorite";
-                    favorite.Click += new EventHandler(Favorite_Click);
+                    if (App.ChangedFavoritedStatus[CurrentPicture.ID] == true)
+                    {
+                        ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
+                        unfavorite.Text = "unfavorite";
+                        unfavorite.Click += new EventHandler(Unfavorite_Click);
 
-                    ApplicationBar.Buttons.Add(favorite);
+                        ApplicationBar.Buttons.Add(unfavorite);
+
+                        App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
+                        doingWork = true;
+                        App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
+                    }
+                    else
+                    {
+                        ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                        favorite.Text = "favorite";
+                        favorite.Click += new EventHandler(Favorite_Click);
+
+                        ApplicationBar.Buttons.Add(favorite);
+                    }
                 }
                 else
                 {
-                    ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
-                    unfavorite.Text = "unfavorite";
-                    unfavorite.Click += new EventHandler(Unfavorite_Click);
+                    if (!CurrentPicture.IsFavorited)
+                    {
+                        ApplicationBarIconButton favorite = new ApplicationBarIconButton(new Uri("Images/appbar.heart.png", UriKind.Relative));
+                        favorite.Text = "favorite";
+                        favorite.Click += new EventHandler(Favorite_Click);
 
-                    ApplicationBar.Buttons.Add(unfavorite);
+                        ApplicationBar.Buttons.Add(favorite);
+                    }
+                    else
+                    {
+                        ApplicationBarIconButton unfavorite = new ApplicationBarIconButton(new Uri("Images/appbar.heartbreak.png", UriKind.Relative));
+                        unfavorite.Text = "unfavorite";
+                        unfavorite.Click += new EventHandler(Unfavorite_Click);
 
-                    App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
-                    doingWork = true;
-                    App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
+                        ApplicationBar.Buttons.Add(unfavorite);
+
+                        App.MetrocamService.FetchFavoritedPictureByPictureIDCompleted += new RequestCompletedEventHandler(MetrocamService_FetchFavoritedPictureByPictureIDCompleted);
+                        doingWork = true;
+                        App.MetrocamService.FetchFavoritedPictureByPictureID(CurrentPicture.ID, App.MetrocamService.CurrentUser.ID);
+                    }
                 }
 
                 alreadyAddedButton = true;
@@ -230,28 +256,11 @@ namespace MetrocamPan
             if (doingWork)
                 return;
 
+            App.ChangedFavoritedStatus[CurrentPicture.ID] = true;
+
             FavoritedPicture data = new FavoritedPicture();
             data.PictureID = CurrentPicture.ID;
             data.UserID = App.MetrocamService.CurrentUser.ID;
-
-            /**
-             * update local copy of picture
-             */
-            PictureInfo favoritePic = (from pic in App.FavoritedUserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = true;
-
-            favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = true;
-
-            favoritePic = (from pic in App.RecentPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = true;
-
-            favoritePic = (from pic in App.UserPictures where pic.ID.Equals(data.PictureID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = true;
 
             App.FavoritedUserPictures.Add(CurrentPicture);
 
@@ -265,6 +274,8 @@ namespace MetrocamPan
         {
             if (doingWork)
                 return;
+
+            App.ChangedFavoritedStatus[CurrentPicture.ID] = false;
 
             GlobalLoading.Instance.IsLoading = true;
             PictureInfo data = CurrentPicture;
@@ -283,18 +294,6 @@ namespace MetrocamPan
 
                 i++;
             }
-
-            PictureInfo favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = false;
-
-            favoritePic = (from pic in App.RecentPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = false;
-
-            favoritePic = (from pic in App.UserPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = false;
 
             if (App.FavoritedUserPictures.Count != 0)
                 App.FavoritedUserPictures.RemoveAt(i);
