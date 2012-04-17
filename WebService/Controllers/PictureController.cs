@@ -61,6 +61,15 @@ namespace WebService.Controllers
                 }
             }
 
+            var query2 = Query.EQ("UserID", data.ID);
+            foreach (Picture p in pictures.Find(query2).SetSortOrder(SortBy.Descending("CreatedDate")).SetLimit(25).ToList<Picture>())
+            {
+                UserInfo u = UserController.FetchInfo(p.UserID);
+                PictureInfo i = new PictureInfo(p, u);
+
+                list.Add(i);
+            }
+
             return list.OrderByDescending(p => p.FriendlyCreatedDate).Take(25).ToList<PictureInfo>();
         }
 

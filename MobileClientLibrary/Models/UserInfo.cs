@@ -55,6 +55,30 @@ namespace MobileClientLibrary.Models
             set;
         }
 
+        public bool IsFollowing
+        {
+            get;
+            set;
+        }
+
+        public int Followers
+        {
+            get;
+            set;
+        }
+
+        public int Following
+        {
+            get;
+            set;
+        }
+
+        public int Pictures
+        {
+            get;
+            set;
+        }
+
         public int CreatedDate
         {
             get;

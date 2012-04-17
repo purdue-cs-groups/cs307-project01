@@ -90,6 +90,27 @@ namespace WebService.Models
         }
 
         [DataMember(Order = 8)]
+        public int Followers
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 9)]
+        public int Following
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 10)]
+        public int Pictures
+        {
+            get;
+            set;
+        }
+
+        [DataMember(Order = 11)]
         public int CreatedDate
         {
             get;

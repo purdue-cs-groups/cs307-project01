@@ -49,6 +49,11 @@ namespace WebService
                 jsonToken.UniqueIdentifier = token.UniqueIdentifier;
                 jsonToken.User = UserController.FetchInfo(token.Identity.ID);
 
+                jsonToken.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, token.Identity.ID);
+                jsonToken.User.Followers = UserController.FetchUserStats(token.Identity.ID).Followers;
+                jsonToken.User.Following = UserController.FetchUserStats(token.Identity.ID).Following;
+                jsonToken.User.Pictures = UserController.FetchUserStats(token.Identity.ID).Pictures;
+
                 return jsonToken;
             }
             else
@@ -348,7 +353,10 @@ namespace WebService
                 data.IsFavorited = FavoritedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
                 data.IsFlagged = FlaggedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
 
-                data.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == data.User.ID).Count() > 0;
+                data.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, data.User.ID);
+                data.User.Followers = UserController.FetchUserStats(data.User.ID).Followers;
+                data.User.Following = UserController.FetchUserStats(data.User.ID).Following;
+                data.User.Pictures = UserController.FetchUserStats(data.User.ID).Pictures;
             }
 
             return data;
@@ -366,7 +374,10 @@ namespace WebService
                 item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                 item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
 
-                item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
+                item.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.User.ID);
+                item.User.Followers = UserController.FetchUserStats(item.User.ID).Followers;
+                item.User.Following = UserController.FetchUserStats(item.User.ID).Following;
+                item.User.Pictures = UserController.FetchUserStats(item.User.ID).Pictures;
             }
 
             return list;
@@ -386,7 +397,10 @@ namespace WebService
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
 
-                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
+                    item.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.User.ID);
+                    item.User.Followers = UserController.FetchUserStats(item.User.ID).Followers;
+                    item.User.Following = UserController.FetchUserStats(item.User.ID).Following;
+                    item.User.Pictures = UserController.FetchUserStats(item.User.ID).Pictures;
                 }
 
                 return list;
@@ -411,7 +425,10 @@ namespace WebService
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
 
-                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
+                    item.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.User.ID);
+                    item.User.Followers = UserController.FetchUserStats(item.User.ID).Followers;
+                    item.User.Following = UserController.FetchUserStats(item.User.ID).Following;
+                    item.User.Pictures = UserController.FetchUserStats(item.User.ID).Pictures;
                 }
 
                 return list;
@@ -436,7 +453,10 @@ namespace WebService
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
 
-                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
+                    item.User.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.User.ID);
+                    item.User.Followers = UserController.FetchUserStats(item.User.ID).Followers;
+                    item.User.Following = UserController.FetchUserStats(item.User.ID).Following;
+                    item.User.Pictures = UserController.FetchUserStats(item.User.ID).Pictures;
                 }
 
                 return list;
@@ -530,13 +550,6 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/user/fetch?userid={userId}&followingid={followingId}")]
-        public Relationship FetchRelationshipByUserID(string userId, string followingId)
-        {
-            return RelationshipController.FetchUserRelationshipByIDs(userId, followingId); 
-        }
-
-        [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/create")]
         public Relationship CreateRelationship(Stream data)
         {
@@ -606,7 +619,11 @@ namespace WebService
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             UserInfo data = UserController.FetchInfo(id);
-            data.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == data.ID).Count() > 0;
+            
+            data.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, data.ID);
+            data.Followers = UserController.FetchUserStats(data.ID).Followers;
+            data.Following = UserController.FetchUserStats(data.ID).Following;
+            data.Pictures = UserController.FetchUserStats(data.ID).Pictures;
 
             return data;
         }
@@ -627,7 +644,10 @@ namespace WebService
             List<UserInfo> list = UserController.FetchAll();
             foreach (UserInfo item in list)
             {
-                item.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.ID).Count() > 0;            
+                item.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.ID);
+                item.Followers = UserController.FetchUserStats(item.ID).Followers;
+                item.Following = UserController.FetchUserStats(item.ID).Following;
+                item.Pictures = UserController.FetchUserStats(item.ID).Pictures;
             }
 
             return list;
@@ -642,7 +662,10 @@ namespace WebService
             List<UserInfo> list = UserController.FetchAll(query);
             foreach (UserInfo item in list)
             {
-                item.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.ID).Count() > 0;
+                item.IsFollowing = RelationshipController.IsFollowing(token.Identity.ID, item.ID);
+                item.Followers = UserController.FetchUserStats(item.ID).Followers;
+                item.Following = UserController.FetchUserStats(item.ID).Following;
+                item.Pictures = UserController.FetchUserStats(item.ID).Pictures;
             }
 
             return list;
