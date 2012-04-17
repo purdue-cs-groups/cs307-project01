@@ -25,7 +25,7 @@
             <TextBlock x:Name="PageTitle" Text="crop photo" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12" HorizontalAlignment="Center">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,12,12,16" HorizontalAlignment="Center">
             <Image x:Name="originalPhoto"
                    Height="533" Width="400"
                    HorizontalAlignment="Left" 
