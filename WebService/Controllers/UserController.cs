@@ -158,7 +158,7 @@ namespace WebService.Controllers
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
 
-                if (list.Contains(i) == false)
+                if (list.Where(z => z.ID == i.ID).Count() <= 0)
                     list.Add(i);
             }
 
@@ -170,7 +170,7 @@ namespace WebService.Controllers
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
 
-                if (list.Contains(i) == false)
+                if (list.Where(z => z.ID == i.ID).Count() <= 0)
                     list.Add(i);
             }
 
@@ -182,7 +182,7 @@ namespace WebService.Controllers
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
 
-                if (list.Contains(i) == false)
+                if (list.Where(z => z.ID == i.ID).Count() <= 0)
                     list.Add(i);
             }
 
