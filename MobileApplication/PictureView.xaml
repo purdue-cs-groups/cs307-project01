@@ -27,26 +27,27 @@
             <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,24,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1">
+            <Grid x:Name="ContentPanel" Margin="0,24,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Image x:Name="imgPicture" 
+                <Image x:Name="imgPicture" 
                    Grid.Row="0"
                    Width="456" Height="456" 
                    Stretch="UniformToFill" />
 
-            <Grid Grid.Row="1" Margin="12,6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" Margin="12,6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Image x:Name="imgProfilePicture" 
+                    <Image x:Name="imgProfilePicture" 
                        Grid.Column="0"
                        Height="40"       
                        Width="40" 
@@ -55,7 +56,7 @@
                        Stretch="UniformToFill"
                        Source="/Images/dunsmore.png" 
                        Tap="ViewUserDetail_Tap" />
-                <TextBlock x:Name="txtUsername" 
+                    <TextBlock x:Name="txtUsername" 
                            Text="Picture owner name" 
                            Grid.Column="1"
                            Margin="6,0,0,0" 
@@ -65,7 +66,7 @@
                            Foreground="{StaticResource PhoneAccentBrush}" 
                            Style="{StaticResource PhoneTextNormalStyle}" 
                            Tap="ViewUserDetail_Tap" />
-                <TextBlock x:Name="txtCreatedDate" 
+                    <TextBlock x:Name="txtCreatedDate" 
                            Grid.Column="2"
                            Height="Auto" 
                            Padding="0,6,0,0"
@@ -74,8 +75,8 @@
                            HorizontalAlignment="Right" 
                            FontSize="{StaticResource PhoneFontSizeSmall}" 
                            Foreground="{StaticResource PhoneBorderBrush}" />
-            </Grid>
-            <TextBlock x:Name="txtCaption" 
+                </Grid>
+                <TextBlock x:Name="txtCaption" 
                        Grid.Row="2" 
                        Margin="12,0"
                        VerticalAlignment="Top" 
@@ -85,7 +86,8 @@
                        Text="Caption goes here"
                        Foreground="{StaticResource PhoneBorderBrush}"
                        TextWrapping="Wrap" />
-        </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
