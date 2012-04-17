@@ -59,6 +59,7 @@ namespace MetrocamPan
 
             this.originalPhoto.Source = MainPage.captured.Source;
 
+            current = (int)cropArea.Margin.Right;
             min = (int)cropArea.Margin.Right;
             max = (int)originalPhoto.Width - (int)cropArea.Width;
 
@@ -105,11 +106,13 @@ namespace MetrocamPan
             if (temp < min)
             {
                 rightBound.Width = originalPhoto.Width - cropArea.Width;
+                leftBound.Width = 0;
                 current = min;
             }
             else if (temp > max)
             {
-                leftBound.Width = originalPhoto.Width - cropArea.Width; 
+                leftBound.Width = originalPhoto.Width - cropArea.Width;
+                rightBound.Width = 0;
                 current = max;
             }
             else
