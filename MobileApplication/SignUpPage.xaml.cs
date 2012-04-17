@@ -165,7 +165,7 @@ namespace MetrocamPan
                     toastDisplay.Hide();
 
                 // Set properties of ToastPrompt
-                toastDisplay = GlobalToastPrompt.CreateToastPrompt("Invalid Credentials",
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt("Oops",
                     inputValidationMessage,
                     5000);
 

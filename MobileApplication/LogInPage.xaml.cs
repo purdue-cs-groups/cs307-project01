@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.Phone.Controls;
 using MobileClientLibrary;
 using MobileClientLibrary.Models;
@@ -20,6 +21,10 @@ namespace MetrocamPan
 {
     public partial class LoginScreen : PhoneApplicationPage
     {
+        // Timer object to keep track of how long it is taking to authenticate [temporary fix to authenticate not responding atm]
+        private DispatcherTimer timer;
+        private int timeCount = 0;
+
         private ToastPrompt toastDisplay;
         private static ToastPrompt GetBasicToast(string title = "Basic")
         {
@@ -33,6 +38,9 @@ namespace MetrocamPan
         public LoginScreen()
         {
             InitializeComponent();
+
+            // Initialize timer
+            timer = new DispatcherTimer();
 
             this.Loaded += new RoutedEventHandler(LoginScreen_Loaded);
         }
@@ -51,9 +59,50 @@ namespace MetrocamPan
 
         private void Login_Click(object sender, EventArgs e)
         {
+            if (!InputValidator.isNotEmpty(this.usernameInput.Text) ||
+                !InputValidator.isNotEmpty(this.passwordInput.Password))
+            {
+                toastDisplay = GetBasicToast("Oops!");
+                toastDisplay.Message = "Please check that you have entered all required fields.";
+                toastDisplay.MillisecondsUntilHidden = 3000;
+                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay.Show();
+                return;
+            }
+
+
             App.MetrocamService.AuthenticateCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted_Login);
             GlobalLoading.Instance.IsLoading = true;
+
+            // Atach timer event handler for tick
+            this.timer.Tick += new EventHandler(timer_Tick);
+            // Set one second as each tick
+            this.timer.Interval = new TimeSpan(0, 0, 1);
+            // Start timer
+            this.timer.Start();
+            
             App.MetrocamService.Authenticate(this.usernameInput.Text, this.passwordInput.Password);
+        }
+
+        // This is catched when authenticate takes too long [temporary fix to authenticate not responding atm]
+        void timer_Tick(object sender, EventArgs e)
+        {
+            timeCount++;
+
+            // Has authenticate taken at least 5 seconds?
+            if (timeCount >= 5)
+            {
+                // Detach event handlers
+                App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
+                this.timer.Tick -= timer_Tick;
+
+                GlobalLoading.Instance.IsLoading = false;
+                toastDisplay = GetBasicToast("Oops!");
+                toastDisplay.Message = "The credentials you provided are invalid.";
+                toastDisplay.MillisecondsUntilHidden = 3000;
+                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay.Show();
+            }
         }
 
         #region Authenticate
