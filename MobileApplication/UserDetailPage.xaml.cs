@@ -63,9 +63,6 @@ namespace MetrocamPan
                 // User navigates to his own profile
                 SetCurrentUserProfile();
 
-                App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
-                App.MetrocamService.FetchUserStats(App.MetrocamService.CurrentUser.ID);
-
                 if (this.UserPictures.ItemsSource == null)
                 {
                     App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
@@ -133,25 +130,24 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;
 
-            App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
-            App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
+            PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
+            FollowingLabel.Text = SelectedPicture.User.Following.ToString();
+            FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
 
-            App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
-            App.MetrocamService.FetchUserStats(userInfo.ID);
-        }
-
-        void MetrocamService_FetchUserRelationshipStatsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
-        {
-            App.MetrocamService.FetchUserStatsCompleted -= MetrocamService_FetchUserRelationshipStatsCompleted;
-
-            UserStats data = e.Data as UserStats;
-            FollowerLabel.Text = data.Followers.ToString();
-            FollowingLabel.Text = data.Following.ToString();
-            PictureLabel.Text = data.Pictures.ToString();
+            if (SelectedPicture.User.IsFollowing == false)
+            {
+                FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
+                ConstructAppBar(false, false);
+            }
+            else
+            {
+                FollowingStatus.Text = "You are following " + userInfo.Username + ".";
+                ConstructAppBar(false, true);
+            }
         }
 
         void MetrocamService_FetchUserCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
@@ -165,9 +161,16 @@ namespace MetrocamPan
             }
             else
             {
-                // fetch relationship to see if following
-                App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
-                App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
+                if (userInfo.IsFollowing == false)
+                {
+                    FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
+                    ConstructAppBar(false, false);
+                }
+                else
+                {
+                    FollowingStatus.Text = "You are following " + userInfo.Username + ".";
+                    ConstructAppBar(false, true);
+                }
             }
 
             // pivot name
@@ -194,32 +197,13 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
-            App.MetrocamService.FetchRelationshipByIDsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchRelationshipByIDsCompleted);
-            App.MetrocamService.FetchRelationshipByIDs(App.MetrocamService.CurrentUser.ID, userInfo.ID); 
+            PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
+            FollowingLabel.Text = SelectedPicture.User.Following.ToString();
+            FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
-
-            App.MetrocamService.FetchUserStatsCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserRelationshipStatsCompleted);
-            App.MetrocamService.FetchUserStats(userInfo.ID);
-        }
-
-        void MetrocamService_FetchRelationshipByIDsCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
-        {
-            App.MetrocamService.FetchRelationshipByIDsCompleted -= MetrocamService_FetchRelationshipByIDsCompleted; 
-            r = e.Data as Relationship;
-
-            if (r == null)
-            {
-                FollowingStatus.Text = "You are not following " + userInfo.Username + "."; 
-                ConstructAppBar(false, false);
-            }
-            else
-            {
-                FollowingStatus.Text = "You are following " + userInfo.Username + "."; 
-                ConstructAppBar(false, true);
-            }
         }
 
         private void SetCurrentUserProfile()
@@ -249,6 +233,10 @@ namespace MetrocamPan
                 biographyTextBlock.Text = "Just another Metrocammer!";
             else
                 biographyTextBlock.Text = App.MetrocamService.CurrentUser.Biography;
+
+            PictureLabel.Text = App.MetrocamService.CurrentUser.Pictures.ToString();
+            FollowingLabel.Text = App.MetrocamService.CurrentUser.Following.ToString();
+            FollowerLabel.Text = App.MetrocamService.CurrentUser.Followers.ToString();
         }
 
         List<PictureInfo> userPictures = null;
@@ -275,14 +263,6 @@ namespace MetrocamPan
 
                 if (App.UserPictures.Count < 24)
                 {
-                    // Put only 24 PictureInfo objects into App.UserPictures collection
-                    if (p.User.ProfilePicture == null)
-                    {
-                        p.User.ProfilePicture = new Picture();
-                        // Set default picture
-                        p.User.ProfilePicture.MediumURL = "Images/dunsmore.png";
-                    }
-
                     App.UserPictures.Add(p);
                 }
                 else
