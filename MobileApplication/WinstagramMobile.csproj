@@ -288,7 +288,7 @@
     <Resource Include="Images\camera.png" />
     <Content Include="Images\Cyan.jpg" />
     <Content Include="Images\Dawn.jpg" />
-    <Content Include="Images\GoGoGaGa.jpg" />
+    <Content Include="Images\Stream.jpg" />
     <Content Include="Images\Grunge.jpg" />
     <Content Include="Images\Original.jpg" />
     <Content Include="Images\Polaroid.jpg" />
@@ -318,7 +318,7 @@
     <Content Include="Images\Storm.jpg" />
     <Content Include="Images\Tilt Shift.jpg" />
     <Content Include="Images\Wasabi.jpg" />
-    <Content Include="Images\Yoshimoto.jpg" />
+    <Content Include="Images\Yoshimo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

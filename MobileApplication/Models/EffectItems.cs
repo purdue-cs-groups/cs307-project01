@@ -26,16 +26,16 @@ namespace MetrocamPan.Models
             Add(new Models.EffectItem(new BlackWhiteEffect()));
             Add(new Models.EffectItem(new BusterEffect()));
             Add(new Models.EffectItem(new CyanEffect()));
-            Add(new Models.EffectItem(new DawnEffect()));
-            Add(new Models.EffectItem(new GoGoGaGaEffect()));
+            Add(new Models.EffectItem(new DawnEffect()));      
             Add(new Models.EffectItem(new GrungeEffect()));
             Add(new Models.EffectItem(new PolaroidEffect()));
             Add(new Models.EffectItem(new PopEffect()));
             Add(new Models.EffectItem(new ShrutiEffect()));
             Add(new Models.EffectItem(new StormEffect()));
+            Add(new Models.EffectItem(new StreamEffect()));
             Add(new Models.EffectItem(new TiltShiftEffect()));
             Add(new Models.EffectItem(new WasabiEffect()));
-            Add(new Models.EffectItem(new YoshimotoEffect()));
+            Add(new Models.EffectItem(new YoshimoEffect()));
         }
     }
 }

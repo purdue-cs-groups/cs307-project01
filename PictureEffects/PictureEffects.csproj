@@ -79,7 +79,7 @@
     <Compile Include="CompositeEffects\BlackWhiteEffect.cs" />
     <Compile Include="CompositeEffects\CyanEffect.cs" />
     <Compile Include="CompositeEffects\DawnEffect.cs" />
-    <Compile Include="CompositeEffects\GoGoGaGaEffect.cs" />
+    <Compile Include="CompositeEffects\StreamEffect.cs" />
     <Compile Include="CompositeEffects\GrungeEffect.cs" />
     <Compile Include="CompositeEffects\OriginalEffect.cs" />
     <Compile Include="CompositeEffects\PolaroidEffect.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="CompositeEffects\StormEffect.cs" />
     <Compile Include="CompositeEffects\TiltShiftEffect.cs" />
     <Compile Include="CompositeEffects\WasabiEffect.cs" />
-    <Compile Include="CompositeEffects\YoshimotoEffect.cs" />
+    <Compile Include="CompositeEffects\YoshimoEffect.cs" />
     <Compile Include="Effects\BitmapMixer.cs" />
     <Compile Include="Effects\BrightnessContrastEffect.cs" />
     <Compile Include="Effects\GaussianBlurEffect.cs" />

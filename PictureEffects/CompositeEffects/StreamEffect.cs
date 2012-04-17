@@ -5,11 +5,11 @@ using System.Windows.Media.Imaging;
 
 namespace PictureEffects.CompositeEffects
 {
-    public class GoGoGaGaEffect : IEffect
+    public class StreamEffect : IEffect
     {
         private readonly TiltShiftEffect tiltShiftFx;
 
-        public GoGoGaGaEffect()
+        public StreamEffect()
         {
             TiltShiftEffect tiltShiftEffect = new TiltShiftEffect();
             tiltShiftEffect.LowerFallOff = 0.8f;
@@ -23,7 +23,7 @@ namespace PictureEffects.CompositeEffects
         { 
             get 
             { 
-                return "GoGoGaGa";
+                return "Stream";
             } 
         }
 
