@@ -625,7 +625,10 @@ namespace MetrocamPan
             App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
 
             if (GlobalLoading.Instance.IsLoading == false)
+            {
                 GlobalLoading.Instance.IsLoading = true;
+                GlobalLoading.Instance.IsLoading = true;
+            }
             
             App.MetrocamService.FetchPopularNewsFeed();
         }
