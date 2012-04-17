@@ -121,6 +121,7 @@
     <Compile Include="Common\AuthenticationManager.cs" />
     <Compile Include="Common\AuthenticationToken.cs" />
     <Compile Include="Common\AuthorizationManager.cs" />
+    <Compile Include="Common\InputValidator.cs" />
     <Compile Include="Common\MD5CryptoServiceProvider.cs" />
     <Compile Include="Common\TimeZone\DateTimeHelper.cs" />
     <Compile Include="Common\TimeZone\Helper.cs" />

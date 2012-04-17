@@ -189,12 +189,28 @@ namespace WebService.Controllers
             return list;
         }
 
+        /*  Create(User data)
+         *  Returns user object upon successful creation.
+         *  Returns null upon unsucessful creation. 
+         */
         public static User Create(User data)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
+
+            //Checks that all the req1uried fields are not empty.
+            if (!InputValidator.isNotEmpty(data.EmailAddress) || !InputValidator.isNotEmpty(data.Name) || !InputValidator.isNotEmpty(data.Username) || !InputValidator.isNotEmpty(data.Password))
+            {
+                return null;
+            }
+
+            //Checks that all the required fiels are valid and of the correct length.
+            if(!InputValidator.isValidEmail(data.EmailAddress) || !InputValidator.isValidUsername(data.Username) || !InputValidator.isStrongPassword(data.Password) || !InputValidator.isValidLength(data.Password, InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary) || !InputValidator.isValidLength(data.Username, InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary))
+            {
+                return null;
+            }
 
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);
 
