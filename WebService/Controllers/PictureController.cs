@@ -154,9 +154,15 @@ namespace WebService.Controllers
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
-            var query = new QueryDocument("_id", data.ID);
+            MongoCollection<FavoritedPicture> favPics = database.GetCollection<FavoritedPicture>("FavoritedPictures");
+            MongoCollection<FlaggedPicture> flagPics = database.GetCollection<FlaggedPicture>("FlaggedPictures");
 
-            pictures.FindAndRemove(query, new SortByDocument());
+            var query = new QueryDocument("_id", data.ID);
+            pictures.Remove(query);
+            
+            query = new QueryDocument("PictureID", data.ID);
+            favPics.Remove(query);
+            flagPics.Remove(query);
         }
     }
 }
