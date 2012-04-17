@@ -325,6 +325,31 @@ namespace MobileClientLibrary
             }
         }
 
+        #region Favorite Picture
+
+        public event RequestCompletedEventHandler FavoritePictureCompleted;
+
+        public void FavoritePicture(string id)
+        {
+            FavoritedPicture data = new FavoritedPicture();
+            data.PictureID = id;
+
+            this.CreateFavoritedPictureCompleted += new RequestCompletedEventHandler(WebServiceClient_CreateFavoritedPictureCompleted);
+            this.CreateFavoritedPicture(data);
+        }
+
+        private void WebServiceClient_CreateFavoritedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            this.CreateFavoritedPictureCompleted -= WebServiceClient_CreateFavoritedPictureCompleted;
+
+            if (FavoritePictureCompleted != null)
+            {
+                FavoritePictureCompleted(sender, new RequestCompletedEventArgs(null));
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Flagged Picture Methods
@@ -488,6 +513,31 @@ namespace MobileClientLibrary
                 }
             }
         }
+
+        #region Flag Picture
+
+        public event RequestCompletedEventHandler FlagPictureCompleted;
+
+        public void FlagPicture(string id)
+        {
+            FlaggedPicture data = new FlaggedPicture();
+            data.PictureID = id;
+
+            this.CreateFlaggedPictureCompleted += new RequestCompletedEventHandler(WebServiceClient_CreateFlaggedPictureCompleted);
+            this.CreateFlaggedPicture(data);
+        }
+
+        private void WebServiceClient_CreateFlaggedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            this.CreateFlaggedPictureCompleted -= WebServiceClient_CreateFlaggedPictureCompleted;
+
+            if (FlagPictureCompleted != null)
+            {
+                FlagPictureCompleted(sender, new RequestCompletedEventArgs(null));
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -896,46 +946,6 @@ namespace MobileClientLibrary
                 if (e.Error == null)
                 {
                     DeletePictureCompleted(sender, new RequestCompletedEventArgs(null));
-                }
-                else
-                {
-                    WebException we = (WebException)e.Error;
-                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
-
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
-                }
-            }
-        }
-
-        #endregion
-
-        #region Flag Picture
-
-        public event RequestCompletedEventHandler FlagPictureCompleted;
-
-        public void FlagPicture(string id)
-        {
-            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
-
-            WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(FlagPicture_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/flag?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
-        }
-
-        private void FlagPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
-        {
-            if (FlagPictureCompleted != null)
-            {
-                if (e.Error == null)
-                {
-                    FlagPictureCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
                 {

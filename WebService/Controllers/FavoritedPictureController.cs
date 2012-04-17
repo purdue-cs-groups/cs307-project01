@@ -27,15 +27,13 @@ namespace WebService.Controllers
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
-            MongoCollection<FavoritedPicture> favoritedPictures = database.GetCollection<FavoritedPicture>("FavoritedPictures");
-            var query = new QueryDocument("UserID", userId);
+            MongoCollection<FavoritedPicture> flaggedPictures = database.GetCollection<FavoritedPicture>("FavoritedPictures");
+            var query = new QueryDocument("PictureID", pictureId);
 
-            foreach (FavoritedPicture f in favoritedPictures.Find(query))
+            foreach (FavoritedPicture p in flaggedPictures.Find(query).ToList<FavoritedPicture>())
             {
-                if (f.PictureID.Equals(pictureId))
-                {
-                    return f;
-                }
+                if (p.UserID == userId)
+                    return p;
             }
 
             return null;

@@ -169,6 +169,12 @@ namespace WebService
             jsonData.UserID = token.Identity.ID;
             jsonData.FriendlyCreatedDate = DateTime.UtcNow;
 
+            if (FlaggedPictureController.FetchByPictureID(jsonData.PictureID).Count > 2)
+            {
+                PictureInfo picture = PictureController.FetchInfo(jsonData.PictureID);
+                PictureController.Delete(picture);
+            }
+
             return FlaggedPictureController.Create(jsonData);
         }
 
@@ -524,18 +530,6 @@ namespace WebService
             {
                 throw new UnauthorizedAccessException("You are not the owner of that Picture.");
             }
-        }
-
-        [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/flag?id={id}")]
-        public void FlagPicture(string id)
-        {
-            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
-
-            PictureInfo data = PictureController.FetchInfo(id);
-
-            // TODO: we should log this action
-            PictureController.Delete(data);
         }
 
         #endregion

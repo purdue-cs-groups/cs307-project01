@@ -22,20 +22,29 @@ namespace WebService.Controllers
             return flaggedPictures.FindOne(query);
         }
 
+        public static List<FlaggedPicture> FetchByPictureID(string pictureId)
+        {
+            MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
+            MongoDatabase database = server.GetDatabase(Global.DatabaseName);
+
+            MongoCollection<FlaggedPicture> flaggedPictures = database.GetCollection<FlaggedPicture>("FlaggedPictures");
+            var query = new QueryDocument("PictureID", pictureId);
+
+            return flaggedPictures.Find(query).ToList<FlaggedPicture>();
+        }
+
         public static FlaggedPicture FetchByPictureID(string pictureId, string userId)
         {
             MongoServer server = MongoServer.Create(Global.DatabaseConnectionString);
             MongoDatabase database = server.GetDatabase(Global.DatabaseName);
 
             MongoCollection<FlaggedPicture> flaggedPictures = database.GetCollection<FlaggedPicture>("FlaggedPictures");
-            var query = new QueryDocument("UserID", userId);
+            var query = new QueryDocument("PictureID", pictureId);
 
-            foreach (FlaggedPicture f in flaggedPictures.Find(query))
+            foreach (FlaggedPicture p in flaggedPictures.Find(query).ToList<FlaggedPicture>())
             {
-                if (f.PictureID.Equals(pictureId))
-                {
-                    return f;
-                }
+                if (p.UserID == userId)
+                    return p;
             }
 
             return null;
