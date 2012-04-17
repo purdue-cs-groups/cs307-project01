@@ -92,6 +92,8 @@ namespace MetrocamPan
             // Has authenticate taken at least 5 seconds?
             if (timeCount >= 5)
             {
+                this.timer.Stop();
+
                 // Detach event handlers
                 App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
                 this.timer.Tick -= timer_Tick;
@@ -109,6 +111,7 @@ namespace MetrocamPan
 
         private void MetrocamService_AuthenticateCompleted_Login(object sender, RequestCompletedEventArgs e)
         {
+            this.timer.Stop();
             App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
             GlobalLoading.Instance.IsLoading = false;
 
