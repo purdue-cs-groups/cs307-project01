@@ -333,7 +333,7 @@ namespace MobileClientLibrary
 
             WebClient client = new WebClient();
             client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteFavoritedPictureByPictureID_DownloadStringCompleted);
-            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}&pictureid={2}", _APIKey, _Token, pictureId)));
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/deleteByPictureID?key={0}&token={1}&pictureid={2}", _APIKey, _Token, pictureId)));
         }
 
         private void DeleteFavoritedPictureByPictureID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
