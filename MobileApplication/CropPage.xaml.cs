@@ -103,15 +103,9 @@ namespace MetrocamPan
 
             drag.Y += e.DeltaManipulation.Translation.Y;
             if (drag.Y < 0)
-            {
-                //lowerBound.Height = originalPhoto.Height - cropArea.Height;
                 drag.Y = 0;
-            }
             if (drag.Y > max)
-            {
-                lowerBound.Height = originalPhoto.Height - cropArea.Height;
                 drag.Y = max;
-            }
 
             int temp = current + (int)e.DeltaManipulation.Translation.Y;
             if (temp < min)

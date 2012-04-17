@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 
 namespace PictureEffects.CompositeEffects
 {
-    public class YoshimotoEffect : IEffect
+    public class YoshimoEffect : IEffect
     {
         private readonly BrightnessContrastEffect contrastFx;
 
@@ -40,7 +40,7 @@ namespace PictureEffects.CompositeEffects
         {
             get
             {
-                return "Yoshimoto";
+                return "Yoshimo";
             }
         }
 
@@ -68,7 +68,7 @@ namespace PictureEffects.CompositeEffects
             }
         }
 
-        public YoshimotoEffect()
+        public YoshimoEffect()
         {
             VignetteEffect vignetteEffect = new VignetteEffect();
             vignetteEffect.Size = 1;
