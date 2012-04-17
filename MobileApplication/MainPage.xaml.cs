@@ -488,18 +488,18 @@ namespace MetrocamPan
             if (MainContent.SelectedIndex == 0)
             {
                 isRefreshingPopular = true;
-
+                FetchPopularPictures();
                 // refresh popular
-                App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
-                App.MetrocamService.FetchPopularNewsFeed();
+                /*App.MetrocamService.FetchPopularNewsFeedCompleted += new RequestCompletedEventHandler(MetrocamService_FetchPopularNewsFeedCompleted);
+                App.MetrocamService.FetchPopularNewsFeed();*/
             }
             else if (MainContent.SelectedIndex == 1)
             {
                 // authenticate and refresh recent
                 isRefreshingRecent = true;
-
-                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
-                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
+                FetchRecentPictures();
+                /*App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);*/
             }
         }
 
@@ -596,8 +596,8 @@ namespace MetrocamPan
             if (MainContent.SelectedIndex == 0 && App.MetrocamService.CurrentUser != null)
             {
                 // If Recent pivot item is selected
-                isRefreshingPopular = true;
-                FetchPopularPictures();
+                // isRefreshingPopular = true;
+                // FetchPopularPictures();
             }
             else if (MainContent.SelectedIndex == 1 && App.MetrocamService.CurrentUser != null)
             {
@@ -626,7 +626,6 @@ namespace MetrocamPan
 
             if (GlobalLoading.Instance.IsLoading == false)
             {
-                GlobalLoading.Instance.IsLoading = true;
                 GlobalLoading.Instance.IsLoading = true;
             }
             
