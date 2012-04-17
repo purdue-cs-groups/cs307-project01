@@ -347,6 +347,8 @@ namespace WebService
 
                 data.IsFavorited = FavoritedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
                 data.IsFlagged = FlaggedPictureController.FetchByPictureID(data.ID, token.Identity.ID) != null;
+
+                data.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == data.User.ID).Count() > 0;
             }
 
             return data;
@@ -363,6 +365,8 @@ namespace WebService
             {
                 item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                 item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+
+                item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
             }
 
             return list;
@@ -381,6 +385,8 @@ namespace WebService
                 {
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+
+                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
                 }
 
                 return list;
@@ -404,6 +410,8 @@ namespace WebService
                 {
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+
+                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
                 }
 
                 return list;
@@ -427,6 +435,8 @@ namespace WebService
                 {
                     item.IsFavorited = FavoritedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
                     item.IsFlagged = FlaggedPictureController.FetchByPictureID(item.ID, token.Identity.ID) != null;
+
+                    item.User.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.User.ID).Count() > 0;
                 }
 
                 return list;
@@ -595,7 +605,10 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return UserController.FetchInfo(id);
+            UserInfo data = UserController.FetchInfo(id);
+            data.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == data.ID).Count() > 0;
+
+            return data;
         }
 
         [OperationContract]
@@ -611,7 +624,13 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return UserController.FetchAll();
+            List<UserInfo> list = UserController.FetchAll();
+            foreach (UserInfo item in list)
+            {
+                item.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.ID).Count() > 0;            
+            }
+
+            return list;
         }
 
         [OperationContract]
@@ -620,7 +639,13 @@ namespace WebService
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
-            return UserController.FetchAll(query);
+            List<UserInfo> list = UserController.FetchAll(query);
+            foreach (UserInfo item in list)
+            {
+                item.IsFollowing = RelationshipController.FetchRelationshipsByUserID(token.Identity.ID).Where(r => r.FollowingUserID == item.ID).Count() > 0;
+            }
+
+            return list;
         }
 
         [OperationContract]

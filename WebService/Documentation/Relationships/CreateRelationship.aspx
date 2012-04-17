@@ -18,14 +18,13 @@
         </p>
         <br />
         <div class="endpoint">
-            GET /v1/relationships/create?id={id}<br />
+            POST /v1/relationships/create?id={id}<br />
             <br />
             <br />
             <div class="code">
                 <i>Request: </i>
                 <pre>
 {
-  "UserID": "4f74b2285ad9850a14ae04ac",
   "FollowingUserID": "4f84e925d47cd406d46faf6c"
 }</pre>
             </div>

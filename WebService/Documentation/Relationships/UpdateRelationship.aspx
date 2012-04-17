@@ -18,7 +18,7 @@
         </p>
         <br />
         <div class="endpoint">
-            GET /v1/relationships/update?id={id}<br />
+            POST /v1/relationships/update?id={id}<br />
             <br />
             <br />
             <div class="code">

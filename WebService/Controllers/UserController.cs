@@ -200,16 +200,16 @@ namespace WebService.Controllers
 
             MongoCollection<User> users = database.GetCollection<User>("Users");
 
-            //Checks that all the req1uried fields are not empty.
+            //Checks that all the required fields are not empty.
             if (!InputValidator.isNotEmpty(data.EmailAddress) || !InputValidator.isNotEmpty(data.Name) || !InputValidator.isNotEmpty(data.Username) || !InputValidator.isNotEmpty(data.Password))
             {
-                return null;
+                throw new FormatException("Username, Email Address, and Name are all required fields!");
             }
 
             //Checks that all the required fiels are valid and of the correct length.
             if(!InputValidator.isValidEmail(data.EmailAddress) || !InputValidator.isValidUsername(data.Username) || !InputValidator.isStrongPassword(data.Password) || !InputValidator.isValidLength(data.Password, InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary) || !InputValidator.isValidLength(data.Username, InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary))
             {
-                return null;
+                throw new FormatException("Username, Email Address, and Name must be valid fields!");
             }
 
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);

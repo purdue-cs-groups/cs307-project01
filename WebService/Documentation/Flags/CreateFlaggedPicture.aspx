@@ -25,7 +25,6 @@
                 <i>Request: </i>
                 <pre>
 {
-  "UserID": "4f74b2285ad9850a14ae04ac",
   "PictureID": "4f84e925d47cd406d46faf6c"
 }</pre>
             </div>
