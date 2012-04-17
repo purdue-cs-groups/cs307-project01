@@ -20,12 +20,12 @@
         <Storyboard 
             x:Name="imageStoryboard" 
             AutoReverse="True" 
-            RepeatBehavior="Forever"  >
+            RepeatBehavior="Forever">
             <DoubleAnimationUsingKeyFrames 
 				Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
 				Storyboard.TargetName="Image">
-                <SplineDoubleKeyFrame KeyTime="0:0:1"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:36" Value="-307"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:1" />
+                <SplineDoubleKeyFrame KeyTime="0:0:36" Value="-307" />
                 <SplineDoubleKeyFrame KeyTime="0:0:37" Value="-307" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -43,7 +43,7 @@
                             </Image.RenderTransform>
                         </Image>
                     </Canvas>
-                    
+
                     <Grid x:Name="ContentPanel">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -56,7 +56,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" x:Name="ApplicationTitle" Text="METROCAM" Margin="12,12,0,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
-                        
+
                         <Grid Grid.Row="1" Grid.Column="0" Height="173" Width="173" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" Tap="LogIn_Tap" Margin="12,12,0,0">
                             <TextBlock HorizontalAlignment="Left" Margin="12,0,0,12" Text="Log In" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="White" />
                         </Grid>

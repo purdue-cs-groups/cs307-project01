@@ -27,24 +27,64 @@
             <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Grid x:Name="ContentPanel" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Image Name="imgPicture" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Width="456" Height="456" Stretch="UniformToFill" Margin="0,0,0,12" />
-            <Image Name="imgProfilePicture" Grid.Row="1" Grid.Column="0" Height="40" Width="40" Stretch="Fill" Source="/Images/dunsmore.png" Tap="ViewUserDetail_Tap" />
-            <TextBlock Name="txtUsername" Grid.Row="1" Grid.Column="1" Text="Picture owner name" Foreground="{StaticResource PhoneAccentBrush}" Style="{StaticResource PhoneTextNormalStyle}" Tap="ViewUserDetail_Tap" Margin="6,6,0,0" />
-            <TextBlock Name="txtCreatedDate" Grid.Row="1" Grid.Column="2" Text="3 hours ago" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0,6,0,0" />
+            <Image x:Name="imgPicture" 
+                   Grid.Row="0"
+                   Width="456" Height="456" 
+                   Stretch="UniformToFill" />
 
-            <TextBlock Name="txtCaption" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle3Style}" />
+            <Grid Grid.Row="1" Margin="12,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="imgProfilePicture" 
+                       Grid.Column="0"
+                       Height="40"       
+                       Width="40" 
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Stretch="UniformToFill"
+                       Source="/Images/dunsmore.png" 
+                       Tap="ViewUserDetail_Tap" />
+                <TextBlock x:Name="txtUsername" 
+                           Text="Picture owner name" 
+                           Grid.Column="1"
+                           Margin="6,0,0,0" 
+                           Height="40"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"  
+                           Foreground="{StaticResource PhoneAccentBrush}" 
+                           Style="{StaticResource PhoneTextNormalStyle}" 
+                           Tap="ViewUserDetail_Tap" />
+                <TextBlock x:Name="txtCreatedDate" 
+                           Grid.Column="2"
+                           Height="Auto" 
+                           Padding="0,6,0,0"
+                           Text="3 hours ago" 
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Right" 
+                           FontSize="{StaticResource PhoneFontSizeSmall}" 
+                           Foreground="{StaticResource PhoneBorderBrush}" />
+            </Grid>
+            <TextBlock x:Name="txtCaption" 
+                       Grid.Row="2" 
+                       Margin="12,0"
+                       VerticalAlignment="Top" 
+                       HorizontalAlignment="Left" 
+                       FontSize="{StaticResource PhoneFontSizeSmall}" 
+                       TextAlignment="Left"
+                       Text="Caption goes here"
+                       Foreground="{StaticResource PhoneBorderBrush}"
+                       TextWrapping="Wrap" />
         </Grid>
     </Grid>
 
