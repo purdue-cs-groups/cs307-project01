@@ -700,7 +700,7 @@ namespace MetrocamPan
                 // changes to local time
                 p.FriendlyCreatedDate = TimeZoneInfo.ConvertTime(p.FriendlyCreatedDate, TimeZoneInfo.Local);
 
-                if (App.RecentPictures.Count < 10)
+                if (App.RecentPictures.Count < 5)
                 {
                     if (App.RecentPictures.Count == 0)
                     {
