@@ -71,8 +71,11 @@ namespace MetrocamPan
 
             captionBox.IsReadOnly = true;
 
-            if (GlobalLoading.Instance.IsLoading == false) 
+            if (GlobalLoading.Instance.IsLoading == false)
+            {
                 GlobalLoading.Instance.IsLoading = true;
+                GlobalLoading.Instance.IsLoading = true;
+            }
 
             // authenticate with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
