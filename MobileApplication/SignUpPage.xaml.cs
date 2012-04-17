@@ -25,8 +25,8 @@ namespace MetrocamPan
 
         private ToastPrompt toastDisplay;
 
-        private const string DefaultLocation = "Metrocam City";
-        private const string DefaultBiography = "A proud Metrocammer!";
+        public const string DefaultLocation = "Metrocam City";
+        public const string DefaultBiography = "A proud Metrocammer!";
 
         public SignUpPage()
         {

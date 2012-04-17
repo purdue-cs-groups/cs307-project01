@@ -181,7 +181,7 @@ namespace MetrocamPan
 
             // location
             if (userInfo.Location == null)
-                hometown.Text = "Earth";
+                hometown.Text = SignUpPage.DefaultLocation;
             else
                 hometown.Text = userInfo.Location;
 
@@ -190,7 +190,7 @@ namespace MetrocamPan
 
             // bio
             if (userInfo.Biography == null)
-                biographyTextBlock.Text = "Just another Metrocammer!";
+                biographyTextBlock.Text = SignUpPage.DefaultBiography;
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
