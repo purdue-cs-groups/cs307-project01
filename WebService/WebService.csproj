@@ -74,6 +74,7 @@
     <Content Include="Documentation\Default.aspx" />
     <Content Include="Documentation\Favorites\CreateFavoritedPicture.aspx" />
     <Content Include="Documentation\Favorites\DeleteFavoritedPicture.aspx" />
+    <Content Include="Documentation\Favorites\DeleteFavoritedPictureByPictureID.aspx" />
     <Content Include="Documentation\Favorites\FetchFavoritedPicture.aspx" />
     <Content Include="Documentation\Favorites\UpdateFavoritedPicture.aspx" />
     <Content Include="Documentation\Flags\CreateFlaggedPicture.aspx" />
@@ -92,6 +93,7 @@
     <Content Include="Documentation\Pictures\UploadPicture.aspx" />
     <Content Include="Documentation\Relationships\CreateRelationship.aspx" />
     <Content Include="Documentation\Relationships\DeleteRelationship.aspx" />
+    <Content Include="Documentation\Relationships\DeleteRelationshipByUserID.aspx" />
     <Content Include="Documentation\Relationships\FetchRelationship.aspx" />
     <Content Include="Documentation\Relationships\UpdateRelationship.aspx" />
     <Content Include="Documentation\Users\CreateUser.aspx" />
@@ -205,6 +207,13 @@
     </Compile>
     <Compile Include="Documentation\Favorites\DeleteFavoritedPicture.aspx.designer.cs">
       <DependentUpon>DeleteFavoritedPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPictureByPictureID.aspx.cs">
+      <DependentUpon>DeleteFavoritedPictureByPictureID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Favorites\DeleteFavoritedPictureByPictureID.aspx.designer.cs">
+      <DependentUpon>DeleteFavoritedPictureByPictureID.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentation\Favorites\FetchFavoritedPicture.aspx.cs">
       <DependentUpon>FetchFavoritedPicture.aspx</DependentUpon>
@@ -331,6 +340,13 @@
     </Compile>
     <Compile Include="Documentation\Relationships\DeleteRelationship.aspx.designer.cs">
       <DependentUpon>DeleteRelationship.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationshipByUserID.aspx.cs">
+      <DependentUpon>DeleteRelationshipByUserID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Documentation\Relationships\DeleteRelationshipByUserID.aspx.designer.cs">
+      <DependentUpon>DeleteRelationshipByUserID.aspx</DependentUpon>
     </Compile>
     <Compile Include="Documentation\Relationships\FetchRelationship.aspx.cs">
       <DependentUpon>FetchRelationship.aspx</DependentUpon>

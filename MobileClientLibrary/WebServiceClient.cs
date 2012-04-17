@@ -296,17 +296,53 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteFavoritedPicture_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)), data.ID);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteFavoritedPicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)));
         }
 
-        private void DeleteFavoritedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeleteFavoritedPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeleteFavoritedPictureCompleted != null)
             {
                 if (e.Error == null)
                 {
                     DeleteFavoritedPictureCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteFavoritedPictureByPictureIDCompleted;
+
+        public void DeleteFavoritedPictureByPictureID(string pictureId)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteFavoritedPictureByPictureID_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "favorites/delete?key={0}&token={1}&pictureid={2}", _APIKey, _Token, pictureId)));
+        }
+
+        private void DeleteFavoritedPictureByPictureID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (DeleteFavoritedPictureByPictureIDCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteFavoritedPictureByPictureIDCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
                 {
@@ -485,11 +521,11 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteFlaggedPicture_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteFlaggedPicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "flags/delete?key={0}&token={1}", _APIKey, _Token)));
         }
 
-        private void DeleteFlaggedPicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeleteFlaggedPicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeleteFlaggedPictureCompleted != null)
             {
@@ -935,11 +971,11 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeletePicture_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), id);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeletePicture_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "pictures/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), id);
         }
 
-        private void DeletePicture_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeletePicture_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeletePictureCompleted != null)
             {
@@ -1101,17 +1137,53 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteRelationship_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)), data.ID);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteRelationship_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/delete?key={0}&token={1}&id={2}", _APIKey, _Token, data.ID)));
         }
 
-        private void DeleteRelationship_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeleteRelationship_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeleteRelationshipCompleted != null)
             {
                 if (e.Error == null)
                 {
                     DeleteRelationshipCompleted(sender, new RequestCompletedEventArgs(null));
+                }
+                else
+                {
+                    WebException we = (WebException)e.Error;
+                    HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
+                    }
+                    else
+                    {
+                        throw e.Error;
+                    }
+                }
+            }
+        }
+
+        public event RequestCompletedEventHandler DeleteRelationshipByUserIDCompleted;
+
+        public void DeleteRelationshipByUserID(string userId)
+        {
+            if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteRelationshipByUserID_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "relationships/deleteByUserID?key={0}&token={1}&userid={2}", _APIKey, _Token, userId)));
+        }
+
+        private void DeleteRelationshipByUserID_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (DeleteRelationshipByUserIDCompleted != null)
+            {
+                if (e.Error == null)
+                {
+                    DeleteRelationshipByUserIDCompleted(sender, new RequestCompletedEventArgs(null));
                 }
                 else
                 {
@@ -1346,11 +1418,11 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUser_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)), null);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteUser_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/delete?key={0}&token={1}", _APIKey, _Token)));
         }
 
-        private void DeleteUser_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeleteUser_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeleteUserCompleted != null)
             {
@@ -1550,11 +1622,11 @@ namespace MobileClientLibrary
             if (_IsAuthenticated == false) throw new UnauthorizedAccessException("This method requires User authentication.");
 
             WebClient client = new WebClient();
-            client.UploadStringCompleted += new UploadStringCompletedEventHandler(DeleteUserConnectedAccount_UploadStringCompleted);
-            client.UploadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)), null);
+            client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DeleteUserConnectedAccount_DownloadStringCompleted);
+            client.DownloadStringAsync(new Uri(String.Format(_WebServiceEndpoint + "users/connections/delete?key={0}&token={1}&id={2}", _APIKey, _Token, id)));
         }
 
-        private void DeleteUserConnectedAccount_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        private void DeleteUserConnectedAccount_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             if (DeleteUserConnectedAccountCompleted != null)
             {

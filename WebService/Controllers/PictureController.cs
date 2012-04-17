@@ -49,7 +49,7 @@ namespace WebService.Controllers
             MongoCollection<Picture> pictures = database.GetCollection<Picture>("Pictures");
 
             List<PictureInfo> list = new List<PictureInfo>();
-            foreach (Relationship r in RelationshipController.FetchRelationshipsByUserID(data.ID))
+            foreach (Relationship r in RelationshipController.FetchByUserID(data.ID))
             {
                 var query1 = Query.EQ("UserID", r.FollowingUserID);
                 foreach (Picture p in pictures.Find(query1).SetSortOrder(SortBy.Descending("CreatedDate")).SetLimit(25).ToList<Picture>())

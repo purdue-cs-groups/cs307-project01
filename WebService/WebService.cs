@@ -123,12 +123,30 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/delete?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/delete?id={id}")]
         public void DeleteFavoritedPicture(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             FavoritedPicture data = FavoritedPictureController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                FavoritedPictureController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that FavoritedPicture.");
+            }
+        }
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/favorites/deleteByPictureID?pictureid={pictureId}")]
+        public void DeleteFavoritedPictureByPictureID(string pictureId)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            FavoritedPicture data = FavoritedPictureController.FetchByPictureID(pictureId, token.Identity.ID);
 
             if (data.UserID == token.Identity.ID)
             {
@@ -199,7 +217,7 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/delete?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/flags/delete?id={id}")]
         public void DeleteFlaggedPicture(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -515,7 +533,7 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/delete?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/pictures/delete?id={id}")]
         public void DeletePicture(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -585,12 +603,30 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/delete?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/delete?id={id}")]
         public void DeleteRelationship(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
 
             Relationship data = RelationshipController.Fetch(id);
+
+            if (data.UserID == token.Identity.ID)
+            {
+                RelationshipController.Delete(data);
+            }
+            else
+            {
+                throw new UnauthorizedAccessException("You are not the owner of that Relationship.");
+            }
+        }
+
+        [OperationContract]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/relationships/deleteByUserID?userid={userId}")]
+        public void DeleteRelationshipByUserID(string userId)
+        {
+            var token = AuthenticationManager.ValidateToken(OperationContext.Current);
+
+            Relationship data = RelationshipController.FetchByFollowingUserID(token.Identity.ID, userId);
 
             if (data.UserID == token.Identity.ID)
             {
@@ -620,13 +656,6 @@ namespace WebService
             data.Pictures = UserController.FetchUserStats(data.ID).Pictures;
 
             return data;
-        }
-
-        [OperationContract]
-        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/user/stats/fetch?userId={userId}")]
-        public UserStats FetchUserStats(string userId)
-        {
-            return UserController.FetchUserStats(userId);
         }
 
         [OperationContract]
@@ -707,7 +736,7 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/delete")]
         public void DeleteUser()
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);
@@ -778,7 +807,7 @@ namespace WebService
         }
 
         [OperationContract]
-        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/delete?id={id}")]
+        [WebGet(ResponseFormat = WebMessageFormat.Json, UriTemplate = "/users/connections/delete?id={id}")]
         public void DeleteUserConnectedAccount(string id)
         {
             var token = AuthenticationManager.ValidateToken(OperationContext.Current);

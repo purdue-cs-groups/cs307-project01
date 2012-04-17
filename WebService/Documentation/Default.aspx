@@ -36,6 +36,9 @@
             <div class="endpoint">
                 <a href="Favorites/DeleteFavoritedPicture.aspx">/v1/favorites/delete?id={id}</a>
             </div>
+            <div class="endpoint">
+                <a href="Favorites/DeleteFavoritedPictureByPictureID.aspx">/v1/favorites/deleteByPictureID?pictureid={pictureId}</a>
+            </div>
             <br />
             Flags
             <div class="endpoint">
@@ -95,6 +98,9 @@
             </div>
             <div class="endpoint">
                 <a href="Relationships/DeleteRelationship.aspx">/v1/relationships/delete?id={id}</a>
+            </div>
+            <div class="endpoint">
+                <a href="Relationships/DeleteRelationshipByUserID.aspx">/v1/relationships/deleteByUserID?userid={userId}</a>
             </div>
             <br />
             Users
