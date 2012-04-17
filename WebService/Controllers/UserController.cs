@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using WebService.Common;
 using MongoDB.Driver.Builders;
 using MongoDB.Bson;
+using System.Text.RegularExpressions;
 
 namespace WebService.Controllers
 {
@@ -149,10 +150,10 @@ namespace WebService.Controllers
 
             List<UserInfo> list = new List<UserInfo>();
 
-            //User Regex to find all results with the query string in it.
-            string regexQuery = "*" + query + "*";
+            //Regex to find all results with the query string in it.
+            var regexQueryUpper = Query.Matches("Name", BsonRegularExpression.Create(new Regex(query, RegexOptions.IgnoreCase)));
 
-            foreach (User u in users.Find(new QueryDocument("Name", regexQuery)).ToList<User>())
+            foreach (User u in users.Find(regexQueryUpper).ToList<User>())
             {
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
@@ -161,7 +162,10 @@ namespace WebService.Controllers
                     list.Add(i);
             }
 
-            foreach (User u in users.Find(new QueryDocument("Username", regexQuery)).ToList<User>())
+            //Regex to find all results with the query string in it.
+            regexQueryUpper = Query.Matches("Username", BsonRegularExpression.Create(new Regex(query, RegexOptions.IgnoreCase)));
+
+            foreach (User u in users.Find(regexQueryUpper).ToList<User>())
             {
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
@@ -170,7 +174,10 @@ namespace WebService.Controllers
                     list.Add(i);
             }
 
-            foreach (User u in users.Find(new QueryDocument("EmailAddress", regexQuery)).ToList<User>())
+            //Regex to find all results with the query string in it.
+            regexQueryUpper = Query.Matches("EmailAddress", BsonRegularExpression.Create(new Regex(query, RegexOptions.IgnoreCase)));
+
+            foreach (User u in users.Find(regexQueryUpper).ToList<User>())
             {
                 Picture p = PictureController.Fetch(u.ProfilePictureID);
                 UserInfo i = new UserInfo(u, p);
