@@ -60,12 +60,6 @@ namespace MetrocamPan
             results = e.Data as List<UserInfo>;
             foreach (UserInfo u in results)
             {
-                if (u.ProfilePicture == null)
-                {
-                    u.ProfilePicture = new Picture();
-                    u.ProfilePicture.MediumURL = "Images/dunsmore.png";
-                }
-
                 SearchResults.Add(u);
             }
 
@@ -82,8 +76,8 @@ namespace MetrocamPan
 
         private void searchterms_GotFocus(object sender, RoutedEventArgs e)
         {
-            searchResults.Visibility = System.Windows.Visibility.Collapsed;
-            noresults.Visibility = System.Windows.Visibility.Collapsed;
+            //searchResults.Visibility = System.Windows.Visibility.Collapsed;
+            //noresults.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void ViewUserDetailFromUsername_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -99,7 +93,7 @@ namespace MetrocamPan
             Image image = sender as Image;
             UserInfo info = image.DataContext as UserInfo;
 
-            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/UserDetailPage.xaml?id=" + info.ID + "&type=search&userid=" + info.ID, UriKind.Relative));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

@@ -227,7 +227,7 @@ namespace MetrocamPan
             ConstructAppBar(true, true);
 
             // pivot name
-            this.PivotRoot.Title = App.MetrocamService.CurrentUser.Name;
+            this.PivotRoot.Title = App.MetrocamService.CurrentUser.Username;
 
             // profile pic
             profilePicture.Source = (new BitmapImage(new Uri(App.MetrocamService.CurrentUser.ProfilePicture.MediumURL, UriKind.RelativeOrAbsolute)));
