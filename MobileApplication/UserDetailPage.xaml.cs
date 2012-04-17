@@ -30,7 +30,6 @@ namespace MetrocamPan
     {
         public Boolean AppBarSet = false;
         public UserInfo userInfo;
-        public Relationship r = null;
 
         // ToastPrompt for message display
         private ToastPrompt toastDisplay;
@@ -137,6 +136,8 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
             App.MetrocamService.FetchUserPictures(userInfo.ID);
+
+            userInfo.ID = SelectedPicture.User.ID;
 
             if (SelectedPicture.User.IsFollowing == false)
             {
@@ -356,7 +357,6 @@ namespace MetrocamPan
         void MetrocamService_CreateRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
             App.MetrocamService.CreateRelationshipCompleted -= MetrocamService_CreateRelationshipCompleted;
-            r = e.Data as Relationship;
 
             doingWork = false;
             AppBarSet = false;
@@ -369,14 +369,14 @@ namespace MetrocamPan
             if (doingWork)
                 return;
 
-            App.MetrocamService.DeleteRelationshipCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_DeleteRelationshipCompleted);
+            App.MetrocamService.DeleteRelationshipByUserIDCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_DeleteRelationshipByUserIDCompleted);
             doingWork = true;
-            App.MetrocamService.DeleteRelationship(r);
+            App.MetrocamService.DeleteRelationshipByUserID(userInfo.ID);
         }
 
-        void MetrocamService_DeleteRelationshipCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
+        void MetrocamService_DeleteRelationshipByUserIDCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
-            App.MetrocamService.DeleteRelationshipCompleted -= MetrocamService_DeleteRelationshipCompleted;
+            App.MetrocamService.DeleteRelationshipByUserIDCompleted -= MetrocamService_DeleteRelationshipByUserIDCompleted;
 
             doingWork = false;
             AppBarSet = false;
