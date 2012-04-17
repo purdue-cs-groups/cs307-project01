@@ -1357,14 +1357,7 @@ namespace MobileClientLibrary
                     WebException we = (WebException)e.Error;
                     HttpWebResponse response = (System.Net.HttpWebResponse)we.Response;
 
-                    if (response.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        throw new UnauthorizedAccessException("The Authentication Token has expired.");
-                    }
-                    else
-                    {
-                        throw e.Error;
-                    }
+                    CreateUserCompleted(sender, new RequestCompletedEventArgs(new UnauthorizedAccessException()));
                 }
             }
         }
