@@ -206,6 +206,21 @@ namespace MetrocamPan
             // Unsubscribe
             App.MetrocamService.CreateUserCompleted -= new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_CreateUserCompleted);
 
+            UnauthorizedAccessException err = e.Data as UnauthorizedAccessException;
+
+            if (err != null)
+            {
+                if (GlobalLoading.Instance.IsLoading)
+                    GlobalLoading.Instance.IsLoading = false;
+                // There was an error with CreateUser in the webservice
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                    "Signup Failure",
+                    "This Username and/or Email is already being registered to another account.",
+                    3000);
+                toastDisplay.Show();
+                return;
+            }
+
             // Now we authenticate using the username and password
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
 

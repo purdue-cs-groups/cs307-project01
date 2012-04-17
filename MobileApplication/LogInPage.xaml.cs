@@ -16,6 +16,7 @@ using MobileClientLibrary.Models;
 using JeffWilcox.FourthAndMayor;
 using System.Windows.Navigation;
 using Coding4Fun.Phone.Controls;
+using MetrocamPan.Helpers;
 
 namespace MetrocamPan
 {
@@ -26,14 +27,6 @@ namespace MetrocamPan
         private int timeCount = 0;
 
         private ToastPrompt toastDisplay;
-        private static ToastPrompt GetBasicToast(string title = "Basic")
-        {
-            return new ToastPrompt
-            {
-                Title = title,
-                Message = "Please enter text here"
-            };
-        }
 
         public LoginScreen()
         {
@@ -62,10 +55,10 @@ namespace MetrocamPan
             if (!InputValidator.isNotEmpty(this.usernameInput.Text) ||
                 !InputValidator.isNotEmpty(this.passwordInput.Password))
             {
-                toastDisplay = GetBasicToast("Oops!");
-                toastDisplay.Message = "Please check that you have entered all required fields.";
-                toastDisplay.MillisecondsUntilHidden = 3000;
-                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                    "Oops!",
+                    "Please check that you have entered all required fields.",
+                    3000);
                 toastDisplay.Show();
                 return;
             }
@@ -98,11 +91,12 @@ namespace MetrocamPan
                 App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
                 this.timer.Tick -= timer_Tick;
 
-                GlobalLoading.Instance.IsLoading = false;
-                toastDisplay = GetBasicToast("Oops!");
-                toastDisplay.Message = "The credentials you provided are invalid.";
-                toastDisplay.MillisecondsUntilHidden = 3000;
-                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                if (GlobalLoading.Instance.IsLoading)
+                    GlobalLoading.Instance.IsLoading = false;
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                    "Oops!",
+                    "The credentials you provided are invalid.",
+                    3000);
                 toastDisplay.Show();
             }
         }
@@ -113,16 +107,17 @@ namespace MetrocamPan
         {
             this.timer.Stop();
             App.MetrocamService.AuthenticateCompleted -= MetrocamService_AuthenticateCompleted_Login;
-            GlobalLoading.Instance.IsLoading = false;
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
 
             UnauthorizedAccessException err = e.Data as UnauthorizedAccessException;
 
             if (err != null)
             {
-                toastDisplay = GetBasicToast("Oops!");
-                toastDisplay.Message = "The credentials you provided are invalid.";
-                toastDisplay.MillisecondsUntilHidden = 3000;
-                toastDisplay.TextWrapping = TextWrapping.Wrap;
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                    "Oops!",
+                    "The credentials you provided are invalid.",
+                    3000);
                 toastDisplay.Show();
                 return;
             }
