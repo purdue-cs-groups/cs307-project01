@@ -115,8 +115,8 @@ namespace MetrocamPan
                     Save.Text = "save";
                     Save.Click += new EventHandler(Save_Click);
 
-                    ApplicationBar.MenuItems.Add(Delete);
                     ApplicationBar.MenuItems.Add(Save);
+                    ApplicationBar.MenuItems.Add(Delete);                   
                     ApplicationBar.MenuItems.Add(profilePic);
 
                     alreadyAddedMenuItem = true;
@@ -267,16 +267,24 @@ namespace MetrocamPan
                 return;
 
             GlobalLoading.Instance.IsLoading = true;
-            PictureInfo data = CurrentPicture; 
+            PictureInfo data = CurrentPicture;
+            int i = 0;
 
             /**
              * update local copy of picture
              */
-            PictureInfo favoritePic = (from pic in App.FavoritedUserPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
-            if (favoritePic != null)
-                favoritePic.IsFavorited = false;
+            foreach (PictureInfo p in App.FavoritedUserPictures)
+            {
+                if (p.ID.Equals(CurrentPicture.ID))
+                {
+                    p.IsFavorited = false;
+                    break;
+                }
 
-            favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
+                i++;
+            }
+
+            PictureInfo favoritePic = (from pic in App.PopularPictures where pic.ID.Equals(data.ID) select pic).SingleOrDefault();
             if (favoritePic != null)
                 favoritePic.IsFavorited = false;
 
@@ -288,7 +296,9 @@ namespace MetrocamPan
             if (favoritePic != null)
                 favoritePic.IsFavorited = false;
 
-            App.FavoritedUserPictures.Remove(CurrentPicture);
+            if (App.FavoritedUserPictures.Count != 0)
+                App.FavoritedUserPictures.RemoveAt(i);
+
             App.MetrocamService.DeleteFavoritedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_DeleteFavoritedPictureCompleted);
             App.MetrocamService.DeleteFavoritedPicture(f);
         }
