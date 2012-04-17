@@ -44,7 +44,24 @@ namespace MetrocamPan
             }
 
             this.lToggle.IsChecked = Settings.locationService.Value;
+            if (Settings.locationService.Value)
+            {
+                lToggle.Content = "on";
+            }
+            else
+            {
+                lToggle.Content = "off";
+            }
+
             this.oToggle.IsChecked = Settings.saveOriginal.Value;
+            if (Settings.saveOriginal.Value)
+            {
+                oToggle.Content = "on";
+            }
+            else
+            {
+                oToggle.Content = "off";
+            }
         }
 
         private void tweetCheck(object sender, RoutedEventArgs e)
