@@ -139,15 +139,31 @@ namespace MetrocamPan
 
             userInfo.ID = SelectedPicture.User.ID;
 
-            if (SelectedPicture.User.IsFollowing == false)
+            if (App.ChangedFollowerStatus.ContainsKey(userInfo.ID))
             {
-                FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
-                ConstructAppBar(false, false);
+                if (App.ChangedFollowerStatus[userInfo.ID] == true)
+                { 
+                    FollowingStatus.Text = "You are following " + userInfo.Username + ".";
+                    ConstructAppBar(false, true);
+                }
+                else
+                {
+                    FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
+                    ConstructAppBar(false, false);
+                }
             }
             else
             {
-                FollowingStatus.Text = "You are following " + userInfo.Username + ".";
-                ConstructAppBar(false, true);
+                if (SelectedPicture.User.IsFollowing == false)
+                {
+                    FollowingStatus.Text = "You are not following " + userInfo.Username + ".";
+                    ConstructAppBar(false, false);
+                }
+                else
+                {
+                    FollowingStatus.Text = "You are following " + userInfo.Username + ".";
+                    ConstructAppBar(false, true);
+                }
             }
         }
 
@@ -345,6 +361,8 @@ namespace MetrocamPan
             if (doingWork)
                 return;
 
+            App.ChangedFollowerStatus[userInfo.ID] = true; 
+
             Relationship data = new Relationship();
             data.UserID = App.MetrocamService.CurrentUser.ID;
             data.FollowingUserID = userInfo.ID;
@@ -368,6 +386,8 @@ namespace MetrocamPan
         {
             if (doingWork)
                 return;
+
+            App.ChangedFollowerStatus[userInfo.ID] = false; 
 
             App.MetrocamService.DeleteRelationshipByUserIDCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_DeleteRelationshipByUserIDCompleted);
             doingWork = true;

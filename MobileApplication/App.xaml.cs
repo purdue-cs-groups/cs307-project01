@@ -37,6 +37,8 @@ namespace MetrocamPan
         public static ObservableCollection<PictureInfo> UserPictures = new ObservableCollection<PictureInfo>();
         public static ObservableCollection<PictureInfo> FavoritedUserPictures = new ObservableCollection<PictureInfo>();
 
+        public static Dictionary<string, bool> ChangedFollowerStatus = new Dictionary<string, bool>();
+
         public static bool isFromLandingPage = false;
         public static bool isFromAppLaunch = false;
         public static bool isFromAppActivate = false;
