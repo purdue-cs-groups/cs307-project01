@@ -207,9 +207,26 @@ namespace WebService.Controllers
             }
 
             //Checks that all the required fiels are valid and of the correct length.
-            if(!InputValidator.isValidEmail(data.EmailAddress) || !InputValidator.isValidUsername(data.Username) || !InputValidator.isStrongPassword(data.Password) || !InputValidator.isValidLength(data.Password, InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary) || !InputValidator.isValidLength(data.Username, InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary))
+            if (!InputValidator.isValidEmail(data.EmailAddress))
             {
-                throw new FormatException("Username, Email Address, and Name must be valid fields!");
+                throw new FormatException("Email address " + data.EmailAddress + " is not valid!");
+            }
+            if (!InputValidator.isValidUsername(data.Username))
+            {
+                throw new FormatException("Username " + data.Username + " is not valid!");
+            }
+            //Checks for password will not work from server side when passing in a hashed password.
+            /*if (!InputValidator.isStrongPassword(data.Password))
+            {
+                throw new FormatException("Password is not strong!");
+            }*/
+            /*if (!InputValidator.isValidLength(data.Password, InputValidator.passwordLowerBoundary, InputValidator.passwordUpperBoundary))
+            {
+                throw new FormatException("Password is not long enough!");
+            }*/
+            if(!InputValidator.isValidLength(data.Username, InputValidator.usernameLowerBoundary, InputValidator.usernameUpperBoundary))
+            {
+                throw new FormatException("Username " + data.Username + " is not long enough!");
             }
 
             data.CreatedDate = Utilities.ConvertToUnixTime(DateTime.UtcNow);

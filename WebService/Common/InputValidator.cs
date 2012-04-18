@@ -14,6 +14,7 @@ namespace WebService.Common
 
         public static int usernameLowerBoundary = 4;
         public static int usernameUpperBoundary = 25;
+
         public static int passwordLowerBoundary = 6;
         public static int passwordUpperBoundary = 20;
 
@@ -44,7 +45,7 @@ namespace WebService.Common
          *      Spaces not allowed
          *      At least one number character
          *      At least one capital character
-         *      Between 6 to 12 characters in length
+         *      Between 6 to 20 characters in length
          */
         public static bool isStrongPassword(String password)
         {
@@ -54,7 +55,7 @@ namespace WebService.Common
                 return false;
             }
 
-            // Minimum and Maximum Length of field - 6 to 12 Characters
+            // Minimum and Maximum Length of field - 6 to 20 Characters
             if (password.Length < passwordLowerBoundary || password.Length > passwordUpperBoundary)
             {
                 return false;
@@ -126,7 +127,7 @@ namespace WebService.Common
                 return false;
             }
 
-            // Minimum and Maximum Length of field - 4 to 12 Characters
+            // Minimum and Maximum Length of field - 4 to 25 Characters
             if (username.Length < usernameLowerBoundary || username.Length > usernameUpperBoundary)
             {
                 return false;
