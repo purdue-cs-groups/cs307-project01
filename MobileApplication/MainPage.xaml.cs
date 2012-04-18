@@ -108,6 +108,7 @@ namespace MetrocamPan
                 NavigationService.RemoveBackEntry();
 
                 App.isFromUploadPage = false;
+                return;
             }
             else if (App.isFromEditProfile)
             {
@@ -117,7 +118,8 @@ namespace MetrocamPan
 
                 toastDisplay.Show();
 
-                App.isFromEditProfile = false; 
+                App.isFromEditProfile = false;
+                return;
             }
             
             // Checks if user is already logged in previously
@@ -206,7 +208,7 @@ namespace MetrocamPan
                 DateTime start = DateTime.Now;
                 DateTime end = DateTime.Now;
 
-                while ((end.Ticks - start.Ticks) < 50000)
+                while ((end.Ticks - start.Ticks) < 70000)
                 {
                     end = DateTime.Now;
                 }
