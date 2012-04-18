@@ -46,6 +46,8 @@ namespace MetrocamPan
         PictureInfo SelectedPicture = null;
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            GlobalLoading.Instance.Text = "";
+
             if (App.isFromEditProfile)
             {
                 toastDisplay = GlobalToastPrompt.CreateToastPrompt(

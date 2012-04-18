@@ -77,6 +77,8 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = true;
             }
 
+            GlobalLoading.Instance.Text = "Uploading picture...";
+
             // authenticate with user's credentials
             App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(client_AuthenticateCompleted);
             App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
@@ -247,6 +249,8 @@ namespace MetrocamPan
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.Text = "";
 
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;

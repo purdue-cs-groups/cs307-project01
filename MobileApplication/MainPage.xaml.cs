@@ -74,7 +74,13 @@ namespace MetrocamPan
             if (recentPictures.ItemsSource == null)
             {
                 Dispatcher.BeginInvoke(() =>
-                        recentPictures.DataContext = App.RecentPictures);
+                        recentPictures.ItemsSource = App.RecentPictures);
+            }
+
+            if (FavoritePictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                        FavoritePictures.DataContext = App.FavoritedUserPictures);
             }
         }
 
@@ -95,6 +101,11 @@ namespace MetrocamPan
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
+
+            GlobalLoading.Instance.Text = "";
 
             startPop = DateTime.Now;
 
@@ -176,7 +187,10 @@ namespace MetrocamPan
                 if (MainContent.SelectedIndex == 0)
                 {
                     // Refresh popular
+                    isRefreshingPopular = true;
+                    isRefreshingRecent = true;
                     FetchPopularPictures();
+                    FetchRecentPictures();
                     App.pictureIsDeleted = false;
                 }
                 else if (MainContent.SelectedIndex == 1)
@@ -1059,6 +1073,8 @@ namespace MetrocamPan
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+
+            GlobalLoading.Instance.Text = "";
 
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;

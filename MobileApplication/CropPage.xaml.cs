@@ -14,6 +14,7 @@ using Microsoft.Phone.Controls;
 using System.Windows.Media.Imaging;
 using System.Reflection;
 using System.Windows.Resources;
+using JeffWilcox.FourthAndMayor;
 
 namespace MetrocamPan
 {
@@ -34,6 +35,7 @@ namespace MetrocamPan
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            GlobalLoading.Instance.Text = "";
             drag.Y = 0;
             SetPhoto();
         }

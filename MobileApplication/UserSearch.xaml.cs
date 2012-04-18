@@ -34,6 +34,8 @@ namespace MetrocamPan
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            GlobalLoading.Instance.Text = "";
+
             noresults.Visibility = System.Windows.Visibility.Collapsed;
             searchResults.Visibility = System.Windows.Visibility.Collapsed;
             SearchResults.Clear();
@@ -47,6 +49,7 @@ namespace MetrocamPan
             noresults.Visibility = System.Windows.Visibility.Collapsed;
             App.MetrocamService.SearchUsersCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_SearchUsersCompleted);
             GlobalLoading.Instance.IsLoading = true;
+            GlobalLoading.Instance.Text = "Searching...";
             App.MetrocamService.SearchUsers(this.searchterms.Text);
         }
 
@@ -55,6 +58,7 @@ namespace MetrocamPan
         {
             App.MetrocamService.SearchUsersCompleted -= MetrocamService_SearchUsersCompleted;
             GlobalLoading.Instance.IsLoading = false;
+            GlobalLoading.Instance.Text = "";
             SearchResults.Clear();
 
             results = e.Data as List<UserInfo>;

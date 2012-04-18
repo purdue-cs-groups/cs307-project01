@@ -373,6 +373,8 @@ namespace MetrocamPan
         {
             base.OnNavigatedFrom(e);
 
+            GlobalLoading.Instance.Text = "";
+
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
         }

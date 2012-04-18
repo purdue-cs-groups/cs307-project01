@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using JeffWilcox.FourthAndMayor;
 
  
 
@@ -25,6 +26,8 @@ namespace MetrocamPan
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            GlobalLoading.Instance.Text = "";
 
             if (Settings.twitterAuth.Value)
             {
