@@ -201,6 +201,16 @@ namespace MetrocamPan
             if ((App.isFromAppLaunch || App.isFromLandingPage) && App.MetrocamService.CurrentUser != null)
             {
                 FetchPopularPictures();
+                FetchRecentPictures();
+
+                DateTime start = DateTime.Now;
+                DateTime end = DateTime.Now;
+
+                while ((end.Ticks - start.Ticks) < 50000)
+                {
+                    end = DateTime.Now;
+                }
+
                 GetUserConnectedAccounts();                
             }
 
@@ -608,13 +618,6 @@ namespace MetrocamPan
                 // isRefreshingPopular = true;
                 // FetchPopularPictures();
             }
-            else if (MainContent.SelectedIndex == 1 && App.MetrocamService.CurrentUser != null && App.RecentPictures.Count == 0)
-            {
-                // If Recent pivot item is selected
-                GlobalLoading.Instance.IsLoading = true;
-                startRec = DateTime.Now;
-                FetchRecentPictures();
-            }
             else if (MainContent.SelectedIndex == 2 && App.MetrocamService.CurrentUser != null && App.FavoritedUserPictures.Count == 0)
             {
                 if (App.FavoritedUserPictures.Count != 0)
@@ -639,7 +642,7 @@ namespace MetrocamPan
                 GlobalLoading.Instance.IsLoading = true;
             }
 
-            GlobalLoading.Instance.Text = "Fetching popular pictures...";
+            GlobalLoading.Instance.Text = "Fetching pictures...";
             App.MetrocamService.FetchPopularNewsFeed();
         }
 
@@ -696,7 +699,7 @@ namespace MetrocamPan
             if (GlobalLoading.Instance.IsLoading == false) 
                 GlobalLoading.Instance.IsLoading = true;
 
-            GlobalLoading.Instance.Text = "Fetching recent pictures...";
+            GlobalLoading.Instance.Text = "Fetching pictures...";
 
             App.MetrocamService.FetchNewsFeed();
         }
