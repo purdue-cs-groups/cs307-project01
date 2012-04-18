@@ -122,7 +122,7 @@ namespace MetrocamPan
                 return;
             }
 
-            FetchRecentPictures();
+            //FetchRecentPictures();
 
             // Obtain UserInfo object from web service
             UserInfo currentUser = App.MetrocamService.CurrentUser;

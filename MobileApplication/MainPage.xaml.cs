@@ -119,7 +119,7 @@ namespace MetrocamPan
 
                 App.isFromEditProfile = false; 
             }
-
+            
             // Checks if user is already logged in previously
             if (!Settings.isLoggedIn.Value || Settings.isLoggedIn == null)
             {
@@ -131,13 +131,13 @@ namespace MetrocamPan
 
             if (App.isFromLandingPage)
             {
-                // Reset back to false
-                App.isFromLandingPage = false;
-
                 // Clears back stack so user cannot go back to LandingPage(s)
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
                 NavigationService.RemoveBackEntry();
+
+                App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
+                App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);
             }
 
             // User is logged in previously, check how this app got to main page
@@ -198,7 +198,7 @@ namespace MetrocamPan
             App.MetrocamService.AuthenticateCompleted -= new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
             Settings.getUserSpecificSettings(App.MetrocamService.CurrentUser.ID);
 
-            if (App.isFromAppLaunch && App.MetrocamService.CurrentUser != null)
+            if ((App.isFromAppLaunch || App.isFromLandingPage) && App.MetrocamService.CurrentUser != null)
             {
                 FetchPopularPictures();
                 GetUserConnectedAccounts();                
@@ -212,6 +212,7 @@ namespace MetrocamPan
             // Reset back to false
             App.isFromAppLaunch = false;
             App.isFromAppActivate = false;
+            App.isFromLandingPage = false;
             isRefreshingRecent = false;
         }
 
