@@ -22,13 +22,13 @@
         </Grid.RowDefinitions>
         
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
             <TextBlock x:Name="PageTitle" Text="share" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <StackPanel Grid.Row="1" Margin="12,12,0,12">
+        <StackPanel Grid.Row="1" Margin="12">
             <toolkit:PhoneTextBox Hint="photo caption" ActualHintVisibility="Visible" Name="captionBox" KeyDown="captionKey" InputScope="Text" />
             <toolkit:ToggleSwitch Content="Share with Twitter" IsChecked="false" IsEnabled="False" Name="twitterSwitch" />
             <toolkit:ToggleSwitch Content="Share with Facebook" IsChecked="false" IsEnabled="False" Visibility="Collapsed" />

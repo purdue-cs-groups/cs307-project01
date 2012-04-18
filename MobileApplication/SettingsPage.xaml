@@ -21,12 +21,12 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
             <TextBlock x:Name="PageTitle" Text="settings" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <Grid x:Name="settingsOptions" Grid.Row="1" Margin="12,12,0,12">
+        <Grid x:Name="settingsOptions" Grid.Row="1" Margin="12">
             <StackPanel>
                 <TextBlock x:Name="socialitems" Text="social networks" Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <Button x:Name="connectaccounts" Click="ConnectToTwitter_Click">Connect to Twitter</Button>

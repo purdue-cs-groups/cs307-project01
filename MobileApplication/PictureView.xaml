@@ -22,13 +22,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12">
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
             <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-            <Grid x:Name="ContentPanel" Margin="12,12,0,12">
+            <Grid x:Name="ContentPanel" Margin="12">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
