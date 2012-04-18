@@ -23,18 +23,18 @@
 
     <Grid Background="Transparent">
         <!--Root Pivot Control-->      
-        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="-12,-5,0,0" Background="{StaticResource PhoneBackgroundBrush}" SelectionChanged="MainContent_SelectionChanged">
+        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="0,-5,0,0" Background="{StaticResource PhoneBackgroundBrush}" SelectionChanged="MainContent_SelectionChanged">
 
             <!--Popular Pivot Item-->
             <controls:PivotItem Header="popular" IsTabStop="False" FontWeight="Normal">
                 <Grid>
                     <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="12,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Loaded="LoadingMessage_Loaded" />
-                    <ListBox x:Name="PopularPictures" Margin="6,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
+                    <ListBox x:Name="PopularPictures" Margin="12,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Image  Width="144"
-                                        Height="144"
-                                        Margin="6"
+                                <Image  Width="140"
+                                        Height="140"
+                                        Margin="0,4,4,0"
                                         Source="{Binding MediumURL}"
                                         Tap="PopularPicture_Tap" 
                                         Loaded="PopularPicture_Loaded" />
@@ -98,8 +98,8 @@
                                 </Grid>
                                 <Image Grid.Row="1"
                                        Source="{Binding MediumURL}" 
-                                       Height="456"
-                                       Width="456"
+                                       Height="438"
+                                       Width="438"
                                        Stretch="UniformToFill" 
                                        Tag="{Binding PictureID}" 
                                        Tap="recentPicture_Tap" 
@@ -129,13 +129,13 @@
             <controls:PivotItem Header="favorites" IsTabStop="False" FontWeight="Normal">
                 <Grid>
                     <TextBlock x:Name="FavoritesLoadingMessage" Margin="12,0" Text="You have no favorite pictures, have a look around!" TextWrapping="Wrap" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Visibility="Collapsed" />
-                    <ListBox x:Name="FavoritePictures" Margin="6,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
+                    <ListBox x:Name="FavoritePictures" Margin="12,0,12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Image
-                                        Width="144"
-                                        Height="144"
-                                        Margin="6"
+                                        Width="140"
+                                        Height="140"
+                                        Margin="0,4,4,0"
                                         Source="{Binding MediumURL}"
                                         Tap="FavoritedPicture_Tap" />
                             </DataTemplate>
