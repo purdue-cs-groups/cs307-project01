@@ -70,6 +70,12 @@ namespace MetrocamPan
                 Dispatcher.BeginInvoke(() =>
                     PopularPictures.DataContext = App.PopularPictures);
             }
+
+            if (recentPictures.ItemsSource == null)
+            {
+                Dispatcher.BeginInvoke(() =>
+                        recentPictures.DataContext = App.RecentPictures);
+            }
         }
 
         // Display the loading message dynamically based on time
