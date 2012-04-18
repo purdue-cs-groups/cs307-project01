@@ -95,6 +95,19 @@ namespace JeffWilcox.FourthAndMayor
             }
         }
 
+        private string _text;
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _mangoIndicator.Text = value;
+            }
+        }
+
         private void NotifyValueChanged()
         {
             if (_mangoIndicator != null)

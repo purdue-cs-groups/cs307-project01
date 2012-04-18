@@ -29,6 +29,11 @@ namespace MetrocamPan
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private DateTime startPop;
+        private DateTime endPop;
+        private DateTime startRec;
+        private DateTime endRec;
+
         public static String TwitterToken = null;
         public static String TwitterSecret = null;
 
@@ -84,6 +89,8 @@ namespace MetrocamPan
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            startPop = DateTime.Now;
 
             if (App.isFromUploadPage)
             {
@@ -193,8 +200,8 @@ namespace MetrocamPan
 
             if (App.isFromAppLaunch && App.MetrocamService.CurrentUser != null)
             {
-                GetUserConnectedAccounts();
                 FetchPopularPictures();
+                GetUserConnectedAccounts();                
             }
 
             if (isRefreshingRecent)
@@ -497,7 +504,7 @@ namespace MetrocamPan
             else if (MainContent.SelectedIndex == 1)
             {
                 // authenticate and refresh recent
-                isRefreshingRecent = true;
+                isRefreshingRecent = true;     
                 FetchRecentPictures();
                 /*App.MetrocamService.AuthenticateCompleted += new RequestCompletedEventHandler(MetrocamService_AuthenticateCompleted);
                 App.MetrocamService.Authenticate(Settings.username.Value, Settings.password.Value);*/
@@ -604,6 +611,7 @@ namespace MetrocamPan
             {
                 // If Recent pivot item is selected
                 GlobalLoading.Instance.IsLoading = true;
+                startRec = DateTime.Now;
                 FetchRecentPictures();
             }
             else if (MainContent.SelectedIndex == 2 && App.MetrocamService.CurrentUser != null && App.FavoritedUserPictures.Count == 0)
@@ -629,13 +637,16 @@ namespace MetrocamPan
             {
                 GlobalLoading.Instance.IsLoading = true;
             }
-            
+
+            GlobalLoading.Instance.Text = "Fetching popular pictures...";
             App.MetrocamService.FetchPopularNewsFeed();
         }
 
         Boolean isRefreshingPopular = false;
         void MetrocamService_FetchPopularNewsFeedCompleted(object sender, MobileClientLibrary.RequestCompletedEventArgs e)
         {
+            endPop = DateTime.Now;
+            GlobalLoading.Instance.Text = "";
             App.MetrocamService.FetchPopularNewsFeedCompleted -= MetrocamService_FetchPopularNewsFeedCompleted;
             App.PopularPictures.Clear();
 
@@ -684,11 +695,15 @@ namespace MetrocamPan
             if (GlobalLoading.Instance.IsLoading == false) 
                 GlobalLoading.Instance.IsLoading = true;
 
+            GlobalLoading.Instance.Text = "Fetching recent pictures...";
+
             App.MetrocamService.FetchNewsFeed();
         }
 
         void MetrocamService_FetchNewsFeedCompleted(object sender, RequestCompletedEventArgs e)
         {
+            GlobalLoading.Instance.Text = "";
+            endRec = DateTime.Now;
             App.MetrocamService.FetchNewsFeedCompleted -= MetrocamService_FetchNewsFeedCompleted;
             App.RecentPictures.Clear();
             App.ContinuedRecentPictures.Clear();
@@ -735,13 +750,16 @@ namespace MetrocamPan
             App.MetrocamService.FetchUserFavoritedPicturesCompleted += new RequestCompletedEventHandler(MetrocamService_FetchUserFavoritedPicturesCompleted);
 
             if (GlobalLoading.Instance.IsLoading == false)
-                GlobalLoading.Instance.IsLoading = true; 
+                GlobalLoading.Instance.IsLoading = true;
+
+            GlobalLoading.Instance.Text = "Fetching your favorite pictures...";
             
             App.MetrocamService.FetchUserFavoritedPictures(App.MetrocamService.CurrentUser.ID);
         }
 
         void MetrocamService_FetchUserFavoritedPicturesCompleted(object sender, RequestCompletedEventArgs e)
         {
+            GlobalLoading.Instance.Text = "";
             App.MetrocamService.FetchUserFavoritedPicturesCompleted -= MetrocamService_FetchUserFavoritedPicturesCompleted;
             App.FavoritedUserPictures.Clear();
 
