@@ -129,9 +129,14 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = SelectedPicture.User.Biography;
 
-            PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
-            FollowingLabel.Text = SelectedPicture.User.Following.ToString();
-            FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
+            if (SelectedPicture.User.Pictures != null)
+                PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
+
+            if (SelectedPicture.User.Following != null)
+                FollowingLabel.Text = SelectedPicture.User.Following.ToString();
+
+            if (SelectedPicture.User.Followers != null)
+                FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
@@ -214,9 +219,14 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = userInfo.Biography;
 
-            PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
-            FollowingLabel.Text = SelectedPicture.User.Following.ToString();
-            FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
+            if (SelectedPicture.User.Pictures != null) 
+                PictureLabel.Text = SelectedPicture.User.Pictures.ToString();
+
+            if (SelectedPicture.User.Following != null)
+                FollowingLabel.Text = SelectedPicture.User.Following.ToString();
+
+            if (SelectedPicture.User.Followers != null)
+                FollowerLabel.Text = SelectedPicture.User.Followers.ToString();
 
             App.MetrocamService.FetchUserPicturesCompleted += new MobileClientLibrary.RequestCompletedEventHandler(MetrocamService_FetchUserPicturesCompleted);
             GlobalLoading.Instance.IsLoading = true;
@@ -251,9 +261,14 @@ namespace MetrocamPan
             else
                 biographyTextBlock.Text = App.MetrocamService.CurrentUser.Biography;
 
-            PictureLabel.Text = App.MetrocamService.CurrentUser.Pictures.ToString();
-            FollowingLabel.Text = App.MetrocamService.CurrentUser.Following.ToString();
-            FollowerLabel.Text = App.MetrocamService.CurrentUser.Followers.ToString();
+            if (App.MetrocamService.CurrentUser.Pictures != null)
+                PictureLabel.Text = App.MetrocamService.CurrentUser.Pictures.ToString();
+
+            if (App.MetrocamService.CurrentUser.Following != null)
+                FollowingLabel.Text = App.MetrocamService.CurrentUser.Following.ToString();
+
+            if (App.MetrocamService.CurrentUser.Followers != null)
+                FollowerLabel.Text = App.MetrocamService.CurrentUser.Followers.ToString();
         }
 
         List<PictureInfo> userPictures = null;

@@ -44,8 +44,8 @@
                     <DataTemplate>
                         <Grid>
                             <Image Margin="12,5,0,0" Height="90" HorizontalAlignment="Left" Stretch="UniformToFill" VerticalAlignment="Top" Width="90" Source="{Binding ProfilePicture.MediumURL}" Tap="ViewUserDetailFromPicture_Tap" />
-                            <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="38" VerticalAlignment="Top" FontSize="35" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailFromUsername_Tap" />
-                            <TextBlock Margin="112,50,0,0" Text="{Binding Username}"  Height="38" VerticalAlignment="Top" FontSize="26" Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" />
+                            <TextBlock Margin="112,13,0,0" Text="{Binding Name}"  Height="Auto" VerticalAlignment="Top" Foreground="{StaticResource PhoneBorderBrush}" Tap="ViewUserDetailFromUsername_Tap" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                            <TextBlock Margin="112,55,0,0" Text="{Binding Username}"  Height="Auto" VerticalAlignment="Top"  Foreground="{StaticResource PhoneAccentBrush}" Tap="ViewUserDetailFromUsername_Tap" FontSize="{StaticResource PhoneFontSizeMediumLarge}" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
