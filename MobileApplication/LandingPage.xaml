@@ -33,11 +33,11 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <StackPanel>
-            <fancytile:Tile Height="768" Width="480" HorizontalAlignment="Left"
+            <fancytile:Tile Height="800" Width="480" HorizontalAlignment="Left"
                             fancytilebinding:FrameworkElementBinding.ClipToBounds="True">
                 <Grid>
                     <Canvas>
-                        <Image x:Name="Image" Source="Images/belltower.jpeg" Stretch="None">
+                        <Image x:Name="Image" Source="Images/belltower_2.jpg" Stretch="None">
                             <Image.RenderTransform>
                                 <CompositeTransform />
                             </Image.RenderTransform>
