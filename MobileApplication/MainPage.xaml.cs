@@ -102,6 +102,11 @@ namespace MetrocamPan
         {
             base.OnNavigatedTo(e);
 
+            if (App.FavoritedUserPictures.Count == 0)
+                FavoritesLoadingMessage.Visibility = Visibility.Visible;
+            else
+                FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
+
             if (GlobalLoading.Instance.IsLoading)
                 GlobalLoading.Instance.IsLoading = false;
 
@@ -1002,6 +1007,9 @@ namespace MetrocamPan
             {
                 return;
             }
+
+            if (App.FavoritedUserPictures.Count == 0)
+                FavoritesLoadingMessage.Visibility = Visibility.Collapsed;
 
             App.FavoritedUserPictures.Add(info);
 
