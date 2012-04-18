@@ -379,11 +379,44 @@ namespace MetrocamPan
 
         private void Flag_Click(object sender, EventArgs e)
         {
+            if (doingWork)
+                return;
+
+            if (CurrentPicture.IsFlagged || App.ChangedFlaggedStatus.ContainsKey(CurrentPicture.ID))
+            {
+                toastDisplay = GlobalToastPrompt.CreateToastPrompt(
+                "Oops!",
+                "You have already flagged this picture.");
+
+                toastDisplay.Show();
+                return;
+            }
+
+            FlaggedPicture data = new FlaggedPicture();
+            data.UserID = App.MetrocamService.CurrentUser.ID;
+            data.PictureID = CurrentPicture.ID;
+
+            App.MetrocamService.CreateFlaggedPictureCompleted += new RequestCompletedEventHandler(MetrocamService_CreateFlaggedPictureCompleted);
+            if (GlobalLoading.Instance.IsLoading == false)
+                GlobalLoading.Instance.IsLoading = true;
+            doingWork = true;
+            App.MetrocamService.CreateFlaggedPicture(data);
+        }
+
+        void MetrocamService_CreateFlaggedPictureCompleted(object sender, RequestCompletedEventArgs e)
+        {
+            App.MetrocamService.CreateFlaggedPictureCompleted -= MetrocamService_CreateFlaggedPictureCompleted;
+            if (GlobalLoading.Instance.IsLoading)
+                GlobalLoading.Instance.IsLoading = false;
+
             toastDisplay = GlobalToastPrompt.CreateToastPrompt(
                 "Success!",
                 "Picture has been flagged for review.");
 
             toastDisplay.Show();
+
+            App.ChangedFlaggedStatus[CurrentPicture.ID] = true;
+            doingWork = false;
         }
     }
 }

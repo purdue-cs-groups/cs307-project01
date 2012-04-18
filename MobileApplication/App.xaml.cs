@@ -39,6 +39,7 @@ namespace MetrocamPan
 
         public static Dictionary<string, bool> ChangedFollowerStatus = new Dictionary<string, bool>();
         public static Dictionary<string, bool> ChangedFavoritedStatus = new Dictionary<string, bool>();
+        public static Dictionary<string, bool> ChangedFlaggedStatus = new Dictionary<string, bool>();
 
         public static bool isFromLandingPage = false;
         public static bool isFromAppLaunch = false;
