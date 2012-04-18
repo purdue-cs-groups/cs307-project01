@@ -29,7 +29,7 @@
             <controls:PivotItem Header="popular" IsTabStop="False" FontWeight="Normal">
                 <Grid>
                     <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="12,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Loaded="LoadingMessage_Loaded" />
-                    <ListBox x:Name="PopularPictures" Margin="12,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
+                    <ListBox x:Name="PopularPictures" Margin="12,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Image  Width="140"
