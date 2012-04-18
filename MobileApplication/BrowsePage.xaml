@@ -7,6 +7,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -15,41 +16,35 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <controls:Pivot x:Name="MainContent" Title="METROCAM" FontWeight="Bold" Margin="0,0,0,0" Background="{StaticResource PhoneBackgroundBrush}">
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
-            <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
-            <TextBlock x:Name="PageTitle" Text="popular" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <StackPanel>
-                <TextBlock x:Name="LoadingMessage" Text="Good morning!" Margin="12,0" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource PhoneAccentBrush}" Loaded="LoadingMessage_Loaded" />
-                <ListBox x:Name="PopularHubTiles" Margin="6,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <toolkit:HubTile 
+            <!--Popular Pivot Item-->
+            <controls:PivotItem Header="popular" IsTabStop="False" FontWeight="Normal">
+                <Grid>
+                    <TextBlock x:Name="LoadingMessage" Text="Hi!" Margin="12,0" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" Loaded="LoadingMessage_Loaded" />
+                    <ListBox x:Name="PopularHubTiles" Margin="12,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <toolkit:HubTile 
                                     Style="{StaticResource SmallHubTile}"
-                                    Margin="6"
+                                    Margin="0,4,4,0"
                                     DisplayNotification="True" 
                                     Source="{Binding MediumURL}" 
                                     Notification="{Binding Caption}" 
                                     Title="{Binding User.Username}"
                                     Tag="Pic"
                                     GroupTag="PopularTiles" Visibility="Collapsed" Loaded="HubTile_Loaded" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <toolkit:WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-            </StackPanel>
-        </ScrollViewer>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

@@ -20,12 +20,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12" >
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12" >
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
             <TextBlock x:Name="PageTitle" Text="sign up" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
-        <ScrollViewer x:Name="ContentPanel" Grid.Row="1">
+        <ScrollViewer x:Name="ContentPanel" Grid.Row="1" Margin="12,12,0,12">
             <StackPanel>
                 <TextBlock Text="Username" Style="{StaticResource PhoneTextNormalStyle}" />
                 <toolkit:PhoneTextBox x:Name="UsernameInput" MaxLength="25" InputScope="LogOnName" KeyUp="UsernameInput_KeyUp" GotFocus="UsernameInput_GotFocus" LostFocus="UsernameInput_LostFocus" />

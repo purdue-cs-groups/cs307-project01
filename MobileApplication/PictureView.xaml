@@ -22,13 +22,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Margin="12,0" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
             <TextBlock x:Name="PageTitle" Text="picture details" Margin="7,-12,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-            <Grid x:Name="ContentPanel" Margin="0,24,0,0">
+            <Grid x:Name="ContentPanel" Margin="12,12,0,12">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -37,10 +37,12 @@
 
                 <Image x:Name="imgPicture" 
                    Grid.Row="0"
-                   Width="456" Height="456" 
-                   Stretch="UniformToFill" />
+                   Width="438" Height="438" 
+                   Stretch="UniformToFill"
+                   HorizontalAlignment="Left"
+                   Margin="12,0,0,0"/>
 
-                <Grid Grid.Row="1" Margin="12,6">
+                <Grid Grid.Row="1" Margin="12,6,12,6" IsHitTestVisible="False">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -69,7 +71,7 @@
                     <TextBlock x:Name="txtCreatedDate" 
                            Grid.Column="2"
                            Height="Auto" 
-                           Padding="0,6,0,0"
+                           Padding="0,6,6,0"
                            Text="3 hours ago" 
                            VerticalAlignment="Top" 
                            HorizontalAlignment="Right" 

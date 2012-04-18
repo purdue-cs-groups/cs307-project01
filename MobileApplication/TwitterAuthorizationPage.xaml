@@ -21,12 +21,12 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,12,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="METROCAM" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,12,0,12">
             <phone:WebBrowser x:Name="BrowserControl" Navigated="BrowserControl_Navigated" Navigating="BrowserControl_Navigating" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="12,0" />
         </Grid>
     </Grid>
