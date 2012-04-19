@@ -182,9 +182,27 @@ namespace MetrocamPan
 
         void MetrocamService_DeletePictureCompleted(object sender, RequestCompletedEventArgs e)
         {
+            App.MetrocamService.DeletePictureCompleted -= MetrocamService_DeletePictureCompleted;
             GlobalLoading.Instance.IsLoading = false;
 
-            App.pictureIsDeleted = true;
+            var PictureToDelete = (from pic in App.PopularPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).FirstOrDefault<PictureInfo>();
+            if (PictureToDelete != null)
+                App.PopularPictures.Remove(PictureToDelete);
+
+            PictureToDelete = (from pic in App.RecentPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).FirstOrDefault<PictureInfo>();
+            if (PictureToDelete != null)
+                App.RecentPictures.Remove(PictureToDelete);
+
+            PictureToDelete = (from pic in App.UserPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).FirstOrDefault<PictureInfo>();
+            if (PictureToDelete != null)
+                App.UserPictures.Remove(PictureToDelete);
+
+            PictureToDelete = (from pic in App.FavoritedUserPictures where pic.ID.Equals(NavigationContext.QueryString["id"]) select pic).FirstOrDefault<PictureInfo>();
+            if (PictureToDelete != null)
+                App.FavoritedUserPictures.Remove(PictureToDelete);
+            
+
+            //App.pictureIsDeleted = true;
 
             if (NavigationService.CanGoBack)
                 NavigationService.GoBack();
