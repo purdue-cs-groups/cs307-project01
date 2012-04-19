@@ -12,9 +12,7 @@
         <p class="title">
             Metrocam</p>
         <p class="tagline">
-            Metrocam is a fun & quirky way to share your life with friends through a series
-            of pictures. Snap a photo, then choose a filter to transform the look and feel of
-            the shot into a memory to keep around forever.
+            Based on an open API and a powerful webservice, Metrocam boasts a beautiful user experience, powerfully integrated with your Windows Phone. It's that feeling of running into your best friend from college on 11th Avenue when she's wearing that old 'Seattle Seahawks' t-shirt. And making fun of her for it. Except anywhere. Anytime.  
         </p>
         <br />
         <div>
