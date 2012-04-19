@@ -70,9 +70,54 @@ namespace MetrocamPan
             this.CapturedImage.Source = CapturedSource;
         }
 
-        // Apply image filter upon selection changed
-        private void ImageFiltersWrapper_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private T FindFirstElementInVisualTree<T>(DependencyObject parentElement) where T : DependencyObject
         {
+            var count = VisualTreeHelper.GetChildrenCount(parentElement);
+            if (count == 0)
+                return null;
+
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parentElement, i);
+
+                if (child != null && child is T)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    var result = FindFirstElementInVisualTree<T>(child);
+                    if (result != null)
+                        return result;
+
+                }
+            }
+            return null;
+        }
+
+        // Apply image filter upon selection changed
+        TextBlock old = null;
+        TextBlock curr = null;
+        private void ImageFiltersWrapper_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {     
+            int index = ((sender as ListBox).SelectedIndex);
+            ListBoxItem lbi = this.ImageFiltersWrapper.ItemContainerGenerator.ContainerFromIndex(index) as ListBoxItem;
+
+            if (lbi != null)
+            {
+                if (old == null)
+                {
+                    ListBoxItem _lbi = this.ImageFiltersWrapper.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                    old = FindFirstElementInVisualTree<TextBlock>(_lbi);
+                }
+
+                curr = FindFirstElementInVisualTree<TextBlock>(lbi);
+                Color accent = (Color)Application.Current.Resources["PhoneAccentColor"];
+                curr.Foreground = new SolidColorBrush(accent);
+                old.Foreground = new SolidColorBrush(Colors.White);
+                old = curr; 
+            }
+            
             // If original filter is selected, remove filter effect
             if (this.ImageFiltersWrapper.SelectedItem is OriginalEffect)
             {
@@ -110,6 +155,15 @@ namespace MetrocamPan
             {
                 NavigationService.GoBack();
             }
+        }
+
+        private void ImageFiltersWrapper_Loaded(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem _lbi = this.ImageFiltersWrapper.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+            TextBlock first = FindFirstElementInVisualTree<TextBlock>(_lbi);
+
+            Color accent = (Color) Application.Current.Resources["PhoneAccentColor"];
+            first.Foreground = new SolidColorBrush(accent);
         }
     }
 }

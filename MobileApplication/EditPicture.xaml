@@ -31,7 +31,7 @@
             <Image x:Name="CapturedImage" Source="{Binding CapturedSource}" 
                    Height="432" Width="432" Margin="12,0,0,0"
                    Stretch="UniformToFill" VerticalAlignment="Top" Loaded="capturedImage_Loaded" FlowDirection="LeftToRight" HorizontalAlignment="Left" />
-            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,440,12,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged">
+            <ListBox x:Name="ImageFiltersWrapper" ItemsSource="{Binding}" Margin="12,440,12,0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="ImageFiltersWrapper_SelectionChanged" Loaded="ImageFiltersWrapper_Loaded">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -40,7 +40,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="{Binding IconURI}" Margin="0,0,12,0" VerticalAlignment="Top" Width="90" Height="90" />
-                            <TextBlock Grid.Row="0" Text="{Binding Name}" Margin="0,0,12,0" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                            <TextBlock Grid.Row="0" Text="{Binding Name}" Margin="0,0,12,0" TextAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
