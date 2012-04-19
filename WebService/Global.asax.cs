@@ -12,8 +12,8 @@ namespace WebService
 {
     public class Global : System.Web.HttpApplication
     {
-        public const string DatabaseConnectionString = "mongodb://pu307user:Password01@ds029847.mongolab.com:29847";
-        public const string DatabaseName = "pu307dev";
+        public const string DatabaseConnectionString = "mongodb://metrocam:m3tr0c4m!@ds031947.mongolab.com:31947";
+        public const string DatabaseName = "metrocam";
 
         public const bool APIKeyAuthorizationEnabled = true;
 
