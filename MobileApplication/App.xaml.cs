@@ -127,10 +127,10 @@ namespace MetrocamPan
             {
                 WebException ex = e.ExceptionObject as WebException;
 
-                RootFrame.Dispatcher.BeginInvoke(() =>
+                /*RootFrame.Dispatcher.BeginInvoke(() =>
                 {
                     MessageBox.Show(ex.Message + "\n\nAre you connected to the network?", "Error Contacting Server", MessageBoxButton.OK);
-                });
+                });*/
             }
             else
             {
