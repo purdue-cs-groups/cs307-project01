@@ -37,20 +37,20 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Profiles" />
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\WinstagramProduction.azurePubxml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\WebService\WebService.csproj">
       <Name>WebService</Name>
-      <Project>{d0d1b331-8c82-427f-8098-2faf79ac81c6}</Project>
+      <Project>{81aeac49-40e6-46e0-9de9-429eaab605fc}</Project>
       <Private>True</Private>
       <RoleType>Web</RoleType>
       <RoleName>WebService</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Profiles" />
-  </ItemGroup>
-  <ItemGroup>
-    <PublishProfile Include="Profiles\WinstagramProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

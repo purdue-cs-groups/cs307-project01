@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="metrocam" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=a79dqteo31.database.windows.net;Initial Catalog=metrocam;Persist Security Info=True;User ID=metrocam" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="metrocamConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.FavoritedPictures" Member="FavoritedPictures">
+    <Type Name="FavoritedPicture">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PictureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_FavoritedPicture" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Picture_FavoritedPicture" Member="Picture" ThisKey="PictureID" OtherKey="PictureID" Type="Picture" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAddress" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Biography" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="ProfilePictureID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_FavoritedPicture" Member="FavoritedPictures" ThisKey="UserID" OtherKey="UserID" Type="FavoritedPicture" />
+      <Association Name="User_FlaggedPicture" Member="FlaggedPictures" ThisKey="UserID" OtherKey="UserID" Type="FlaggedPicture" />
+      <Association Name="User_Picture" Member="Pictures" ThisKey="UserID" OtherKey="UserID" Type="Picture" />
+      <Association Name="User_Relationship" Member="Relationships" ThisKey="UserID" OtherKey="UserID" Type="Relationship" />
+      <Association Name="User_Relationship1" Member="Relationships1" ThisKey="UserID" OtherKey="FollowingUserID" Type="Relationship" />
+      <Association Name="User_UserConnectedAccount" Member="UserConnectedAccounts" ThisKey="UserID" OtherKey="UserID" Type="UserConnectedAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FlaggedPictures" Member="FlaggedPictures">
+    <Type Name="FlaggedPicture">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PictureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_FlaggedPicture" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Picture_FlaggedPicture" Member="Picture" ThisKey="PictureID" OtherKey="PictureID" Type="Picture" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pictures" Member="Pictures">
+    <Type Name="Picture">
+      <Column Name="PictureID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Caption" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="ViewCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LargeURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="MediumURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="SmallURL" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Picture_FavoritedPicture" Member="FavoritedPictures" ThisKey="PictureID" OtherKey="PictureID" Type="FavoritedPicture" />
+      <Association Name="Picture_FlaggedPicture" Member="FlaggedPictures" ThisKey="PictureID" OtherKey="PictureID" Type="FlaggedPicture" />
+      <Association Name="User_Picture" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Relationships" Member="Relationships">
+    <Type Name="Relationship">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FollowingUserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_Relationship" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Relationship1" Member="User1" ThisKey="FollowingUserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserConnectedAccounts" Member="UserConnectedAccounts">
+    <Type Name="UserConnectedAccount">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccountName" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ClientToken" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ClientSecret" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserConnectedAccount" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
