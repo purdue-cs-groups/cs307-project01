@@ -34,8 +34,12 @@
 
                 <TextBlock Text="media library"  Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="originalCheck" Unchecked="originalUncheck" Name="oToggle" Header="save pictures taken with camera"/>
+                
                 <TextBlock Text="location services"  Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
                 <toolkit:ToggleSwitch Content="on" IsChecked="True" IsEnabled="True" Checked="locCheck" Unchecked="locUncheck" Name="lToggle" Header="add location to pictures" />
+
+                <TextBlock Text="account"  Style="{StaticResource PhoneTextTitle2Style}" Foreground="{StaticResource PhoneAccentBrush}" />
+                <Button x:Name="ChangePasswordButton" Click="ChangePasswordButton_Click">Change Password</Button>
             </StackPanel>
         </Grid>
     </Grid>
