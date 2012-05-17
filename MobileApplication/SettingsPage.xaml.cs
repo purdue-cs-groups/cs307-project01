@@ -115,7 +115,7 @@ namespace MetrocamPan
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/ChangePasswordPage.xaml", UriKind.Relative));
-        }
+        }//
 
     }
 }
