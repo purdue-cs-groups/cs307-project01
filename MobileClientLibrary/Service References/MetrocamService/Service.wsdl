@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63432/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63432/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:63432/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WebService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Service_CreateFavoritedPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFavoritedPicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateFavoritedPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFavoritedPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetFavoritedPictures_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFavoritedPictures" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetFavoritedPictures_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFavoritedPicturesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteFavoritedPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFavoritedPicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteFavoritedPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFavoritedPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateFlaggedPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFlaggedPicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateFlaggedPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFlaggedPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetFlaggedPictures_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlaggedPictures" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetFlaggedPictures_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFlaggedPicturesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteFlaggedPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFlaggedPicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteFlaggedPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFlaggedPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreatePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreatePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetPicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetPicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_UpdatePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_UpdatePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeletePicture_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePicture" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeletePicture_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePictureResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateRelationship_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRelationship" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateRelationship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRelationshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetRelationships_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationships" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetRelationships_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRelationshipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteRelationship_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelationship" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteRelationship_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRelationshipResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="Service_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateUserConnectedAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserConnectedAccount" />
+  </wsdl:message>
+  <wsdl:message name="Service_CreateUserConnectedAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateUserConnectedAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetUserConnectedAccounts_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConnectedAccounts" />
+  </wsdl:message>
+  <wsdl:message name="Service_GetUserConnectedAccounts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConnectedAccountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteUserConnectedAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConnectedAccount" />
+  </wsdl:message>
+  <wsdl:message name="Service_DeleteUserConnectedAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConnectedAccountResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Service">
+    <wsdl:operation name="CreateFavoritedPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreateFavoritedPicture" message="tns:Service_CreateFavoritedPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreateFavoritedPictureResponse" message="tns:Service_CreateFavoritedPicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFavoritedPictures">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetFavoritedPictures" message="tns:Service_GetFavoritedPictures_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetFavoritedPicturesResponse" message="tns:Service_GetFavoritedPictures_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFavoritedPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeleteFavoritedPicture" message="tns:Service_DeleteFavoritedPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeleteFavoritedPictureResponse" message="tns:Service_DeleteFavoritedPicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFlaggedPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreateFlaggedPicture" message="tns:Service_CreateFlaggedPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreateFlaggedPictureResponse" message="tns:Service_CreateFlaggedPicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFlaggedPictures">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetFlaggedPictures" message="tns:Service_GetFlaggedPictures_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetFlaggedPicturesResponse" message="tns:Service_GetFlaggedPictures_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFlaggedPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeleteFlaggedPicture" message="tns:Service_DeleteFlaggedPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeleteFlaggedPictureResponse" message="tns:Service_DeleteFlaggedPicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreatePicture" message="tns:Service_CreatePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreatePictureResponse" message="tns:Service_CreatePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetPicture" message="tns:Service_GetPicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetPictureResponse" message="tns:Service_GetPicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/UpdatePicture" message="tns:Service_UpdatePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/UpdatePictureResponse" message="tns:Service_UpdatePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePicture">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeletePicture" message="tns:Service_DeletePicture_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeletePictureResponse" message="tns:Service_DeletePicture_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRelationship">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreateRelationship" message="tns:Service_CreateRelationship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreateRelationshipResponse" message="tns:Service_CreateRelationship_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationships">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetRelationships" message="tns:Service_GetRelationships_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetRelationshipsResponse" message="tns:Service_GetRelationships_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelationship">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeleteRelationship" message="tns:Service_DeleteRelationship_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeleteRelationshipResponse" message="tns:Service_DeleteRelationship_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreateUser" message="tns:Service_CreateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreateUserResponse" message="tns:Service_CreateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetUser" message="tns:Service_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetUserResponse" message="tns:Service_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/UpdateUser" message="tns:Service_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/UpdateUserResponse" message="tns:Service_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeleteUser" message="tns:Service_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeleteUserResponse" message="tns:Service_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserConnectedAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/CreateUserConnectedAccount" message="tns:Service_CreateUserConnectedAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/CreateUserConnectedAccountResponse" message="tns:Service_CreateUserConnectedAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConnectedAccounts">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/GetUserConnectedAccounts" message="tns:Service_GetUserConnectedAccounts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/GetUserConnectedAccountsResponse" message="tns:Service_GetUserConnectedAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConnectedAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/Service/DeleteUserConnectedAccount" message="tns:Service_DeleteUserConnectedAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Service/DeleteUserConnectedAccountResponse" message="tns:Service_DeleteUserConnectedAccount_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_Service" type="tns:Service">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateFavoritedPicture">
+      <soap:operation soapAction="http://tempuri.org/Service/CreateFavoritedPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFavoritedPictures">
+      <soap:operation soapAction="http://tempuri.org/Service/GetFavoritedPictures" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFavoritedPicture">
+      <soap:operation soapAction="http://tempuri.org/Service/DeleteFavoritedPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFlaggedPicture">
+      <soap:operation soapAction="http://tempuri.org/Service/CreateFlaggedPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFlaggedPictures">
+      <soap:operation soapAction="http://tempuri.org/Service/GetFlaggedPictures" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFlaggedPicture">
+      <soap:operation soapAction="http://tempuri.org/Service/DeleteFlaggedPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatePicture">
+      <soap:operation soapAction="http://tempuri.org/Service/CreatePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPicture">
+      <soap:operation soapAction="http://tempuri.org/Service/GetPicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePicture">
+      <soap:operation soapAction="http://tempuri.org/Service/UpdatePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePicture">
+      <soap:operation soapAction="http://tempuri.org/Service/DeletePicture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRelationship">
+      <soap:operation soapAction="http://tempuri.org/Service/CreateRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelationships">
+      <soap:operation soapAction="http://tempuri.org/Service/GetRelationships" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelationship">
+      <soap:operation soapAction="http://tempuri.org/Service/DeleteRelationship" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://tempuri.org/Service/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/Service/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/Service/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/Service/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateUserConnectedAccount">
+      <soap:operation soapAction="http://tempuri.org/Service/CreateUserConnectedAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConnectedAccounts">
+      <soap:operation soapAction="http://tempuri.org/Service/GetUserConnectedAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConnectedAccount">
+      <soap:operation soapAction="http://tempuri.org/Service/DeleteUserConnectedAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="BasicHttpBinding_Service" binding="tns:BasicHttpBinding_Service">
+      <soap:address location="http://localhost:63432/Service.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -59,6 +59,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
@@ -69,20 +71,11 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\MD5CryptoServiceProvider.cs" />
-    <Compile Include="Common\PictureURL.cs" />
-    <Compile Include="Common\UserCredentials.cs" />
-    <Compile Include="Common\Utilities.cs" />
-    <Compile Include="Common\AuthenticationToken.cs" />
-    <Compile Include="Models\FavoritedPicture.cs" />
-    <Compile Include="Models\FlaggedPicture.cs" />
-    <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\PictureInfo.cs" />
-    <Compile Include="Models\Relationship.cs" />
-    <Compile Include="Models\UserConnectedAccount.cs" />
-    <Compile Include="Models\UserInfo.cs" />
-    <Compile Include="WebServiceClient.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Service References\MetrocamService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +89,58 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.FavoritedPicture.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.FlaggedPicture.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.Picture.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.Relationship.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\ClientLibrary.MetrocamService.UserConnectedAccount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MetrocamService\Service.wsdl" />
+    <None Include="Service References\MetrocamService\Service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MetrocamService\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MetrocamService\Service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MetrocamService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetrocamService\Service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetrocamService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetrocamService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MetrocamService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

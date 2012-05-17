@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/WebService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WebService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:63432/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="FavoritedPicture">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Picture" nillable="true" type="tns:Picture" />
+      <xs:element minOccurs="0" name="PictureID" type="ser:guid" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FavoritedPicture" nillable="true" type="tns:FavoritedPicture" />
+  <xs:complexType name="Picture">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Caption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FavoritedPictures" nillable="true" type="tns:ArrayOfFavoritedPicture" />
+      <xs:element minOccurs="0" name="FlaggedPictures" nillable="true" type="tns:ArrayOfFlaggedPicture" />
+      <xs:element minOccurs="0" name="LargeURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MediumURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PictureID" type="ser:guid" />
+      <xs:element minOccurs="0" name="SmallURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+      <xs:element minOccurs="0" name="ViewCount" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Picture" nillable="true" type="tns:Picture" />
+  <xs:complexType name="ArrayOfFavoritedPicture">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FavoritedPicture" nillable="true" type="tns:FavoritedPicture" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFavoritedPicture" nillable="true" type="tns:ArrayOfFavoritedPicture" />
+  <xs:complexType name="ArrayOfFlaggedPicture">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FlaggedPicture" nillable="true" type="tns:FlaggedPicture" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFlaggedPicture" nillable="true" type="tns:ArrayOfFlaggedPicture" />
+  <xs:complexType name="FlaggedPicture">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Picture" nillable="true" type="tns:Picture" />
+      <xs:element minOccurs="0" name="PictureID" type="ser:guid" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FlaggedPicture" nillable="true" type="tns:FlaggedPicture" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Biography" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FavoritedPictures" nillable="true" type="tns:ArrayOfFavoritedPicture" />
+      <xs:element minOccurs="0" name="FlaggedPictures" nillable="true" type="tns:ArrayOfFlaggedPicture" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pictures" nillable="true" type="tns:ArrayOfPicture" />
+      <xs:element minOccurs="0" name="ProfilePictureID" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="Relationships" nillable="true" type="tns:ArrayOfRelationship" />
+      <xs:element minOccurs="0" name="Relationships1" nillable="true" type="tns:ArrayOfRelationship" />
+      <xs:element minOccurs="0" name="UserConnectedAccounts" nillable="true" type="tns:ArrayOfUserConnectedAccount" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfPicture">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Picture" nillable="true" type="tns:Picture" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPicture" nillable="true" type="tns:ArrayOfPicture" />
+  <xs:complexType name="ArrayOfRelationship">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Relationship" nillable="true" type="tns:Relationship" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRelationship" nillable="true" type="tns:ArrayOfRelationship" />
+  <xs:complexType name="Relationship">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FollowingUserID" type="ser:guid" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="User1" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Relationship" nillable="true" type="tns:Relationship" />
+  <xs:complexType name="ArrayOfUserConnectedAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserConnectedAccount" nillable="true" type="tns:UserConnectedAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserConnectedAccount" nillable="true" type="tns:ArrayOfUserConnectedAccount" />
+  <xs:complexType name="UserConnectedAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientSecret" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClientToken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="User" nillable="true" type="tns:User" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserConnectedAccount" nillable="true" type="tns:UserConnectedAccount" />
+</xs:schema>

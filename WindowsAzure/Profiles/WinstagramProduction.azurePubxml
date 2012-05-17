@@ -10,7 +10,7 @@
     <AzureEnableWebDeploy>False</AzureEnableWebDeploy>
     <AzureStorageAccountName>metrocam</AzureStorageAccountName>
     <AzureStorageAccountLabel>metrocam</AzureStorageAccountLabel>
-    <AzureDeploymentLabel>WindowsAzure - Jeremiah Theurer</AzureDeploymentLabel>
+    <AzureDeploymentLabel>WindowsAzure - Matt McCormick</AzureDeploymentLabel>
     <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
