@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileClientLibrary", "Mobi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{81AEAC49-40E6-46E0-9DE9-429EAAB605FC}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "WindowsAzure", "WindowsAzure\WindowsAzure.ccproj", "{21D9975C-4D51-42ED-955F-CEE57DE7560E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,16 @@ Global
 		{81AEAC49-40E6-46E0-9DE9-429EAAB605FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{81AEAC49-40E6-46E0-9DE9-429EAAB605FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{81AEAC49-40E6-46E0-9DE9-429EAAB605FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{21D9975C-4D51-42ED-955F-CEE57DE7560E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
